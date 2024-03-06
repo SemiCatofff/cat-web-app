@@ -1,16 +1,28 @@
+import Header from "../../components/Header/Header";
+import "./Main.scss";
+import { useSelector, useDispatch } from "react-redux";
+import Login from "../Login/Login";
 
-import Header from "../../components/Header/Header"
+function Main(props) {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-
-
-function Main(props){
-    return(
+  return (
+    <div className="main-page">
+      {isLoggedIn ? (
         <>
-        <Header/>
-        {props.children}
+          <Header />
+          <div className="page-section">
+            <div className="info-section"></div>
+            {props.children}
+          </div>
         </>
-
-    )
+      ) : (
+        <>
+          <Login />
+        </>
+      )}
+    </div>
+  );
 }
 
-export default Main
+export default Main;
