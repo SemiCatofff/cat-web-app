@@ -41,6 +41,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<AllChallenges />} />
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/explore" element={<AllChallenges/>} />
                 </Routes>
               </Main>
             </Router>
