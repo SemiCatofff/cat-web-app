@@ -8,13 +8,20 @@ function Main(props) {
 
   return (
     <div className="main-page">
-   
-          <Header />
-          <div className="page-section">
-            <div className="info-section"></div>
-            <div className="lower-section">{props.children}</div>
-          </div>
-    </div>
+    {isLoggedIn ? (
+      <>
+        <Header />
+        <div className="page-section">
+          <div className="info-section"></div>
+          {props.children}
+        </div>
+      </>
+    ) : (
+      <>
+        <Login />
+      </>
+    )}
+  </div>
   );
 }
 
