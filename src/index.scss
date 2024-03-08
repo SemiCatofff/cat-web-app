@@ -1,0 +1,83 @@
+
+$font-size-heading: 72px;
+$font-size-subheading: 48px;
+$font-size-subheading-small: 32px;
+$font-size-subheading2: 24px;
+$font-size-paragraph: 20px;
+$font-size-caption: 15px;
+
+$breakpoint-sm: 576px; 
+$breakpoint-md: 768px; 
+$breakpoint-lg: 992px; 
+
+.heading {
+  font-size: $font-size-heading;
+  // @media (max-width: $breakpoint-md) {
+  //   font-size: calc($font-size-heading * 0.8); 
+  // }
+
+  // @media (max-width: $breakpoint-sm) {
+  //   font-size: calc($font-size-heading * 0.6); 
+  // }
+}
+
+.subheading {
+  font-size: $font-size-subheading;
+}
+
+.subheading-small {
+  font-size: $font-size-subheading-small;
+}
+
+.subheading2 {
+  font-size: $font-size-subheading2;
+}
+
+.paragraph {
+  font-size: $font-size-paragraph;
+}
+
+.caption {
+  font-size: $font-size-caption;
+}
+
+
+.paddingX {
+  padding-left: 16px;
+  padding-right: 16px;
+  @media (max-width: $breakpoint-md) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+.paddingY {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.marginX {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.marginY {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+// Flex utilities
+.flex {
+  display: flex;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
