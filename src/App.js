@@ -1,20 +1,25 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import store from "./redux/store/store";
+import { Provider } from "react-redux";
+import AllChallenges from "./pages/AllChallenges/AllChallenges";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Main from "./pages/Main/Main";
+
+
 function App() {
   return (
-    <div className="text-center">
-      <header className="bg-blue-500  flex flex-col justify-center text-white">
-        <p className="text-3xl">
-          Hello
-        </p>
-        <a
-          className="text-blue-200 hover:text-red-500"
-          href="https://tailwindcss.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-       Catoff here
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+    <Router>
+    <Main>
+        <Routes>
+          <Route path="/" element={<AllChallenges />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/explore" element={<AllChallenges/>} />
+        </Routes>
+    </Main>
+      
+    </Router>
+  </Provider>
   );
 }
 
