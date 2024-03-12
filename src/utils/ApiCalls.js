@@ -1,6 +1,8 @@
 import axios from "axios";
-const BackendURL = "https://api.catoff.xyz";
+const BackendURL = "http://192.168.1.153:3005";
 
+
+const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMDE1MTE0MSwiZXhwIjoxNzEwMTU0NzQxfQ.mQOK4buQdz1M6_nhEV1LgxOLbt1t07tqWn97WvuE4cI"
 const loginAPI = async (signature, publicKey) => {
   let body = {
     signature: signature,
@@ -17,8 +19,9 @@ const loginAPI = async (signature, publicKey) => {
 
 const setUserDetailsAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
+    Authorization: `Bearer ${authToken}`,
   };
+  
   let body = {
     Email: "ishita@gmail.com",
     UserName: "ishita",
@@ -39,8 +42,9 @@ const setUserDetailsAPI = async () => {
 
 const searchChallengeApi = async (searchTerm) => {
   let headers = {
-    Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
+    Authorization: `Bearer ${authToken}`,
   };
+
   try {
     const response = await axios.get(
       `${BackendURL}/challenge/challenges/search/calory?searchTerm=${searchTerm}`,
@@ -48,37 +52,17 @@ const searchChallengeApi = async (searchTerm) => {
         headers,
       }
     );
-    return response.data;
+    return response;
   } catch (error) {
     return error.message;
   }
 };
 
-const getDashboardDetailsAPI = async () => {
-  let headers = {
-    Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
-  };
-  let body = {
-    Email: "ishita@gmail.com",
-    UserName: "ishita",
-  };
-  try {
-    const response = await axios.post(
-      `${BackendURL}/user/addUserDetails`,
-      body,
-      {
-        headers,
-      }
-    );
-    return response.data;
-  } catch (error) {
-    return error.message;
-  }
-};
+
 
 const getUserCurrentTableAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
+    Authorization: `Bearer ${authToken}`,
   };
 
   try {
@@ -96,7 +80,7 @@ const getUserCurrentTableAPI = async () => {
 
 const getUserGraphAPI = async (time) => {
   let headers = {
-    Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
+    Authorization: `Bearer ${authToken}`,
   };
 
   try {
@@ -113,7 +97,7 @@ const getUserGraphAPI = async (time) => {
 };
 const getUserProfileDataAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
+    Authorization: `Bearer ${authToken}`,
   };
 
   try {
@@ -123,7 +107,7 @@ const getUserProfileDataAPI = async () => {
         headers,
       }
     );
-    return response.data;
+    return response;
   } catch (error) {
     return error.message;
   }
@@ -136,5 +120,4 @@ export {
   getUserCurrentTableAPI,
   getUserGraphAPI,
   getUserProfileDataAPI,
-  getDashboardDetailsAPI,
 };
