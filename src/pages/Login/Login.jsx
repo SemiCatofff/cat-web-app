@@ -42,7 +42,7 @@ function Login() {
     <div className="w-1/2 h-1/2 flex justify-center items-center">
       <div
         className="w-32 h-10 bg-blue-500 flex justify-center items-center cursor-pointer rounded-lg"
-        onClick={()=>{login(); handleLogin();}}
+        onClick={()=>{ handleLogin();}}
       >
         Login
       </div>

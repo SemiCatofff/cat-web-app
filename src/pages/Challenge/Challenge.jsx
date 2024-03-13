@@ -1,9 +1,7 @@
-function Challenge(){
-    return(
-        <div>
-
-        </div>
-    )
+function Challenge() {
+  return (
+   <div></div>
+  );
 }
 
-export default Challenge
+export default Challenge;

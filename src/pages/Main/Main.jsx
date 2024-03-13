@@ -7,17 +7,16 @@ function Main(props) {
 
   return (
     <div className="w-screen h-screen flex align-center justify-center items-center text-white">
-      {isLoggedIn ? (
+    
         <>
           <div className="w-screen h-screen flex flex-col">
-            <div className="w-full h-auto">{props.children}</div>{" "}
+            <div className="w-full h-full">{props.children}</div>{" "}
           </div>
           <Navbar />
         </>
-      ) : (
-        <Login />
-      )}
-    </div>
+
+        </div>
+  
   );
 }
 
