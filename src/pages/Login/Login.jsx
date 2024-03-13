@@ -1,63 +1,51 @@
-import { useDispatch } from "react-redux";
-import { setWalletAddress, setLoginState } from "../../redux/actions/actions";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { useWallet } from "@solana/wallet-adapter-react";
-import './Login.scss'
-import { loginAPI, setUserDetailsAPI} from "../../utils/ApiCalls";
-import { useEffect } from "react";
-import base58 from 'bs58'
-require("@solana/wallet-adapter-react-ui/styles.css");
+import { setLoginState } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAPI } from "../../utils/OktoApiCalls";
+import axios from "axios";
 
-
+import { useGoogleLogin } from "@react-oauth/google";
 
 function Login() {
   const dispatch = useDispatch();
-  const { publicKey, connected,signMessage } = useWallet();
+  const handleLogin = async () => {
+    const output = await loginAPI();
+  };
 
-  useEffect(()=>{
-    dispatch(setWalletAddress(publicKey));
-    console.log(publicKey?.toBase58())
-
-    if(connected){
-    login()
-    }
-
-  },[connected,publicKey])
-
-  async function sign(messageToSign) {
-    try {
-      const message = new TextEncoder().encode(messageToSign);
-      const uint8arraySignature = await signMessage(message);
-
-      return(base58.encode(uint8arraySignature));
-
-
-    } catch (e) {
-      console.log('could not sign message');
-      return null;
-    }
-
-  }
-
-  const login = async()=>{
-    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTcwOTcyMTcwOSwiZXhwIjoxNzA5NzI1MzA5fQ.y4Y7HKpjM7L8UDXmDN_Ekv1qLiaZ3GpCR7CyaAHanJk
-
-    const signature = await sign("hello world")
-    console.log(signature)
-    const output = await loginAPI(signature, publicKey);
   
-    if(output.success)
-    {
-    localStorage.setItem("bearerToken", output.data.token )
-    console.log(output.data.token)
-    console.log(output)
-    dispatch(setLoginState(true));
-    }
-  }
+
+ 
+  
+
+  const login = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      console.log(tokenResponse);
+      // fetching userinfo can be done on the client or the server
+      // const GoogleAuth = window.gapi.auth2.getAuthInstance();
+      // console.log("=================================================");
+      // const googleUser = await GoogleAuth.signIn();
+      // console.log('Token || ' + googleUser.getAuthResponse().id_token);
+      const userInfo = await axios
+        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then(res => res.data);
+
+      console.log(userInfo);
+    },
+    // flow: 'implicit', // implicit is the default
+  });
+
+
+
 
   return (
-    <div className="login-box">
-      <WalletMultiButton />
+    <div className="w-1/2 h-1/2 flex justify-center items-center">
+      <div
+        className="w-32 h-10 bg-blue-500 flex justify-center items-center cursor-pointer rounded-lg"
+        onClick={()=>{ handleLogin();}}
+      >
+        Login
+      </div>
     </div>
   );
 }
