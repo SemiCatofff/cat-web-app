@@ -7,6 +7,8 @@ import Main from "./pages/Main/Main";
 import Login from "./pages/Login/Login";
 import CreateChallenges from "./pages/CreateChallenge/CreateChallenge";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import Signup from "./pages/Signup/signup";
+
 
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
       <Router>
         <Main>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+
             <Route path="/create" element={<CreateChallenges />} />
             <Route path="/explore" element={<AllChallenges />} />
           </Routes>
