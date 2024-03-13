@@ -10,21 +10,21 @@ function Dashboard() {
   const [challengeTab, setChallengeTab] = useState(0);
   const [userDetail, setUserDetail] = useState({});
 
-  useEffect(() => {
-    const getUserDashboardData = async () => {
-      const userTable = await getUserCurrentTableAPI();
+  // useEffect(() => {
+  //   const getUserDashboardData = async () => {
+  //     const userTable = await getUserCurrentTableAPI();
 
-      const userGraph = await getUserGraphAPI("all");
+  //     const userGraph = await getUserGraphAPI("all");
 
-      const userProfile = await getUserProfileDataAPI();
+  //     const userProfile = await getUserProfileDataAPI();
 
-      if (userProfile.status === 200) {
-        setUserDetail(userProfile.data);
-      }
-    };
+  //     if (userProfile.status === 200) {
+  //       setUserDetail(userProfile.data);
+  //     }
+  //   };
 
-    getUserDashboardData();
-  }, []);
+  //   getUserDashboardData();
+  // }, []);
 
   useEffect(() => {}, [graphTab]);
 

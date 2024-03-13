@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Main>
           <Routes>
-            <Route path="/mail" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/create" element={<CreateChallenges />} />
             <Route path="/explore" element={<AllChallenges />} />
           </Routes>

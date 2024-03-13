@@ -1,14 +1,22 @@
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <footer className="fixed bottom-0 left-0 w-full bg-blue-500 text-white p-4">
-      <div className="container flex flex-row items-center justify-center mx-auto text-center gap-x-4">
-        <div className="w-10 h-10 rounded-lg bg-white" onClick={()=>{navigate("./explore")}}>x</div>
-        <div className="w-10 h-10 rounded-lg bg-white" onClick={()=>{navigate("./")}}>x</div>
-        <div className="w-10 h-10 rounded-lg bg-white" onClick={()=>{navigate("./create")}}>x</div>
+    <footer className="fixed inset-x-0 bottom-0 mx-4 mb-4 h-20 bg-black p-4 shadow-md rounded-2xl">
+      <div className="flex h-full justify-center items-center gap-20">
+        <button className="flex flex-col items-center">
+          <span>➕</span>
+        </button>
+        <button className="flex flex-col items-center">
+          <span>➕</span>
+        </button>
+        <button className="flex flex-col items-center">
+          <span>➕</span>
+        </button>
+        <button className="flex flex-col items-center">
+          <span>➕</span>
+        </button>
       </div>
     </footer>
   );
