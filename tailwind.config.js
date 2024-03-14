@@ -10,8 +10,7 @@ module.exports = {
       },
       fontFamily: {
         ttruns: ["TTRuns", "sans-serif"],
-        display: ["Work", "sans-serif"],
-        body: ['"Open Sans"', "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
 
       borderRadius: {

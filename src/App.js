@@ -16,17 +16,18 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 function App() {
   return (
     <GoogleOAuthProvider clientId="719827239908-s7sm3g1a0bavuus0fq039l8b73qvc6bq.apps.googleusercontent.com">
-    <Provider store={store}>
-      <Router>
-        <Main>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/create" element={<CreateChallenge />} />
-            <Route path="/explore" element={<AllChallenges />} />
-          </Routes>
-        </Main>
-      </Router>
-    </Provider>
+      <Provider store={store}>
+        <Router>
+          <Main>
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/create" element={<CreateChallenge />} />
+              <Route path="/explore" element={<AllChallenges />} />
+            </Routes>
+          </Main>
+        </Router>
+      </Provider>
     </GoogleOAuthProvider>
   );
 }

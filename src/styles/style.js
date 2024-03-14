@@ -1,27 +1,27 @@
 const styles = {
-  // font-ttruns font-bold
-  heading1: "",
-  heading2: "",
-  subheading: "",
-  subtext: "",
-  paragraph: "",
+  heading1: "text-[24px] font-ttruns font-bold",
+  heading2: "text-[16px] font-ttruns font-bold",
+  subheading: "text-[14px] font-inter font-semibold",
+  subtext: "text-[14px] font-inter font-regular",
+  paragraph: "text-[12px] font-inter font-regular",
 
-  caption1: "",
-  caption2: "",
-  buttoncta: "",
+  caption1: "text-[12px] font-inter font-semibold",
+  caption2: "text-[10px] font-inter font-semibold",
+  buttoncta1: "text-[16px] font-inter font-semibold",
+  buttoncta2: "text-[16px] font-ttruns font-semibold",
 
   flexCenter: "flex justify-center items-center",
   flexStart: "flex justify-center items-start",
   flexEnd: "flex  items-end",
 
-  paddingX: "sm:px-16 px-6",
-  paddingY: "sm:py-16 py-6",
-  paddingL: "sm:pl-16 pl-6",
-  padding: "sm:px-16 px-6 sm:py-12 py-4",
+  paddingX: "px-4",
+  paddingY: "py-4",
+  paddingL: "pl-4",
+  padding: "p-4 ",
 
-  marginX: "sm:mx-16 mx-6",
-  marginL: "sm:ml-16 ml-6",
-  marginY: "sm:my-16 my-6",
+  marginX: "mx-4",
+  marginL: "ml-4",
+  marginY: "my-4",
 };
 
 export default styles;
