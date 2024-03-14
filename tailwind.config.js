@@ -3,29 +3,30 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellow: "#D5F84A", 
-        black: "#192126", 
-        accent: "#f9acaa", 
-        custom:"#282C2E",
+        yellow: "#D5F84A",
+        black: "#192126",
+        accent: "#f9acaa",
+        custom: "#282C2E",
       },
       fontFamily: {
-        display: ["Work", "sans-serif"], 
-        body: ['"Open Sans"', "sans-serif"], 
+        ttruns: ["TTRuns", "sans-serif"],
+        display: ["Work", "sans-serif"],
+        body: ['"Open Sans"', "sans-serif"],
       },
-     
+
       borderRadius: {
-        custom: "12px", 
+        custom: "12px",
       },
-      height:{
-       custom: "170px",
+      height: {
+        custom: "170px",
       },
 
       padding: {
-        custom: "1.25rem", 
+        custom: "1.25rem",
       },
-     
+
       margin: {
-        custom: "1.25rem", 
+        custom: "1.25rem",
       },
     },
   },

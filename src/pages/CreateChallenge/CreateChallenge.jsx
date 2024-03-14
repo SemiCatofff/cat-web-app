@@ -1,9 +1,7 @@
-function CreateChallenges(){
-    return(
-        <div>
+import React from "react";
 
-        </div>
-    )
-}
+const CreateChallenge = () => {
+  return <div>CreateChallenge</div>;
+};
 
-export default CreateChallenges
+export default CreateChallenge;

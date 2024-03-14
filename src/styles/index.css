@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+@font-face {
+  font-family: "TTRuns";
+  src: url("../assets/fonts/TT\ Runs\ Trial\ Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TTRuns";
+  src: url("../assets/fonts/TT\ Runs\ Trial\ DemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TTRuns";
+  src: url("../assets/fonts/TT\ Runs\ Trial\ Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TTRuns";
+  src: url("../assets/fonts/TT\ Runs\ Trial\ ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
