@@ -9,6 +9,7 @@ function Main(props) {
       <div className="flex flex-col md:max-w-[350px] w-full h-full bg-white shadow-lg">
         <div className="overflow-auto">{props.children}</div>
       </div>
+      <Navbar />
     </div>
   );
 }
