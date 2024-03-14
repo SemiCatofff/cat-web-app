@@ -1,15 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import store from "./redux/store/store";
 import { Provider } from "react-redux";
-import AllChallenges from "./pages/AllChallenges/AllChallenges";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Main from "./pages/Main/Main";
-import Login from "./pages/Login/Login";
-import CreateChallenges from "./pages/CreateChallenge/CreateChallenge";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import Signup from "./pages/Signup/signup";
+import {
+  AllChallenges,
+  Challenge,
+  CreateChallenge,
+  Dashboard,
+  Home,
+  Login,
+  Main,
+} from "./pages";
 
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   return (
@@ -18,10 +20,8 @@ function App() {
       <Router>
         <Main>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-
-            <Route path="/create" element={<CreateChallenges />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/create" element={<CreateChallenge />} />
             <Route path="/explore" element={<AllChallenges />} />
           </Routes>
         </Main>
@@ -32,7 +32,6 @@ function App() {
 }
 
 export default App;
-
 
 // {
 //   "code": "4/0AeaYSHC_LUBD7DbIottsXXJYiDGFeogYEZm3zciA8Deu0rkUJTOFqhDJ0SsTo7fw7I8XuQ",
