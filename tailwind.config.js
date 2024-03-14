@@ -5,8 +5,9 @@ module.exports = {
       colors: {
         yellow: "#D5F84A",
         black: "#192126",
+
         accent: "#f9acaa",
-        custom: "#282C2E",
+        custom: "#192126",
       },
       fontFamily: {
         ttruns: ["TTRuns", "sans-serif"],
@@ -14,10 +15,12 @@ module.exports = {
       },
 
       borderRadius: {
-        custom: "12px",
+        box: "20px",
+        tab: "100px"
       },
       height: {
-        custom: "170px",
+        custom: "79px",
+        tab:"54px"
       },
 
       padding: {
@@ -26,6 +29,10 @@ module.exports = {
 
       margin: {
         custom: "1.25rem",
+      },
+      backgroundImage: {
+        hero : "url('../assets/images/bgapp.svg')",
+        
       },
     },
   },

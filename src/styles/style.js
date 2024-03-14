@@ -1,3 +1,4 @@
+
 const styles = {
   heading1: "text-[22px] font-ttruns font-bold text-white",
   heading2: "text-[16px] font-ttruns font-bold text-white",
