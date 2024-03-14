@@ -23,6 +23,8 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/create" element={<CreateChallenge />} />
+              <Route path="/challenge" element={<Challenge />} />
+            
               <Route path="/explore" element={<AllChallenges />} />
             </Routes>
           </Main>

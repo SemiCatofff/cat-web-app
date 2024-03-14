@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import sel from "../../assets/sel.svg";
-import category from "../../assets/Category.svg";
-import setting from "../../assets/Setting.svg";
-import profile from "../../assets/Profile.png";
-import add from "../../assets/add.png";
+import sel from "../../assets/images/sel.svg";
+import category from "../../assets/images/Category.svg";
+import setting from "../../assets/images/Setting.svg";
+import profile from "../../assets/images/Profile.png";
+import add from "../../assets/images/add.png";
 import { useState } from "react";
 
 function Navbar() {
