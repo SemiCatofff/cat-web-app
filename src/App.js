@@ -20,12 +20,11 @@ function App() {
         <Router>
           <Main>
             <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/create" element={<CreateChallenge />} />
               <Route path="/challenge" element={<Challenge />} />
-            
-              <Route path="/explore" element={<AllChallenges />} />
+              {/* <Route path="/explore" element={<AllChallenges />} /> */}
             </Routes>
           </Main>
         </Router>

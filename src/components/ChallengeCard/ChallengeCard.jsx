@@ -1,10 +1,15 @@
 import { cardImg } from "../../assets/images";
 import styles from "../../styles/style";
+import { useNavigate } from "react-router";
 
 const ChallengeCard = () => {
+  const navigate = useNavigate();
+  const handleOnclick = () => {
+    navigate("/challenge");
+  };
   return (
     <>
-      <div className="relative mr-2">
+      <div className="relative mr-2 cursor-pointer" onClick={handleOnclick}>
         <img src={cardImg} alt="" />
 
         <div className={`absolute top-2 w-64 ${styles.paddingX}`}>
