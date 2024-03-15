@@ -80,6 +80,8 @@ function Dashboard() {
     <div className="flex flex-col">
       <ProfileBox />
       <RewardBox />
+   
+
     </div>
   );
 }
