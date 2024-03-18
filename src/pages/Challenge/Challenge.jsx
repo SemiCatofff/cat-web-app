@@ -16,7 +16,7 @@ function Challenge() {
             setTab(0);
           }}
         >
-          <div className="w-full flex items-center justify-center">
+          <div className={`${styles.subheading} !text-[#000000]`}>
             My Progress
           </div>
         </div>
@@ -28,7 +28,7 @@ function Challenge() {
             setTab(1);
           }}
         >
-          <div className={`${styles.subheading}`}> Leaderboard</div>
+          <div className={`${styles.subheading} !text-[#000000]`}> Leaderboard</div>
         </div>
       </div>
 
