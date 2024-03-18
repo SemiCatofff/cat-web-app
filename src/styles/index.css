@@ -56,11 +56,11 @@
 }
 
 .middle {
-  top: 10px;
+  top: 16px;
 }
 
 .bottom1 {
-  top: 20px;
+  top: 32px;
 }
 
 .button_container1:hover .bottom {
@@ -111,7 +111,7 @@
 }
 
 .overlay.open {
-  height: 80%;
+  height: 110%;
   opacity: 1;
   visibility: visible;
 }
