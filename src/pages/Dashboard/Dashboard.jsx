@@ -1,89 +1,59 @@
-import { useEffect, useState } from "react";
-import {
-  getUserCurrentTableAPI,
-  getUserGraphAPI,
-  getUserProfileDataAPI,
-} from "../../utils/ApiCalls";
+import React from "react";
+import styles from "../../styles/style";
+import { homeHeader } from "../../assets/images";
 
-function Dashboard() {
-  const [graphTab, setGraphTab] = useState(0);
-  const [challengeTab, setChallengeTab] = useState(0);
-  const [userDetail, setUserDetail] = useState({});
-
-  // useEffect(() => {
-  //   const getUserDashboardData = async () => {
-  //     const userTable = await getUserCurrentTableAPI();
-
-  //     const userGraph = await getUserGraphAPI("all");
-
-  //     const userProfile = await getUserProfileDataAPI();
-
-  //     if (userProfile.status === 200) {
-  //       setUserDetail(userProfile.data);
-  //     }
-  //   };
-
-  //   getUserDashboardData();
-  // }, []);
-
-  useEffect(() => {}, [graphTab]);
-
-  useEffect(() => {}, [challengeTab]);
-
-  const ProfileBox = () => {
-    return (
-      <div className="bg-white shadow-md p-4 m-8 rounded-md border-gray-400">
-        <div className="flex flex-col">
-          <div className="flex gap-5 ">
-            <h2 className="text-gray-500 font-bold">User Name</h2>
-            <p className="text-blue-600">{userDetail.UserName}</p>
-          </div>
-          <div className="flex gap-5 ">
-            <h2 className="text-gray-500 font-bold">User Email</h2>
-            <p className="text-blue-600">{userDetail.UserEmail}</p>
-          </div>
-          <div className="flex gap-5 ">
-            <h2 className="text-gray-500 font-bold">Wallet Address</h2>
-            <p className="text-blue-600">
-              {userDetail.WalletAddress?.toString().slice(0, 7) + "....."}
-            </p>
-          </div>
-          <div className="flex gap-5 ">
-            <h2 className="text-gray-500 font-bold">User ID</h2>
-            <p className="text-blue-600">{userDetail.UserID}</p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const RewardBox = () => {
-    return (
-      <div className="bg-white flex shadow-md p-2 mx-8 my-2 rounded-md border-gray-400">
-        <div className="bg-white w-1/2 flex shadow-md m-2 rounded-md border-gray-400 items-center justify-center">
-          <div className="flex flex-col ">
-            <h2 className="text-gray-500 font-bold">Rewards</h2>
-            <p className="text-blue-600">{userDetail.TotalRewardsWon}</p>
-          </div>
-        </div>
-        <div className="bg-white w-1/2 flex shadow-md m-2 rounded-md border-gray-400 items-center justify-center">
-          <div className="flex flex-col items-center justify-center">
-            <h2 className="text-gray-500 font-bold">Staked</h2>
-            <p className="text-blue-600">{userDetail.CurrentStaked}</p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
+const Dashboard = () => {
   return (
-    <div className="flex flex-col">
-      <ProfileBox />
-      <RewardBox />
-   
+    <>
+      <div className={`${styles.paddingX}`}>
+        <div className="relative">
+          <div className="w-full absolute z-20 flex  justify-center">
+            <div className="flex-col">
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt=""
+                srcset=""
+                className="rounded-full w-32 h-32 object-cover
+              "
+              />
+              <h1 className={`${styles.heading2} text-center pt-4`}>
+                Alice James
+              </h1>
+              <h1 className={`${styles.paragraph} text-white text-center pt-2`}>
+                alicejames21@gmail.com
+              </h1>
+              <h1 className={`${styles.paragraph} text-white text-center pt-1`}>
+                52fs5ge5g45sov45a
+              </h1>
+            </div>
+          </div>
+        </div>
+        <img src={homeHeader} alt="" className="pt-20 w-full" />
+      </div>
 
-    </div>
+      <div className={`${styles.paddingX} ${styles.marginY} `}>
+        <div
+          className={`flex justify-between bg-white rounded-xl ${styles.paddingX} ${styles.paddingY} `}
+        >
+          <div className="flex">
+            <img src="" alt="img" />
+            <div className="texts">
+              <p className={`${styles.caption1} text-black`}>Wager Earned</p>
+              <p className={`${styles.heading2} text-black`}>3 SOL</p>
+            </div>
+          </div>
+
+          <div className="flex">
+            <img src="" alt="img" />
+            <div className="texts">
+              <p className={`${styles.caption1} text-black`}>Wager Earned</p>
+              <p className={`${styles.heading2} text-black`}>3 SOL</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default Dashboard;
