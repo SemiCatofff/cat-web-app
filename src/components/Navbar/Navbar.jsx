@@ -63,42 +63,27 @@ const Navbar = () => {
                     {" "}
                     <ul>
                       <div className="nav-para text-2xl mb-4 mt-4">
-                        <a
-                          className="lala  relative hover:text-[#9F0000]"
-                          href="/anarchy"
-                        >
+                        <a className="lala  relative " href="/anarchy">
                           Explore
                         </a>
                       </div>
                       <div className="nav-para text-2xl mb-4 mt-4">
-                        <a
-                          className="lala  relative hover:text-[#9F0000]"
-                          href="/anarchy"
-                        >
+                        <a className="lala  relative " href="/anarchy">
                           Create Challenge
                         </a>
                       </div>
                       <div className="nav-para text-2xl mb-4 mt-4">
-                        <a
-                          className="lala  relative hover:text-[#9F0000]"
-                          href="/anarchy"
-                        >
+                        <a className="lala  relative " href="/anarchy">
                           Join Challenge
                         </a>
                       </div>
                       <div className="nav-para text-2xl mb-4 mt-4">
-                        <a
-                          className="lala  relative hover:text-[#9F0000]"
-                          href="/anarchy"
-                        >
+                        <a className="lala  relative " href="/anarchy">
                           My Profile
                         </a>
                       </div>
                       <div className="nav-para text-2xl mb-4 mt-4">
-                        <a
-                          className="lala  relative hover:text-[#9F0000]"
-                          href="/anarchy"
-                        >
+                        <a className="lala  relative " href="/anarchy">
                           Invite Friend
                         </a>
                       </div>

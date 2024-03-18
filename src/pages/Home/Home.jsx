@@ -18,7 +18,7 @@ const Home = () => {
     <>
       <div className={` ${styles.paddingX} ${styles.paddingY} `}>
         <div className="relative">
-          <img src={homeHeader} alt="headerImg" className="" />{" "}
+          <img src={homeHeader} alt="headerImg" className="w-full" />{" "}
           <h1
             className={`${styles.heading1} ${styles.marginX} ${styles.marginY}  absolute top-0 text-yellow ${styles.paddingY}`}
           >

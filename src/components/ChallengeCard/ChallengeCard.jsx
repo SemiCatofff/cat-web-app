@@ -9,8 +9,11 @@ const ChallengeCard = () => {
   };
   return (
     <>
-      <div className="relative mr-2 cursor-pointer" onClick={handleOnclick}>
-        <img src={cardImg} alt="" />
+      <div
+        className="relative w-full pr-2  cursor-pointer"
+        onClick={handleOnclick}
+      >
+        <img src={cardImg} alt="" className="w-full" />
 
         <div className={`absolute top-2 w-64 ${styles.paddingX}`}>
           <div className={`${styles.flexBetween}`}>
