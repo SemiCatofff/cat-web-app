@@ -1,90 +1,117 @@
-import { useNavigate } from "react-router-dom";
-import sel from "../../assets/images/sel.svg";
-import category from "../../assets/images/Category.svg";
-import setting from "../../assets/images/Setting.svg";
-import profile from "../../assets/images/Profile.png";
-import add from "../../assets/images/add.png";
-import { useState } from "react";
+import React, { useEffect, useRef } from "react";
 
-function Navbar() {
-  const navigate = useNavigate();
-  const [tab, setTab] = useState(0);
+const Navbar = () => {
+  const buttonContainerRef = useRef(null);
+  const overlayRef = useRef(null);
+  const bodyRef = useRef(null);
 
-  const routes = ["/", "/create", "/dashboard", "/settings"];
+  //   useEffect(() => {
+  //     const buttonContainer = buttonContainerRef.current;
+  //     const overlay = overlayRef.current;
+  //     const body = bodyRef.current;
 
-  const handleTabClick = (index) => {
-    setTab(index);
-    navigate(routes[index]);
-  };
+  //     const toggleClass = () => {
+  //       buttonContainer.classList.toggle("active");
+  //       overlay.classList.toggle("open");
+  //       body.classList.toggle("active");
+  //     };
+
+  //     buttonContainer.addEventListener("click", toggleClass);
+
+  //     // Clean up the event listener when the component unmounts
+  //     return () => {
+  //       buttonContainer.removeEventListener("click", toggleClass);
+  //     };
+  //   }, []);
+
+  useEffect(() => {
+    const buttonContainer = buttonContainerRef.current;
+    const overlay = overlayRef.current;
+    const body = bodyRef.current; // Ensure there is an element for this ref in your component.
+
+    const toggleClass = () => {
+      buttonContainer?.classList.toggle("active");
+      overlay?.classList.toggle("open");
+      body?.classList.toggle("active");
+    };
+
+    buttonContainer?.addEventListener("click", toggleClass);
+
+    return () => {
+      buttonContainer?.removeEventListener("click", toggleClass);
+    };
+  }, []);
 
   return (
-    <footer className="mb-4 mx-4 bottom-0 h-custom bg-custom rounded-box absolute left-0 right-0">
-      <div className="flex h-full justify-center items-center gap-[12%]">
-        <button
-          className="flex flex-col items-center"
-          onClick={() => handleTabClick(0)}
-        >
-          <span>
-            {" "}
-            <img src={category}></img>
-          </span>
-          <span className="text-xs text-yellow">Explore</span>
-          {tab === 0 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
-        </button>
-        <button
-          className="flex flex-col items-center gap-1"
-          onClick={() => handleTabClick(1)}
-        >
-          <span>
-            {" "}
-            <img src={add}></img>
-          </span>
-          <span className="text-xs text-yellow">Create</span>
-          {tab === 1 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
-        </button>
-        <button
-          className="flex flex-col items-center gap-1"
-          onClick={() => handleTabClick(2)}
-        >
-          <span>
-            {" "}
-            <img src={profile}></img>
-          </span>
-          <span className="text-xs text-yellow">Profile</span>
-          {tab === 2 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
-        </button>
-        <button
-          className="flex flex-col items-center gap-1"
-          onClick={() => {
-            handleTabClick(4);
-          }}
-        >
-          <span>
-            {" "}
-            <img src={setting}></img>
-          </span>
-          <span className="text-xs text-yellow">Settings</span>
-          {tab === 3 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
-        </button>
+    <>
+      <div className="w-full px-4">
+        <div className="flex justify-between ">
+          <a href="/" className=" z-40">
+            <img src={""} alt="Logo" className="w-full" />
+          </a>
+          <div id="menuToggle  z-10">
+            <div ref={buttonContainerRef} class="button_container1 z-30">
+              <span class="top1"></span>
+              <span class="middle"></span>
+              <span class="bottom1"></span>
+            </div>
+
+            <div ref={overlayRef} class="overlay mt-0">
+              <div class="nav">
+                <div className="flex justify-end px-4 w-full text-white">
+                  <div className="col2 text-right">
+                    {" "}
+                    <ul>
+                      <div className="nav-para text-2xl mb-4 mt-4">
+                        <a
+                          className="lala  relative hover:text-[#9F0000]"
+                          href="/anarchy"
+                        >
+                          Explore
+                        </a>
+                      </div>
+                      <div className="nav-para text-2xl mb-4 mt-4">
+                        <a
+                          className="lala  relative hover:text-[#9F0000]"
+                          href="/anarchy"
+                        >
+                          Create Challenge
+                        </a>
+                      </div>
+                      <div className="nav-para text-2xl mb-4 mt-4">
+                        <a
+                          className="lala  relative hover:text-[#9F0000]"
+                          href="/anarchy"
+                        >
+                          Join Challenge
+                        </a>
+                      </div>
+                      <div className="nav-para text-2xl mb-4 mt-4">
+                        <a
+                          className="lala  relative hover:text-[#9F0000]"
+                          href="/anarchy"
+                        >
+                          My Profile
+                        </a>
+                      </div>
+                      <div className="nav-para text-2xl mb-4 mt-4">
+                        <a
+                          className="lala  relative hover:text-[#9F0000]"
+                          href="/anarchy"
+                        >
+                          Invite Friend
+                        </a>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </>
   );
-}
+};
 
 export default Navbar;
