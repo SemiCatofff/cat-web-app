@@ -1,7 +1,6 @@
-
 const styles = {
   heading1: "text-[22px] font-ttruns font-bold text-white",
-  heading2: "text-[16px] font-ttruns font-bold text-white",
+  heading2: "text-[16px] font-ttruns font-semibold text-white",
   subheading: "text-[14px] font-inter font-semibold text-white",
   subtext: "text-[14px] font-inter font-regular text-white",
   paragraph: "text-[12px] font-inter font-regular text-white",
@@ -23,7 +22,7 @@ const styles = {
 
   marginX: "mx-4",
   marginL: "ml-4",
-  marginY: "my-2",
+  marginY: "my-6",
 };
 
 export default styles;
