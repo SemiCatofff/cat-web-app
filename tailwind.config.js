@@ -16,7 +16,8 @@ module.exports = {
 
       borderRadius: {
         box: "20px",
-        tab: "100px"
+        tab: "100px",
+      
       },
       height: {
         custom: "79px",
@@ -32,6 +33,7 @@ module.exports = {
       },
       backgroundImage: {
         hero : "url('../assets/images/bgapp.svg')",
+        trophy : "url('../assets/images/glossy.png')",
         
       },
     },

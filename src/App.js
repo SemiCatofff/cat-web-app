@@ -9,7 +9,11 @@ import {
   Home,
   Login,
   Main,
+  
 } from "./pages";
+
+import ChallengeDetails from "./pages/ChallengeDetails/ChallengeDetails";
+
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -24,7 +28,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/create" element={<CreateChallenge />} />
               <Route path="/challenge" element={<Challenge />} />
-              {/* <Route path="/explore" element={<AllChallenges />} /> */}
+              <Route path="/details" element={<ChallengeDetails />} />
             </Routes>
           </Main>
         </Router>
