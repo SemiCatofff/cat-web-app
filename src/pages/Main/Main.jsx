@@ -23,6 +23,11 @@ function Main(props) {
       <div className="z-20">
         <Appbar />
       </div>
+
+      <div
+        className="absolute inset-0 bg-hero bg-cover bg-center"
+        style={{ opacity: 0.16 }}
+      ></div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 const ChallengeCard = () => {
   const navigate = useNavigate();
   const handleOnclick = () => {
-    navigate("/challenge");
+    navigate("/details");
   };
   return (
     <>
