@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "../../styles/style";
+import { useNavigate } from "react-router-dom";
 
 const CreateChallenge = () => {
   const [formStep, setFormStep] = useState(1);
+  const navigate = useNavigate()
   const [formState1, setFormState1] = useState({
     challengeName: "",
     description: "",
@@ -27,14 +29,17 @@ const CreateChallenge = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log(formState1)
+    console.log(formState2)
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (formStep === 1) {
       setFormState1({ ...formState1, [name]: value });
     } else {
-      setFormState2({ ...formState1, [name]: value });
+      setFormState2({ ...formState2, [name]: value });
     }
   };
 
@@ -46,7 +51,7 @@ const CreateChallenge = () => {
             <div className="mb-4 flex flex-col gap-[5px]">
               <label
                 htmlFor="challengeName"
-                className={`${styles.subheading} text-[#666666]`}
+                className={`${styles.subheading} !text-[#666666]`}
               >
                 Challenge Name
               </label>
@@ -63,7 +68,7 @@ const CreateChallenge = () => {
             <div className="mb-4 flex flex-col gap-[5px]">
               <label
                 htmlFor="description"
-                className={`${styles.subheading} text-[#666666]`}
+                className={`${styles.subheading} !text-[#666666]`}
               >
                 Description
               </label>
@@ -79,7 +84,7 @@ const CreateChallenge = () => {
             <div className="mb-4 flex flex-col gap-[5px]">
               <label
                 htmlFor="requirements"
-                className={`${styles.subheading} text-[#666666]`}
+                className={`${styles.subheading} !text-[#666666]`}
               >
                 Requirements
               </label>
@@ -97,7 +102,7 @@ const CreateChallenge = () => {
               <div className="flex flex-col gap-[5px] w-[45%]">
                 <label
                   htmlFor="startDate"
-                  className={`${styles.subheading} text-[#666666]`}
+                  className={`${styles.subheading} !text-[#666666]`}
                 >
                   Start Date
                 </label>
@@ -113,7 +118,7 @@ const CreateChallenge = () => {
               <div className="flex flex-col gap-[5px] w-[45%]">
                 <label
                   htmlFor="endDate"
-                  className={`${styles.subheading} text-[#666666]`}
+                  className={`${styles.subheading} !text-[#666666]`}
                 >
                   End Date
                 </label>
@@ -129,7 +134,7 @@ const CreateChallenge = () => {
             </div>
 
             <div className="mb-4 flex flex-col gap-[6px]">
-              <span className={`${styles.subheading} text-[#666666]`}>
+              <span className={`${styles.subheading} !text-[#666666]`}>
                 Challenge Type
               </span>
               <div className="flex flex-col">
@@ -141,7 +146,7 @@ const CreateChallenge = () => {
                     checked={formState1.challengeType === "dare"}
                     onChange={handleInputChange}
                   />
-                  <span className={`${styles.subheading} text-[#666666] ml-3`}>
+                  <span className={`${styles.subheading} !text-[#666666] ml-3`}>
                     Dare Challenge
                   </span>
                 </label>
@@ -153,7 +158,7 @@ const CreateChallenge = () => {
                     checked={formState1.challengeType === "p2p"}
                     onChange={handleInputChange}
                   />
-                  <span className={`${styles.subheading} text-[#666666] ml-3`}>
+                  <span className={`${styles.subheading} !text-[#666666] ml-3`}>
                     P2P Challenge
                   </span>
                 </label>
@@ -165,7 +170,7 @@ const CreateChallenge = () => {
                     checked={formState1.challengeType === "group"}
                     onChange={handleInputChange}
                   />
-                  <span className={`${styles.subheading} text-[#666666] ml-3`}>
+                  <span className={`${styles.subheading} !text-[#666666] ml-3`}>
                     Group Challenge
                   </span>
                 </label>
@@ -176,7 +181,7 @@ const CreateChallenge = () => {
               <div
                 type="button"
                 className="flex w-[49%] h-[56px] items-center rounded-[12px]  justify-center border-[1px] border-[#8567FF] text-[#8567FF]"
-                onClick={handleNextClick}
+                onClick={()=>{navigate("/")}}
               >
                 Cancel
               </div>
@@ -195,15 +200,15 @@ const CreateChallenge = () => {
           <div className="flex flex-col gap-[12px]">
             <div className="mb-4 flex flex-col gap-[5px]">
               <label
-                htmlFor="challengeName"
-                className={`${styles.subheading} text-[#666666]`}
+                htmlFor="maxParticipants"
+                className={`${styles.subheading} !text-[#666666]`}
               >
                 Enter Number of Maximum Paricipant
               </label>
               <input
                 type="text"
-                id="challengeName"
-                name="challengeName"
+                id="maxParticipants"
+                name="maxParticipants"
                 value={formState2.maxParticipants}
                 onChange={handleInputChange}
                 className="h-[56px] rounded-[8px] outline-[#8567FF]"
@@ -211,16 +216,33 @@ const CreateChallenge = () => {
             </div>
             <div className="mb-4 flex flex-col gap-[5px]">
               <label
-                htmlFor="challengeName"
-                className={`${styles.subheading} text-[#666666]`}
+                htmlFor="minParticipants"
+                className={`${styles.subheading} !text-[#666666]`}
               >
                 Enter Number of Minimum Paricipant
               </label>
               <input
                 type="text"
-                id="challengeName"
-                name="challengeName"
+                id="minParticipants"
+                name="minParticipants"
                 value={formState2.minParticipants}
+                onChange={handleInputChange}
+                className="h-[56px] rounded-[8px] outline-[#8567FF]"
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col gap-[5px]">
+              <label
+                htmlFor="wager"
+                className={`${styles.subheading} !text-[#666666]`}
+              >
+                Enter Number of wager amount
+              </label>
+              <input
+                type="text"
+                id="wager"
+                name="wager"
+                value={formState2.wager}
                 onChange={handleInputChange}
                 className="h-[56px] rounded-[8px] outline-[#8567FF]"
               />
