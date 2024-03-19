@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/style";
-import { homeHeader } from "../../assets/images";
+import { homeHeader, stake, reward } from "../../assets/images";
 
 const Dashboard = () => {
   return (
@@ -36,7 +36,7 @@ const Dashboard = () => {
           className={`flex justify-around bg-white rounded-xl ${styles.paddingX} ${styles.paddingY} py-8`}
         >
           <div className="flex">
-            <img src="" alt="img" />
+            <img src={reward} alt="img" />
             <div className="texts ml-4">
               <p className={`${styles.caption1} !text-black`}>Wager Earned</p>
               <p className={`${styles.heading2} !text-black`}>3 SOL</p>
@@ -44,7 +44,7 @@ const Dashboard = () => {
           </div>
 
           <div className="flex">
-            <img src="" alt="img" />
+            <img src={stake} alt="img" />
             <div className="texts ml-4">
               <p className={`${styles.caption1} !text-black`}>Wager Earned</p>
               <p className={`${styles.heading2} !text-black`}>3 SOL</p>
@@ -62,11 +62,13 @@ const Dashboard = () => {
 
       <div className={`${styles.paddingX} ${styles.marginY}`}>
         <div
-          className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-8`}
+          className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-4`}
         >
           <div className="flex">
-            <img src="" alt="img" />
-            <div className="texts ml-4">
+            <div className="w-12 h-12 rounded-full bg-[#FFF5D9] text-center my-auto">
+              <p className={`${styles.subheading} my-3 text-black`}>1</p>
+            </div>
+            <div className="texts ml-4 my-auto">
               <p className={`${styles.heading2} !text-black`}>
                 Self Up Challenge
               </p>
@@ -77,8 +79,8 @@ const Dashboard = () => {
           </div>
 
           <div className="flex">
-            <div className="texts ml-4">
-              <p className={`${styles.caption1} !text-amber-400`}>- 2 SOL</p>
+            <div className="texts ml-4 my-auto">
+              <p className={`${styles.subheading2} !text-amber-400`}>- 2 SOL</p>
               <p className={`${styles.caption1} !text-black`}>Unranked</p>
             </div>
           </div>
@@ -86,11 +88,13 @@ const Dashboard = () => {
       </div>
       <div className={`${styles.paddingX} ${styles.marginY}`}>
         <div
-          className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-8`}
+          className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-4`}
         >
           <div className="flex">
-            <img src="" alt="img" />
-            <div className="texts ml-4">
+            <div className="w-12 h-12 rounded-full bg-[#FFF5D9] text-center my-auto">
+              <p className={`${styles.subheading} my-3 text-black`}>1</p>
+            </div>
+            <div className="texts ml-4 my-auto">
               <p className={`${styles.heading2} !text-black`}>
                 Self Up Challenge
               </p>
@@ -101,32 +105,8 @@ const Dashboard = () => {
           </div>
 
           <div className="flex">
-            <div className="texts ml-4">
-              <p className={`${styles.caption1} !text-amber-400`}>- 2 SOL</p>
-              <p className={`${styles.caption1} !text-black`}>Unranked</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={`${styles.paddingX} ${styles.marginY}`}>
-        <div
-          className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-8`}
-        >
-          <div className="flex">
-            <img src="" alt="img" />
-            <div className="texts ml-4">
-              <p className={`${styles.heading2} !text-black`}>
-                Self Up Challenge
-              </p>
-              <p className={`${styles.caption1} !text-black`}>
-                24th January 2024
-              </p>
-            </div>
-          </div>
-
-          <div className="flex">
-            <div className="texts ml-4">
-              <p className={`${styles.caption1} !text-amber-400`}>- 2 SOL</p>
+            <div className="texts ml-4 my-auto">
+              <p className={`${styles.subheading2} !text-amber-400`}>- 2 SOL</p>
               <p className={`${styles.caption1} !text-black`}>Unranked</p>
             </div>
           </div>
