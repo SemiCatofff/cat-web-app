@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import menu from "../../assets/images/Menu.svg";
 
 const Navbar = () => {
   const buttonContainerRef = useRef(null);
@@ -30,7 +31,7 @@ const Navbar = () => {
           <a href="/" className=" z-40">
             <img src={""} alt="Logo" className="w-full" />
           </a>
-          <div className="flex justify-between ">
+          <div className="flex justify-between items-center ">
             <div className=" mr-4 z-10">
               <img
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -39,10 +40,11 @@ const Navbar = () => {
               />
             </div>
             <div id="menuToggle  z-10">
-              <div ref={buttonContainerRef} class="button_container1 z-30">
-                <span class="top1"></span>
-                <span class="middle"></span>
-                <span class="bottom1"></span>
+              <div
+                ref={buttonContainerRef}
+                class="button_container1 z-30 items-center"
+              >
+                <img src={menu}></img>
               </div>
 
               <div ref={overlayRef} class="overlay mt-0">
