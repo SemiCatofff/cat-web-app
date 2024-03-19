@@ -20,7 +20,7 @@ const Home = () => {
         <div className="relative">
           <img src={homeHeader} alt="headerImg" className="w-full" />{" "}
           <h1
-            className={`${styles.heading1} ${styles.marginX} ${styles.marginY}  absolute top-0 text-yellow ${styles.paddingY}`}
+            className={`${styles.heading1} ${styles.marginX} absolute top-0 text-yellow ${styles.paddingY}`}
           >
             Welcome to <br /> CATOFF 🔥
           </h1>
