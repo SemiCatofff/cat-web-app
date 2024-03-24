@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "../../styles/style";
-import { homeHeader, stake, reward } from "../../assets/images";
+import React from 'react'
+import styles from '../../styles/style'
+import { homeHeader, stake, reward } from '../../assets/images'
 
 const Dashboard = () => {
   return (
@@ -120,7 +120,7 @@ const Dashboard = () => {
         </a>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

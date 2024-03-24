@@ -1,37 +1,37 @@
-import { useState } from "react";
-import styles from "../../styles/style";
-import contest from "../../assets/images/player.png";
-import { useNavigate } from "react-router-dom";
-import profile from "../../assets/images/prof.png";
+import { useState } from 'react'
+import styles from '../../styles/style'
+import contest from '../../assets/images/player.png'
+import { useNavigate } from 'react-router-dom'
+import profile from '../../assets/images/prof.png'
 
 function ChallengeDetails() {
   const [people, setPeople] = useState([
     {
-      name: "Alice Doe",
-      address: "0x7856...jh86sp09",
-      timestamp: "5 Hours Ago",
-      imageSrc: "/path-to-your-image.jpg",
+      name: 'Alice Doe',
+      address: '0x7856...jh86sp09',
+      timestamp: '5 Hours Ago',
+      imageSrc: '/path-to-your-image.jpg',
     },
     {
-      name: "Alice Doe",
-      address: "0x7856...jh86sp09",
-      timestamp: "15 Hours Ago",
-      imageSrc: "/path-to-your-image.jpg",
+      name: 'Alice Doe',
+      address: '0x7856...jh86sp09',
+      timestamp: '15 Hours Ago',
+      imageSrc: '/path-to-your-image.jpg',
     },
     {
-      name: "Alice Doe",
-      address: "0x7856...jh86sp09",
-      timestamp: "2 Days Ago",
-      imageSrc: "/path-to-your-image.jpg",
+      name: 'Alice Doe',
+      address: '0x7856...jh86sp09',
+      timestamp: '2 Days Ago',
+      imageSrc: '/path-to-your-image.jpg',
     },
     {
-      name: "Alice Doe",
-      address: "0x7856...jh86sp09",
-      timestamp: "2 Days Ago",
-      imageSrc: "/path-to-your-image.jpg",
+      name: 'Alice Doe',
+      address: '0x7856...jh86sp09',
+      timestamp: '2 Days Ago',
+      imageSrc: '/path-to-your-image.jpg',
     },
-  ]);
-  const navigate = useNavigate();
+  ])
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col h-auto py-4 gap-[17px]">
       <div className="">
@@ -44,7 +44,7 @@ function ChallengeDetails() {
           <div
             className="flex items-center justify-center w-[112px] h-[25px] rounded-[20px] text-[#8567FF] bg-yellow border-[1px] border-[#8567FF]"
             onClick={() => {
-              navigate("/challenge");
+              navigate('/challenge')
             }}
           >
             Fitness
@@ -62,7 +62,7 @@ function ChallengeDetails() {
       <div className="relative h-[198px] mx-4 rounded-box border-[1px] bg-[#282C2E] flex items-center justify-center">
         <div
           className="absolute inset-0 bg-trophy bg-cover bg-center"
-          style={{ opacity: "60%" }}
+          style={{ opacity: '60%' }}
         ></div>
 
         <div className="absolute top-[20px] left-[20px]">
@@ -98,7 +98,7 @@ function ChallengeDetails() {
       <div
         className="h-[60px] mx-4 bg-yellow rounded-box border-[1px] border-[#000000] flex items-center justify-center"
         onClick={() => {
-          navigate("/challenge");
+          navigate('/challenge')
         }}
       >
         <p className={`${styles.subheading} !text-[#000000]`}>Join Challenge</p>
@@ -132,11 +132,11 @@ function ChallengeDetails() {
                 {item.timestamp}
               </span>
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
-export default ChallengeDetails;
+export default ChallengeDetails

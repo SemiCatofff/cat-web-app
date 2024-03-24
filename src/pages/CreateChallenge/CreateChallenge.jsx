@@ -1,47 +1,47 @@
-import React, { useState } from "react";
-import styles from "../../styles/style";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import styles from '../../styles/style'
+import { useNavigate } from 'react-router-dom'
 
 const CreateChallenge = () => {
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(1)
   const navigate = useNavigate()
   const [formState1, setFormState1] = useState({
-    challengeName: "",
-    description: "",
-    requirements: "",
-    startDate: "",
-    endDate: "",
-    challengeType: "",
-  });
+    challengeName: '',
+    description: '',
+    requirements: '',
+    startDate: '',
+    endDate: '',
+    challengeType: '',
+  })
 
   const [formState2, setFormState2] = useState({
-    wager: "",
-    wallet: "",
-    minParticipants: "",
-    maxParticipants: "",
-  });
+    wager: '',
+    wallet: '',
+    minParticipants: '',
+    maxParticipants: '',
+  })
 
   const handleNextClick = () => {
     if (formStep === 1) {
-      setFormStep(2);
+      setFormStep(2)
     } else {
-      setFormStep(1);
+      setFormStep(1)
     }
-  };
+  }
 
   const handleSubmit = () => {
     console.log(formState1)
     console.log(formState2)
-  };
+  }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     if (formStep === 1) {
-      setFormState1({ ...formState1, [name]: value });
+      setFormState1({ ...formState1, [name]: value })
     } else {
-      setFormState2({ ...formState2, [name]: value });
+      setFormState2({ ...formState2, [name]: value })
     }
-  };
+  }
 
   return (
     <div className="mx-4 flex flex-col">
@@ -143,7 +143,7 @@ const CreateChallenge = () => {
                     type="radio"
                     name="challengeType"
                     value="dare"
-                    checked={formState1.challengeType === "dare"}
+                    checked={formState1.challengeType === 'dare'}
                     onChange={handleInputChange}
                   />
                   <span className={`${styles.subheading} !text-[#666666] ml-3`}>
@@ -155,7 +155,7 @@ const CreateChallenge = () => {
                     type="radio"
                     name="challengeType"
                     value="p2p"
-                    checked={formState1.challengeType === "p2p"}
+                    checked={formState1.challengeType === 'p2p'}
                     onChange={handleInputChange}
                   />
                   <span className={`${styles.subheading} !text-[#666666] ml-3`}>
@@ -167,7 +167,7 @@ const CreateChallenge = () => {
                     type="radio"
                     name="challengeType"
                     value="group"
-                    checked={formState1.challengeType === "group"}
+                    checked={formState1.challengeType === 'group'}
                     onChange={handleInputChange}
                   />
                   <span className={`${styles.subheading} !text-[#666666] ml-3`}>
@@ -181,7 +181,9 @@ const CreateChallenge = () => {
               <div
                 type="button"
                 className="flex w-[49%] h-[56px] items-center rounded-[12px]  justify-center border-[1px] border-[#8567FF] text-[#8567FF]"
-                onClick={()=>{navigate("/")}}
+                onClick={() => {
+                  navigate('/')
+                }}
               >
                 Cancel
               </div>
@@ -268,7 +270,7 @@ const CreateChallenge = () => {
         )}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default CreateChallenge;
+export default CreateChallenge

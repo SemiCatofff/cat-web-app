@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Catoff Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Catoff Web App is the core platform where users can engage in peer-to-peer challenges, track their progress, and interact with a community of like-minded competitors. Built with React and Redux for state management, this application leverages the power of modern web technologies to provide a seamless and responsive user experience.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Introduction](#introduction)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Structure and Pages](#structure-and-pages)
+- [Contributing](#contributing)
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Catoff Web App is the interactive interface of the Catoff ecosystem, designed to facilitate a wide range of challenges from fitness to skill-based competitions. It integrates Google OAuth for authentication, ensuring a secure and convenient login mechanism for users.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Key Features
 
-### `npm test`
+- **Google OAuth Integration**: Secure and streamlined user authentication process.
+- **Challenge Creation and Participation**: Users can create new challenges or join existing ones.
+- **Real-time Leaderboards**: Track standings and progress within each challenge.
+- **Responsive Design**: Optimized for a wide range of devices, offering a consistent experience across desktop and mobile.
+- **Redux State Management**: Efficient handling of application state, ensuring a smooth and dynamic user experience.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technology Stack
 
-### `npm run build`
+- React
+- Redux
+- React Router
+- Axios for API requests
+- TailwindCSS for styling
+- Workbox for Progressive Web App (PWA) capabilities
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ensure you have Node.js and npm installed before starting. Clone the repository, install dependencies, and you are ready to go:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/CatoffGaming/catoff-web-app.git
+cd catoff-web-app
+npm install
+```
 
-### `npm run eject`
+## Running the Application
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To start the application in development mode, run:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To build the application for production, use:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
+## Structure and Pages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app structure is designed for scalability and ease of navigation, featuring the following key pages and components:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Home**: The landing page of the app.
+- **Dashboard**: User-specific data and challenge overviews.
+- **Create Challenge**: Interface for creating new challenges.
+- **Challenge Details**: Detailed information about specific challenges.
+- **All Challenges**: Overview of available challenges to join.
 
-### Code Splitting
+## Feedback and Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Your feedback is valuable to us! For any suggestions, concerns, or questions, please reach out through the contact us form on the [landing page](https://www.catoff.xyz).
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For more information on the Catoff ecosystem, visit [app.catoff.xyz](https://app.catoff.xyz).
