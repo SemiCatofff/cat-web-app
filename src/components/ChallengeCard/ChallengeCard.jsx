@@ -1,12 +1,12 @@
-import { cardImg } from "../../assets/images";
-import styles from "../../styles/style";
-import { useNavigate } from "react-router";
+import { cardImg } from '../../assets/images'
+import styles from '../../styles/style'
+import { useNavigate } from 'react-router'
 
 const ChallengeCard = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const handleOnclick = () => {
-    navigate("/details");
-  };
+    navigate('/details')
+  }
   return (
     <>
       <div
@@ -55,7 +55,7 @@ const ChallengeCard = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ChallengeCard;
+export default ChallengeCard

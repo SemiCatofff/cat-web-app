@@ -19,10 +19,14 @@ function AllChallenges() {
       </header>
 
       <main className="h-auto p-4">
-       
         <div className=" text-white p-5 rounded-2xl shadow-lg h-custom bg-custom">
-          <h2 className="text-yellow text-xl font-body font-semibold">Own your wagers,</h2>
-          <h2 className="text-yellow text-xl font-body font-semibold">  Own your wins </h2>
+          <h2 className="text-yellow text-xl font-body font-semibold">
+            Own your wagers,
+          </h2>
+          <h2 className="text-yellow text-xl font-body font-semibold">
+            {' '}
+            Own your wins{' '}
+          </h2>
           <p className="mt-12 text-xs">Compete and earn crypto with Catoff.</p>
         </div>
 
@@ -68,7 +72,7 @@ function AllChallenges() {
         </section>
       </main>
     </div>
-  );
+  )
 }
 
-export default AllChallenges;
+export default AllChallenges

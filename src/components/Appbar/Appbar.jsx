@@ -1,21 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import sel from "../../assets/images/sel.svg";
-import category from "../../assets/images/Category.svg";
-import setting from "../../assets/images/Setting.svg";
-import profile from "../../assets/images/Profile.png";
-import add from "../../assets/images/add.png";
-import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
+import sel from '../../assets/images/sel.svg'
+import category from '../../assets/images/Category.svg'
+import setting from '../../assets/images/Setting.svg'
+import profile from '../../assets/images/Profile.png'
+import add from '../../assets/images/add.png'
+import { useState } from 'react'
 
 function Appbar() {
-  const navigate = useNavigate();
-  const [tab, setTab] = useState(0);
+  const navigate = useNavigate()
+  const [tab, setTab] = useState(0)
 
-  const routes = ["/", "/create", "/dashboard", "/settings"];
+  const routes = ['/', '/create', '/dashboard', '/settings']
 
   const handleTabClick = (index) => {
-    setTab(index);
-    navigate(routes[index]);
-  };
+    setTab(index)
+    navigate(routes[index])
+  }
 
   return (
     <footer className="mb-4 mx-4 bottom-0 h-custom bg-custom rounded-box absolute left-0 right-0">
@@ -25,7 +25,7 @@ function Appbar() {
           onClick={() => handleTabClick(0)}
         >
           <span>
-            {" "}
+            {' '}
             <img src={category}></img>
           </span>
           <span className="text-xs text-yellow">Explore</span>
@@ -40,7 +40,7 @@ function Appbar() {
           onClick={() => handleTabClick(1)}
         >
           <span>
-            {" "}
+            {' '}
             <img src={add}></img>
           </span>
           <span className="text-xs text-yellow">Create</span>
@@ -55,7 +55,7 @@ function Appbar() {
           onClick={() => handleTabClick(2)}
         >
           <span>
-            {" "}
+            {' '}
             <img src={profile}></img>
           </span>
           <span className="text-xs text-yellow">Profile</span>
@@ -68,11 +68,11 @@ function Appbar() {
         <button
           className="flex flex-col items-center gap-1"
           onClick={() => {
-            handleTabClick(4);
+            handleTabClick(4)
           }}
         >
           <span>
-            {" "}
+            {' '}
             <img src={setting}></img>
           </span>
           <span className="text-xs text-yellow">Settings</span>
@@ -84,7 +84,7 @@ function Appbar() {
         </button>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Appbar;
+export default Appbar

@@ -2,31 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 @font-face {
-  font-family: "TTRuns";
-  src: url("../assets/fonts/TT\ Runs\ Trial\ Regular.ttf") format("truetype");
+  font-family: 'TTRuns';
+  src: url('../assets/fonts/TT\ Runs\ Trial\ Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "TTRuns";
-  src: url("../assets/fonts/TT\ Runs\ Trial\ DemiBold.ttf") format("truetype");
+  font-family: 'TTRuns';
+  src: url('../assets/fonts/TT\ Runs\ Trial\ DemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "TTRuns";
-  src: url("../assets/fonts/TT\ Runs\ Trial\ Bold.ttf") format("truetype");
+  font-family: 'TTRuns';
+  src: url('../assets/fonts/TT\ Runs\ Trial\ Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "TTRuns";
-  src: url("../assets/fonts/TT\ Runs\ Trial\ ExtraBold.ttf") format("truetype");
+  font-family: 'TTRuns';
+  src: url('../assets/fonts/TT\ Runs\ Trial\ ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
 }
@@ -105,8 +105,14 @@
   top: 0px;
   opacity: 0;
   overflow-y: hidden;
-  -webkit-transition: opacity 0.35s, height 0.35s, visibility 0.35s;
-  transition: opacity 0.35s, height 0.35s, visibility 0.35s;
+  -webkit-transition:
+    opacity 0.35s,
+    height 0.35s,
+    visibility 0.35s;
+  transition:
+    opacity 0.35s,
+    height 0.35s,
+    visibility 0.35s;
   z-index: 1;
 }
 
@@ -179,7 +185,7 @@
 }
 
 .overlay ul li a:after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 50%;

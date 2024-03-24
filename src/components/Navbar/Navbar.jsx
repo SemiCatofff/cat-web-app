@@ -1,35 +1,35 @@
-import React, { useEffect, useRef } from "react";
-import menu from "../../assets/images/Menu.svg";
+import React, { useEffect, useRef } from 'react'
+import menu from '../../assets/images/Menu.svg'
 
 const Navbar = () => {
-  const buttonContainerRef = useRef(null);
-  const overlayRef = useRef(null);
-  const bodyRef = useRef(null);
+  const buttonContainerRef = useRef(null)
+  const overlayRef = useRef(null)
+  const bodyRef = useRef(null)
 
   useEffect(() => {
-    const buttonContainer = buttonContainerRef.current;
-    const overlay = overlayRef.current;
-    const body = bodyRef.current; // Ensure there is an element for this ref in your component.
+    const buttonContainer = buttonContainerRef.current
+    const overlay = overlayRef.current
+    const body = bodyRef.current // Ensure there is an element for this ref in your component.
 
     const toggleClass = () => {
-      buttonContainer?.classList.toggle("active");
-      overlay?.classList.toggle("open");
-      body?.classList.toggle("active");
-    };
+      buttonContainer?.classList.toggle('active')
+      overlay?.classList.toggle('open')
+      body?.classList.toggle('active')
+    }
 
-    buttonContainer?.addEventListener("click", toggleClass);
+    buttonContainer?.addEventListener('click', toggleClass)
 
     return () => {
-      buttonContainer?.removeEventListener("click", toggleClass);
-    };
-  }, []);
+      buttonContainer?.removeEventListener('click', toggleClass)
+    }
+  }, [])
 
   return (
     <>
       <div className="w-full px-4">
         <div className="flex justify-between ">
           <a href="/" className=" z-40">
-            <img src={""} alt="Logo" className="w-full" />
+            <img src={''} alt="Logo" className="w-full" />
           </a>
           <div className="flex justify-between items-center ">
             <div className=" mr-4 z-10">
@@ -51,7 +51,7 @@ const Navbar = () => {
                 <div class="nav">
                   <div className="flex justify-end px-4 w-full text-white">
                     <div className="col2 text-right">
-                      {" "}
+                      {' '}
                       <ul>
                         <div className="nav-para text-2xl mb-4 mt-4">
                           <a className="lala  relative " href="/anarchy">
@@ -88,7 +88,7 @@ const Navbar = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
