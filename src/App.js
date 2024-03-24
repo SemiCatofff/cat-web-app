@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import store from "./redux/store/store";
-import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import store from './redux/store/store'
+import { Provider } from 'react-redux'
 import {
   AllChallenges,
   Challenge,
@@ -9,13 +9,11 @@ import {
   Home,
   Login,
   Main,
-  
-} from "./pages";
+} from './pages'
 
-import ChallengeDetails from "./pages/ChallengeDetails/ChallengeDetails";
+import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
 
-
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
   return (
@@ -34,10 +32,10 @@ function App() {
         </Router>
       </Provider>
     </GoogleOAuthProvider>
-  );
+  )
 }
 
-export default App;
+export default App
 
 // {
 //   "code": "4/0AeaYSHC_LUBD7DbIottsXXJYiDGFeogYEZm3zciA8Deu0rkUJTOFqhDJ0SsTo7fw7I8XuQ",

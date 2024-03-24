@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   getUserCurrentTableAPI,
   getUserGraphAPI,
   getUserProfileDataAPI,
-} from "../../utils/ApiCalls";
+} from '../../utils/ApiCalls'
 
 function Dashboard() {
-  const [graphTab, setGraphTab] = useState(0);
-  const [challengeTab, setChallengeTab] = useState(0);
-  const [userDetail, setUserDetail] = useState({});
+  const [graphTab, setGraphTab] = useState(0)
+  const [challengeTab, setChallengeTab] = useState(0)
+  const [userDetail, setUserDetail] = useState({})
 
   // useEffect(() => {
   //   const getUserDashboardData = async () => {
@@ -26,9 +26,9 @@ function Dashboard() {
   //   getUserDashboardData();
   // }, []);
 
-  useEffect(() => {}, [graphTab]);
+  useEffect(() => {}, [graphTab])
 
-  useEffect(() => {}, [challengeTab]);
+  useEffect(() => {}, [challengeTab])
 
   const ProfileBox = () => {
     return (
@@ -45,7 +45,7 @@ function Dashboard() {
           <div className="flex gap-5 ">
             <h2 className="text-gray-500 font-bold">Wallet Address</h2>
             <p className="text-blue-600">
-              {userDetail.WalletAddress?.toString().slice(0, 7) + "....."}
+              {userDetail.WalletAddress?.toString().slice(0, 7) + '.....'}
             </p>
           </div>
           <div className="flex gap-5 ">
@@ -54,8 +54,8 @@ function Dashboard() {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   const RewardBox = () => {
     return (
@@ -73,17 +73,15 @@ function Dashboard() {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="flex flex-col">
       <ProfileBox />
       <RewardBox />
-   
-
     </div>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard

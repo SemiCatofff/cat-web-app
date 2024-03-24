@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import Login from "../Login/Login";
-import Navbar from "../../components/Navbar/Navbar";
-import Appbar from "../../components/Appbar/Appbar";
+import { useSelector } from 'react-redux'
+import Login from '../Login/Login'
+import Navbar from '../../components/Navbar/Navbar'
+import Appbar from '../../components/Appbar/Appbar'
 
 function Main(props) {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
   return (
     <div className="w-screen h-screen flex flex-col justify-between relative bg-[#ECECEC] md:max-w-[360px]">
       <div className="z-20 h-[56px]">
@@ -24,7 +24,7 @@ function Main(props) {
         style={{ opacity: 0.16 }}
       ></div>
     </div>
-  );
+  )
 }
 
-export default Main;
+export default Main

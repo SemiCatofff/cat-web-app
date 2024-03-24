@@ -1,14 +1,14 @@
-import React from "react";
-import profile from "../../assets/images/prof.png";
+import React from 'react'
+import profile from '../../assets/images/prof.png'
 
 const calculateHeight = (steps, maxSteps) => {
-  const maxHeight = 260;
+  const maxHeight = 260
 
-  return Math.floor((steps / maxSteps) * maxHeight);
-};
+  return Math.floor((steps / maxSteps) * maxHeight)
+}
 
 const LeaderboardItem = ({ name, steps, profilePic, maxSteps }) => {
-  const barHeight = calculateHeight(steps, maxSteps);
+  const barHeight = calculateHeight(steps, maxSteps)
 
   return (
     <div className="flex flex-col w-[50%] justify-end items-center gap-[20px]">
@@ -35,11 +35,11 @@ const LeaderboardItem = ({ name, steps, profilePic, maxSteps }) => {
         ></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const StepUpChallenge = () => {
-  const maxSteps = 50000;
+  const maxSteps = 50000
 
   return (
     <div className="flex flex-col mt-4 items-center justify-center">
@@ -59,7 +59,7 @@ const StepUpChallenge = () => {
       </div>
       <div className="h-[3px] w-[296px] bg-[#6F6F6F] bg-opacity-35"></div>
     </div>
-  );
-};
+  )
+}
 
-export default StepUpChallenge;
+export default StepUpChallenge
