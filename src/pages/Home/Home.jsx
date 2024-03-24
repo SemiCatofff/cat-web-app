@@ -1,9 +1,9 @@
-import styles from "../../styles/style";
-import { homeHeader } from "../../assets/images";
-import { ChallengeCard } from "../../components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import styles from '../../styles/style'
+import { homeHeader } from '../../assets/images'
+import { ChallengeCard } from '../../components'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const Home = () => {
   var settings = {
@@ -13,12 +13,12 @@ const Home = () => {
     initialSlide: 0,
     slidesToShow: 1.2,
     slidesToScroll: 1,
-  };
+  }
   return (
     <>
       <div className={` ${styles.paddingX} ${styles.paddingY} `}>
         <div className="relative">
-          <img src={homeHeader} alt="headerImg" className="w-full" />{" "}
+          <img src={homeHeader} alt="headerImg" className="w-full" />{' '}
           <h1
             className={`${styles.heading1} ${styles.marginX} absolute top-0 text-yellow ${styles.paddingY}`}
           >
@@ -73,7 +73,7 @@ const Home = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

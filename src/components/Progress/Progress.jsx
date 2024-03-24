@@ -1,12 +1,12 @@
-import styles from "../../styles/style";
-import profile from "../../assets/images/prof.png";
-import insta from "../../assets/images/insta.svg";
-import discord from "../../assets/images/discord.svg";
-import tg from "../../assets/images/tg.svg";
-import twitter from "../../assets/images/twitter.svg";
-import boot from "../../assets/images/boot.svg";
-import bg from "../../assets/images/bg.svg";
-import bullets from "../../assets/images/bullets.svg";
+import styles from '../../styles/style'
+import profile from '../../assets/images/prof.png'
+import insta from '../../assets/images/insta.svg'
+import discord from '../../assets/images/discord.svg'
+import tg from '../../assets/images/tg.svg'
+import twitter from '../../assets/images/twitter.svg'
+import boot from '../../assets/images/boot.svg'
+import bg from '../../assets/images/bg.svg'
+import bullets from '../../assets/images/bullets.svg'
 
 function Progress() {
   return (
@@ -79,11 +79,11 @@ function Progress() {
           <img src={insta}></img>
           <img src={discord}></img>
           <img src={tg}></img>
-          <img src={""}></img>
+          <img src={''}></img>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Progress;
+export default Progress
