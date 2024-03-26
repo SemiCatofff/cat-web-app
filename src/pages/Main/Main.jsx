@@ -21,7 +21,7 @@ function Main(props) {
         {props.children}
       </div>
 
-      <div className="absolute right-0 top-[20px]">
+      <div className="absolute right-0 top-[5px]">
         <img src={el2} alt=""></img>
       </div>
       <div className="absolute rigth-0 bottom-[0px]">
