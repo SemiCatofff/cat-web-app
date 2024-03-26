@@ -2,40 +2,71 @@ import styles from '../../styles/style'
 import { useState } from 'react'
 import Progress from '../../components/Progress/Progress'
 import StepUpChallenge from '../../components/Leaderboard/Leaderboard'
+import MultiChallenge from '../../components/MultiChallenge/MultiChallenge'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
   return (
-    <div className="flex flex-col h-auto py-4">
-      <div className="h-tab mx-4 flex bg-[#F7F7F7] rounded-tab px-2 py-2 gap-[1%]">
+    <div className="flex flex-col h-auto">
+      <div className="mx-4 my-2 ">
+        <div className={`${styles.caption2} !text-[#4B4B4B]`}>#Fitness</div>
+        <div className={`${styles.heading2} !text-[#202117] `}>
+          Step Challenge
+        </div>
+        <div >
+          <span className={`${styles.caption2} !text-[#202117] !font-medium`}>14th April, 2024</span>
+          <span className={`${styles.paragraph} !text-[#8D8D8D]`}>{"  "}Ending in 3 days</span>
+        </div>
+      </div>
+      <div className="h-[54px] mx-4 flex bg-[#EDEBF3] rounded-tab drop-shadow gap-[1%]">
         <div
-          className={`h-[38px] rounded-tab w-[49%] flex items-center justify-center ${
-            tab === 0 ? 'bg-yellow' : ''
+          className={`h-[54px] rounded-tab w-[49%] flex items-center justify-center ${
+            tab === 0 ? 'bg-[#E1F076]' : ''
           }`}
           onClick={() => {
             setTab(0)
           }}
         >
-          <div className={`${styles.subheading} !text-[#000000]`}>
+          <div
+            className={`${styles.caption1} ${tab === 0 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
+          >
             My Progress
           </div>
         </div>
         <div
           className={`h-[38p] rounded-tab w-[49%] flex items-center justify-center ${
-            tab === 1 ? 'bg-yellow' : ''
+            tab === 1 ? 'bg-[#E1F076] !text-[#202117]' : '!text-[#6F6F6F]'
           }`}
           onClick={() => {
             setTab(1)
           }}
         >
-          <div className={`${styles.subheading} !text-[#000000]`}>
+          <div
+            className={`${styles.caption1} ${tab === 1 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
+          >
             {' '}
             Leaderboard
           </div>
         </div>
+        <div
+          className={`h-[38p] rounded-tab w-[49%] flex items-center justify-center ${
+            tab === 2 ? 'bg-[#E1F076]' : ''
+          }`}
+          onClick={() => {
+            setTab(2)
+          }}
+        >
+          <div
+            className={`${styles.caption1} ${tab === 2 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
+          >
+            {' '}
+            Chatroom
+          </div>
+        </div>
       </div>
 
-      {tab === 0 ? <Progress /> : <StepUpChallenge />}
+      {tab === 0 ? <Progress /> : <MultiChallenge 
+      live ={true}/>}
     </div>
   )
 }
