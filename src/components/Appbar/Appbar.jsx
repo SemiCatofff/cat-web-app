@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import sel from '../../assets/images/sel.svg'
 import category from '../../assets/images/Category.svg'
-import setting from '../../assets/images/Setting.svg'
+import setting from '../../assets/images/chat.png'
 import profile from '../../assets/images/Profile.png'
 import add from '../../assets/images/add.png'
 import { useState } from 'react'
@@ -18,7 +17,7 @@ function Appbar() {
   }
 
   return (
-    <footer className="mb-4 mx-4 bottom-0 h-custom bg-custom rounded-box absolute left-0 right-0">
+    <footer className=" bottom-0 h-custom bg-custom absolute left-0 right-0">
       <div className="flex h-full justify-center items-center gap-[12%]">
         <button
           className="flex flex-col items-center"
@@ -26,14 +25,9 @@ function Appbar() {
         >
           <span>
             {' '}
-            <img src={category}></img>
+            <img src={category} alt=""></img>
           </span>
           <span className="text-xs text-yellow">Explore</span>
-          {tab === 0 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
         </button>
         <button
           className="flex flex-col items-center gap-1"
@@ -41,30 +35,11 @@ function Appbar() {
         >
           <span>
             {' '}
-            <img src={add}></img>
+            <img src={add} alt=""></img>
           </span>
           <span className="text-xs text-yellow">Create</span>
-          {tab === 1 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
         </button>
-        <button
-          className="flex flex-col items-center gap-1"
-          onClick={() => handleTabClick(2)}
-        >
-          <span>
-            {' '}
-            <img src={profile}></img>
-          </span>
-          <span className="text-xs text-yellow">Profile</span>
-          {tab === 2 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
-        </button>
+
         <button
           className="flex flex-col items-center gap-1"
           onClick={() => {
@@ -73,14 +48,20 @@ function Appbar() {
         >
           <span>
             {' '}
-            <img src={setting}></img>
+            <img src={setting} alt=""></img>
           </span>
-          <span className="text-xs text-yellow">Settings</span>
-          {tab === 3 && (
-            <span className="absolute bottom-[-1px]">
-              <img src={sel}></img>
-            </span>
-          )}
+          <span className="text-xs text-yellow">Chats</span>
+        </button>
+
+        <button
+          className="flex flex-col items-center gap-1"
+          onClick={() => handleTabClick(2)}
+        >
+          <span>
+            {' '}
+            <img src={profile} alt=""></img>
+          </span>
+          <span className="text-xs text-yellow">Profile</span>
         </button>
       </div>
     </footer>
