@@ -27,6 +27,7 @@ function App() {
               <Route path="/create" element={<CreateChallenge />} />
               <Route path="/challenge" element={<Challenge />} />
               <Route path="/details" element={<ChallengeDetails />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </Main>
         </Router>
