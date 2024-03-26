@@ -33,7 +33,7 @@ function ChallengeDetails() {
   ])
   const navigate = useNavigate()
   return (
-    <div className="flex flex-col h-auto py-4 gap-[17px]">
+    <div className="flex flex-col h-auto gap-[17px]">
       <div className="">
         <img src={contest} className="mx-4 rounded-[24px] w-[92%]"></img>
       </div>
