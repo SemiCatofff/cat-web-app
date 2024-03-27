@@ -57,7 +57,6 @@ function ChallengeDetails() {
   </div>
   <div className="button rounded-full bg-yellow px-8 py-2 my-auto">
     <h1 className={`${styles.heading2} !text-black flex `}> <span className='my-auto'>Join Now</span> <span className='-mr-2 '><img src={arrow} alt="" className='h-8 w-8 my-auto' /></span> </h1>
-  
   </div>
 </div>
   </div>
