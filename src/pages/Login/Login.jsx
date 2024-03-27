@@ -1,42 +1,34 @@
-import { setLoginState } from '../../redux/actions/actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginAPI } from '../../utils/OktoApiCalls'
-import axios from 'axios'
-
-import { useGoogleLogin } from '@react-oauth/google'
-import { useNavigate } from 'react-router-dom'
+import styles from '../../styles/style'
+import { setLoginState } from '../../redux/actions/actions'
 
 function Login() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const handleLogin = async () => {
-    navigate('/signup')
 
-    //const output = await loginAPI();
+  const handleLogin = async () => {
+    //window.location.href = 'http://localhost:3005/googleAuth/'
+    dispatch(setLoginState(true))
   }
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse)
-      const userInfo = await axios
-        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        })
-        .then((res) => res.data)
-
-      console.log(userInfo)
-    },
-  })
-
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <div
-        className="w-32 h-10 bg-blue-500 flex justify-center items-center cursor-pointer rounded-lg"
-        onClick={() => {
-          handleLogin()
-        }}
-      >
-        Login
+    <div className="w-full h-full flex justify-center">
+      <div className="absolute top-[60%] flex flex-col justify-center">
+        <div
+          className="w-[298px] h-[68px] z-1 bg-[#E1F076] rounded-[100px] cursor-pointer flex items-center justify-center"
+          onClick={handleLogin}
+        >
+          <span className={`${styles.heading1} !text-[#202117]`}>SIGNUP</span>
+        </div>
+
+        <div className='flex flex-col items-center mt-[30px] gap-[10px]'>
+        <div className= {`${styles.subtext} !text-[#FFFFFF] !font-regular`}>
+           Already a user 
+          </div>
+          <div className= {`${styles.subtext} !text-[#E1F076]`}>
+          Continue with your account
+          </div>
+
+        </div>
       </div>
     </div>
   )
