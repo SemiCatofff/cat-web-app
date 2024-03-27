@@ -1,8 +1,20 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styles from '../../styles/style'
 import { homeHeader, arrow, award2, star, user, edit,addd, yellowarrow } from '../../assets/images'
+import {Popup} from "../../components/index"
 
 const Dashboard = () => {
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+  
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <>
       <div className={`${styles.paddingX}`}>
@@ -44,11 +56,16 @@ const Dashboard = () => {
         <div className="mx-4 pb-2">
           <img src={award2} alt="awardicon" className='mx-auto' />
         <div className="button rounded-full bg-purple-100 pl-6 mb-4 -mt-3.5">
-    <h1 className={`${styles.heading2} !text-black flex justify-between`}> <span className='my-auto  mx-auto flex flex-col'><p className={`${styles.caption2} !text-black`}>Wager Earned</p><p>12,470</p></span> <span className='-mr-2 bg-black text-yellow rounded-full px-8 py-4 flex'>WITHDRAW <img src={yellowarrow} alt="" /></span>  </h1>
+    <h1 className={`${styles.heading2} !text-black flex justify-between`}> <span className='my-auto  mx-auto flex flex-col'><p className={`${styles.caption2} !text-black `}>Wager Earned</p><p>12,470</p></span> <span onClick={handleOpenPopup} className='-mr-2 bg-black text-yellow rounded-full px-8 py-4 flex cursor-pointer'>WITHDRAW <img src={yellowarrow} alt="" /></span>  </h1>
   </div>
         </div>
          
       </div>
+      <Popup 
+        isOpen={isPopupOpen} 
+        content={<div>Lalala</div>} 
+        onClose={handleClosePopup} 
+      />
 
 
 {/* history Title */}
@@ -102,3 +119,4 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
