@@ -38,18 +38,17 @@ const ChallengeCard = () => {
                 <span className={`${styles.heading2}`}>Step Challenge</span>
                 <br />
               <div className="flex">  17th April , 2024 
-              <div className='w-2 h-2 rounded-full bg-yellow mx-2 my-auto' />
+              <div className='w-2 h-2 mx-2 rounded-full bg-yellow my-auto' />
               <div className={`text-white italic`}>Entry : 2000 credits</div>
               </div>
-
               <div className="pl-3 bg-white rounded-full py-2 mx-auto mt-4 flex">
                 <div className="flex"><img src={award} alt="gg" />
                 <p className={`${styles.heading2} !text-black !text-[12px] mx-1`}>Prize Pool <span className='text-purple-600 font-bold'>: 20K Credits</span></p>
                 </div>
+                
               </div>
               </div>
-             
-           
+
             </div>
           </div>
         </div>
