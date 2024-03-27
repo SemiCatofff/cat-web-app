@@ -44,7 +44,7 @@ const Dashboard = () => {
         <div className="mx-4 pb-2">
           <img src={award2} alt="awardicon" className='mx-auto' />
         <div className="button rounded-full bg-purple-100 pl-6 mb-4 -mt-3.5">
-    <h1 className={`${styles.heading2} !text-black flex justify-between`}> <span className='my-auto px-1 flex flex-col'><p className={`${styles.caption2} !text-black`}>Wager Earned</p><p>12,470</p></span> <span className='-mr-2 bg-black text-yellow rounded-full px-8 py-4 flex'>WITHDRAW <img src={yellowarrow} alt="" /></span>  </h1>
+    <h1 className={`${styles.heading2} !text-black flex justify-between`}> <span className='my-auto  mx-auto flex flex-col'><p className={`${styles.caption2} !text-black`}>Wager Earned</p><p>12,470</p></span> <span className='-mr-2 bg-black text-yellow rounded-full px-8 py-4 flex'>WITHDRAW <img src={yellowarrow} alt="" /></span>  </h1>
   </div>
         </div>
          
