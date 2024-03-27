@@ -32,7 +32,8 @@ module.exports = {
       },
       backgroundImage: {
         hero: "url('../assets/images/bgapp.svg')",
-        trophy: "url('../assets/images/glossy.png')",
+        trophy: "url('../assets/images/xyz.png')",
+        signup: "url('../assets/images/signup.png')",
       },
     },
   },
