@@ -219,3 +219,14 @@
     bottom: 0;
   }
 }
+
+
+.transparent-bg{
+  border-radius: 80px;
+border: 0.2px solid rgba(255, 255, 255, 0.19);
+
+background: linear-gradient(92deg, rgba(255, 255, 255, 0.36) -0.56%, rgba(255, 255, 255, 0.14) 91.86%);
+
+box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.19);
+backdrop-filter: blur(4px);
+}
