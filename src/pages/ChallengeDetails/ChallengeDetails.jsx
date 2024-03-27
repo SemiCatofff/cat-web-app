@@ -2,41 +2,16 @@ import { useState } from 'react'
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router-dom'
 import {ChallengeCard} from "../../components/index"
-import {  avatargrp2, targetbg, target } from '../../assets/images'
+import {  avatargrp2, targetbg, target, arrow } from '../../assets/images'
 
 
 function ChallengeDetails() {
-  const [people, setPeople] = useState([
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      timestamp: '5 Hours Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      timestamp: '15 Hours Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      timestamp: '2 Days Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      timestamp: '2 Days Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-  ])
+
   const navigate = useNavigate()
   return (
   <>
   <div className={`mb-20`}>
-    <ChallengeCard></ChallengeCard>
+    <ChallengeCard />
     <div className={`${styles.marginY} ${styles.marginX}`}>
       <h1 className={`${styles.subheading2} !text-gray-500`}>About the Challenge</h1>
       <p className={`${styles.paragraph} mt-4 !text-gray-500`}>Dorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissi</p>
@@ -68,9 +43,27 @@ function ChallengeDetails() {
     <p className={`${styles.heading2} text-yellow`}>10000 steps in 3 Days</p>
 <p className={`${styles.heading2} !text-gray-400`}>23 Hrs</p></div>
 
-</div>
-    </div>
   </div>
+  
+  
+  </div>
+  {/* Buttons */}
+<div className={`${styles.marginX} flex justify-between mt-8`}>
+  <div className="credit">
+    <h1 className={`${styles.heading2} !text-black`}>2k Credit</h1>
+    <p className={`${styles.caption1} !text-gray-500 `}>
+      Wager Amount
+    </p>
+  </div>
+  <div className="button rounded-full bg-yellow px-8 py-2 my-auto">
+    <h1 className={`${styles.heading2} !text-black flex `}> <span className='my-auto'>Join Now</span> <span className='-mr-2 '><img src={arrow} alt="" className='h-8 w-8 my-auto' /></span> </h1>
+  
+  </div>
+</div>
+  </div>
+
+
+
   </>
   )
 }
