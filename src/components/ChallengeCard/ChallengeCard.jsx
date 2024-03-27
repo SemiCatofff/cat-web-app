@@ -15,7 +15,7 @@ const ChallengeCard = () => {
       >
         <img src={cardImg} alt="" className="w-full" />
         <div className={``}>
-          <div className={`absolute top-10 w-full px-10`}>
+          <div className={`absolute top-10 w-full px-8`}>
           <div className={`${styles.flexBetween}`}>
           <div
                 className={`${styles.caption2} !text-black transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex`}
@@ -28,7 +28,7 @@ const ChallengeCard = () => {
              </div>
             </div>
           </div>
-          <div className={`absolute bottom-10 w-full px-10 `}>
+          <div className={`absolute bottom-10 w-full px-8 `}>
             <div className={`${styles.flexBetween}`}>
               <div
                 className={`${styles.caption1} ${styles.marginY} text-gray-400`}

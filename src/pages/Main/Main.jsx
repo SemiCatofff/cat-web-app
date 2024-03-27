@@ -13,7 +13,7 @@ function Main(props) {
   const showAppbar = routes.includes(location.pathname)
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] relative md:max-w-[360px]">
+    <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] relative md:max-w-[390px] mx-auto">
       <div className="z-20">
         <Navbar />
       </div>
