@@ -9,6 +9,7 @@ import {
   Home,
   Login,
   Main,
+  Chat
 } from './pages'
 
 import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
@@ -27,6 +28,7 @@ function App() {
               <Route path="/create" element={<CreateChallenge />} />
               <Route path="/challenge" element={<Challenge />} />
               <Route path="/details" element={<ChallengeDetails />} />
+              <Route path="/chat" element={<Chat />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </Main>

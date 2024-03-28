@@ -9,7 +9,7 @@ import el2 from '../../assets/images/el2.png'
 function Main(props) {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
   const location = useLocation()
-  const routes = ['/', '/create', '/dashboard', '/settings']
+  const routes = ['/', '/create', '/dashboard', '/settings', '/chat']
   const showAppbar = routes.includes(location.pathname)
 
   return (

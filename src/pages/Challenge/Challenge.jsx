@@ -3,9 +3,12 @@ import { useState } from 'react'
 import Progress from '../../components/Progress/Progress'
 import StepUpChallenge from '../../components/Leaderboard/Leaderboard'
 import MultiChallenge from '../../components/MultiChallenge/MultiChallenge'
+import Chatbox from '../../components/Chatbox/Chatbox'
+
 
 function Challenge() {
   const [tab, setTab] = useState(0)
+  const [gameType, setGameType] = useState('n2n')
   return (
     <div className="flex flex-col h-auto">
       <div className="mx-4 my-2 ">
@@ -65,8 +68,13 @@ function Challenge() {
         </div>
       </div>
 
-      {tab === 0 ? <Progress /> : <MultiChallenge 
-      live ={true}/>}
+      {tab === 0 && <Progress />}
+
+      {tab === 1 &&
+        ((gameType === 'p2p' && <MultiChallenge live={true} />) ||
+          (gameType === 'n2n' && <StepUpChallenge />))}
+
+      {tab === 2 && <Chatbox />}
     </div>
   )
 }

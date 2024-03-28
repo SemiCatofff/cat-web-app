@@ -9,7 +9,7 @@ function Appbar() {
   const navigate = useNavigate()
   const [tab, setTab] = useState(0)
 
-  const routes = ['/', '/create', '/dashboard', '/settings']
+  const routes = ['/', '/create', '/dashboard', '/chat']
 
   const handleTabClick = (index) => {
     setTab(index)
@@ -43,7 +43,7 @@ function Appbar() {
         <button
           className="flex flex-col items-center gap-1"
           onClick={() => {
-            handleTabClick(4)
+            handleTabClick(3)
           }}
         >
           <span>
