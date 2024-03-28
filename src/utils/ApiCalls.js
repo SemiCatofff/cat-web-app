@@ -1,38 +1,31 @@
 import axios from 'axios'
-const BackendURL = 'http://192.168.1.153:3005'
+const BackendURL = 'https://stagingapi.catoff.xyz'
 
 const authToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMDE1MTE0MSwiZXhwIjoxNzEwMTU0NzQxfQ.mQOK4buQdz1M6_nhEV1LgxOLbt1t07tqWn97WvuE4cI'
-const loginAPI = async (signature, publicKey) => {
-  let body = {
-    signature: signature,
-    message: 'hello world',
-    publicKey: publicKey,
-  }
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMTUyNTA5NiwiZXhwIjoxNzExNjExNDk2fQ.OucF7IlG5AAceAoPrM0ufRz8gcy8HA7EQaBONKkTwR4'
+
+//API CALLS FLOW
+//GOOGLE AUTH FLOW ON THE LOGIN PAGE
+const redirectGoogleAuth = async () => {
   try {
-    const response = await axios.post(`${BackendURL}/user/login`, body)
+    const response = await axios.get(`${BackendURL}/googleAuth`)
     return response.data
   } catch (error) {
     return error.message
   }
 }
 
-const setUserDetailsAPI = async () => {
+// ACCOUNT FETCHING SCREEN
+
+const authenticateAPI = async () => {
   let headers = {
     Authorization: `Bearer ${authToken}`,
-  }
-
-  let body = {
-    Email: 'ishita@gmail.com',
-    UserName: 'ishita',
   }
   try {
     const response = await axios.post(
-      `${BackendURL}/user/addUserDetails`,
-      body,
-      {
-        headers,
-      }
+      `${BackendURL}/oktoProxy/authenticate`,
+      {},
+      { headers }
     )
     return response.data
   } catch (error) {
@@ -40,35 +33,17 @@ const setUserDetailsAPI = async () => {
   }
 }
 
-const searchChallengeApi = async (searchTerm) => {
+//first time user flow
+
+const setPinAPI = async () => {
   let headers = {
     Authorization: `Bearer ${authToken}`,
   }
-
   try {
-    const response = await axios.get(
-      `${BackendURL}/challenge/challenges/search/calory?searchTerm=${searchTerm}`,
-      {
-        headers,
-      }
-    )
-    return response
-  } catch (error) {
-    return error.message
-  }
-}
-
-const getUserCurrentTableAPI = async () => {
-  let headers = {
-    Authorization: `Bearer ${authToken}`,
-  }
-
-  try {
-    const response = await axios.get(
-      `${BackendURL}/userBoard/dashboard/userCurrentTable`,
-      {
-        headers,
-      }
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/set_pin`,
+      {},
+      { headers }
     )
     return response.data
   } catch (error) {
@@ -76,46 +51,143 @@ const getUserCurrentTableAPI = async () => {
   }
 }
 
-const getUserGraphAPI = async (time) => {
+const createWallet = async () => {
   let headers = {
     Authorization: `Bearer ${authToken}`,
   }
-
   try {
-    const response = await axios.get(
-      `${BackendURL}/userBoard/dashboard/userProgressGraph/${time}`,
-      {
-        headers,
-      }
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/create_wallet`,
+      {},
+      { headers }
     )
     return response.data
   } catch (error) {
     return error.message
   }
 }
-const getUserProfileDataAPI = async () => {
+
+//logging in flow
+
+const getRefreshTokenAPI = async () => {
+  let headers = {
+    Authorization: `Bearer ${authToken}`,
+  }
+  try {
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/refresh_token`,
+      {},
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getUserWalletAPI = async () => {
+  let headers = {
+    Authorization: `Bearer ${authToken}`,
+  }
+
+  try {
+    const response = await axios.get(`${BackendURL}/oktoProxy/wallets`, {
+      headers,
+    })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//EXPLORE PAGE
+
+const getChallenges = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${authToken}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/${challengeID}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getOngoingChallenges = async (type, page, limit) => {
   let headers = {
     Authorization: `Bearer ${authToken}`,
   }
 
   try {
     const response = await axios.get(
-      `${BackendURL}/userBoard/dashboard/userDetails`,
-      {
-        headers,
-      }
+      `${BackendURL}/challenge/challenges/onGoing/category/${type}?page=${page}&limit=${limit}`,
+      { headers }
     )
-    return response
+    return response.data
   } catch (error) {
     return error.message
   }
 }
+
+
+const searchChallengeAPI = async (search, page, limit) =>{
+
+  let headers = {
+    Authorization: `Bearer ${authToken}`,
+  }
+
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/search/${search}?page=${page}&limit=${limit}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+
+}
+
+//CREATE CHALLENGE PAGE
+
+const createChallengeAPI = async (challengeDetails) => {
+  let headers = {
+    Authorization: `Bearer ${authToken}`,
+  }
+
+  try {
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/re`,
+      challengeDetails,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//CHALLENGE DETAILS PAGE
+
+//CHALLENGE JOIN FLOW
+
+//CHALLENGE PROGRESS PAGE
+
+//TAB===0
+
+//TAB ===1
+
+//TAB === 2
 
 export {
-  loginAPI,
-  setUserDetailsAPI,
-  searchChallengeApi,
-  getUserCurrentTableAPI,
-  getUserGraphAPI,
-  getUserProfileDataAPI,
+  redirectGoogleAuth,
+  authenticateAPI,
+  setPinAPI,
+  getRefreshTokenAPI,
+  createWallet,
+  getUserWalletAPI,
 }

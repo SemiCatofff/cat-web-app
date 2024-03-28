@@ -1,75 +1,53 @@
 import styles from '../../styles/style'
-import { homeHeader } from '../../assets/images'
+import { homeHeader,filter, search } from '../../assets/images'
 import { ChallengeCard } from '../../components'
-import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
+
 const Home = () => {
-  var settings = {
-    infinite: false,
-    speed: 500,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    slidesToShow: 1.2,
-    slidesToScroll: 1,
-  }
+
   return (
     <>
-      <div className={` ${styles.paddingX} ${styles.paddingY} `}>
+      <div className={`${styles.marginX} ${styles.marginY} flex `} >
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="pp" className='rounded-full object-cover mr-3 w-12 h-12' /> 
+          <div>
+            <p className={`${styles.heading2} !text-black`}>Hey <span className='!text-purple-600'>Alice!</span></p>
+            <p>Let's the game Begin ! 🔥</p>
+          </div>
+        </div>
+        <div className={`search-box flex ${styles.marginX}`}>
+          <div className="w-[90%]">
+            <input type="text"  className=' bg-no-repeat bg-left-center bg-[length:20px_20px] bg-[url("search)] pl-16  w-full h-12 bg-violet-100 rounded-xl shadow' placeholder='Search for challenges...' />
+          </div>
+          <button className="w-[10%] ml-2 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto">
+        <img src={filter} alt="filter" className='my-auto' />
+          </button>
+        </div>
+      {/* Cards Section */}
+      <div className={`card-box`}>
+       
+        <ChallengeCard />
+        <ChallengeCard />
+      </div>
+        {/* Create Challenge CTA */}
+      <div className={` ${styles.paddingX} ${styles.paddingY} mb-40`}>
         <div className="relative">
           <img src={homeHeader} alt="headerImg" className="w-full" />{' '}
           <h1
-            className={`${styles.heading1} ${styles.marginX} absolute top-0 text-yellow ${styles.paddingY}`}
+            className={`${styles.heading2} ${styles.marginX} ${styles.marginY} absolute top-2 text-yellow `}
           >
-            Welcome to <br /> CATOFF 🔥
+         Create Challenge and Own Your Win !
           </h1>
           <p
-            className={`${styles.paragraph} ${styles.marginX} ${styles.marginY} absolute bottom-4 `}
+            className={`${styles.paragraph} ${styles.marginX}  absolute bottom-14 `}
           >
-            Own your Wager, Own your wins !
+            Compete and earn crypto with Catoff.
           </p>
-        </div>
-      </div>
-      {/* Cards Section */}
-      <div className={`card-box`}>
-        <div
-          className={`${styles.marginX} ${styles.marginY} ${styles.flexBetween}`}
-        >
-          <p className={`${styles.subheading} !text-neutral-700`}>
-            Live Challenges
-          </p>
-          <a href="" className={`${styles.paragraph} !text-neutral-500`}>
-            View All <span>..</span>
-          </a>
-        </div>
-        <div className={` slider-container ml-4 overflow-hidden `}>
-          <Slider {...settings}>
-            <div className="">
-              <ChallengeCard />
-            </div>
-            <div className="">
-              <ChallengeCard />
-            </div>
-            <div className="">
-              <ChallengeCard />
-            </div>
-            <div className="">
-              <ChallengeCard />
-            </div>
-          </Slider>
-        </div>
-      </div>
-      <div className={`blog-box mt-6`}>
-        <div
-          className={`${styles.marginX} ${styles.marginY} ${styles.flexBetween}`}
-        >
-          <p className={`${styles.subheading} !text-neutral-700`}>
-            How Do We Work ?
-          </p>
-          <a href="" className={`${styles.paragraph} !text-neutral-500`}>
-            View All <span>..</span>
-          </a>
+          <div className={`${styles.caption2} mx-3 ${styles.paddingX} transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex absolute bottom-4 `}>
+               
+                Create Now 
+          </div>
         </div>
       </div>
     </>
