@@ -4,21 +4,25 @@ import Progress from '../../components/Progress/Progress'
 import StepUpChallenge from '../../components/Leaderboard/Leaderboard'
 import MultiChallenge from '../../components/MultiChallenge/MultiChallenge'
 import Chatbox from '../../components/Chatbox/Chatbox'
-
+import DareLeader from '../../components/DareLeader/DareLeader'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
-  const [gameType, setGameType] = useState('n2n')
+  const [gameType, setGameType] = useState('dare')
   return (
     <div className="flex flex-col h-auto">
       <div className="mx-4 my-2 ">
         <div className={`${styles.caption2} !text-[#4B4B4B]`}>#Fitness</div>
-        <div className={`${styles.heading2} !text-[#202117] `}>
+        <div className={`${styles.heading1} !text-[#202117] !font-semibold `}>
           Step Challenge
         </div>
-        <div >
-          <span className={`${styles.caption2} !text-[#202117] !font-medium`}>14th April, 2024</span>
-          <span className={`${styles.paragraph} !text-[#8D8D8D]`}>{"  "}Ending in 3 days</span>
+        <div>
+          <span className={`${styles.caption2} !text-[#202117] !font-medium`}>
+            14th April, 2024
+          </span>
+          <span className={`${styles.paragraph} !text-[#8D8D8D]`}>
+            {'  '}Ending in 3 days
+          </span>
         </div>
       </div>
       <div className="h-[54px] mx-4 flex bg-[#EDEBF3] rounded-tab drop-shadow gap-[1%]">
@@ -72,7 +76,7 @@ function Challenge() {
 
       {tab === 1 &&
         ((gameType === 'p2p' && <MultiChallenge live={true} />) ||
-          (gameType === 'n2n' && <StepUpChallenge />))}
+          (gameType === 'n2n' && <StepUpChallenge />) || (gameType === 'dare' && <DareLeader/> ))}
 
       {tab === 2 && <Chatbox />}
     </div>
