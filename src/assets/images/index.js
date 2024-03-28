@@ -20,4 +20,8 @@ export {default as user } from './user.svg'
 export {default as graphic1} from './graphic1.svg'
 export {default as graphic2} from './graphic2.svg'
 export {default as doubleright} from "./doubleright.svg"
+export {default as notif} from "./notif.png"
+export {default as set} from "./sett.png"
+export {default as cross} from "./cross.png"
+
 
