@@ -17,3 +17,7 @@ export {default as edit } from './edit.svg'
 export {default as addd } from './addd.png'
 export {default as yellowarrow} from './arrow-yellow.svg'
 export {default as user } from './user.svg'
+export {default as graphic1} from './graphic1.svg'
+export {default as graphic2} from './graphic2.svg'
+export {default as doubleright} from "./doubleright.svg"
+
