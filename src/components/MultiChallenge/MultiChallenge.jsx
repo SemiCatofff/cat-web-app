@@ -2,28 +2,45 @@ import React from 'react'
 import profile from '../../assets/images/prof.png'
 import styles from '../../styles/style'
 import { useState } from 'react'
+import crown from '../../assets/images/crown.png'
+import { useNavigate } from 'react-router-dom'
+import discord from '../../assets/images/dis.png'
+import ig from '../../assets/images/in.png'
+import tg from '../../assets/images/tg.png'
 
-const Competitor = ({ profileSrc, name, steps, isWinner }) => (
-  <div className="w-[32%] h-full flex flex-col items-center relative gap-[15px]">
-    {isWinner && (
-      <span className={`${styles.buttoncta2} !text-[#202117]`}>Winner</span>
-    )}
-    <img
-      className="w-[80px] h-[80px] border-4 border-yellow rounded-full"
-      src={profile}
-      alt=""
-    />
-    <div className="flex flex-col items-center gap-[1px]">
-      <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-      <span className={`${styles.subtext} !text-[#202117] !text-[12px]`}>{steps} Steps</span>
+const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
+  <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
+    <div className="">
+      {isWinner && (
+        <div className="absolute -top-[22px] left-[36%]">
+          <img src={crown} alt=""></img>
+        </div>
+      )}
+      <img
+        className={`w-[${hval}px] h-[${hval}px] border-4 border-[#E1F076] rounded-full z-10`}
+        src={profile}
+        alt={`${name}`}
+      />
+      <div className={`absolute ${index === 1 ? 'bottom-16' : 'bottom-11'} h-[28px] w-[28px] left-[39.5%] rounded-full bg-[#E1F076] flex items-center justify-center`} >
+        <div className={`${styles.subtext} !text-black font-semibold`}>
+          {index}
+        </div>
+      </div>
     </div>
+
+    <div className="flex flex-col items-center z-20">
+      <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
+      <span className={`${styles.subtext} !text-[#202117]`}>{steps} Steps</span>
+    </div>
+
+    {isWinner && <div className="h-[5px]"> </div>}
   </div>
 )
 
 const PlayerInfo = ({ index, name, steps }) => {
   return (
     <div className="h-[48px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center">
-      <div className={`${styles.subheading} !text-[#4f4f4f]`}>{index+4}</div>
+      <div className={`${styles.subheading} !text-[#4f4f4f]`}>{index + 4}</div>
       <div>
         <img
           className="w-[32px] h-[32px] rounded-full mx-[10px]"
@@ -70,12 +87,32 @@ const MultiChallenge = ({ live }) => {
     },
   ])
 
+  const navigate = useNavigate()
+
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-6">
-        <Competitor isWinner={false} name={'Megan Jess'} steps={100} />
-        <Competitor isWinner={true} name={'Bryan Wolf'} steps={100} />
-        <Competitor isWinner={false} name={'Bryan Wolf'} steps={100} />
+        <Competitor
+          isWinner={false}
+          name={'Megan Jess'}
+          steps={100}
+          hval={80}
+          index={2}
+        />
+        <Competitor
+          isWinner={true}
+          name={'Bryan Wolf'}
+          steps={100}
+          hval={90}
+          index={1}
+        />
+        <Competitor
+          isWinner={false}
+          name={'Bryan Wolf'}
+          steps={100}
+          hval={80}
+          index={3}
+        />
       </div>
 
       <div className="w-full flex flex-col gap-[8px] mt-4">
@@ -91,11 +128,39 @@ const MultiChallenge = ({ live }) => {
         })}
       </div>
 
-      <div className="relative w-full h-[85px] mx-4 mt-6 rounded-box bg-[#192126] flex flex-col items-center justify-center gap-[9px]">
+      <div className="flex flex-col items-center justify-center mt-[20px] gap-[10px]">
+        {/*
+        
+        will be rendered based on the date conditions
+        // to be added with api integration
+        
+        <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
+           Challenge Ends in
+        </div>
+        <div className={`${styles.heading2} !text-[#202117]`}>
+           3 day . 60 hours . 10
+        </div> */}
+
+        <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
+          You won 2000 credits!
+        </div>
         <div
-          className="absolute inset-0 bg-trophy bg-right bg-no-repeat right-3"
-          style={{ opacity: '80%' }}
-        ></div>
+          className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] text-[#E1F076] rounded-[80px] `}
+          onClick={() => {
+            navigate('/dashboard')
+          }}
+        >
+          CLAIM
+        </div>
+      </div>
+
+      <div className="relative w-full h-[85px] mx-4 my-6 rounded-box bg-[#192126] flex items-center justify-center gap-[7%]">
+        <div className="absolute inset-0 bg-trophy bg-right bg-no-repeat right-3" style={{ opacity: '80%' }}></div>
+        <div className={`${styles.heading2} !text-[16px] flex items-center justify-center`}> Share</div>
+        <img src={ig} alt=""></img>
+        <img src={tg} alt=""></img>
+        <img src={discord} alt=""></img>
+        <img src={discord} alt=""></img>
       </div>
     </div>
   )
