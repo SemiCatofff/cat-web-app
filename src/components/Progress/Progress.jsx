@@ -23,14 +23,14 @@ function Progress() {
           <div className="flex items-center gap-[10px]">
             <img src={profile}></img>
             <div className={`flex flex-col gap-[1px] text-white`}>
-              <div className={`${styles.heading3}`}>82%</div>
+              <div className={`${styles.heading2}`}>82%</div>
               <div className={`${styles.paragraph} !text-[10px]`}>of the goal</div>
             </div>
           </div>
           <div className="flex items-center gap-[10px]">
             <img src={boot}></img>
             <div className={`flex flex-col gap-[1px] text-white`}>
-              <div className={`${styles.heading3}`}>10000</div>
+              <div className={`${styles.heading2}`}>10000</div>
               <div className={`${styles.paragraph} !text-[10px]`}>Total steps counted</div>
             </div>
           </div>
@@ -40,17 +40,17 @@ function Progress() {
           <div className="flex flex-col justify-center bg-[#192126] rounded-box h-[49%] gap-[10%]">
             <div className="flex flex-col justify-center mx-4">
               <div className={`${styles.paragraph } !text-[10px]`}>Staked Wager </div>
-              <div className={`${styles.heading3} !text-[#C5B7FF]`}>100</div>
+              <div className={`${styles.heading2} !text-[#C5B7FF]`}>100</div>
             </div>
             <div className="flex flex-col justify-center mx-4">
               <div className={`${styles.paragraph} !text-[10px] `}>Prize Pool</div>
-              <div className={`${styles.heading3} !text-[#D0F076]`}>1000</div>
+              <div className={`${styles.heading2} !text-[#D0F076]`}>1000</div>
             </div>
           </div>
 
           <div className="bg-[#D0F076] border-[1px] rounded-box h-[49%] relative py-2 px-[7.5%] ">
             <div className="absolute top-1 h-[38px] w-[85%] rounded-[12px] flex items-center justify-center ">
-              <div className={`${styles.heading3} !text-[#68783B]`}>
+              <div className={`${styles.heading2} !text-[#68783B]`}>
                 GIVE UP ?
               </div>
             </div>
@@ -61,7 +61,7 @@ function Progress() {
               </div>
             </div>
             <div className="absolute bottom-3 bg-[#192126] h-[38px] w-[85%] rounded-[12px] flex items-center justify-center ">
-              <div className={`${styles.heading3} text-yellow `}>CATOFF </div>
+              <div className={`${styles.heading2} text-yellow `}>CATOFF </div>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@ function Progress() {
         <div className={`${styles.subtext} !text-[#FFFFF]`}>
           Nugget Of the Day
         </div>
-        <div className={`${styles.heading3} !text-[#E1F076]`}>
+        <div className={`${styles.heading2} !text-[#E1F076]`}>
           Where there is will , there’s way !
         </div>
 

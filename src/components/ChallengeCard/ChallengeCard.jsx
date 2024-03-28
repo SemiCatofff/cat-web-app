@@ -1,4 +1,4 @@
-import { cardImg } from '../../assets/images'
+import { cardImg, optionBtn, award, avatargrp, } from '../../assets/images'
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router'
 
@@ -10,46 +10,45 @@ const ChallengeCard = () => {
   return (
     <>
       <div
-        className="relative w-full pr-2  cursor-pointer"
+        className="relative w-full cursor-pointer"
         onClick={handleOnclick}
       >
         <img src={cardImg} alt="" className="w-full" />
         <div className={``}>
-          <div className={`absolute top-2 w-full pr-6 pl-4`}>
-            <div className={`${styles.flexBetween}`}>
-              <h1 className={`${styles.heading2} ${styles.marginY}`}>
-                Step Challenge
-              </h1>
-              <p
-                className={`${styles.caption2} ${styles.marginY} mt-4 text-right`}
+          <div className={`absolute top-10 w-full px-8`}>
+          <div className={`${styles.flexBetween}`}>
+          <div
+                className={`${styles.caption2} !text-black transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex`}
               >
-                10 Days Left
-              </p>
-            </div>
-            <div className={``}>
-              <p
-                className={`${styles.caption2} !text-black bg-slate-100 w-28 py-1 rounded-xl text-center px-2`}
-              >
+                <img src={avatargrp} alt="" />
                 + 54 members
-              </p>
+              </div>
+             <div className="rounded px-3 py-4  transparent-bg my-auto">
+              <img src={optionBtn} alt="" />
+             </div>
             </div>
           </div>
-          <div className={`absolute bottom-2 w-full pr-6 pl-4 `}>
+          <div className={`absolute bottom-10 w-full px-8 `}>
             <div className={`${styles.flexBetween}`}>
-              <h1
-                className={`${styles.caption2} ${styles.marginY} text-yellow`}
+              <div
+                className={`${styles.caption1} ${styles.marginY} text-gray-400`}
               >
-                Live Prize Pool
+                #Fitness
                 <br />
-                <span className={`${styles.heading2}`}>2 SOL</span>
-              </h1>
-              <h1
-                className={`${styles.caption2} ${styles.marginY} text-right text-yellow`}
-              >
-                Entry Wager
+                <span className={`${styles.heading2}`}>Step Challenge</span>
                 <br />
-                <span className={`${styles.heading2} `}>0.005 SOL</span>
-              </h1>
+              <div className="flex">  17th April , 2024 
+              <div className='w-2 h-2 mx-2 rounded-full bg-yellow my-auto' />
+              <div className={`text-white italic`}>Entry : 2000 credits</div>
+              </div>
+              <div className="pl-3 bg-white rounded-full py-2 mx-auto mt-4 flex">
+                <div className="flex"><img src={award} alt="gg"  />
+                <p className={`${styles.heading2} !text-black !text-[12px] mx-1`}>Prize Pool <span className='text-purple-600 font-bold'>: 20K Credits</span></p>
+                </div>
+                
+              </div>
+              </div>
+
             </div>
           </div>
         </div>
