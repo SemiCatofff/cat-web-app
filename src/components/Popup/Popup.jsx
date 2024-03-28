@@ -13,7 +13,7 @@ const Popup = ({ isOpen, content, onClose }) => {
           <div className="confirmation-content">
             {content}
           </div>
-          {/* Here you can add the "slide to confirm" component */}
+    
         </div>
       </div>
     </div>
