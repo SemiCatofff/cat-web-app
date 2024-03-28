@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import styles from '../../styles/style'
-import { homeHeader, arrow, award2, star, user, edit,addd, yellowarrow } from '../../assets/images'
+import { homeHeader, arrow, award2, star, user, edit,addd, yellowarrow,graphic1, doubleright } from '../../assets/images'
 import {Popup} from "../../components/index"
 
 const Dashboard = () => {
@@ -59,15 +59,28 @@ const Dashboard = () => {
     <h1 className={`${styles.heading2} !text-black flex justify-between`}> <span className='my-auto  mx-auto flex flex-col'><p className={`${styles.caption2} !text-black `}>Wager Earned</p><p>12,470</p></span> <span onClick={handleOpenPopup} className='-mr-2 bg-black text-yellow rounded-full px-8 py-4 flex cursor-pointer'>WITHDRAW <img src={yellowarrow} alt="" /></span>  </h1>
   </div>
         </div>
+
+        
          
       </div>
-      <Popup 
+     
+
+<Popup 
         isOpen={isPopupOpen} 
-        content={<div>Lalala</div>} 
+        content={  
+        <div classname = {`!z-40`}>
+          <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+          <h2 className={`${styles.heading1} !text-black `}>Confirm Payment Of <br /><span className='text-purple-500'>2K Credits?</span> </h2>
+         <img src={graphic1} alt="" className='mx-auto mt-5' />
+         <div className="slide-button bg-yellow rounded-full !text-black py-4 mt-6"><p className=''></p></div>
+          </div>
+        
+        
+        </div>
+        
+      } 
         onClose={handleClosePopup} 
       />
-
-
 {/* history Title */}
       <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
         <p className={`${styles.subheading} !text-black`}>History</p>
@@ -112,8 +125,6 @@ const Dashboard = () => {
     <h1 className={`${styles.heading2}  flex justify-center`}> <span className='my-auto'>LOGOUT </span> <span className='-mr-2 '><img src={arrow} alt="" className='h-8 w-8 my-auto' /></span> </h1>
   </div>
 </div>
-
-
     </>
   )
 }

@@ -28,7 +28,7 @@ function Main(props) {
         <img src={el1} alt=""></img>
       </div>
       {showAppbar && (
-        <div className="z-20">
+        <div className="z-10">
           <Appbar />
         </div>
       )}
