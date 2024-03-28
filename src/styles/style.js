@@ -1,7 +1,7 @@
 const styles = {
   heading1: 'text-[22px] font-ttruns font-bold text-white',
   heading2: 'text-[14px] font-ttruns font-semibold text-white',
-  heading2: 'text-[14px] font-ttruns font-semibold text-white',
+
   subheading: 'text-[14px] font-inter font-semibold text-white',
   subheading2: 'text-[16px] font-inter font-semibold text-white',
   subtext: 'text-[14px] font-inter font-regular text-white',
