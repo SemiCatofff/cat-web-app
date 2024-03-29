@@ -14,6 +14,10 @@ const Dashboard = () => {
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
+  const handleConfirmation = () => {
+    // Handle the confirmation logic here, such as going to the next screen
+    setIsPopupOpen(false);
+  };
 
   return (
     <>
@@ -72,10 +76,8 @@ const Dashboard = () => {
           <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
           <h2 className={`${styles.heading1} !text-black `}>Confirm Payment Of <br /><span className='text-purple-500'>2K Credits?</span> </h2>
          <img src={graphic1} alt="" className='mx-auto mt-5' />
-         <div className="slide-button bg-yellow rounded-full !text-black py-4 mt-6"><p className=''></p></div>
+         <div className="slide-button bg-yellow rounded-full !text-black py-3 mt-6 flex "><div className="h-14 w-14 ml-2 my-auto bg-white rounded-full "><img src={doubleright} className='mx-auto mt-4' /></div><p className={`text-center my-auto  ml-8 !text-black ${styles.heading2}`}>SLIDE TO CONFIRM</p></div>
           </div>
-        
-        
         </div>
         
       } 
@@ -118,10 +120,10 @@ const Dashboard = () => {
       </div>
 {/* Buttons */} 
 <div className={`${styles.paddingX} ${styles.marginY} mb-40`}>
-<div className="button rounded-full bg-yellow px-8 py-4 my-auto mb-4">
+<div className="button rounded-full bg-yellow px-8 py-5 my-auto mb-2">
     <h1 className={`${styles.heading2} !text-black flex justify-center`}>  <span className='mr-2 '><img src={user} alt="" className='h-5 w-5 my-auto' /></span> <span className='my-auto'>INVITE YOUR FRIEND</span> </h1>
   </div>
-  <div className="button rounded-full bg-black px-8 py-4 my-auto mb-4">
+  <div className="button rounded-full bg-black px-8 py-5 my-auto mb-4">
     <h1 className={`${styles.heading2}  flex justify-center`}> <span className='my-auto'>LOGOUT </span> <span className='-mr-2 '><img src={arrow} alt="" className='h-8 w-8 my-auto' /></span> </h1>
   </div>
 </div>
