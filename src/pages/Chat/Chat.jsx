@@ -42,7 +42,9 @@ const Chat = () => {
         </div>
 
         <div className="flex flex-col w-[50%]">
-          <p className={`${styles.subheading2} !text-[#4f4f4f] !font-bold`}>{name}</p>
+          <p className={`${styles.subheading2} !text-[#4f4f4f] !font-bold`}>
+            {name}
+          </p>
           <p className={`${styles.subtext} !text-[#4f4f4f]`}>{name}</p>
         </div>
         <div className="flex justify-left h-full items-start w-[30%]">
@@ -55,21 +57,16 @@ const Chat = () => {
   return (
     <div className="mx-4 flex flex-col">
       <div className={`flex py-4 px-2 items-center`}>
-        <div className='w-[80%] flex flex-col'>
-        <p className={`${styles.heading1} !text-black !font-semibold`}>
-          Hi Alice
-        </p>
-        {/* <p className={`${styles.subtext} !text-[#4f4f4f]`}>
+        <div className="w-[80%] flex flex-col">
+          <p className={`${styles.heading1} !text-black !font-semibold`}>
+            Hi Alice
+          </p>
+          {/* <p className={`${styles.subtext} !text-[#4f4f4f]`}>
             How its going
         </p> */}
         </div>
-        <div className='w-[91px] h-[45px] flex items-center justify-center rounded-[80px] bg-[#E1F076]'>
-
-        <div
-            className={`${styles.caption1} !text-[#202117]`}
-          >
-         Invite
-          </div>
+        <div className="w-[91px] h-[45px] flex items-center justify-center rounded-[80px] bg-[#E1F076]">
+          <div className={`${styles.caption1} !text-[#202117]`}>Invite</div>
         </div>
       </div>
       {people.map((item, index) => {

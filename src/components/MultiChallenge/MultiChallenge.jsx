@@ -23,7 +23,9 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
         src={profile}
         alt={`${name}`}
       />
-      <div className={`absolute ${index === 1 ? 'bottom-16' : 'bottom-11'} h-[28px] w-[28px] left-[39.5%] rounded-full bg-[#E1F076] flex items-center justify-center`} >
+      <div
+        className={`absolute ${index === 1 ? 'bottom-16' : 'bottom-11'} h-[28px] w-[28px] left-[39.5%] rounded-full bg-[#E1F076] flex items-center justify-center`}
+      >
         <div className={`${styles.subtext} !text-black font-semibold`}>
           {index}
         </div>
@@ -61,7 +63,7 @@ const PlayerInfo = ({ index, name, steps }) => {
   )
 }
 
-const MultiChallenge = ({ target , type }) => {
+const MultiChallenge = ({ target, type }) => {
   const [people, setPeople] = useState([
     {
       name: 'Alice Doe',
@@ -89,61 +91,58 @@ const MultiChallenge = ({ target , type }) => {
     },
   ])
   const params = useParams()
-  const fetchLeaderboard = async()=>{
-    const output = await getLeaderboard(params.id);
-    if(output.success){
+  const fetchLeaderboard = async () => {
+    const output = await getLeaderboard(params.id)
+    if (output.success) {
       setPeople(output.data)
-    }   
+    }
   }
 
-  useEffect(()=>{
-
-fetchLeaderboard()
-  },[])
+  useEffect(() => {
+    fetchLeaderboard()
+  }, [])
   const navigate = useNavigate()
-
 
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-6">
-      {
-  people.length >= 3
-    ? [people[1], people[0], ...people.slice(2, 3)].map((person, index) => (
-        <Competitor
-          key={index}
-          isWinner={false}
-          name={person.username}
-          steps={person.value}
-          hval={80}
-          index={index === 0? 2: index === 2? 3: index}
-        />
-      ))
-    : people.map((person, index) => (
-        <Competitor
-          key={index}
-          isWinner={false}
-          name={person.username}
-          steps={person.value}
-          hval={80}
-          index={index + 1}
-        />
-      ))
-}
-
-   
+        {people.length >= 3
+          ? [people[1], people[0], ...people.slice(2, 3)].map(
+              (person, index) => (
+                <Competitor
+                  key={index}
+                  isWinner={false}
+                  name={person.username}
+                  steps={person.value}
+                  hval={80}
+                  index={index === 0 ? 2 : index === 2 ? 3 : index}
+                />
+              )
+            )
+          : people.map((person, index) => (
+              <Competitor
+                key={index}
+                isWinner={false}
+                name={person.username}
+                steps={person.value}
+                hval={80}
+                index={index + 1}
+              />
+            ))}
       </div>
 
       <div className="w-full flex flex-col gap-[8px] mt-4">
-        {people.length > 3 && people.slice(3).map((item, index) => {
-          return (
-            <PlayerInfo
-              index={index}
-              name={item.username}
-              address={item.address}
-              steps={item.value}
-            />
-          )
-        })}
+        {people.length > 3 &&
+          people.slice(3).map((item, index) => {
+            return (
+              <PlayerInfo
+                index={index}
+                name={item.username}
+                address={item.address}
+                steps={item.value}
+              />
+            )
+          })}
       </div>
 
       <div className="flex flex-col items-center justify-center mt-[20px] gap-[10px]">
@@ -173,8 +172,16 @@ fetchLeaderboard()
       </div>
 
       <div className="relative w-full h-[85px] mx-4 my-6 rounded-box bg-[#192126] flex items-center justify-center gap-[7%]">
-        <div className="absolute inset-0 bg-trophy bg-right bg-no-repeat right-3" style={{ opacity: '80%' }}></div>
-        <div className={`${styles.heading2} !text-[16px] flex items-center justify-center`}> Share</div>
+        <div
+          className="absolute inset-0 bg-trophy bg-right bg-no-repeat right-3"
+          style={{ opacity: '80%' }}
+        ></div>
+        <div
+          className={`${styles.heading2} !text-[16px] flex items-center justify-center`}
+        >
+          {' '}
+          Share
+        </div>
         <img src={ig} alt=""></img>
         <img src={tg} alt=""></img>
         <img src={discord} alt=""></img>

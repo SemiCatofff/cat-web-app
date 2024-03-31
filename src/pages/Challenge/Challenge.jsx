@@ -10,16 +10,14 @@ import { getChallengeDashboard } from '../../utils/ApiCalls'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
-  const [gameType, setGameType] = useState(localStorage.getItem("type"))
+  const [gameType, setGameType] = useState(localStorage.getItem('type'))
   const params = useParams()
-  const [userPerformance, setUserPerformance] = useState(
-    {
-      Target: '1',
-      Value: '0',
-      StakedWager: '00',
-      TotalWagerStaked: '000',
-    },
-  )
+  const [userPerformance, setUserPerformance] = useState({
+    Target: '1',
+    Value: '0',
+    StakedWager: '00',
+    TotalWagerStaked: '000',
+  })
   const getDashboardDetails = async () => {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
@@ -30,7 +28,6 @@ function Challenge() {
   useEffect(() => {
     getDashboardDetails()
   }, [])
-
 
   return (
     <div className="flex flex-col h-auto">
@@ -95,11 +92,35 @@ function Challenge() {
         </div>
       </div>
 
-      {tab === 0 && <Progress value ={userPerformance.Value} target={userPerformance.Target} wager={userPerformance.StakedWager} prize={userPerformance.TotalWagerStaked} type={userPerformance.GameType}/>}
+      {tab === 0 && (
+        <Progress
+          value={userPerformance.Value}
+          target={userPerformance.Target}
+          wager={userPerformance.StakedWager}
+          prize={userPerformance.TotalWagerStaked}
+          type={userPerformance.GameType}
+        />
+      )}
 
       {tab === 1 &&
-        ((gameType === 'nvn' && <MultiChallenge target={userPerformance.Target} type={userPerformance.GameType} />) ||
-          (gameType === '1v1' && <StepUpChallenge target={userPerformance.Target} type={userPerformance.GameType}/>) || (gameType === '0v1' && <DareLeader target={userPerformance.Target} type={userPerformance.GameType}/> ))}
+        ((gameType === 'nvn' && (
+          <MultiChallenge
+            target={userPerformance.Target}
+            type={userPerformance.GameType}
+          />
+        )) ||
+          (gameType === '1v1' && (
+            <StepUpChallenge
+              target={userPerformance.Target}
+              type={userPerformance.GameType}
+            />
+          )) ||
+          (gameType === '0v1' && (
+            <DareLeader
+              target={userPerformance.Target}
+              type={userPerformance.GameType}
+            />
+          )))}
 
       {tab === 2 && <Chatbox />}
     </div>

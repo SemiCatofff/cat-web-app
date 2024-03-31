@@ -5,11 +5,8 @@ const BackendURL = 'https://stagingapi.catoff.xyz'
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
 const redirectGoogleAuth = async () => {
   try {
-    window.location.href = `${BackendURL}/googleAuth`;
-    
-  } catch (error) {
-  
-  }
+    window.location.href = `${BackendURL}/googleAuth`
+  } catch (error) {}
 }
 
 // ACCOUNT FETCHING SCREEN
@@ -130,9 +127,7 @@ const getOngoingChallenges = async (type, page, limit) => {
   }
 }
 
-
-const searchChallengeAPI = async (search, page, limit) =>{
-
+const searchChallengeAPI = async (search, page, limit) => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
@@ -146,7 +141,6 @@ const searchChallengeAPI = async (search, page, limit) =>{
   } catch (error) {
     return error.message
   }
-
 }
 
 //CREATE CHALLENGE PAGE
@@ -170,12 +164,9 @@ const createChallengeAPI = async (challengeDetails) => {
 
 //CHALLENGE DETAILS PAGE
 
-
-
 //CHALLENGE JOIN FLOW
 
 //CHALLENGE PROGRESS PAGE
-
 
 const getChallengeDashboard = async (challengeID) => {
   let headers = {
@@ -207,7 +198,6 @@ const getLeaderboard = async (challengeID) => {
   }
 }
 
-
 //TAB===0
 
 //TAB ===1
@@ -224,5 +214,5 @@ export {
   getChallenges,
   getOngoingChallenges,
   getChallengeDashboard,
-  getLeaderboard
+  getLeaderboard,
 }

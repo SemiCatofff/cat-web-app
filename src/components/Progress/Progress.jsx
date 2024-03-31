@@ -8,8 +8,7 @@ import { getChallengeDashboard } from '../../utils/ApiCalls'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 
-function Progress({value,target,prize,wager,type}) {
-
+function Progress({ value, target, prize, wager, type }) {
   return (
     <div className="flex flex-col mt-4 gap-[13px] ">
       <div className="h-[256px] flex justify-between mx-4 rounded-box gap-[2%]">
@@ -29,12 +28,7 @@ function Progress({value,target,prize,wager,type}) {
               <img src={profile}></img>
               <div className={`flex flex-col gap-[1px] text-white`}>
                 <div className={`${styles.heading2}`}>
-                  {parseInt(
-                    (parseInt(value) /
-                      parseInt(target)) *
-                      100
-                  )}
-                  %
+                  {parseInt((parseInt(value) / parseInt(target)) * 100)}%
                 </div>
                 <div className={`${styles.paragraph} !text-[10px]`}>
                   of the goal
@@ -44,9 +38,7 @@ function Progress({value,target,prize,wager,type}) {
             <div className="flex items-center gap-[10px]">
               <img src={boot}></img>
               <div className={`flex flex-col gap-[1px] text-white`}>
-                <div className={`${styles.heading2}`}>
-                  {value}
-                </div>
+                <div className={`${styles.heading2}`}>{value}</div>
                 <div className={`${styles.paragraph} !text-[10px]`}>
                   Total {type} counted
                 </div>

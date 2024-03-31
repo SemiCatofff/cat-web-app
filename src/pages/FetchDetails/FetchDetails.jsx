@@ -1,7 +1,12 @@
 import { setLoginState } from '../../redux/actions/actions'
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { authenticateAPI, createWallet, getRefreshTokenAPI, setPinAPI } from '../../utils/ApiCalls'
+import {
+  authenticateAPI,
+  createWallet,
+  getRefreshTokenAPI,
+  setPinAPI,
+} from '../../utils/ApiCalls'
 import { useDispatch } from 'react-redux'
 
 function Fetchdetails() {
@@ -15,12 +20,11 @@ function Fetchdetails() {
     sessionStorage.setItem('authToken', jwt)
     const output = await authenticateAPI()
     if (output.status !== 'success') {
-      const output2 = await setPinAPI();
-      const output3 = await createWallet();
+      const output2 = await setPinAPI()
+      const output3 = await createWallet()
     }
 
     const refreshToken = await getRefreshTokenAPI()
-
 
     dispatch(setLoginState(true))
     navigate('/')

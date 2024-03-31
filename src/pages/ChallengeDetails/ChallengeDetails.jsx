@@ -27,7 +27,7 @@ function ChallengeDetails() {
     const output = await getChallenges(params.id)
     if (output.success) {
       setChallengeDetails(output.data)
-      localStorage.setItem('type',output.data.ParticipationType)
+      localStorage.setItem('type', output.data.ParticipationType)
     }
   }
 
