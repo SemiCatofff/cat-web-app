@@ -1,12 +1,14 @@
 import React from 'react'
 import profile from '../../assets/images/prof.png'
 import styles from '../../styles/style'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import crown from '../../assets/images/crown.png'
 import { useNavigate } from 'react-router-dom'
 import discord from '../../assets/images/dis.png'
 import ig from '../../assets/images/in.png'
 import tg from '../../assets/images/tg.png'
+import { getLeaderboard } from '../../utils/ApiCalls'
 
 const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
   <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
@@ -33,7 +35,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
       <span className={`${styles.subtext} !text-[#202117]`}>{steps} Steps</span>
     </div>
 
-    {isWinner && <div className="h-[5px]"> </div>}
+    {index === 1 && <div className="h-[5px]"> </div>}
   </div>
 )
 
@@ -59,7 +61,7 @@ const PlayerInfo = ({ index, name, steps }) => {
   )
 }
 
-const MultiChallenge = ({ live }) => {
+const MultiChallenge = ({ target , type }) => {
   const [people, setPeople] = useState([
     {
       name: 'Alice Doe',
@@ -86,43 +88,59 @@ const MultiChallenge = ({ live }) => {
       imageSrc: '/path-to-your-image.jpg',
     },
   ])
+  const params = useParams()
+  const fetchLeaderboard = async()=>{
+    const output = await getLeaderboard(params.id);
+    if(output.success){
+      setPeople(output.data)
+    }   
+  }
 
+  useEffect(()=>{
+
+fetchLeaderboard()
+  },[])
   const navigate = useNavigate()
+
 
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-6">
+      {
+  people.length >= 3
+    ? [people[1], people[0], ...people.slice(2, 3)].map((person, index) => (
         <Competitor
+          key={index}
           isWinner={false}
-          name={'Megan Jess'}
-          steps={100}
+          name={person.username}
+          steps={person.value}
           hval={80}
-          index={2}
+          index={index === 0? 2: index === 2? 3: index}
         />
+      ))
+    : people.map((person, index) => (
         <Competitor
-          isWinner={true}
-          name={'Bryan Wolf'}
-          steps={100}
-          hval={90}
-          index={1}
-        />
-        <Competitor
+          key={index}
           isWinner={false}
-          name={'Bryan Wolf'}
-          steps={100}
+          name={person.username}
+          steps={person.value}
           hval={80}
-          index={3}
+          index={index + 1}
         />
+      ))
+}
+
+   
       </div>
 
       <div className="w-full flex flex-col gap-[8px] mt-4">
-        {people.map((item, index) => {
+        {people.length > 3 && people.slice(3).map((item, index) => {
           return (
             <PlayerInfo
               index={index}
-              name={item.name}
+              name={item.username}
               address={item.address}
-              steps={item.steps}
+              steps={item.value}
             />
           )
         })}
