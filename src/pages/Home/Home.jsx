@@ -1,11 +1,53 @@
 import styles from '../../styles/style'
 import { homeHeader,filter, search } from '../../assets/images'
 import { ChallengeCard } from '../../components'
+import { useEffect, useState} from 'react'
+import { getOngoingChallenges } from '../../utils/ApiCalls'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 
 const Home = () => {
+  const [challenges, setChallenges] = useState([
+    {
+      "PlayersJoined": 1,
+      "ChallengeID": "1",
+      "ChallengeName": "Solo Tournament",
+      "StartDate": "2024-04-01",
+      "Wager": 10,
+    },
+    {
+      "PlayersJoined": 1,
+      "ChallengeID": "2",
+      "ChallengeName": "Solo Tournament",
+      "StartDate": "2024-04-01",
+      "Wager": 10,
+    },
+    {
+      "PlayersJoined": 1,
+      "ChallengeID": "3",
+      "ChallengeName": "Solo Tournament",
+      "StartDate": "2024-04-01",
+      "Wager": 10,
+    },
+  ])
+
+
+
+  const getChalData = async (filter) =>{
+    const output = await getOngoingChallenges(filter,1,10)
+    if(output.success && output.data.length > 0){
+      setChallenges(output.data)
+    } 
+  }
+
+
+
+  useEffect(()=>{
+    getChalData('all');  
+  },[])
+
+
 
   return (
     <>
@@ -18,7 +60,7 @@ const Home = () => {
         </div>
         <div className={`search-box flex ${styles.marginX}`}>
           <div className="w-[90%]">
-            <input type="text"  className=' bg-no-repeat bg-left-center bg-[length:20px_20px] bg-[url("search)] pl-16  w-full h-12 bg-violet-100 rounded-xl shadow' placeholder='Search for challenges...' />
+            <input type="text" className=' bg-no-repeat bg-left-center bg-[length:20px_20px] bg-[url("search)] pl-6  w-full h-12 bg-violet-100 rounded-xl shadow' placeholder='Search for challenges...' />
           </div>
           <button className="w-[10%] ml-2 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto">
         <img src={filter} alt="filter" className='my-auto' />
@@ -27,8 +69,20 @@ const Home = () => {
       {/* Cards Section */}
       <div className={`card-box`}>
        
-        <ChallengeCard />
-        <ChallengeCard />
+        { challenges.map((item)=>{
+          return(
+            <ChallengeCard
+            id ={item.ChallengeID}
+            type ={"Fitness"}
+            name={item.ChallengeName}
+            people={item.PlayersJoined}
+            date={item.StartDate}
+            wager={item.Wager}
+            prize={item.Wager * 100} /> 
+          )
+        })
+      }
+
       </div>
         {/* Create Challenge CTA */}
       <div className={` ${styles.paddingX} ${styles.paddingY} mb-40`}>
