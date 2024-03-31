@@ -57,7 +57,7 @@ const Chatbox = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-240px)] mt-6 mx-4">
+    <div className="h-[calc(100vh-300px)] mt-6 mx-4">
       <div className="h-[calc(100%-71px)] bg-[#FFFFFF] border-[1px] border-[#CDCDCD] rounded-[31px]">
         <div class="flex items-center px-4 py-4">
           <div class="rounded-full w-[15%] flex items-center justify-center text-white font-semibold"></div>
