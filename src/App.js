@@ -8,7 +8,7 @@ import {
   Home,
   Main,
   Chat,
-  Fetchdetails
+  Fetchdetails,
 } from './pages'
 
 import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'

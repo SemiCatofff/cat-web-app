@@ -2,11 +2,9 @@ import styles from '../../styles/style'
 import { redirectGoogleAuth } from '../../utils/ApiCalls'
 
 function Login() {
-
   const handleLogin = async () => {
-    const output = await redirectGoogleAuth();
+    const output = await redirectGoogleAuth()
   }
-
 
   return (
     <div className="w-full h-full flex justify-center">
@@ -18,14 +16,13 @@ function Login() {
           <span className={`${styles.heading1} !text-[#202117]`}>SIGNUP</span>
         </div>
 
-        <div className='flex flex-col items-center mt-[30px] gap-[10px]'>
-        <div className= {`${styles.subtext} !text-[#FFFFFF] !font-regular`}>
-           Already a user 
+        <div className="flex flex-col items-center mt-[30px] gap-[10px]">
+          <div className={`${styles.subtext} !text-[#FFFFFF] !font-regular`}>
+            Already a user
           </div>
-          <div className= {`${styles.subtext} !text-[#E1F076]`}>
-          Continue with your account
+          <div className={`${styles.subtext} !text-[#E1F076]`}>
+            Continue with your account
           </div>
-
         </div>
       </div>
     </div>

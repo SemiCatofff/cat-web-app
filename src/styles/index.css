@@ -152,7 +152,6 @@
   transform: translateY(-50%);
 }
 
-
 @-webkit-keyframes fadeInTop {
   0% {
     opacity: 0;
@@ -175,29 +174,33 @@
   }
 }
 
-
-.transparent-bg{
+.transparent-bg {
   border-radius: 80px;
-border: 0.2px solid rgba(255, 255, 255, 0.19);
+  border: 0.2px solid rgba(255, 255, 255, 0.19);
 
-background: linear-gradient(92deg, rgba(255, 255, 255, 0.36) -0.56%, rgba(255, 255, 255, 0.14) 91.86%);
+  background: linear-gradient(
+    92deg,
+    rgba(255, 255, 255, 0.36) -0.56%,
+    rgba(255, 255, 255, 0.14) 91.86%
+  );
 
-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.19);
-backdrop-filter: blur(4px);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.19);
+  backdrop-filter: blur(4px);
 }
-
 
 /* popup stylings */
 
 .popup-backdrop {
-  inset: 0; 
+  inset: 0;
   background: rgba(0, 0, 0, 0.719);
   display: flex;
   align-items: flex-end;
   backdrop-filter: blur(5px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s, visibility 0.4s;
+  transition:
+    opacity 0.4s,
+    visibility 0.4s;
 }
 
 .popup-backdrop.open {
@@ -206,7 +209,7 @@ backdrop-filter: blur(4px);
 }
 
 .popup-content {
-  width: 100%; 
+  width: 100%;
   border-radius: 25px 25px 0 0;
   background: white;
   padding: 1em;
@@ -215,12 +218,10 @@ backdrop-filter: blur(4px);
 }
 
 .popup-content.open {
-  transform: translateY(0); 
+  transform: translateY(0);
 }
 
-
 .slide-button {
-
 }
 .close-button {
   position: absolute;
