@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux'
 import styles from '../../styles/style'
-import { setLoginState } from '../../redux/actions/actions'
+import { redirectGoogleAuth } from '../../utils/ApiCalls'
 
 function Login() {
-  const dispatch = useDispatch()
 
   const handleLogin = async () => {
-    //window.location.href = 'http://localhost:3005/googleAuth/'
-    dispatch(setLoginState(true))
+    const output = await redirectGoogleAuth();
   }
+
 
   return (
     <div className="w-full h-full flex justify-center">
