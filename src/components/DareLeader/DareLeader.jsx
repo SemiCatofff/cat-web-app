@@ -24,7 +24,7 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
     </div>
   )
 }
-const DareLeader = ({ live }) => {
+const DareLeader = ({ target, type }) => {
   const navigate = useNavigate();
 
   return (
@@ -38,10 +38,10 @@ const DareLeader = ({ live }) => {
       alt='Participant'
     />
     <div className='flex flex-col'>
-      <span className= {`${styles.subheading} text-[#9A9C95] !font-regular !text-[13px]`}>
+      <span className= {`${styles.subheading} !text-[#9A9C95] !font-regular !text-[13px]`}>
         Participant
       </span>
-      <span className= {`${styles.subheading} text-[#000000]`}>
+      <span className= {`${styles.subheading} !text-[#000000]`}>
         You
       </span>
     </div>
@@ -50,10 +50,10 @@ const DareLeader = ({ live }) => {
  
   <div className='flex items-center'>
     <div className='flex flex-col items-end mr-2'>
-      <span className= {`${styles.subheading} text-[#9A9C95] !font-regular !text-[13px]`}>
+      <span className= {`${styles.subheading} !text-[#9A9C95] !font-regular !text-[13px]`}>
         Challenger
       </span>
-      <span className= {`${styles.subheading} text-[#000000]`}>
+      <span className= {`${styles.subheading} !text-[#000000]`}>
         Meghan Jesse
       </span>
     </div>
@@ -91,7 +91,7 @@ const DareLeader = ({ live }) => {
          <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
            You won 2000 credits! 
         </div>
-        <div className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] text-[#E1F076] rounded-[80px] `} onClick={()=>{ navigate("/dashboard")}}>
+        <div className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `} onClick={()=>{ navigate("/dashboard")}}>
          CLAIM
         </div>
 
