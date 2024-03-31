@@ -1,12 +1,13 @@
-import React from 'react'
 import profile from '../../assets/images/prof.png'
 import styles from '../../styles/style'
 import crown from '../../assets/images/crown.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getLeaderboard } from '../../utils/ApiCalls'
 
 const calculateHeight = (steps, maxSteps) => {
-  const maxHeight = 260
-  return Math.floor((steps / maxSteps) * maxHeight)
+  const maxHeight = 250
+  return Math.floor(((maxSteps - steps) / maxSteps) * maxHeight)
 }
 const LeaderboardItem = ({ steps, maxSteps }) => {
   const barHeight = calculateHeight(steps, maxSteps)
@@ -15,11 +16,11 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
     <div className="flex flex-col w-[50%] justify-end items-center gap-[20px]">
       <div
         className="bottom-0 rounded-t-xl w-[70px] bg-[#E1F076]"
-        style={{ height: `${barHeight + 100}px` }}
+        style={{ height: `${250}px` }}
       >
         <div
           className=" bottom-0 rounded-t-xl w-[70px] bg-[#6F6F6F]"
-          style={{ height: `${barHeight * 0.33}px` }}
+          style={{ height: `${barHeight}px` }}
         ></div>
       </div>
     </div>
@@ -40,7 +41,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index}) => (
       )}
       <img
         className={`w-[${hval}px] h-[${hval}px] border-4 border-[#E1F076] rounded-full z-10`}
-        src={profile}
+        src={profileSrc}
         alt={`${name}`}
       />
 
@@ -61,27 +62,44 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index}) => (
 )
 
 
-const StepUpChallenge = ({ live }) => {
+const StepUpChallenge = ({ target, winner , type}) => {
   const navigate = useNavigate();
+  const params = useParams()
+  const [leaderBoard, setLeaderBoard] = useState([{},{}])
+
+  const fetchLeaderboard = async()=>{
+    const output = await getLeaderboard(params.id);
+    if(output.success){
+      setLeaderBoard(output.data)
+    }   
+  }
+
+  useEffect(()=>{
+
+fetchLeaderboard()
+  },[])
 
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-1">
-        <Competitor isWinner={false} name={'Megan Jess'} steps={100} hval={80} index={2} />
+        <Competitor isWinner={false} name={leaderBoard[0].username} steps={leaderBoard[0].value} profileSrc={leaderBoard[0].profilePicture} hval={80} index={1} />
         <div className="w-[14%] h-[100px] flex justify-center">
           <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s </div>
         </div>
-        <Competitor isWinner={true} name={'Bryan Wolf'} steps={100} hval={84} index={1} />
+        <Competitor isWinner={false} name={leaderBoard[1].username} steps={leaderBoard[1].value} profileSrc={leaderBoard[1].profilePicture} hval={84} index={2} />
       </div>
 
       <div className="flex gap-[14%] w-[90%] mt-4">
-        <div className="w-[43%] flex flex-col items-center justify-center">
-          <LeaderboardItem steps={100} maxSteps={300} />
-        </div>
-        <div className="w-[43%] flex flex-col items-center justify-center">
-          <LeaderboardItem steps={100} maxSteps={300} />
-        </div>
-      </div>
+        {
+          leaderBoard.map((item)=>{
+            return(
+              <div className="w-[45%] flex flex-col items-center justify-end">
+              <LeaderboardItem steps={item.value} maxSteps={target} />
+            </div>
+            )
+          })
+        }
+         </div>
       <div className="h-[3px] w-[296px] bg-[#6F6F6F] bg-opacity-35"></div>
       <div className='flex flex-col items-center justify-center mt-[20px] gap-[10px]'>
         
