@@ -1,17 +1,14 @@
 import axios from 'axios'
 const BackendURL = 'https://stagingapi.catoff.xyz'
 
-const authToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMTUyNTA5NiwiZXhwIjoxNzExNjExNDk2fQ.OucF7IlG5AAceAoPrM0ufRz8gcy8HA7EQaBONKkTwR4'
-
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
 const redirectGoogleAuth = async () => {
   try {
-    const response = await axios.get(`${BackendURL}/googleAuth`)
-    return response.data
+    window.location.href = `${BackendURL}/googleAuth`;
+    
   } catch (error) {
-    return error.message
+  
   }
 }
 
@@ -19,7 +16,7 @@ const redirectGoogleAuth = async () => {
 
 const authenticateAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -37,7 +34,7 @@ const authenticateAPI = async () => {
 
 const setPinAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -53,7 +50,7 @@ const setPinAPI = async () => {
 
 const createWallet = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -71,7 +68,7 @@ const createWallet = async () => {
 
 const getRefreshTokenAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -87,7 +84,7 @@ const getRefreshTokenAPI = async () => {
 
 const getUserWalletAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
@@ -104,7 +101,7 @@ const getUserWalletAPI = async () => {
 
 const getChallenges = async (challengeID) => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.get(
@@ -119,7 +116,7 @@ const getChallenges = async (challengeID) => {
 
 const getOngoingChallenges = async (type, page, limit) => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
@@ -137,7 +134,7 @@ const getOngoingChallenges = async (type, page, limit) => {
 const searchChallengeAPI = async (search, page, limit) =>{
 
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
@@ -156,7 +153,7 @@ const searchChallengeAPI = async (search, page, limit) =>{
 
 const createChallengeAPI = async (challengeDetails) => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
@@ -173,9 +170,43 @@ const createChallengeAPI = async (challengeDetails) => {
 
 //CHALLENGE DETAILS PAGE
 
+
+
 //CHALLENGE JOIN FLOW
 
 //CHALLENGE PROGRESS PAGE
+
+
+const getChallengeDashboard = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/dashboard/${challengeID}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getLeaderboard = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/${challengeID}/leaderboard`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
 
 //TAB===0
 
@@ -190,4 +221,8 @@ export {
   getRefreshTokenAPI,
   createWallet,
   getUserWalletAPI,
+  getChallenges,
+  getOngoingChallenges,
+  getChallengeDashboard,
+  getLeaderboard
 }
