@@ -2,11 +2,18 @@ import { cardImg, optionBtn, award, avatargrp } from '../../assets/images'
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router'
 
-const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
+const ChallengeCard = ({ id, name, date, people, wager, prize, type, active }) => {
   const navigate = useNavigate()
   const handleOnclick = () => {
-    navigate(`/details/${id}`)
+    if(active){
+      navigate(`/challenge/${id}`)
+    }
+    else{
+      navigate(`/details/${id}`)
+    } 
   }
+
+
   return (
     <>
       <div className="relative w-full cursor-pointer" onClick={handleOnclick}>

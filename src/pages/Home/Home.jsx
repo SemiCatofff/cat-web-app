@@ -2,7 +2,7 @@ import styles from '../../styles/style'
 import { homeHeader, filter, search } from '../../assets/images'
 import { ChallengeCard } from '../../components'
 import { useEffect, useState } from 'react'
-import { getOngoingChallenges } from '../../utils/ApiCalls'
+import { getOngoingChallenges, getUserChallenges } from '../../utils/ApiCalls'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -31,15 +31,24 @@ const Home = () => {
     },
   ])
 
+  const [active, setActive] = useState([])
+
   const getChalData = async (filter) => {
     const output = await getOngoingChallenges(filter, 1, 10)
-    if (output.success && output.data.length > 0) {
+    if (output.success) {
       setChallenges(output.data)
     }
   }
 
+  const userChallenges = async ()=>{
+    const output = await getUserChallenges()
+      const activeChallenges = output.map((item)=> item.ChallengeID)
+      setActive(activeChallenges)
+  }
+
   useEffect(() => {
     getChalData('all')
+    userChallenges()
   }, [])
 
   return (
@@ -73,14 +82,17 @@ const Home = () => {
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
+
+             !item.IsStarted &&
             <ChallengeCard
               id={item.ChallengeID}
-              type={'Fitness'}
+              type={item.GameType}
               name={item.ChallengeName}
               people={item.PlayersJoined}
               date={item.StartDate}
               wager={item.Wager}
-              prize={item.Wager * 100}
+              prize={item.CurrentPool}
+              active= {active.includes(item.ChallengeID)}
             />
           )
         })}
