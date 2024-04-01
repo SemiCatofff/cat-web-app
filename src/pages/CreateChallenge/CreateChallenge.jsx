@@ -61,7 +61,7 @@ const CreateChallenge = () => {
                 name="challengeName"
                 value={formState1.challengeName}
                 onChange={handleInputChange}
-                className="h-[56px] rounded-[8px] outline-[#8567FF]"
+                className="h-[56px] rounded-[8px] bg-[#F2EFFF]"
               />
             </div>
 
@@ -77,7 +77,7 @@ const CreateChallenge = () => {
                 name="description"
                 value={formState1.description}
                 onChange={handleInputChange}
-                className="h-[56px] rounded-[8px] outline-[#8567FF]"
+                className="h-[56px] rounded-[8px] bg-[#F2EFFF]"
               />
             </div>
 
@@ -94,7 +94,7 @@ const CreateChallenge = () => {
                 name="requirements"
                 value={formState1.requirements}
                 onChange={handleInputChange}
-                className="h-[56px] rounded-[8px] outline-[#8567FF]"
+                className="h-[56px] rounded-[8px] bg-[#F2EFFF]"
               />
             </div>
 
@@ -112,7 +112,7 @@ const CreateChallenge = () => {
                   name="startDate"
                   value={formState1.startDate}
                   onChange={handleInputChange}
-                  className="h-[56px] rounded-[8px] outline-[#8567FF]"
+                  className="h-[56px] rounded-[8px] #bg-[#F2EFFF]"
                 />
               </div>
               <div className="flex flex-col gap-[5px] w-[45%]">
@@ -128,7 +128,7 @@ const CreateChallenge = () => {
                   name="endDate"
                   value={formState1.endDate}
                   onChange={handleInputChange}
-                  className="h-[56px] rounded-[8px] outline-[#8567FF]"
+                  className="h-[56px] rounded-[8px] bg-[#F2EFFF]"
                 />
               </div>
             </div>
@@ -180,7 +180,7 @@ const CreateChallenge = () => {
             <div className="flex gap-[2%] mb-[120px]">
               <div
                 type="button"
-                className="flex w-[49%] h-[56px] items-center rounded-[12px]  justify-center border-[1px] border-[#8567FF] text-[#8567FF]"
+                className="flex w-[49%] h-[56px] items-center rounded-[12px]  justify-center border-[1px] bg-[#F2EFFF] text-[#8567FF]"
                 onClick={() => {
                   navigate('/')
                 }}
