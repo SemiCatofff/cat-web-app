@@ -32,9 +32,9 @@ function Challenge() {
   return (
     <div className="flex flex-col h-auto">
       <div className="mx-4 my-2 ">
-        <div className={`${styles.caption2} !text-[#4B4B4B]`}>#Fitness</div>
+        <div className={`${styles.caption2} !text-[#4B4B4B]`}>#{userPerformance.GameType}</div>
         <div className={`${styles.heading1} !text-[#202117] !font-semibold `}>
-          Step Challenge
+          {userPerformance.ChallengeName}
         </div>
         <div>
           <span className={`${styles.caption2} !text-[#202117] !font-medium`}>

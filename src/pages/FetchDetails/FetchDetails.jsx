@@ -13,18 +13,24 @@ function Fetchdetails() {
   const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  
+  
   const checkLoginStatus = async () => {
     const queryParams = new URLSearchParams(location.search)
     const jwt = queryParams.get('jwt')
     sessionStorage.setItem('authToken', jwt)
-    const output = await authenticateAPI()
-    if (output.status !== 'success') {
+    
+  
+       const output = await authenticateAPI()
+    
       const output2 = await setPinAPI()
-      const output3 = await createWallet()
-    }
 
+      const output3 = await createWallet()
+    
     const refreshToken = await getRefreshTokenAPI()
+
+    
+    sessionStorage.setItem("set",1)
 
     dispatch(setLoginState(true))
     navigate('/')
@@ -32,7 +38,7 @@ function Fetchdetails() {
 
   useEffect(() => {
     checkLoginStatus()
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="absolute z-10 inset-0 bg-signup bg-cover bg-center"></div>
