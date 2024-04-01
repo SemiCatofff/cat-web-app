@@ -24,7 +24,7 @@ function Main(props) {
   }, [dispatch])
 
   const showAppbar = routes.includes(location.pathname)
-
+  
   return (
     <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] overflow-hidden relative md:max-w-[360px]">
       {isLoggedIn ? (

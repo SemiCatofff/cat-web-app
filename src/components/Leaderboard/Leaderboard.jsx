@@ -68,7 +68,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
 const StepUpChallenge = ({ target, winner, type }) => {
   const navigate = useNavigate()
   const params = useParams()
-  const [leaderBoard, setLeaderBoard] = useState([{}, {}])
+  const [leaderBoard, setLeaderBoard] = useState([])
 
   const fetchLeaderboard = async () => {
     const output = await getLeaderboard(params.id)
@@ -84,25 +84,25 @@ const StepUpChallenge = ({ target, winner, type }) => {
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-1">
-        <Competitor
+        {leaderBoard.length >= 1 && <Competitor
           isWinner={false}
           name={leaderBoard[0].username}
           steps={leaderBoard[0].value}
           profileSrc={leaderBoard[0].profilePicture}
           hval={80}
           index={1}
-        />
+        />}
         <div className="w-[14%] h-[100px] flex justify-center">
           <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s </div>
         </div>
-        <Competitor
+        {leaderBoard.length === 2 &&<Competitor
           isWinner={false}
           name={leaderBoard[1].username}
           steps={leaderBoard[1].value}
           profileSrc={leaderBoard[1].profilePicture}
-          hval={84}
+          hval={80}
           index={2}
-        />
+        />}
       </div>
 
       <div className="flex gap-[14%] w-[90%] mt-4">
