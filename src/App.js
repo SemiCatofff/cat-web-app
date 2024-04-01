@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import store from './redux/store/store'
 import { Provider } from 'react-redux'
 import {
-  AllChallenges,
   Challenge,
   CreateChallenge,
   Dashboard,
   Home,
-  Login,
   Main,
+  Chat,
+  Fetchdetails,
 } from './pages'
 
 import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
@@ -25,9 +25,12 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/create" element={<CreateChallenge />} />
-              <Route path="/challenge" element={<Challenge />} />
-              <Route path="/details" element={<ChallengeDetails />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/challenge/:id" element={<Challenge />} />
+              <Route path="/details/:id" element={<ChallengeDetails />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/explore" element={<Fetchdetails />} />
+
+              {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
           </Main>
         </Router>
