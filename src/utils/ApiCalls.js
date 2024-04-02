@@ -175,7 +175,7 @@ const joinChallengeAPI = async (challengeName) => {
   }
 
   let body = {
-    ChallengeID : 3
+    ChallengeID : challengeName
   }
 
   try {
