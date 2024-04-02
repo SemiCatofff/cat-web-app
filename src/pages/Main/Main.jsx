@@ -32,7 +32,7 @@ function Main(props) {
           <div className="z-1">
             <Navbar />
           </div>
-          <div className="flex-grow overflow-auto h-[auto] z-10 px-3">
+          <div className="flex-grow overflow-auto h-[auto] z-10 px-2">
             {props.children}
           </div>
           <div className="absolute right-0 top-[5px]">
