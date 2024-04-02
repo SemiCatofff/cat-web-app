@@ -48,15 +48,15 @@ const ChallengeCard = ({ id, name, date, people, wager, prize, type, active }) =
                     Entry : {wager} credits
                   </div>
                 </div>
-                <div className="px-3 bg-white rounded-full py-2 mx-auto mt-4 flex">
+                <div className=" bg-white rounded-full px-2 py-2 w-[210px] mt-4 flex">
                   <div className="flex">
                     <img src={award} alt="gg" />
                     <p
-                      className={`${styles.heading2} !text-black !text-[12px] mx-1`}
+                      className={`${styles.heading2} !text-black !text-[12px]`}
                     >
                       Prize Pool{' '}
                       <span className="text-purple-600 font-bold">
-                        : {prize} Credits
+                        : {prize} credits
                       </span>
                     </p>
                   </div>
