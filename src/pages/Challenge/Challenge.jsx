@@ -42,7 +42,11 @@ function Challenge() {
             14th April, 2024
           </span>
           <span className={`${styles.paragraph} !text-[#8D8D8D]`}>
-            {'  '}Ending in 3 days
+            {'  '}Ending in {moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}
           </span>
         </div>
       </div>
