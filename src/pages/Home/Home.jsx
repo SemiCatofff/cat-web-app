@@ -34,11 +34,13 @@ const Home = () => {
     const output = await getUserChallenges()
       const activeChallenges = output.map((item)=> item.ChallengeID)
       setActive(activeChallenges)
+
   }
 
   const userData = async () =>{
     const output = await getUserDetails()
     setUserInfo(output)
+    localStorage.setItem('profile', output.ProfilePicture)
   }
 
   useEffect(() => {

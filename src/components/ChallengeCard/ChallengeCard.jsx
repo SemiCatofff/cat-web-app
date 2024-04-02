@@ -1,4 +1,5 @@
-import { cardImg, optionBtn, award, avatargrp } from '../../assets/images'
+import { cardImg, optionBtn, award, avatargrp} from '../../assets/images'
+import card2 from "../../assets/images/card2.png"
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router'
 
@@ -17,7 +18,7 @@ const ChallengeCard = ({ id, name, date, people, wager, prize, type, active }) =
   return (
     <>
       <div className="relative w-full cursor-pointer" onClick={handleOnclick}>
-        <img src={cardImg} alt="" className="w-full" />
+        <img src={type=== "Steps"? cardImg : card2} alt="" className="w-full h-[400px]" />
         <div className={``}>
           <div className={`absolute top-10 w-full px-8`}>
             <div className={`${styles.flexBetween}`}>

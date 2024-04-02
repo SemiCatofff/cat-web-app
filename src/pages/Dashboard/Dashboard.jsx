@@ -14,11 +14,13 @@ import {
 } from '../../assets/images'
 import { Popup } from '../../components/index'
 import { getUserDetails, getUserChallenges, createWallet, logout} from '../../utils/ApiCalls'
+import moment from 'moment'
 
 const Dashboard = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [history, setHistory] = useState([])
   const [details, setDetails] = useState([])
+  const [solTok, setSolTok] = useState("")
 
   const handleOpenPopup = () => {
     setIsPopupOpen(true)
@@ -36,6 +38,9 @@ const Dashboard = () => {
     //these apis don't have error states
     const output = await getUserDetails()
     setDetails(output)
+   
+    let tok = output.Portfolio.length > 0? output.Portfolio[0].quantity +" "+ output.Portfolio[0].token_name: "No tokens"
+    setSolTok(tok)
 
     const histor = await getUserChallenges()
     setHistory(histor)
@@ -69,7 +74,10 @@ const Dashboard = () => {
               </h1>
               <h1
                 className={`${styles.paragraph} text-white text-center pt-1`}
-              ></h1>
+              >{details.WalletAddress}</h1>
+               <h1
+                className={`${styles.paragraph} text-white text-center pt-1`}
+              > {solTok}</h1>
             </div>
           </div>
         </div>
@@ -176,7 +184,10 @@ const Dashboard = () => {
                     {item.ChallengeName}
                   </p>
                   <p className={`${styles.caption2} !text-gray-500`}>
-                    24th January 2024
+                  {moment(parseInt(item.StartDate, 10)).format(
+                'D MMM, YYYY HH.mm'
+              )}
+                  
                   </p>
                 </div>
               </div>
@@ -184,13 +195,13 @@ const Dashboard = () => {
               <div className="flex">
                 <div className="texts ml-4 my-auto">
                   <p className={`${styles.subheading2} !text-amber-400`}>
-                    - 2 SOL
+                    - {item.WagerStaked}
                   </p>
                   <p
                     className={`${styles.caption1} !text-gray-500 flex justify-center`}
                   >
                     {' '}
-                    {item.Rank}
+                    {/* {item.Rank} */}
                   </p>
                 </div>
               </div>

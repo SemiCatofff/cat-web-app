@@ -20,7 +20,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
       )}
       <img
         className={`w-[${hval}px] h-[${hval}px] border-4 border-[#E1F076] rounded-full z-10`}
-        src={profile}
+        src={profileSrc}
         alt={`${name}`}
       />
       <div
@@ -41,14 +41,14 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
   </div>
 )
 
-const PlayerInfo = ({ index, name, steps }) => {
+const PlayerInfo = ({ index, name, steps, prof }) => {
   return (
     <div className="h-[48px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center">
       <div className={`${styles.subheading} !text-[#4f4f4f]`}>{index + 4}</div>
       <div>
         <img
-          className="w-[32px] h-[32px] rounded-full mx-[10px]"
-          src={profile}
+          className="w-[30px] h-[30px] rounded-full mx-[10px]"
+          src={prof}
           alt=""
         />
       </div>
@@ -63,32 +63,9 @@ const PlayerInfo = ({ index, name, steps }) => {
   )
 }
 
-const MultiChallenge = ({ target, type }) => {
+const MultiChallenge = ({ target, type, isActive, ends }) => {
   const [people, setPeople] = useState([
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      steps: '5 Hours Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      steps: '15 Hours Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      steps: '2 Days Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
-    {
-      name: 'Alice Doe',
-      address: '0x7856...jh86sp09',
-      steps: '2 Days Ago',
-      imageSrc: '/path-to-your-image.jpg',
-    },
+   
   ])
   const params = useParams()
   const fetchLeaderboard = async () => {
@@ -114,8 +91,9 @@ const MultiChallenge = ({ target, type }) => {
                   isWinner={false}
                   name={person.username}
                   steps={person.value}
-                  hval={80}
+                  hval={70}
                   index={index === 0 ? 2 : index === 2 ? 3 : index}
+                  profileSrc={person.profilePicture}
                 />
               )
             )
@@ -125,8 +103,9 @@ const MultiChallenge = ({ target, type }) => {
                 isWinner={false}
                 name={person.username}
                 steps={person.value}
-                hval={80}
+                hval={70}
                 index={index + 1}
+                profileSrc={person.profilePicture}
               />
             ))}
       </div>
@@ -140,35 +119,38 @@ const MultiChallenge = ({ target, type }) => {
                 name={item.username}
                 address={item.address}
                 steps={item.value}
+                prof= {item.profilePicture}
               />
             )
           })}
       </div>
 
       <div className="flex flex-col items-center justify-center mt-[20px] gap-[10px]">
-        {/*
-        
-        will be rendered based on the date conditions
-        // to be added with api integration
-        
+      { !isActive?
+       <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
            Challenge Ends in
         </div>
         <div className={`${styles.heading2} !text-[#202117]`}>
-           3 day . 60 hours . 10
-        </div> */}
-
+           {ends}
+        </div>
+        </> 
+        :
+   <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
           You won 2000 credits!
         </div>
         <div
-          className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] text-[#E1F076] rounded-[80px] `}
+          className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
           onClick={() => {
             navigate('/dashboard')
           }}
         >
           CLAIM
         </div>
+        </> 
+
+}
       </div>
 
       <div className="relative w-full h-[85px] mx-4 my-6 rounded-box bg-[#192126] flex items-center justify-center gap-[7%]">
@@ -185,7 +167,7 @@ const MultiChallenge = ({ target, type }) => {
         <img src={ig} alt=""></img>
         <img src={tg} alt=""></img>
         <img src={discord} alt=""></img>
-        <img src={discord} alt=""></img>
+        {/* <img src={discord} alt=""></img> */}
       </div>
     </div>
   )

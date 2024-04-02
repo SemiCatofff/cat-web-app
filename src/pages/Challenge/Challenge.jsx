@@ -7,6 +7,7 @@ import Chatbox from '../../components/Chatbox/Chatbox'
 import DareLeader from '../../components/DareLeader/DareLeader'
 import { useParams } from 'react-router-dom'
 import { getChallengeDashboard } from '../../utils/ApiCalls'
+import moment from 'moment'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
@@ -107,18 +108,36 @@ function Challenge() {
           <MultiChallenge
             target={userPerformance.Target}
             type={userPerformance.GameType}
+            isActive ={userPerformance.isStarted}
+            ends ={moment
+              .duration(
+                moment(parseInt(userPerformance.EndDate)).diff(moment())
+              )
+              .humanize()}
           />
         )) ||
           (gameType === '1v1' && (
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
+              isActive ={userPerformance.isStarted}
+              ends ={moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}
             />
           )) ||
           (gameType === '0v1' && (
             <DareLeader
               target={userPerformance.Target}
               type={userPerformance.GameType}
+              isActive ={userPerformance.isStarted}
+              ends ={moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}
             />
           )))}
 
