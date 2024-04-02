@@ -22,7 +22,7 @@ const ChallengeCard = ({ id, name, date, people, wager, prize, type, active }) =
           <div className={`absolute top-10 w-full px-8`}>
             <div className={`${styles.flexBetween}`}>
               <div
-                className={`${styles.caption2} !text-black transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex`}
+                className={`${styles.caption2} !text-black bg-transparent py-2 my-auto rounded-xl text-center px-2 flex`}
               >
                 <img src={avatargrp} alt="" />+ {people} members
               </div>

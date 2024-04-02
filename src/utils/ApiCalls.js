@@ -256,13 +256,23 @@ const getLeaderboard = async (challengeID) => {
   }
 }
 
-//TAB===0
+const withDrawApi = async () =>{
 
-//TAB ===1
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 
-//TAB === 2
 
-
+}
 
 const logout = async () =>{
 
@@ -281,5 +291,6 @@ export {
   joinChallengeAPI,
   getUserChallenges,
   getUserDetails,
-  logout
+  logout,
+  withDrawApi
 }

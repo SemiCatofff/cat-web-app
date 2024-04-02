@@ -47,31 +47,36 @@ function ChallengeDetails() {
     setIsConfirmed(false)
   }
 
-  const joinChal = async() =>{
+  const joinChal = async () => {
     const output = await joinChallengeAPI(params.id)
     setIsLoading(false)
-    if(output.success){
+    if (output.success) {
       setIsConfirmed(true)
-    }
-    else{
+    } else {
       //error popup here
-
-      
     }
- 
   }
 
   const handleSliderConfirm = () => {
     setIsLoading(true)
     joinChal()
-   }
+  }
 
   const goToDashboard = () => {
     navigate(`/challenge/${params.id}`)
   }
 
   const popupContent = isLoading ? (
-    <div className="loader">Loading...</div>
+    <div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+        <h2 className={`${styles.heading1} !text-black `}>Please wait!</h2>
+        <p className={`${styles.subheading2} !text-black mt-6`}>
+          🎉 Processing Your Request! 🎉
+        </p>
+       
+        <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12 mx-auto mt-8"></div>
+      </div>
+    </div>
   ) : isConfirmed ? (
     <div className={`!z-40`}>
       <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
@@ -126,7 +131,7 @@ function ChallengeDetails() {
           id={challengeDetails.ChallengeID}
           type={challengeDetails.GameType}
           name={challengeDetails.ChallengeName}
-          people={100}
+          people={challengeDetails.PlayersJoined}
           date={moment(parseInt(challengeDetails.StartDate, 10)).format(
             'D MMM, YYYY'
           )}
@@ -147,25 +152,22 @@ function ChallengeDetails() {
           </h1>
           <ul>
             <li className={`${styles.paragraph} mt-4 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
+              - Outdoor Challenge
             </li>
             <li className={`${styles.paragraph} mt-1 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
+              - Tracker Device Should be On
             </li>
             <li className={`${styles.paragraph} mt-1 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
-            </li>
-            <li className={`${styles.paragraph} mt-1 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
+              - Malpractices will not be encouraged
             </li>
           </ul>
         </div>
-        <div className={`${styles.marginY} ${styles.marginX}`}>
+        {/* <div className={`${styles.marginY} ${styles.marginX}`}>
           <h1 className={`${styles.subheading2} !text-gray-500 mb-4`}>
             People Joined
           </h1>
           <img src={avatargrp2} alt="" />
-        </div>
+        </div> */}
 
         <div className={`${styles.marginY} ${styles.marginX} relative`}>
           <img src={targetbg} alt="" className="w-full" />
