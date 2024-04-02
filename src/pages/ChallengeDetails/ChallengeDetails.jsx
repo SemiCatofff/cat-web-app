@@ -89,7 +89,7 @@ function ChallengeDetails() {
           className=" bg-black rounded-full py-6 mt-6 flex w-full"
           onClick={goToDashboard}
         >
-          <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
+          <p className={`${styles.heading2} !text-yellow mx-auto flex mb-4`}>
             {' '}
             GO TO DASHBOARD{' '}
             <span className="ml-3">
@@ -104,7 +104,7 @@ function ChallengeDetails() {
       <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
         <h2 className={`${styles.heading1} !text-black px-8`}>
           Confirm Payment Of{' '}
-          <span className="text-purple-500">2K Credits?</span>{' '}
+          <span className="text-purple-500"> {challengeDetails.Wager} Credits?</span>{' '}
         </h2>
         <img src={graphic1} alt="" className="mx-auto mt-10" />
         <div
@@ -115,9 +115,9 @@ function ChallengeDetails() {
             <img src={doubleright} className="mx-auto mt-4" />
           </div>
           <p
-            className={`text-center my-auto ml-8 !text-black ${styles.heading2}`}
+            className={`text-center my-auto ml-8 mb-4 !text-black ${styles.heading2}`}
           >
-            SLIDE TO CONFIRM
+             CONFIRM
           </p>
         </div>
       </div>
