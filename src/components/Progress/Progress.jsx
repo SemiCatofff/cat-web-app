@@ -25,7 +25,7 @@ function Progress({ value, target, prize, wager, type }) {
           ></img>
           <div className="w-auto flex flex-col justify-center gap-[25px]">
             <div className="flex items-center gap-[10px]">
-              <img src={profile}></img>
+              <img src={localStorage.getItem('profile')} className='rounded-full w-[60px]'></img>
               <div className={`flex flex-col gap-[1px] text-white`}>
                 <div className={`${styles.heading2}`}>
                   {parseInt((parseInt(value) / parseInt(target)) * 100)}%

@@ -7,6 +7,7 @@ import Chatbox from '../../components/Chatbox/Chatbox'
 import DareLeader from '../../components/DareLeader/DareLeader'
 import { useParams } from 'react-router-dom'
 import { getChallengeDashboard } from '../../utils/ApiCalls'
+import moment from 'moment'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
@@ -32,9 +33,9 @@ function Challenge() {
   return (
     <div className="flex flex-col h-auto">
       <div className="mx-4 my-2 ">
-        <div className={`${styles.caption2} !text-[#4B4B4B]`}>#Fitness</div>
+        <div className={`${styles.caption2} !text-[#4B4B4B]`}>#{userPerformance.GameType}</div>
         <div className={`${styles.heading1} !text-[#202117] !font-semibold `}>
-          Step Challenge
+          {userPerformance.ChallengeName}
         </div>
         <div>
           <span className={`${styles.caption2} !text-[#202117] !font-medium`}>
@@ -107,18 +108,36 @@ function Challenge() {
           <MultiChallenge
             target={userPerformance.Target}
             type={userPerformance.GameType}
+            isActive ={userPerformance.isStarted}
+            ends ={moment
+              .duration(
+                moment(parseInt(userPerformance.EndDate)).diff(moment())
+              )
+              .humanize()}
           />
         )) ||
           (gameType === '1v1' && (
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
+              isActive ={userPerformance.isStarted}
+              ends ={moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}
             />
           )) ||
           (gameType === '0v1' && (
             <DareLeader
               target={userPerformance.Target}
               type={userPerformance.GameType}
+              isActive ={userPerformance.isStarted}
+              ends ={moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}
             />
           )))}
 

@@ -150,9 +150,11 @@ const createChallengeAPI = async (challengeDetails) => {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
+
+
   try {
     const response = await axios.post(
-      `${BackendURL}/oktoProxy/re`,
+      `${BackendURL}/player`,
       challengeDetails,
       { headers }
     )
@@ -164,7 +166,63 @@ const createChallengeAPI = async (challengeDetails) => {
 
 //CHALLENGE DETAILS PAGE
 
-//CHALLENGE JOIN FLOW
+//CHALLENGE JOIN FLOW4
+
+
+const joinChallengeAPI = async (challengeName) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+
+  let body = {
+    ChallengeID : challengeName
+  }
+
+  try {
+    const response = await axios.post(
+      `${BackendURL}/player`,
+      body,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+
+
+//user dashboard page
+
+const getUserChallenges = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/userBoard/dashboard/userCurrentTable`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getUserDetails = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/userBoard/dashboard/userDetails`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
 
 //CHALLENGE PROGRESS PAGE
 
@@ -198,12 +256,27 @@ const getLeaderboard = async (challengeID) => {
   }
 }
 
-//TAB===0
+const withDrawApi = async () =>{
 
-//TAB ===1
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 
-//TAB === 2
 
+}
+
+const logout = async () =>{
+
+}
 export {
   redirectGoogleAuth,
   authenticateAPI,
@@ -215,4 +288,9 @@ export {
   getOngoingChallenges,
   getChallengeDashboard,
   getLeaderboard,
+  joinChallengeAPI,
+  getUserChallenges,
+  getUserDetails,
+  logout,
+  withDrawApi
 }

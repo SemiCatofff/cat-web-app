@@ -12,13 +12,15 @@ import {
   yellowarrow,
 } from '../../assets/images'
 import { useParams } from 'react-router-dom'
-import { getChallenges } from '../../utils/ApiCalls'
+import { getChallenges, joinChallengeAPI } from '../../utils/ApiCalls'
 import moment from 'moment'
 
 function ChallengeDetails() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirmed, setIsConfirmed] = useState(false)
+  const [joinSuccess, setJoinSuccess] = useState(true)
+
   const navigate = useNavigate()
   const params = useParams()
   const [challengeDetails, setChallengeDetails] = useState([])
@@ -45,12 +47,19 @@ function ChallengeDetails() {
     setIsConfirmed(false)
   }
 
+  const joinChal = async () => {
+    const output = await joinChallengeAPI(params.id)
+    setIsLoading(false)
+    if (output.success) {
+      setIsConfirmed(true)
+    } else {
+      //error popup here
+    }
+  }
+
   const handleSliderConfirm = () => {
     setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setIsConfirmed(true)
-    }, 2000)
+    joinChal()
   }
 
   const goToDashboard = () => {
@@ -58,7 +67,16 @@ function ChallengeDetails() {
   }
 
   const popupContent = isLoading ? (
-    <div className="loader">Loading...</div>
+    <div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+        <h2 className={`${styles.heading1} !text-black `}>Please wait!</h2>
+        <p className={`${styles.subheading2} !text-black mt-6`}>
+          🎉 Processing Your Request! 🎉
+        </p>
+       
+        <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12 mx-auto mt-8"></div>
+      </div>
+    </div>
   ) : isConfirmed ? (
     <div className={`!z-40`}>
       <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
@@ -111,14 +129,14 @@ function ChallengeDetails() {
       <div className={`mb-20`}>
         <ChallengeCard
           id={challengeDetails.ChallengeID}
-          type={challengeDetails.ChallengeID}
+          type={challengeDetails.GameType}
           name={challengeDetails.ChallengeName}
-          people={100}
+          people={challengeDetails.PlayersJoined}
           date={moment(parseInt(challengeDetails.StartDate, 10)).format(
             'D MMM, YYYY'
           )}
           wager={challengeDetails.Wager}
-          prize={10 * 100}
+          prize={challengeDetails.TotalWagerStaked}
         />
         <div className={`${styles.marginY} ${styles.marginX}`}>
           <h1 className={`${styles.subheading2} !text-gray-500`}>
@@ -134,25 +152,22 @@ function ChallengeDetails() {
           </h1>
           <ul>
             <li className={`${styles.paragraph} mt-4 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
+              - Outdoor Challenge
             </li>
             <li className={`${styles.paragraph} mt-1 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
+              - Tracker Device Should be On
             </li>
             <li className={`${styles.paragraph} mt-1 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
-            </li>
-            <li className={`${styles.paragraph} mt-1 !text-gray-500`}>
-              - Dorem ipsum dolor sit amet
+              - Malpractices will not be encouraged
             </li>
           </ul>
         </div>
-        <div className={`${styles.marginY} ${styles.marginX}`}>
+        {/* <div className={`${styles.marginY} ${styles.marginX}`}>
           <h1 className={`${styles.subheading2} !text-gray-500 mb-4`}>
             People Joined
           </h1>
           <img src={avatargrp2} alt="" />
-        </div>
+        </div> */}
 
         <div className={`${styles.marginY} ${styles.marginX} relative`}>
           <img src={targetbg} alt="" className="w-full" />

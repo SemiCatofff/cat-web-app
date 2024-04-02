@@ -1,21 +1,29 @@
-import { cardImg, optionBtn, award, avatargrp } from '../../assets/images'
+import { cardImg, optionBtn, award, avatargrp} from '../../assets/images'
+import card2 from "../../assets/images/card2.png"
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router'
 
-const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
+const ChallengeCard = ({ id, name, date, people, wager, prize, type, active }) => {
   const navigate = useNavigate()
   const handleOnclick = () => {
-    navigate(`/details/${id}`)
+    if(active){
+      navigate(`/challenge/${id}`)
+    }
+    else{
+      navigate(`/details/${id}`)
+    } 
   }
+
+
   return (
     <>
       <div className="relative w-full cursor-pointer" onClick={handleOnclick}>
-        <img src={cardImg} alt="" className="w-full" />
+        <img src={type=== "Steps"? cardImg : card2} alt="" className="w-full h-[400px]" />
         <div className={``}>
           <div className={`absolute top-10 w-full px-8`}>
             <div className={`${styles.flexBetween}`}>
               <div
-                className={`${styles.caption2} !text-black transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex`}
+                className={`${styles.caption2} !text-black bg-transparent py-2 my-auto rounded-xl text-center px-2 flex`}
               >
                 <img src={avatargrp} alt="" />+ {people} members
               </div>
