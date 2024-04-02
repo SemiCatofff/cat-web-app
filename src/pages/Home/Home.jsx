@@ -2,9 +2,11 @@ import styles from '../../styles/style'
 import { homeHeader, filter, search } from '../../assets/images'
 import { ChallengeCard } from '../../components'
 import { useEffect, useState } from 'react'
-import { getOngoingChallenges } from '../../utils/ApiCalls'
+import { getOngoingChallenges, getUserChallenges, getUserDetails } from '../../utils/ApiCalls'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [challenges, setChallenges] = useState([
@@ -15,44 +17,49 @@ const Home = () => {
       StartDate: '2024-04-01',
       Wager: 10,
     },
-    {
-      PlayersJoined: 1,
-      ChallengeID: '2',
-      ChallengeName: 'Solo Tournament',
-      StartDate: '2024-04-01',
-      Wager: 10,
-    },
-    {
-      PlayersJoined: 1,
-      ChallengeID: '3',
-      ChallengeName: 'Solo Tournament',
-      StartDate: '2024-04-01',
-      Wager: 10,
-    },
   ])
+
+  const [active, setActive] = useState([])
+  const [userInfo, setUserInfo] = useState([])
+  const navigate = useNavigate()
 
   const getChalData = async (filter) => {
     const output = await getOngoingChallenges(filter, 1, 10)
-    if (output.success && output.data.length > 0) {
+    if (output.success) {
       setChallenges(output.data)
     }
   }
 
+  const userChallenges = async ()=>{
+    const output = await getUserChallenges()
+      const activeChallenges = output.map((item)=> item.ChallengeID)
+      setActive(activeChallenges)
+
+  }
+
+  const userData = async () =>{
+    const output = await getUserDetails()
+    setUserInfo(output)
+    localStorage.setItem('profile', output.ProfilePicture)
+  }
+
   useEffect(() => {
+    userData()
     getChalData('all')
+    userChallenges()
   }, [])
 
   return (
     <>
-      <div className={`${styles.marginX} ${styles.marginY} flex `}>
+      <div className={`${styles.marginX} ${styles.marginY} flex `} onClick={()=>{navigate('/dashboard')}}>
         <img
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={userInfo.ProfilePicture}
           alt="pp"
           className="rounded-full object-cover mr-3 w-12 h-12"
         />
         <div>
           <p className={`${styles.heading2} !text-black`}>
-            Hey <span className="!text-purple-600">Alice!</span>
+            Hey <span className="!text-purple-600">{userInfo.UserName}!</span>
           </p>
           <p>Let's the game Begin ! 🔥</p>
         </div>
@@ -73,14 +80,19 @@ const Home = () => {
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
+
+             !item.IsStarted &&
             <ChallengeCard
               id={item.ChallengeID}
-              type={'Fitness'}
+              type={item.GameType}
               name={item.ChallengeName}
-              people={item.PlayersJoined}
-              date={item.StartDate}
+              people={item.PlayerJoined}
+              date= {moment(parseInt(item.StartDate, 10)).format(
+                'D MMM, YYYY HH.mm'
+              )}
               wager={item.Wager}
-              prize={item.Wager * 100}
+              prize={item.CurrentPool}
+              active= {active.includes(item.ChallengeID)}
             />
           )
         })}

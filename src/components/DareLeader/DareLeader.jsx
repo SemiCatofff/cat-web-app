@@ -2,6 +2,9 @@ import React from 'react'
 import profile from '../../assets/images/prof.png'
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router-dom'
+import discord from '../../assets/images/dis.png'
+import ig from '../../assets/images/in.png'
+import tg from '../../assets/images/tg.png'
 
 const calculateHeight = (steps, maxSteps) => {
   const maxHeight = 260
@@ -24,7 +27,7 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
     </div>
   )
 }
-const DareLeader = ({ target, type }) => {
+const DareLeader = ({ target, type, isActive,ends }) => {
   const navigate = useNavigate()
 
   return (
@@ -72,18 +75,19 @@ const DareLeader = ({ target, type }) => {
       </div>
       <div className="h-[3px] w-[296px] bg-[#6F6F6F] bg-opacity-35"></div>
       <div className="flex flex-col items-center justify-center mt-[20px] gap-[10px]">
-        {/*
         
-        will be rendered based on the date conditions
-        // to be added with api integration
         
+       { !isActive?
+       <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
            Challenge Ends in
         </div>
         <div className={`${styles.heading2} !text-[#202117]`}>
-           3 day . 60 hours . 10
-        </div> */}
-
+           {ends}
+        </div>
+        </> 
+        :
+   <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
           You won 2000 credits!
         </div>
@@ -95,13 +99,26 @@ const DareLeader = ({ target, type }) => {
         >
           CLAIM
         </div>
+        </> 
+
+}
       </div>
 
-      <div className="relative w-full h-[85px] mx-4 mt-6 mb-4 rounded-box bg-[#192126] flex flex-col items-center justify-center gap-[9px]">
+      <div className="relative w-full h-[85px] mx-4 my-6 rounded-box bg-[#192126] flex items-center justify-center gap-[7%]">
         <div
           className="absolute inset-0 bg-trophy bg-right bg-no-repeat right-3"
           style={{ opacity: '80%' }}
         ></div>
+        <div
+          className={`${styles.heading2} !text-[16px] flex items-center justify-center`}
+        >
+          {' '}
+          Share
+        </div>
+        <img src={ig} alt=""></img>
+        <img src={tg} alt=""></img>
+        <img src={discord} alt=""></img>
+        {/* <img src={discord} alt=""></img> */}
       </div>
     </div>
   )

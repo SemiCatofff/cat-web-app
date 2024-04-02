@@ -24,7 +24,7 @@ function Main(props) {
   }, [dispatch])
 
   const showAppbar = routes.includes(location.pathname)
-
+  
   return (
     <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] overflow-hidden relative md:max-w-[360px]">
       {isLoggedIn ? (
@@ -32,13 +32,13 @@ function Main(props) {
           <div className="z-1">
             <Navbar />
           </div>
-          <div className="flex-grow overflow-auto h-[auto] z-10">
+          <div className="flex-grow overflow-auto h-[auto] z-10 px-3">
             {props.children}
           </div>
           <div className="absolute right-0 top-[5px]">
             <img src={el2} alt=""></img>
           </div>
-          <div className="absolute rigth-0 bottom-[0px]">
+          <div className="absolute rigth-0 bottom-[5px]">
             <img src={el1} alt=""></img>
           </div>
           {showAppbar && (
