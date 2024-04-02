@@ -3,15 +3,14 @@ import store from './redux/store/store'
 import { Provider } from 'react-redux'
 import {
   Challenge,
-  CreateChallenge,
   Dashboard,
   Home,
   Main,
   Chat,
   Fetchdetails,
 } from './pages'
-
 import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
+import CreateChallenge from './pages/CreateChallenge/CreateChallenge'
 
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
@@ -24,12 +23,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/create" element={<CreateChallenge />} />
               <Route path="/challenge/:id" element={<Challenge />} />
               <Route path="/details/:id" element={<ChallengeDetails />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/explore" element={<Fetchdetails />} />
-
+              <Route path="/create" element={<CreateChallenge />} />
               {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
           </Main>

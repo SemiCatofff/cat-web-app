@@ -32,13 +32,13 @@ function Main(props) {
           <div className="z-1">
             <Navbar />
           </div>
-          <div className="flex-grow overflow-auto h-[auto] z-10">
+          <div className="flex-grow overflow-auto h-[auto] z-10 px-3">
             {props.children}
           </div>
           <div className="absolute right-0 top-[5px]">
             <img src={el2} alt=""></img>
           </div>
-          <div className="absolute rigth-0 bottom-[0px]">
+          <div className="absolute rigth-0 bottom-[5px]">
             <img src={el1} alt=""></img>
           </div>
           {showAppbar && (

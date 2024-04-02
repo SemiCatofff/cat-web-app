@@ -8,6 +8,7 @@ import {
   setPinAPI,
 } from '../../utils/ApiCalls'
 import { useDispatch } from 'react-redux'
+import styles from '../../styles/style'
 
 function Fetchdetails() {
   const location = useLocation()
@@ -41,8 +42,22 @@ function Fetchdetails() {
   }, [dispatch])
 
   return (
-    <div className="absolute z-10 inset-0 bg-signup bg-cover bg-center"></div>
+    <div className="w-full h-full flex justify-center">
+    <div className="absolute top-[50%] flex flex-col justify-center items-center">
+    <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12"></div>
+
+      <div className="flex flex-col items-center mt-[30px] gap-[10px]">
+        <div className={`${styles.subheading} !text-[#FFFFFF] !font-regular`}>
+          Creating your account
+        </div>
+       
+      </div>
+    </div>
+  </div>
   )
 }
 
 export default Fetchdetails
+
+
+   {/* */}
