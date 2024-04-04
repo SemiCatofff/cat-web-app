@@ -63,8 +63,8 @@ function Login() {
   }
 
   const handleAuthenticationProcess = async () => {
-    const output = await authenticateAPI()
-    // const output = true;
+    // const output = await authenticateAPI()
+    const output = true;
     if (output.success) {
       const output2 = await setPinAPI()
       const output3 = await createWallet()
