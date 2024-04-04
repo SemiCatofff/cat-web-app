@@ -1,0 +1,145 @@
+import flame from '../../assets/images/flame.png'
+import React from 'react'
+import styles from '../../styles/style'
+import hippo from '../../assets/images/hippo.png'
+
+const Position = ({ type, competitors, profile }) => {
+  const Competitor = ({ profileSrc, name, steps, isUser, hval, index }) => (
+    <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
+      <div className="relative h-[85px] w-[85px] flex items-end justify-center">
+        {isUser && (
+          <img
+            src={flame}
+            className="absolute z-0 h-full w-full object-cover" // object-cover or object-scale-down based on your need
+            alt="Flame"
+          />
+        )}
+        <img
+          className="w-16 h-16 border-4 border-[#E1F076] rounded-full z-10 relative" // Tailwind's w-16 and h-16 are 4rem or 64px by default
+          src={profile}
+          alt={name}
+        />
+      </div>
+
+      <div className="flex flex-col items-center z-20">
+        <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
+        <span className={`${styles.subtext} !text-[#202117]`}>
+          {steps} Steps
+        </span>
+      </div>
+    </div>
+  )
+  const renderMatchType = () => {
+    console.log(type)
+    switch (type) {
+      case 'nvn':
+        return (
+          <div className="h-full w-full flex flex-col items-center justify-center gap-[6px]">
+            <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative">
+              <div className="absolute inset-0 bg-[#F8F8F8] bg-opacity-[85%]"></div>
+              <div className={`${styles.subheading} !text-[#4f4f4f]`}>{4}</div>
+              <div>
+                <img
+                  className="w-[30px] h-[30px] rounded-full mx-[10px]"
+                  src={profile}
+                  alt=""
+                />
+              </div>
+
+              <div className="flex-1 ml-2 mr-2">
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>name</p>
+              </div>
+              <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
+              </div>
+            </div>
+            <div className="h-[45px] w-[211px] bg-yellow rounded-[12px] px-4 flex items-center justify-center">
+              <div className={`${styles.subheading} !text-[#4f4f4f]`}>{4}</div>
+              <div>
+                <img
+                  className="w-[30px] h-[30px] rounded-full mx-[10px]"
+                  src={profile}
+                  alt=""
+                />
+              </div>
+
+              <div className="flex-1 ml-2 mr-2">
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>name</p>
+              </div>
+              <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
+              </div>
+            </div>
+            <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative">
+              <div className="absolute inset-0 bg-[#F8F8F8] bg-opacity-[85%]"></div>
+              <div className={`${styles.subheading} !text-[#4f4f4f]`}>{4}</div>
+              <div>
+                <img
+                  className="w-[30px] h-[30px] rounded-full mx-[10px]"
+                  src={profile}
+                  alt=""
+                />
+              </div>
+
+              <div className="flex-1 ml-2 mr-2">
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>name</p>
+              </div>
+              <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
+              </div>
+            </div>
+          </div>
+        )
+
+      case '1v1':
+      case '0v1':
+        return (
+          <div className="flex w-full justify-between">
+            <Competitor {...competitors[0]} />
+            <div className="w-[14%] flex justify-center items-end">
+              <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s</div>
+            </div>
+            <Competitor {...competitors[1]} />
+          </div>
+        )
+
+      case '0':
+        return (
+          <div className="h-full w-full">
+            <div
+              className={`${styles.heading2} text-[#FF725E] mx-3 my-4 flex items-center justify-center`}
+            >
+              Seems Like No One Joined In.{' '}
+            </div>
+
+            <div className="h-[75%] w-[90%] flex items-center justify-center">
+              <img src={hippo}></img>
+            </div>
+          </div>
+        )
+      default:
+        return null // or some default case
+    }
+  }
+
+  return (
+    <div className="h-[241px] mx-4 rounded-box border-[1px] border-grey flex flex-col">
+      {type != 0 && <div className="flex items-center px-3 py-3 gap-[3%]">
+        <img src={profile} className="h-[20px]"></img>
+        <div className=" gap-[-1px] w-[88%]">
+          <div className={`${styles.heading2} text-[#202117] `}>
+            Keep Going!{' '}
+          </div>
+          <div className={`${styles.subtext} !text-[#202117] !text-[12px] `}>
+            You are 80% ahead of the folks !{' '}
+          </div>
+        </div>
+
+        <img src={profile} className="h-[20px]"></img>
+      </div>}
+      {renderMatchType()}
+    </div>
+  )
+}
+
+export default Position
