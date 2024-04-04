@@ -104,6 +104,7 @@ function Challenge() {
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
           type={userPerformance.GameType}
+          game= {gameType}
         />
       )}
 
