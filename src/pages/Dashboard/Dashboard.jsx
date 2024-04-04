@@ -15,6 +15,7 @@ import {
 import { Popup } from '../../components/index'
 import { getUserDetails, getUserChallenges, createWallet, logout} from '../../utils/ApiCalls'
 import moment from 'moment'
+import ChallengeSlider from '../../components/ChallengeSlider/ChallengeSlider'
 
 const Dashboard = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -30,12 +31,10 @@ const Dashboard = () => {
     setIsPopupOpen(false)
   }
   const handleConfirmation = () => {
-    // Handle the confirmation logic here, such as going to the next screen
     setIsPopupOpen(false)
   }
 
   const getDetails = async () => {
-    //these apis don't have error states
     const output = await getUserDetails()
     setDetails(output)
    
@@ -160,9 +159,18 @@ const Dashboard = () => {
         }
         onClose={handleClosePopup}
       />
+         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
+        <p className={`${styles.heading2} !text-black`}>Your Ongoing Challenges</p>
+        <a href="" className={`${styles.paragraph} !text-black`}>
+          View All
+        </a>
+      </div>
+
+      <ChallengeSlider/>
+
       {/* history Title */}
       <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
-        <p className={`${styles.subheading} !text-black`}>History</p>
+        <p className={`${styles.heading2} !text-black`}>History</p>
         <a href="" className={`${styles.paragraph} !text-black`}>
           View All
         </a>
