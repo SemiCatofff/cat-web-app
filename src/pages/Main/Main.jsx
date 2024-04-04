@@ -49,7 +49,6 @@ function Main(props) {
         </>
       ) : (
         <div className="h-screen">
-          <div className="absolute inset-0 bg-signup bg-cover bg-center"></div>
           {location.pathname === '/explore' ? <Fetchdetails /> : <Login />}
         </div>
       )}
