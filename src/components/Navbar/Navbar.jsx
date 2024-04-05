@@ -1,8 +1,8 @@
+import { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom' // Import Link for client-side navigation
+import { getUserDetails } from '../../utils/ApiCalls'
 import { set, cross } from '../../assets/images'
 import styles from '../../styles/style'
-import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getUserDetails } from '../../utils/ApiCalls'
 
 const Navbar = () => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
@@ -23,15 +23,25 @@ const Navbar = () => {
     userData()
   }, [])
 
+  // This function both navigates to a route and closes the overlay
+  const navigateAndCloseOverlay = (path) => {
+    navigate(path)
+    toggleOverlay()
+  }
+
   return (
     <>
       <div className="w-full">
         <div
           className={`${styles.flexBetween} ${styles.paddingX} mt-6 mb-2 items-center`}
         >
-          <a href="/" className={`z-50 ${styles.heading2} !text-black`}>
+          <Link
+            to="/"
+            className={`z-50 ${styles.heading2} !text-black`}
+            onClick={toggleOverlay}
+          >
             CATOFF
-          </a>
+          </Link>
           <div className="flex justify-between items-center">
             <div
               id="menuToggle"
@@ -48,44 +58,54 @@ const Navbar = () => {
                 <div className="nav">
                   <div
                     className={`${styles.marginX} bg-white rounded-xl px-4  shadow flex`}
+                    onClick={() => navigateAndCloseOverlay('/dashboard')}
                   >
-                    <div
-                      className={`${styles.marginX} ${styles.marginY} flex `}
-                      onClick={() => {
-                        navigate('/dashboard')
-                      }}
-                    >
-                      <img
-                        src={userInfo.ProfilePicture}
-                        alt="pp"
-                        className="rounded-full object-cover mr-3 w-12 h-12"
-                      />
-                      <div>
-                        <p className={`${styles.heading2} !text-black mt-1`}>
-                          Hey{' '}
-                          <span className="!text-purple-600">
-                            {userInfo.UserName}!
-                          </span>
-                        </p>
-                        <p>Go to Dashboard</p>
-                      </div>
+                    <img
+                      src={userInfo.ProfilePicture}
+                      alt="pp"
+                      className="rounded-full object-cover mr-3 w-12 h-12"
+                    />
+                    <div>
+                      <p className={`${styles.heading2} !text-black mt-1`}>
+                        Hey{' '}
+                        <span className="!text-purple-600">
+                          {userInfo.UserName}!
+                        </span>
+                      </p>
+                      <p>Go to Dashboard</p>
                     </div>
                   </div>
                   <div
                     className={`px-4 w-full flex flex-col !text-black ${styles.heading2}`}
                   >
-                    <a className="mx-auto mt-6" href="/">
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/explore"
+                      onClick={toggleOverlay}
+                    >
                       Explore Challenge
-                    </a>
-                    <a className="mx-auto mt-6" href="/">
+                    </Link>
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/create"
+                      onClick={toggleOverlay}
+                    >
                       Create Challenge
-                    </a>
-                    <a className="mx-auto mt-6" href="/">
+                    </Link>
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/"
+                      onClick={toggleOverlay}
+                    >
                       Ongoing Challenges
-                    </a>
-                    <a className="mx-auto mt-6" href="/">
+                    </Link>
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/contact"
+                      onClick={toggleOverlay}
+                    >
                       Contact Us
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
