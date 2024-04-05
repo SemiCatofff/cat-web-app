@@ -6,7 +6,11 @@ import MultiChallenge from '../../components/MultiChallenge/MultiChallenge'
 import Chatbox from '../../components/Chatbox/Chatbox'
 import DareLeader from '../../components/DareLeader/DareLeader'
 import { useParams } from 'react-router-dom'
-import { getChallengeDashboard, getOngoingChallenges } from '../../utils/ApiCalls'
+import {
+  getChallengeDashboard,
+  getOngoingChallenges,
+  getLeaderboard,
+} from '../../utils/ApiCalls'
 import moment from 'moment'
 
 function Challenge() {
@@ -31,7 +35,19 @@ function Challenge() {
     }
   }
 
+  const [leaderBoard, setLeaderBoard] = useState([])
 
+  const fetchLeaderboard = async () => {
+    const output = await getLeaderboard(params.id)
+    if (output.success) {
+      setLeaderBoard(output.data)
+      console.log(output.data)
+    }
+  }
+
+  useEffect(() => {
+    fetchLeaderboard()
+  }, [])
 
   useEffect(() => {
     getDashboardDetails()
@@ -40,7 +56,9 @@ function Challenge() {
   return (
     <div className="flex flex-col h-auto">
       <div className="mx-4 my-2 ">
-        <div className={`${styles.caption2} !text-[#4B4B4B]`}>#{userPerformance.GameType}</div>
+        <div className={`${styles.caption2} !text-[#4B4B4B]`}>
+          #{userPerformance.GameType}
+        </div>
         <div className={`${styles.heading1} !text-[#202117] !font-semibold `}>
           {userPerformance.ChallengeName}
         </div>
@@ -49,11 +67,12 @@ function Challenge() {
             14th April, 2024
           </span>
           <span className={`${styles.paragraph} !text-[#8D8D8D]`}>
-            {'  '}Ending in {moment
-                .duration(
-                  moment(parseInt(userPerformance.EndDate)).diff(moment())
-                )
-                .humanize()}
+            {'  '}Ending in{' '}
+            {moment
+              .duration(
+                moment(parseInt(userPerformance.EndDate)).diff(moment())
+              )
+              .humanize()}
           </span>
         </div>
       </div>
@@ -111,8 +130,12 @@ function Challenge() {
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
           type={userPerformance.GameType}
-          game= {gameType}
-          item = {challenges}
+          game={gameType}
+          item={challenges}
+          leaderBoard={leaderBoard} // Pass leaderBoard as prop
+          creator={userPerformance.ChallengeCreatorUsername}
+          creatorImg={userPerformance.ChallengeCreatorImage}
+          joined ={setUserPerformance.PlayersJoined}
         />
       )}
 
@@ -121,36 +144,41 @@ function Challenge() {
           <MultiChallenge
             target={userPerformance.Target}
             type={userPerformance.GameType}
-            isActive ={userPerformance.isStarted}
-            ends ={moment
+            isActive={userPerformance.isStarted}
+            ends={moment
               .duration(
                 moment(parseInt(userPerformance.EndDate)).diff(moment())
               )
               .humanize()}
+            leaderBoard={leaderBoard}
           />
         )) ||
           (gameType === '1v1' && (
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
-              isActive ={userPerformance.isStarted}
-              ends ={moment
+              isActive={userPerformance.isStarted}
+              ends={moment
                 .duration(
                   moment(parseInt(userPerformance.EndDate)).diff(moment())
                 )
                 .humanize()}
+              leaderBoard={leaderBoard}
             />
           )) ||
           (gameType === '0v1' && (
             <DareLeader
               target={userPerformance.Target}
               type={userPerformance.GameType}
-              isActive ={userPerformance.isStarted}
-              ends ={moment
+              isActive={userPerformance.isStarted}
+              ends={moment
                 .duration(
                   moment(parseInt(userPerformance.EndDate)).diff(moment())
                 )
                 .humanize()}
+              leaderBoard={leaderBoard}
+              creator={userPerformance.ChallengeCreatorUsername}
+              creatorImg={userPerformance.ChallengeCreatorImage}
             />
           )))}
 
