@@ -9,17 +9,7 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-  const [challenges, setChallenges] = useState([
-    {
-      PlayersJoined: 1,
-      ChallengeID: '1',
-      ChallengeName: 'Solo Tournament',
-      StartDate: '2024-04-01',
-      Wager: 10,
-    },
-  ])
-
-  const [active, setActive] = useState([])
+  const [challenges, setChallenges] = useState([])
   const [userInfo, setUserInfo] = useState([])
   const navigate = useNavigate()
 
@@ -29,14 +19,6 @@ const Home = () => {
       setChallenges(output.data)
     }
   }
-
-  const userChallenges = async ()=>{
-    const output = await getUserChallenges()
-      const activeChallenges = output.map((item)=> item.ChallengeID)
-      setActive(activeChallenges)
-
-  }
-
   const userData = async () =>{
     const output = await getUserDetails()
     setUserInfo(output)
@@ -46,7 +28,6 @@ const Home = () => {
   useEffect(() => {
     userData()
     getChalData('all')
-    userChallenges()
   }, [])
 
   return (
@@ -76,7 +57,7 @@ const Home = () => {
           <img src={filter} alt="filter" className="my-auto" />
         </button>
       </div>
-      {/* Cards Section */}
+      
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
@@ -92,12 +73,11 @@ const Home = () => {
               )}
               wager={item.Wager}
               prize={item.CurrentPool}
-              active= {active.includes(item.ChallengeID)}
             />
           )
         })}
       </div>
-      {/* Create Challenge CTA */}
+      
       <div className={` ${styles.paddingX} ${styles.paddingY} mb-40`}>
         <div className="relative">
           <img src={homeHeader} alt="headerImg" className="w-full" />{' '}

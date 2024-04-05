@@ -7,6 +7,7 @@ import { getLeaderboard } from '../../utils/ApiCalls'
 import discord from '../../assets/images/dis.png'
 import ig from '../../assets/images/in.png'
 import tg from '../../assets/images/tg.png'
+import Position from '../Position/Position'
 
 const calculateHeight = (steps, maxSteps) => {
   const maxHeight = 250

@@ -12,7 +12,7 @@ import {
   yellowarrow,
 } from '../../assets/images'
 import { useParams } from 'react-router-dom'
-import { getChallenges, joinChallengeAPI } from '../../utils/ApiCalls'
+import { getChallenges, joinChallengeAPI, getUserChallenges } from '../../utils/ApiCalls'
 import moment from 'moment'
 
 function ChallengeDetails() {
@@ -20,6 +20,8 @@ function ChallengeDetails() {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirmed, setIsConfirmed] = useState(false)
   const [joinSuccess, setJoinSuccess] = useState(true)
+  const [active, setActive] = useState([])
+
 
   const navigate = useNavigate()
   const params = useParams()
@@ -32,13 +34,28 @@ function ChallengeDetails() {
       localStorage.setItem('type', output.data.ParticipationType)
     }
   }
+  const userChallenges = async ()=>{
+    const output = await getUserChallenges()
+      const activeChallenges = output.map((item)=> item.ChallengeID)
+      setActive(activeChallenges)
+
+  }
 
   useEffect(() => {
     getChallengeData()
+    userChallenges()
   }, [])
 
   const handleOpenPopup = () => {
-    setIsPopupOpen(true)
+       if(active.includes(parseInt(params.id))){
+      console.log(active)
+      navigate(`/challenge/${params.id}`)
+
+    }
+    else{
+      setIsPopupOpen(true)
+    }
+    
   }
 
   const handleClosePopup = () => {
@@ -214,7 +231,7 @@ function ChallengeDetails() {
           >
             <h1 className={`${styles.heading2} !text-black flex `}>
               {' '}
-              <span className="my-auto">JOIN NOW</span>{' '}
+              <span className="my-auto">{!active.includes(parseInt(params.id))?"JOIN NOW":"VIEW STATUS"}</span>{' '}
               <span className="-mr-2 ">
                 <img src={arrow} alt="" className="h-8 w-8 my-auto" />
               </span>{' '}
