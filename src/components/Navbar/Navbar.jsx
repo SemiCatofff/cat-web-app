@@ -1,12 +1,27 @@
-import React, { useState } from 'react'
-import { notif, set, cross } from '../../assets/images'
+import { set, cross } from '../../assets/images'
 import styles from '../../styles/style'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getUserDetails } from '../../utils/ApiCalls'
 
 const Navbar = () => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   const toggleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen)
   }
+
+  const [userInfo, setUserInfo] = useState([])
+  const navigate = useNavigate()
+
+  const userData = async () => {
+    const output = await getUserDetails()
+    setUserInfo(output)
+    localStorage.setItem('profile', output.ProfilePicture)
+  }
+
+  useEffect(() => {
+    userData()
+  }, [])
 
   return (
     <>
@@ -28,23 +43,48 @@ const Navbar = () => {
                   alt={isOverlayOpen ? 'Close' : 'Settings'}
                 />
               </button>
-              {/* Overlay */}
+
               <div className={`overlay mt-0 ${isOverlayOpen ? 'open' : ''}`}>
                 <div className="nav">
+                  <div
+                    className={`${styles.marginX} bg-white rounded-xl px-4  shadow flex`}
+                  >
+                    <div
+                      className={`${styles.marginX} ${styles.marginY} flex `}
+                      onClick={() => {
+                        navigate('/dashboard')
+                      }}
+                    >
+                      <img
+                        src={userInfo.ProfilePicture}
+                        alt="pp"
+                        className="rounded-full object-cover mr-3 w-12 h-12"
+                      />
+                      <div>
+                        <p className={`${styles.heading2} !text-black mt-1`}>
+                          Hey{' '}
+                          <span className="!text-purple-600">
+                            {userInfo.UserName}!
+                          </span>
+                        </p>
+                        <p>Go to Dashboard</p>
+                      </div>
+                    </div>
+                  </div>
                   <div
                     className={`px-4 w-full flex flex-col !text-black ${styles.heading2}`}
                   >
                     <a className="mx-auto mt-6" href="/">
-                      Explore
+                      Explore Challenge
                     </a>
                     <a className="mx-auto mt-6" href="/">
-                      Explore
+                      Create Challenge
                     </a>
                     <a className="mx-auto mt-6" href="/">
-                      Explore
+                      Ongoing Challenges
                     </a>
                     <a className="mx-auto mt-6" href="/">
-                      Explore
+                      Contact Us
                     </a>
                   </div>
                 </div>

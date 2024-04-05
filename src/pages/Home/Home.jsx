@@ -2,7 +2,11 @@ import styles from '../../styles/style'
 import { homeHeader, filter, search } from '../../assets/images'
 import { ChallengeCard } from '../../components'
 import { useEffect, useState } from 'react'
-import { getOngoingChallenges, getUserChallenges, getUserDetails } from '../../utils/ApiCalls'
+import {
+  getOngoingChallenges,
+  getUserChallenges,
+  getUserDetails,
+} from '../../utils/ApiCalls'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import moment from 'moment'
@@ -19,7 +23,7 @@ const Home = () => {
       setChallenges(output.data)
     }
   }
-  const userData = async () =>{
+  const userData = async () => {
     const output = await getUserDetails()
     setUserInfo(output)
     localStorage.setItem('profile', output.ProfilePicture)
@@ -32,7 +36,12 @@ const Home = () => {
 
   return (
     <>
-      <div className={`${styles.marginX} ${styles.marginY} flex `} onClick={()=>{navigate('/dashboard')}}>
+      <div
+        className={`${styles.marginX} ${styles.marginY} flex `}
+        onClick={() => {
+          navigate('/dashboard')
+        }}
+      >
         <img
           src={userInfo.ProfilePicture}
           alt="pp"
@@ -53,31 +62,31 @@ const Home = () => {
             placeholder="Search for challenges..."
           />
         </div>
-        <button className="w-[10%] ml-2 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto">
+        <button className=" ml-2  w-12 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto">
           <img src={filter} alt="filter" className="my-auto" />
         </button>
       </div>
-      
+
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
-
-             !item.IsStarted &&
-            <ChallengeCard
-              id={item.ChallengeID}
-              type={item.GameType}
-              name={item.ChallengeName}
-              people={item.PlayerJoined}
-              date= {moment(parseInt(item.StartDate, 10)).format(
-                'D MMM, YYYY HH.mm'
-              )}
-              wager={item.Wager}
-              prize={item.CurrentPool}
-            />
+            !item.IsStarted && (
+              <ChallengeCard
+                id={item.ChallengeID}
+                type={item.GameType}
+                name={item.ChallengeName}
+                people={item.PlayerJoined}
+                date={moment(parseInt(item.StartDate, 10)).format(
+                  'D MMM, YYYY HH.mm'
+                )}
+                wager={item.Wager}
+                prize={item.CurrentPool}
+              />
+            )
           )
         })}
       </div>
-      
+
       <div className={` ${styles.paddingX} ${styles.paddingY} mb-40`}>
         <div className="relative">
           <img src={homeHeader} alt="headerImg" className="w-full" />{' '}
