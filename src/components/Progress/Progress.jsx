@@ -7,7 +7,7 @@ import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
 
-function Progress({ value, target, prize, wager, type, game }) {
+function Progress({ value, target, prize, wager, type, game, item }) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
       #E1F076 ${(value / target) * 100}%, 
@@ -120,10 +120,11 @@ function Progress({ value, target, prize, wager, type, game }) {
         styles={styles}
       />
 
-      <div className={`${styles.heading2} !text-[16px] !text-[#202117] mx-4`}>
+     {item.filter(mem => !mem.IsStarted).length > 0 && <div className={`${styles.heading2} !text-[16px] !text-[#202117] mx-4`}>
         Explore more challenges
       </div>
-      <ChallengeSlider/>
+      }
+      <ChallengeSlider items={item.filter(mem => !mem.IsStarted)}/>
     </div>
   )
 }

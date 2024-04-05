@@ -17,8 +17,8 @@ function Main(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const authToken = sessionStorage.getItem('authToken')
-    if (authToken && location.pathname !== '/explore') {
+    const authState = sessionStorage.getItem('authProcess') === "true"
+    if (authState) {
       dispatch(setLoginState(true))
     }
   }, [dispatch])
@@ -49,7 +49,7 @@ function Main(props) {
         </>
       ) : (
         <div className="h-screen">
-          {location.pathname === '/explore' ? <Fetchdetails /> : <Login />}
+           <Login />
         </div>
       )}
     </div>
