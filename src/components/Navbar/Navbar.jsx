@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom' // Import Link for client-side navigation
+import { useNavigate, Link } from 'react-router-dom'
 import { getUserDetails } from '../../utils/ApiCalls'
-import { set, cross } from '../../assets/images'
+import { set, cross, arrowChevron } from '../../assets/images'
 import styles from '../../styles/style'
 
 const Navbar = () => {
@@ -23,7 +23,6 @@ const Navbar = () => {
     userData()
   }, [])
 
-  // This function both navigates to a route and closes the overlay
   const navigateAndCloseOverlay = (path) => {
     navigate(path)
     toggleOverlay()
@@ -57,30 +56,34 @@ const Navbar = () => {
               <div className={`overlay mt-0 ${isOverlayOpen ? 'open' : ''}`}>
                 <div className="nav">
                   <div
-                    className={`${styles.marginX} bg-white rounded-xl px-4  shadow flex`}
+                    className={`${styles.marginX} bg-white rounded-xl px-4 py-3 shadow flex justify-between `}
                     onClick={() => navigateAndCloseOverlay('/dashboard')}
                   >
-                    <img
-                      src={userInfo.ProfilePicture}
-                      alt="pp"
-                      className="rounded-full object-cover mr-3 w-12 h-12"
-                    />
-                    <div>
-                      <p className={`${styles.heading2} !text-black mt-1`}>
-                        Hey{' '}
-                        <span className="!text-purple-600">
-                          {userInfo.UserName}!
-                        </span>
-                      </p>
-                      <p>Go to Dashboard</p>
+                    <div className="flex">
+                      {' '}
+                      <img
+                        src={userInfo.ProfilePicture}
+                        alt="pp"
+                        className="rounded-full object-cover mr-3 w-12 h-12"
+                      />
+                      <div>
+                        <p className={`${styles.heading2} !text-black mt-1 `}>
+                          Hey{' '}
+                          <span className="!text-purple">
+                            {userInfo.UserName}!
+                          </span>
+                        </p>
+                        <p>Go to Dashboard</p>
+                      </div>{' '}
                     </div>
+                    <img src={arrowChevron} alt="gg" />
                   </div>
                   <div
                     className={`px-4 w-full flex flex-col !text-black ${styles.heading2}`}
                   >
                     <Link
                       className="mx-auto mt-6"
-                      to="/explore"
+                      to="/"
                       onClick={toggleOverlay}
                     >
                       Explore Challenge
@@ -94,7 +97,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       className="mx-auto mt-6"
-                      to="/"
+                      to="/dashboard"
                       onClick={toggleOverlay}
                     >
                       Ongoing Challenges

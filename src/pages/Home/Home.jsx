@@ -49,7 +49,7 @@ const Home = () => {
         />
         <div>
           <p className={`${styles.heading2} !text-black`}>
-            Hey <span className="!text-purple-600">{userInfo.UserName}!</span>
+            Hey <span className="!text-purple">{userInfo.UserName}!</span>
           </p>
           <p>Let's the game Begin ! 🔥</p>
         </div>
