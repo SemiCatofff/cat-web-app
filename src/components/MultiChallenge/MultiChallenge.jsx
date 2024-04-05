@@ -10,7 +10,8 @@ import ig from '../../assets/images/in.png'
 import tg from '../../assets/images/tg.png'
 import { getLeaderboard } from '../../utils/ApiCalls'
 
-const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
+
+const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboard }) => (
   <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
     <div className="">
       {isWinner && (
@@ -63,10 +64,9 @@ const PlayerInfo = ({ index, name, steps, prof }) => {
   )
 }
 
-const MultiChallenge = ({ target, type, isActive, ends }) => {
-  const [people, setPeople] = useState([
-   
-  ])
+const MultiChallenge = ({ target, type, isActive, ends, leaderBoard }) => {
+  const [people, setPeople] = useState(leaderBoard || []);
+
   const params = useParams()
   const fetchLeaderboard = async () => {
     const output = await getLeaderboard(params.id)

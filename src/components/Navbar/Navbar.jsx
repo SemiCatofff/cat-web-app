@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { notif, set, cross } from '../../assets/images'
 import styles from '../../styles/style'
 
+
 const Navbar = () => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   const toggleOverlay = () => {
