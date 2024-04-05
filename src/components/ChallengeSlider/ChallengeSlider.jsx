@@ -2,8 +2,9 @@ import Slider from 'react-slick'
 import challenge from '../../assets/images/challe.png'
 import { useState } from 'react'
 import styles from '../../styles/style'
+import moment from 'moment'
 
-const ChallengeSlider=() =>{
+const ChallengeSlider=({items}) =>{
     var settings = {
         infinite: false,
         speed: 500,
@@ -12,10 +13,10 @@ const ChallengeSlider=() =>{
         slidesToShow: 2.15,
         slidesToScroll: 2,
       }
-    const [items, setItems] = useState([1, 2, 2, 2, 3, 4])
+
 
     return( <div className={` slider-container overflow-hidden `}>
-    <Slider {...settings}>
+    {items.length > 0 && <Slider {...settings}>
       {items.map((item) => {
         return (
           <div className="relative w-full cursor-pointer">
@@ -26,23 +27,29 @@ const ChallengeSlider=() =>{
             />
 
             <div
-              className={`absolute top-5 left-5 bg-white rounded-[80px] h-[22px]`}
+              className={`absolute top-5 left-5 bg-white rounded-[80px] flex items-center justify-center `}
             >
-              <div className={`${styles.flexBetween} px-2 !text-[#6F6F6F]`}>
+              <div className={`${styles.flexBetween} !text-[11px] !text-[#6F6F6F] px-2 py-1`}>
                 {' '}
-                7 days
+                {moment
+                  .duration(
+                    moment(parseInt(item.EndDate)).diff(
+                      moment(parseInt(item.StartDate))
+                    )
+                  )
+                  .humanize()}
               </div>
             </div>
             <div className={`absolute bottom-5 left-5 h-[22px]`}>
-              <div className={`${styles.flexBetween} px-2 !text-[#ffffff]`}>
-                {' '}
-                Step up
+              <div className={`${styles.flexBetween} px-2 !text-[10px] !text-[#ffffff]`}>
+                {item.ChallengeName}
+                
               </div>
             </div>
           </div>
         )
       })}
-    </Slider>
+    </Slider>}
   </div>)
 }
 
