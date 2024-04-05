@@ -150,8 +150,6 @@ const createChallengeAPI = async (challengeDetails) => {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
-
-
   try {
     const response = await axios.post(
       `${BackendURL}/player`,
@@ -168,29 +166,22 @@ const createChallengeAPI = async (challengeDetails) => {
 
 //CHALLENGE JOIN FLOW4
 
-
 const joinChallengeAPI = async (challengeName) => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   let body = {
-    ChallengeID : challengeName
+    ChallengeID: challengeName,
   }
 
   try {
-    const response = await axios.post(
-      `${BackendURL}/player`,
-      body,
-      { headers }
-    )
+    const response = await axios.post(`${BackendURL}/player`, body, { headers })
     return response.data
   } catch (error) {
     return error.message
   }
 }
-
-
 
 //user dashboard page
 
@@ -256,27 +247,21 @@ const getLeaderboard = async (challengeID) => {
   }
 }
 
-const withDrawApi = async () =>{
-
+const withDrawApi = async () => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
-    const response = await axios.get(
-      `${BackendURL}/challenge/challenges`,
-      { headers }
-    )
+    const response = await axios.get(`${BackendURL}/challenge/challenges`, {
+      headers,
+    })
     return response.data
   } catch (error) {
     return error.message
   }
-
-
 }
 
-const logout = async () =>{
-
-}
+const logout = async () => {}
 export {
   redirectGoogleAuth,
   authenticateAPI,
@@ -288,9 +273,10 @@ export {
   getOngoingChallenges,
   getChallengeDashboard,
   getLeaderboard,
+  searchChallengeAPI,
   joinChallengeAPI,
   getUserChallenges,
   getUserDetails,
   logout,
-  withDrawApi
+  withDrawApi,
 }

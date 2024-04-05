@@ -6,6 +6,7 @@ import {
   getOngoingChallenges,
   getUserChallenges,
   getUserDetails,
+  searchChallengeAPI,
 } from '../../utils/ApiCalls'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -15,6 +16,7 @@ import { useNavigate } from 'react-router-dom'
 const Home = () => {
   const [challenges, setChallenges] = useState([])
   const [userInfo, setUserInfo] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
 
   const getChalData = async (filter) => {
@@ -27,6 +29,14 @@ const Home = () => {
     const output = await getUserDetails()
     setUserInfo(output)
     localStorage.setItem('profile', output.ProfilePicture)
+  }
+  const handleSearch = async () => {
+    const output = await searchChallengeAPI(searchTerm, 1, 10)
+    if (output.success) {
+      setChallenges(output.data)
+    } else {
+      alert('No challenges found with that')
+    }
   }
 
   useEffect(() => {
@@ -58,11 +68,17 @@ const Home = () => {
         <div className="w-[90%]">
           <input
             type="text"
-            className=' bg-no-repeat bg-left-center bg-[length:20px_20px] bg-[url("search)] pl-6  w-full h-12 bg-violet-100 rounded-xl shadow'
+            className="bg-no-repeat bg-left-center bg-[length:20px_20px] pl-6 w-full h-12 bg-violet-100 rounded-xl shadow"
             placeholder="Search for challenges..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           />
         </div>
-        <button className=" ml-2  w-12 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto">
+        <button
+          className="ml-2 w-12 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto"
+          onClick={handleSearch}
+        >
           <img src={filter} alt="filter" className="my-auto" />
         </button>
       </div>
@@ -70,7 +86,7 @@ const Home = () => {
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
-            !item.IsStarted && (
+            item.IsStarted && (
               <ChallengeCard
                 id={item.ChallengeID}
                 type={item.GameType}
