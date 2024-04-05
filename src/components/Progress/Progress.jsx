@@ -6,14 +6,28 @@ import bullets from '../../assets/images/bullets.svg'
 import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
+import { useEffect, useState } from 'react'
 
-function Progress({ value, target, prize, wager, type, game, item }) {
+function Progress({
+  value,
+  target,
+  prize,
+  wager,
+  type,
+  game,
+  item,
+  leaderBoard,
+  creator,
+  creatorImg,
+  joined
+}) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
       #E1F076 ${(value / target) * 100}%, 
       #555555 ${(value / target) * 100}% 100%
     )`,
   }
+
   return (
     <div className="flex flex-col mt-4 gap-[13px] ">
       <div className="h-[256px] flex justify-between mx-4 rounded-box gap-[2%]">
@@ -97,34 +111,19 @@ function Progress({ value, target, prize, wager, type, game, item }) {
       </div>
 
       <Position
-        type= {game}
-        competitors={[
-          {
-            isUser: true,
-            name: 'Lead Name',
-            steps: 100,
-            profileSrc: 'path_to_lead_profile_image',
-            hval: 80,
-            index: 1,
-          },
-          {
-            isUser: false,
-            name: 'Challenger Name',
-            steps: 1,
-            profileSrc: 'path_to_challenger_profile_image',
-            hval: 20,
-            index: 2,
-          },
-        ]}
+        type={(game !== "0v1" && leaderBoard.length < 2 )?"0": game}
         profile={profile}
         styles={styles}
-      />
+        leaderBoard={leaderBoard}
+        creator={creator} 
+        creatorImg={creatorImg}     />
 
-     {item.filter(mem => !mem.IsStarted).length > 0 && <div className={`${styles.heading2} !text-[16px] !text-[#202117] mx-4`}>
-        Explore more challenges
-      </div>
-      }
-      <ChallengeSlider items={item.filter(mem => !mem.IsStarted)}/>
+      {item.filter((mem) => !mem.IsStarted).length > 0 && (
+        <div className={`${styles.heading2} !text-[16px] !text-[#202117] mx-4`}>
+          Explore more challenges
+        </div>
+      )}
+      <ChallengeSlider items={item.filter((mem) => !mem.IsStarted)} />
     </div>
   )
 }

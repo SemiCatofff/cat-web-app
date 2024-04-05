@@ -69,41 +69,41 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
   </div>
 )
 
-const StepUpChallenge = ({ target, winner, type, isActive,ends }) => {
+const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) => {
   const navigate = useNavigate()
   const params = useParams()
-  const [leaderBoard, setLeaderBoard] = useState([])
+  const [leader, setLeader] = useState(leaderBoard || [])
 
-  const fetchLeaderboard = async () => {
-    const output = await getLeaderboard(params.id)
-    if (output.success) {
-      setLeaderBoard(output.data)
-    }
-  }
+  // const fetchLeaderboard = async () => {
+  //   const output = await getLeaderboard(params.id)
+  //   if (output.success) {
+  //     setLeaderBoard(output.data)
+  //   }
+  // }
 
-  useEffect(() => {
-    fetchLeaderboard()
-  }, [])
+  // useEffect(() => {
+  //   fetchLeaderboard()
+  // }, [])
 
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-1">
-        {leaderBoard.length >= 1 && <Competitor
+        {leader.length >= 1 && <Competitor
           isWinner={false}
-          name={leaderBoard[0].username}
-          steps={leaderBoard[0].value}
-          profileSrc={leaderBoard[0].profilePicture}
+          name={leader[0].username}
+          steps={leader[0].value}
+          profileSrc={leader[0].profilePicture}
           hval={80}
           index={1}
         />}
         <div className="w-[14%] h-[100px] flex justify-center">
           <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s </div>
         </div>
-        {leaderBoard.length === 2 &&<Competitor
+        {leader.length === 2 &&<Competitor
           isWinner={false}
-          name={leaderBoard[1].username}
-          steps={leaderBoard[1].value}
-          profileSrc={leaderBoard[1].profilePicture}
+          name={leader[1].username}
+          steps={leader[1].value}
+          profileSrc={leader[1].profilePicture}
           hval={80}
           index={2}
         />}
