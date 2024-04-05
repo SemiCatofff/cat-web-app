@@ -6,13 +6,14 @@ import MultiChallenge from '../../components/MultiChallenge/MultiChallenge'
 import Chatbox from '../../components/Chatbox/Chatbox'
 import DareLeader from '../../components/DareLeader/DareLeader'
 import { useParams } from 'react-router-dom'
-import { getChallengeDashboard } from '../../utils/ApiCalls'
+import { getChallengeDashboard, getOngoingChallenges } from '../../utils/ApiCalls'
 import moment from 'moment'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
   const [gameType, setGameType] = useState(localStorage.getItem('type'))
   const params = useParams()
+  const [challenges, setChallenges] = useState([])
   const [userPerformance, setUserPerformance] = useState({
     Target: '1',
     Value: '0',
@@ -24,7 +25,13 @@ function Challenge() {
     if (output.success) {
       setUserPerformance(output.data)
     }
+    const output2 = await getOngoingChallenges('all', 1, 10)
+    if (output2.success) {
+      setChallenges(output2.data)
+    }
   }
+
+
 
   useEffect(() => {
     getDashboardDetails()
@@ -105,6 +112,7 @@ function Challenge() {
           prize={userPerformance.TotalWagerStaked}
           type={userPerformance.GameType}
           game= {gameType}
+          item = {challenges}
         />
       )}
 
