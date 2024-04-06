@@ -78,7 +78,6 @@ const Dashboard = () => {
     else{
       deposit()
     }
-    
   }
 
   const goToDashboard = () => {
@@ -100,14 +99,16 @@ const Dashboard = () => {
     <div className={`!z-40`}>
       <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
         <h2 className={`${styles.heading1} !text-black `}>Congratulations!</h2>
+      
         <p className={`${styles.subheading2} !text-black mt-6`}>
-          
+          🎉 Request successfully registered! 🎉
         </p>
        
         <button
           className=" bg-black rounded-full py-5 mt-6 flex w-full"
           onClick={goToDashboard}
         >
+
           <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
             {' '}
             GO TO DASHBOARD{' '}
