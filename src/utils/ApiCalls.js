@@ -261,6 +261,21 @@ const withDrawApi = async () => {
   }
 }
 
+const getShareableChallengeLink = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/${challengeID}/share`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
 const logout = async () => {}
 export {
   redirectGoogleAuth,
@@ -279,4 +294,5 @@ export {
   getUserDetails,
   logout,
   withDrawApi,
+  getShareableChallengeLink,
 }
