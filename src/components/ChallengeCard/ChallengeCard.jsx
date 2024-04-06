@@ -2,11 +2,39 @@ import { cardImg, optionBtn, award, avatargrp } from '../../assets/images'
 import card2 from '../../assets/images/card2.png'
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router'
+import { getShareableChallengeLink } from '../../utils/ApiCalls'
 
 const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
   const navigate = useNavigate()
   const handleOnclick = () => {
     navigate(`/challenge/${id}`)
+  }
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      alert('Link copied to clipboard!')
+    } catch (error) {
+      alert('Failed to copy the link')
+    }
+  }
+
+  const shareChallenge = async (id) => {
+    try {
+      console.log(id)
+      const shareableLinkData = await getShareableChallengeLink(id)
+      if (shareableLinkData.success) {
+        const challengeUrl = shareableLinkData.data
+        await copyToClipboard(challengeUrl)
+        alert(
+          `Link copied to clipboard! Here's the challenge detail URL: ${challengeUrl}`
+        )
+      } else {
+        alert(shareableLinkData.message)
+      }
+    } catch (error) {
+      alert('Failed to copy the link')
+    }
   }
 
   return (
@@ -25,7 +53,13 @@ const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
               >
                 <img src={avatargrp} alt="" />+ {people} members
               </div>
-              <div className="rounded px-3 py-4  transparent-bg my-auto">
+              <div
+                className="rounded px-3 py-4  transparent-bg my-auto"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  shareChallenge()
+                }}
+              >
                 <img src={optionBtn} alt="" />
               </div>
             </div>
