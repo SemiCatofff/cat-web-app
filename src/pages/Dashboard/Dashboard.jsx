@@ -103,7 +103,7 @@ const Dashboard = () => {
           className={`flex justify-between  ${styles.paddingX} ${styles.paddingY} py-8 `}
         >
           <div
-            className={`${styles.caption1} !text-black px-4 py-2 rounded-full bg-purple-100 flex relative`}
+            className={`${styles.caption1} bg-violet-100 !text-black px-4 py-2 rounded-full bg-purple-100 flex relative`}
           >
             <span>
               <img src={star} alt="" className="" />
@@ -115,15 +115,19 @@ const Dashboard = () => {
             </span>
           </div>
           <div
-            className={`${styles.caption1} !text-black px-4 py-2 rounded-full bg-purple-100 `}
+            className={`${styles.caption1} !text-black px-4 py-2 rounded-full bg-violet-100 flex`}
           >
-            Wagered <span className="font-bold">{details.CurrentStaked}</span>
+            Wagered{' '}
+            <span className="font-bold ml-1">{details.CurrentStaked}</span>{' '}
+            <span>
+              <img src={star} alt="" className="-mt-0.5" />
+            </span>{' '}
           </div>
         </div>
 
         <div className="mx-4 pb-2">
           <img src={award2} alt="awardicon" className="mx-auto" />
-          <div className="button rounded-full bg-purple-100 pl-6 mb-4 -mt-3.5">
+          <div className="button rounded-full bg-violet-100 pl-6 mb-4 -mt-3.5">
             <h1
               className={`${styles.heading2} !text-black flex justify-between`}
             >
