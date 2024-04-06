@@ -13,18 +13,22 @@ import {
   doubleright,
 } from '../../assets/images'
 import { Popup } from '../../components/index'
-import { getUserDetails, getUserChallenges, createWallet, logout} from '../../utils/ApiCalls'
+import {
+  getUserDetails,
+  getUserChallenges,
+  createWallet,
+  logout,
+} from '../../utils/ApiCalls'
 import moment from 'moment'
 import ChallengeSlider from '../../components/ChallengeSlider/ChallengeSlider'
 import { useDispatch } from 'react-redux'
 import { setLoginState } from '../../redux/actions/actions'
 
-
 const Dashboard = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [history, setHistory] = useState([])
   const [details, setDetails] = useState([])
-  const [solTok, setSolTok] = useState("")
+  const [solTok, setSolTok] = useState('')
   const dispatch = useDispatch()
 
   const handleOpenPopup = () => {
@@ -41,8 +45,11 @@ const Dashboard = () => {
   const getDetails = async () => {
     const output = await getUserDetails()
     setDetails(output)
-   
-    let tok = output.Portfolio.length > 0? output.Portfolio[0].quantity +" "+ output.Portfolio[0].token_name: "No tokens"
+
+    let tok =
+      output.Portfolio.length > 0
+        ? output.Portfolio[0].quantity + ' ' + output.Portfolio[0].token_name
+        : 'No tokens'
     setSolTok(tok)
 
     const histor = await getUserChallenges()
@@ -53,10 +60,10 @@ const Dashboard = () => {
     getDetails()
   }, [])
 
-    const walletLogout = async () =>{
+  const walletLogout = async () => {
     sessionStorage.clear()
     dispatch(setLoginState(false))
-   }
+  }
   return (
     <>
       <div className={`${styles.paddingX}`}>
@@ -76,12 +83,13 @@ const Dashboard = () => {
               <h1 className={`${styles.paragraph} text-white text-center pt-2`}>
                 {details.UserEmail}
               </h1>
-              <h1
-                className={`${styles.paragraph} text-white text-center pt-1`}
-              >{details.WalletAddress}</h1>
-               <h1
-                className={`${styles.paragraph} text-white text-center pt-1`}
-              > {solTok}</h1>
+              <h1 className={`${styles.paragraph} text-white text-center pt-1`}>
+                {details.WalletAddress}
+              </h1>
+              <h1 className={`${styles.paragraph} text-white text-center pt-1`}>
+                {' '}
+                {solTok}
+              </h1>
             </div>
           </div>
         </div>
@@ -164,61 +172,74 @@ const Dashboard = () => {
         }
         onClose={handleClosePopup}
       />
-       
-       
-       {history.filter(item => item.IsStarted && item.IsActive).length > 0 &&  <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
-        <p className={`${styles.heading2} !text-black`}>Your Ongoing Challenges</p>
-        <a href="" className={`${styles.paragraph} !text-black`}>
-          View All
-        </a>
-      </div>}
 
-      <ChallengeSlider items ={history.filter(item => item.IsStarted && item.IsActive)}/>
-      {history.filter(item => !item.IsStarted && !item.IsActive).length > 0 &&  <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
-        <p className={`${styles.heading2} !text-black`}>History</p>
-        <a href="" className={`${styles.paragraph} !text-black`}>
-          View All
-        </a>
-      </div>}
-      <div className={`${styles.paddingX} ${styles.marginY} flex flex-col gap-[6px]`}>
-        {history.filter(item => !item.IsStarted && !item.IsActive).map((item, index) => {
-          return (
-            <div
-              className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-4 shadow`}
-            >
-              <div className="flex">
-                <div className="w-12 h-12 rounded-full bg-[#FFF5D9] text-center">
-                  <p className={`${styles.subheading} !text-black my-3.5`}>{index+1}</p>
+      {history.filter((item) => item.IsStarted && item.IsActive).length > 0 && (
+        <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
+          <p className={`${styles.heading2} !text-black`}>
+            Your Ongoing Challenges
+          </p>
+          <a href="" className={`${styles.paragraph} !text-black`}>
+            View All
+          </a>
+        </div>
+      )}
+
+      <ChallengeSlider
+        items={history.filter((item) => item.IsStarted && item.IsActive)}
+      />
+      {history.filter((item) => !item.IsStarted && !item.IsActive).length >
+        0 && (
+        <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
+          <p className={`${styles.heading2} !text-black`}>History</p>
+          <a href="" className={`${styles.paragraph} !text-black`}>
+            View All
+          </a>
+        </div>
+      )}
+      <div
+        className={`${styles.paddingX} ${styles.marginY} flex flex-col gap-[6px]`}
+      >
+        {history
+          .filter((item) => !item.IsStarted && !item.IsActive)
+          .map((item, index) => {
+            return (
+              <div
+                className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-4 shadow`}
+              >
+                <div className="flex">
+                  <div className="w-12 h-12 rounded-full bg-[#FFF5D9] text-center">
+                    <p className={`${styles.subheading} !text-black my-3.5`}>
+                      {index + 1}
+                    </p>
+                  </div>
+                  <div className="texts ml-4 my-auto">
+                    <p className={`${styles.subheading2} !text-black`}>
+                      {item.ChallengeName}
+                    </p>
+                    <p className={`${styles.caption2} !text-gray-500`}>
+                      {moment(parseInt(item.StartDate, 10)).format(
+                        'D MMM, YYYY HH.mm'
+                      )}
+                    </p>
+                  </div>
                 </div>
-                <div className="texts ml-4 my-auto">
-                  <p className={`${styles.subheading2} !text-black`}>
-                    {item.ChallengeName}
-                  </p>
-                  <p className={`${styles.caption2} !text-gray-500`}>
-                  {moment(parseInt(item.StartDate, 10)).format(
-                'D MMM, YYYY HH.mm'
-              )}
-                  
-                  </p>
+
+                <div className="flex">
+                  <div className="texts ml-4 my-auto">
+                    <p className={`${styles.subheading2} !text-amber-400`}>
+                      - {item.WagerStaked}
+                    </p>
+                    <p
+                      className={`${styles.caption1} !text-gray-500 flex justify-center`}
+                    >
+                      {' '}
+                      {/* {item.Rank} */}
+                    </p>
+                  </div>
                 </div>
               </div>
-
-              <div className="flex">
-                <div className="texts ml-4 my-auto">
-                  <p className={`${styles.subheading2} !text-amber-400`}>
-                    - {item.WagerStaked}
-                  </p>
-                  <p
-                    className={`${styles.caption1} !text-gray-500 flex justify-center`}
-                  >
-                    {' '}
-                    {/* {item.Rank} */}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
       {/* Buttons */}
       <div className={`${styles.paddingX} ${styles.marginY} mb-40`}>
@@ -231,12 +252,15 @@ const Dashboard = () => {
             <span className="my-auto">INVITE YOUR FRIEND</span>{' '}
           </h1>
         </div>
-        <div className="button rounded-full bg-black px-8 py-5 my-auto mb-4">
+        <div
+          className="button rounded-full bg-black px-8 py-5 my-auto mb-4"
+          onClick={walletLogout}
+        >
           <h1 className={`${styles.heading2}  flex justify-center`}>
             {' '}
-            <span className="my-auto" onClick={walletLogout}> LOGOUT </span>{' '}
+            <span className="my-auto text-yellow"> LOGOUT </span>{' '}
             <span className="-mr-2 ">
-              <img src={arrow} alt="" className="h-8 w-8 my-auto" />
+              <img src={yellowarrow} alt="" className="h-8 w-8 my-auto" />
             </span>{' '}
           </h1>
         </div>
