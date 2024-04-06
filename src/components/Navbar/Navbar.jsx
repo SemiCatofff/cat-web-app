@@ -4,6 +4,7 @@ import { getUserDetails } from '../../utils/ApiCalls'
 import { set, cross, arrowChevron } from '../../assets/images'
 import styles from '../../styles/style'
 
+
 const Navbar = () => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   const toggleOverlay = () => {

@@ -23,12 +23,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/challenge/:id" element={<Challenge />} />
-              <Route path="/details/:id" element={<ChallengeDetails />} />
+              <Route path="/details/:id" element={<Challenge />} />
+              <Route path="/challenge/:id" element={<ChallengeDetails />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/explore" element={<Fetchdetails />} />
               <Route path="/create" element={<CreateChallenge />} />
-              {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
           </Main>
         </Router>

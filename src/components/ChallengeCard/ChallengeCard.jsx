@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
   const navigate = useNavigate()
   const handleOnclick = () => {
-    navigate(`/details/${id}`)
+    navigate(`/challenge/${id}`)
   }
 
   return (

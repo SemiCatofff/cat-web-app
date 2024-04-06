@@ -16,12 +16,16 @@ import { Popup } from '../../components/index'
 import { getUserDetails, getUserChallenges, createWallet, logout} from '../../utils/ApiCalls'
 import moment from 'moment'
 import ChallengeSlider from '../../components/ChallengeSlider/ChallengeSlider'
+import { useDispatch } from 'react-redux'
+import { setLoginState } from '../../redux/actions/actions'
+
 
 const Dashboard = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [history, setHistory] = useState([])
   const [details, setDetails] = useState([])
   const [solTok, setSolTok] = useState("")
+  const dispatch = useDispatch()
 
   const handleOpenPopup = () => {
     setIsPopupOpen(true)
@@ -49,8 +53,9 @@ const Dashboard = () => {
     getDetails()
   }, [])
 
-  const walletCreation = async () =>{
-    const output = await logout();
+    const walletLogout = async () =>{
+    sessionStorage.clear()
+    dispatch(setLoginState(false))
    }
   return (
     <>
@@ -159,26 +164,24 @@ const Dashboard = () => {
         }
         onClose={handleClosePopup}
       />
-         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
+       
+       
+       {history.filter(item => item.IsStarted && item.IsActive).length > 0 &&  <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
         <p className={`${styles.heading2} !text-black`}>Your Ongoing Challenges</p>
         <a href="" className={`${styles.paragraph} !text-black`}>
           View All
         </a>
-      </div>
+      </div>}
 
-      <ChallengeSlider/>
-
-      {/* history Title */}
-      <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
+      <ChallengeSlider items ={history.filter(item => item.IsStarted && item.IsActive)}/>
+      {history.filter(item => !item.IsStarted && !item.IsActive).length > 0 &&  <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
         <p className={`${styles.heading2} !text-black`}>History</p>
         <a href="" className={`${styles.paragraph} !text-black`}>
           View All
         </a>
-      </div>
-
-      {/* History */}
+      </div>}
       <div className={`${styles.paddingX} ${styles.marginY} flex flex-col gap-[6px]`}>
-        {history.map((item, index) => {
+        {history.filter(item => !item.IsStarted && !item.IsActive).map((item, index) => {
           return (
             <div
               className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-4 shadow`}
@@ -231,7 +234,7 @@ const Dashboard = () => {
         <div className="button rounded-full bg-black px-8 py-5 my-auto mb-4">
           <h1 className={`${styles.heading2}  flex justify-center`}>
             {' '}
-            <span className="my-auto" onClick={walletCreation}> LOGOUT </span>{' '}
+            <span className="my-auto" onClick={walletLogout}> LOGOUT </span>{' '}
             <span className="-mr-2 ">
               <img src={arrow} alt="" className="h-8 w-8 my-auto" />
             </span>{' '}

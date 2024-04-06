@@ -1,10 +1,12 @@
 import flame from '../../assets/images/flame.png'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../../styles/style'
 import hippo from '../../assets/images/hippo.png'
+import batch from '../../assets/images/batch.png'
+import move from '../../assets/images/move.png'
 
-const Position = ({ type, competitors, profile }) => {
-  const Competitor = ({ profileSrc, name, steps, isUser, hval, index }) => (
+const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
+  const Competitor = ({ profileSrc, name, steps, isUser }) => (
     <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
       <div className="relative h-[85px] w-[85px] flex items-end justify-center">
         {isUser && (
@@ -16,7 +18,7 @@ const Position = ({ type, competitors, profile }) => {
         )}
         <img
           className="w-16 h-16 border-4 border-[#E1F076] rounded-full z-10 relative" // Tailwind's w-16 and h-16 are 4rem or 64px by default
-          src={profile}
+          src={profileSrc}
           alt={name}
         />
       </div>
@@ -30,7 +32,6 @@ const Position = ({ type, competitors, profile }) => {
     </div>
   )
   const renderMatchType = () => {
-    console.log(type)
     switch (type) {
       case 'nvn':
         return (
@@ -92,14 +93,49 @@ const Position = ({ type, competitors, profile }) => {
         )
 
       case '1v1':
-      case '0v1':
         return (
           <div className="flex w-full justify-between">
-            <Competitor {...competitors[0]} />
+            <Competitor
+              profileSrc={
+                leaderBoard.length > 0 ? leaderBoard[0].profilePicture : ''
+              }
+              name={leaderBoard.length > 0 ? leaderBoard[0].username : ''}
+              steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
+              isUser={''}
+            />
             <div className="w-[14%] flex justify-center items-end">
               <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s</div>
             </div>
-            <Competitor {...competitors[1]} />
+            <Competitor
+              profileSrc={
+                leaderBoard.length > 0 ? leaderBoard[1].profilePicture : ''
+              }
+              name={leaderBoard.length > 0 ? leaderBoard[1].username : ''}
+              steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
+              isUser={''}
+            />
+          </div>
+        )
+      case '0v1':
+        return (
+          <div className="flex w-full justify-between">
+            <Competitor
+              profileSrc={
+                leaderBoard.length > 0 ? leaderBoard[0].profilePicture : ''
+              }
+              name={leaderBoard.length > 0 ? leaderBoard[0].username : ''}
+              steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
+              isUser={''}
+            />
+            <div className="w-[14%] flex justify-center items-end">
+              <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s</div>
+            </div>
+            <Competitor
+              profileSrc={creatorImg}
+              name={creator}
+              steps={0}
+              isUser={''}
+            />
           </div>
         )
 
@@ -107,7 +143,7 @@ const Position = ({ type, competitors, profile }) => {
         return (
           <div className="h-full w-full">
             <div
-              className={`${styles.heading2} text-[#FF725E] mx-3 my-4 flex items-center justify-center`}
+              className={`${styles.heading2} !text-[#FF725E] mx-3 my-4 flex items-center justify-center`}
             >
               Seems Like No One Joined In.{' '}
             </div>
@@ -124,19 +160,21 @@ const Position = ({ type, competitors, profile }) => {
 
   return (
     <div className="h-[241px] mx-4 rounded-box border-[1px] border-grey flex flex-col">
-      {type != 0 && <div className="flex items-center px-3 py-3 gap-[3%]">
-        <img src={profile} className="h-[20px]"></img>
-        <div className=" gap-[-1px] w-[88%]">
-          <div className={`${styles.heading2} text-[#202117] `}>
-            Keep Going!{' '}
+      {type != 0 && (
+        <div className="flex items-center px-3 py-3 gap-[3%]">
+          <img src={batch} className="h-[30px]"></img>
+          <div className=" gap-[1px] w-[88%]">
+            <div className={`${styles.heading2} !text-[#202117] `}>
+              Keep Going!{' '}
+            </div>
+            <div className={`${styles.subtext} !text-[#202117] !text-[12px] `}>
+              You are 80% ahead of the folks !{' '}
+            </div>
           </div>
-          <div className={`${styles.subtext} !text-[#202117] !text-[12px] `}>
-            You are 80% ahead of the folks !{' '}
-          </div>
-        </div>
 
-        <img src={profile} className="h-[20px]"></img>
-      </div>}
+          <img src={move} className="h-[40px]"></img>
+        </div>
+      )}
       {renderMatchType()}
     </div>
   )
