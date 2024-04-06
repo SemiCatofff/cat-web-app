@@ -152,7 +152,7 @@ const createChallengeAPI = async (challengeDetails) => {
 
   try {
     const response = await axios.post(
-      `${BackendURL}/player`,
+      `${BackendURL}/challenge/challenges`,
       challengeDetails,
       { headers }
     )
@@ -302,4 +302,5 @@ export {
   logout,
   withDrawApi,
   getShareableChallengeLink,
+  createChallengeAPI
 }
