@@ -3,54 +3,10 @@ import CustomButton from "../ui/Button";
 import { yellowarrow } from "../../assets/images";
 
 const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
-    // const [challenge,setChallenge]=useState({
-    //     challengeName:"",
-    //     description:"",
-    //     category: "Select a Category",
-    //     startDate:new Date(),
-    //     endDate:new Date(),
-    //     challengeType:"",
-    // });
-
-    // const handleRadioChange=(e)=>{
-    //     setChallenge({
-    //         ...challenge,
-    //         challengeType:e.target.value
-    //     });
-    // }
-
-    // const handleSetStartDate=(date)=>{  
-    //     setChallenge({
-    //         ...challenge,
-    //         startDate:date
-    //     })  
-    // }
-
-    // const handleSetEndDate=(date)=>{    
-    //     setChallenge({
-    //         ...challenge,
-    //         endDate:date
-    //     })
-    // }
-
-    // const handleSubmit=(e)=>{
-    //     e.preventDefault();
-    //     setStep(2);
-    // }
-
     const onSubmit = (data) => {
         setStep(2);
     }
-
-    // const handleOptionChange=(e)=>{
-    //     setChallenge({
-    //         ...challenge,
-    //         category:e.target.value
-    //     })
-    // }
-
-
-
+    
   return (
     <div className=" px-4">
         <h1 className=' text-xl text-purple font-semibold my-4'>
@@ -60,10 +16,9 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
             <Input 
                 label='Challenge Name' 
                 placeholder='Enter Challenge Name' 
-                errorName="challengeName"
+                errorName="ChallengeName"
                 errors={errors}
-                footerText="This is a sample footer text"
-                {...register("challengeName", { required: "This challenge Name is required"})} 
+                {...register("ChallengeName", { required: "This challenge Name is required"})} 
             />
 
             <Input 
@@ -71,23 +26,16 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
                 placeholder='Enter Challenge Description' 
                 errorName="description"
                 errors={errors}
-                footerText="This is a sample footer text"
-                {...register("description", { required: "This challenge Description is required"})} 
+                footerText=""
+                {...register("ChallengeDescription", { required: "This challenge Description is required"})} 
             />
-            {/* <Input 
-                label='Requirements' 
-                placeholder='Enter Requirement' 
-                id='requirements' 
-                value={challenge.requirements} 
-                onChange={handleChange}
-                footerText={""}
-            /> */}
+
             <div className=" flex justify-between gap-1">
                 <DatePickerInput
                 label={"Start Date"}
                 errorName="startDate"
                 errors={errors}
-                {...register("startDate",{
+                {...register("StartDate",{
                     required: "StartDate is required"
                 })}></DatePickerInput>
 
@@ -95,7 +43,7 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
                 label={"End Date"}
                 errorName="endDate"
                 errors={errors}
-                {...register("endDate",{
+                {...register("EndDate",{
                     required: "EndDate is required"
                 })}></DatePickerInput>
 
@@ -103,23 +51,22 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
             <SelectInput
                 label='Select Category'
                 id='category'
-                options={["Option 1","Option 2","Option 3"]}
-                {...register("category")}
+                options={["Steps","Calories"]}
+                {...register("GameType")}
             />
             <div>
             <label className=" text-sm text-[#666666] font-semibold my-2">Challenge Type</label>
             <div className="grid grid-cols-2 gap-3">
-            {["0v1 Challenge","1v1 Challenge","Multiplayer Challenge"].map((value, index)=>{
-                return (
-                    <RadioInput
-                        key={index}
-                        label={value}
-                        {...register("challengeType", { required: "Challange type is required"})} 
-                        // selectedValue={challenge.challengeType}
-                        // handleInputChange={handleRadioChange}
-                    />
-                )
-            })}
+            {["0v1 Challenge", "1v1 Challenge", "Multiplayer Challenge"].map((value, index) => {
+        return (
+          <RadioInput
+            key={index}
+            label={value}
+            value={index} // Associate each radio button with its label as its value
+            {...register("challengeType", { required: "Challenge type is required" })}
+          />
+        );
+      })}
             </div>
             {errors.challengeType&&<p className=" text-sm text-red-500">{errors.challengeType.message}</p>}
             </div>
