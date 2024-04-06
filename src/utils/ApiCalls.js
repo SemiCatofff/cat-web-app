@@ -247,12 +247,17 @@ const getLeaderboard = async (challengeID) => {
   }
 }
 
-const withDrawApi = async () => {
+const withDrawApi = async (amount) => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
+  let body = {
+  amount: 1,
+    currency: "SOL"
+}
+
   try {
-    const response = await axios.get(`${BackendURL}/challenge/challenges`, {
+    const response = await axios.get(`${BackendURL}/user/withdraw`, body, {
       headers,
     })
     return response.data
@@ -275,6 +280,8 @@ const getShareableChallengeLink = async (challengeID) => {
     return error.message
   }
 }
+
+
 
 const logout = async () => {}
 export {
