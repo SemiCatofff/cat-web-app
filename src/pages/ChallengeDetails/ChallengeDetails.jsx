@@ -49,7 +49,7 @@ function ChallengeDetails() {
   const handleOpenPopup = () => {
        if(active.includes(parseInt(params.id))){
       console.log(active)
-      navigate(`/challenge/${params.id}`)
+      navigate(`/details/${params.id}`)
 
     }
     else{
