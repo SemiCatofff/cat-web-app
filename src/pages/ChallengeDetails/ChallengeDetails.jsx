@@ -12,7 +12,11 @@ import {
   yellowarrow,
 } from '../../assets/images'
 import { useParams } from 'react-router-dom'
-import { getChallenges, joinChallengeAPI, getUserChallenges } from '../../utils/ApiCalls'
+import {
+  getChallenges,
+  joinChallengeAPI,
+  getUserChallenges,
+} from '../../utils/ApiCalls'
 import moment from 'moment'
 
 function ChallengeDetails() {
@@ -21,7 +25,6 @@ function ChallengeDetails() {
   const [isConfirmed, setIsConfirmed] = useState(false)
   const [joinSuccess, setJoinSuccess] = useState(true)
   const [active, setActive] = useState([])
-
 
   const navigate = useNavigate()
   const params = useParams()
@@ -34,11 +37,10 @@ function ChallengeDetails() {
       localStorage.setItem('type', output.data.ParticipationType)
     }
   }
-  const userChallenges = async ()=>{
+  const userChallenges = async () => {
     const output = await getUserChallenges()
-      const activeChallenges = output.map((item)=> item.ChallengeID)
-      setActive(activeChallenges)
-
+    const activeChallenges = output.map((item) => item.ChallengeID)
+    setActive(activeChallenges)
   }
 
   useEffect(() => {
@@ -47,15 +49,12 @@ function ChallengeDetails() {
   }, [])
 
   const handleOpenPopup = () => {
-       if(active.includes(parseInt(params.id))){
+    if (active.includes(parseInt(params.id))) {
       console.log(active)
       navigate(`/details/${params.id}`)
-
-    }
-    else{
+    } else {
       setIsPopupOpen(true)
     }
-    
   }
 
   const handleClosePopup = () => {
@@ -70,7 +69,7 @@ function ChallengeDetails() {
     if (output.success) {
       setIsConfirmed(true)
     } else {
-      //error popup here
+      alert('Joining Failed')
     }
   }
 
@@ -90,7 +89,7 @@ function ChallengeDetails() {
         <p className={`${styles.subheading2} !text-black mt-6`}>
           🎉 Processing Your Request! 🎉
         </p>
-       
+
         <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12 mx-auto mt-8"></div>
       </div>
     </div>
@@ -121,7 +120,10 @@ function ChallengeDetails() {
       <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
         <h2 className={`${styles.heading1} !text-black px-8`}>
           Confirm Payment Of{' '}
-          <span className="text-purple-500"> {challengeDetails.Wager} Credits?</span>{' '}
+          <span className="text-purple-500">
+            {' '}
+            {challengeDetails.Wager} Credits?
+          </span>{' '}
         </h2>
         <img src={graphic1} alt="" className="mx-auto mt-10" />
         <div
@@ -134,7 +136,7 @@ function ChallengeDetails() {
           <p
             className={`text-center my-auto ml-8 mb-4 !text-black ${styles.heading2}`}
           >
-             CONFIRM
+            CONFIRM
           </p>
         </div>
       </div>
@@ -231,7 +233,11 @@ function ChallengeDetails() {
           >
             <h1 className={`${styles.heading2} !text-black flex `}>
               {' '}
-              <span className="my-auto">{!active.includes(parseInt(params.id))?"JOIN NOW":"VIEW STATUS"}</span>{' '}
+              <span className="my-auto">
+                {!active.includes(parseInt(params.id))
+                  ? 'JOIN NOW'
+                  : 'VIEW STATUS'}
+              </span>{' '}
               <span className="-mr-2 ">
                 <img src={arrow} alt="" className="h-8 w-8 my-auto" />
               </span>{' '}
