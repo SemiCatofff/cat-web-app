@@ -64,6 +64,15 @@ const Dashboard = () => {
     sessionStorage.clear()
     dispatch(setLoginState(false))
   }
+
+  const copyInviteLink = async () => {
+    try {
+      await navigator.clipboard.writeText('https://staging.catoff.xyz')
+      alert('Link copied to clipboard!')
+    } catch (err) {
+      alert('failed to Share')
+    }
+  }
   return (
     <>
       <div className={`${styles.paddingX}`}>
@@ -247,7 +256,10 @@ const Dashboard = () => {
       </div>
       {/* Buttons */}
       <div className={`${styles.paddingX} ${styles.marginY} mb-40`}>
-        <div className="button rounded-full bg-yellow px-8 py-5 my-auto mb-2">
+        <div
+          className="button rounded-full bg-yellow px-8 py-5 my-auto mb-2"
+          onClick={copyInviteLink}
+        >
           <h1 className={`${styles.heading2} !text-black flex justify-center`}>
             {' '}
             <span className="mr-2 ">
