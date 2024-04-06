@@ -1,4 +1,5 @@
 
+import { info } from "../../assets/images";
 import React,{forwardRef} from "react";
 
 // export const RadioInput = ({label, inputs, selectedInput, handleInputChange}) => {
@@ -32,7 +33,7 @@ export const Input = forwardRef(({ type="text", label, errorName, errors, footer
   <div className=" flex flex-col gap-2">
     <label className=" text-sm text-[#666666] font-semibold">{label}</label>
     <input type={type} className="rounded-md bg-[#F2EFFF] placeholder:text-[#666666] text-base w-full px-2 py-3 outline-none" ref={ref} {...props} />
-    {errors[errorName]?<p className=" text-sm text-red-500">{errors[errorName].message}</p>:<p className=" text-sm text-[#666666]">{footerText}</p>}
+    {errors[errorName]?<p className=" text-sm text-red-500">{errors[errorName].message}</p>:<p className=" flex gap-1 text-sm text-[#666666]"><img src={info} alt="info" />{footerText}</p>}
   </div>
 ));
 
@@ -42,8 +43,8 @@ export const DatePickerInput = forwardRef(({ label, errors, errorName, ...props 
     <div className="relative w-[95%]">
       <label className="text-sm text-[#666666] font-semibold">{label}</label>
       <input
-        type="date"
-        className="w-[100%] px-2 py-3 rounded-md bg-[#F2EFFF] focus:outline-none focus:border-purple focus:ring focus:ring-[#C7B5DE]"
+        type="datetime-local"
+        className="w-36 px-2 py-3 rounded-md bg-[#F2EFFF] focus:outline-none focus:border-purple focus:ring focus:ring-[#C7B5DE]"
         placeholder="Select a date"
         ref={ref}
         {...props}
@@ -53,7 +54,7 @@ export const DatePickerInput = forwardRef(({ label, errors, errorName, ...props 
   );
 });
 
-export default DatePickerInput;
+
 
 
 export const RadioInput = forwardRef(({ label, handleInputChange, ...props }, ref) => {
