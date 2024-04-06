@@ -1,5 +1,6 @@
-import { Input, RadioInput, DatePickerInput,SelectInput, TestInput } from "../ui/Input";
-import { PurpleOutlineButton, PurpleButton } from "../ui/Button";
+import { Input, RadioInput, DatePickerInput,SelectInput } from "../ui/Input";
+import CustomButton from "../ui/Button";
+import { yellowarrow } from "../../assets/images";
 
 const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
     // const [challenge,setChallenge]=useState({
@@ -48,9 +49,11 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
     //     })
     // }
 
+
+
   return (
     <div className=" px-4">
-        <h1 className=' text-xl text-purple font-semibold mb-3'>
+        <h1 className=' text-xl text-purple font-semibold my-4'>
             Create a new Challenge
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className=' relative flex flex-col gap-4 h-[80vh]'>
@@ -106,7 +109,7 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
             <div>
             <label className=" text-sm text-[#666666] font-semibold my-2">Challenge Type</label>
             <div className="grid grid-cols-2 gap-3">
-            {["Dare Challenge","P2P Challenge","Group Challenge"].map((value, index)=>{
+            {["0v1 Challenge","1v1 Challenge","Multiplayer Challenge"].map((value, index)=>{
                 return (
                     <RadioInput
                         key={index}
@@ -122,13 +125,14 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
             </div>
 
             <div className=" lg:pb-10 h-full w-full pt-4">
-            <div className=" flex  justify-between gap-2 items-end px-2">
-                <PurpleOutlineButton>
+            <div className=" flex  justify-between gap-2 items-end px-2 pb-24">
+                <CustomButton textColor="black" buttonColor="[#F2EFFF]" type="button">
                     Cancel
-                </PurpleOutlineButton> 
-                <PurpleButton className=" opacity-80" onClick={()=>console.log("test onclick")}>
+                </CustomButton> 
+                <CustomButton textColor="yellow" buttonColor="black" type="submit">
                     Next
-                </PurpleButton>
+                    <img src={yellowarrow} alt="next-arrow" />
+                </CustomButton>
             </div>
             </div>
         </form>
