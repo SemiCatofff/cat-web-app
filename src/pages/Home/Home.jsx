@@ -71,8 +71,23 @@ const Home = () => {
             className="bg-no-repeat bg-left-center bg-[length:20px_20px] pl-6 w-full h-12 bg-violet-100 rounded-xl shadow"
             placeholder="Search for challenges..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+            onChange={async (e) => {
+              setSearchTerm(e.target.value)
+              if (e.target.value.trim() !== '') {
+                const output = await searchChallengeAPI(
+                  e.target.value.trim(),
+                  1,
+                  10
+                )
+                if (output.success) {
+                  setChallenges(output.data)
+                } else {
+                  alert('No challenges found with that')
+                }
+              } else {
+                getChalData('all')
+              }
+            }}
           />
         </div>
         <button
