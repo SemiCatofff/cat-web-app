@@ -46,12 +46,13 @@ function Login() {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
     const jwt = queryParams.get('jwt')
-    if (jwt) {
+    if (jwt && !sessionStorage.getItem("authProcess")) {
+      sessionStorage.setItem("authProcess", "false")
       setIsPopupOpen(true)
       sessionStorage.setItem('authToken', jwt)
       handleAuthenticationProcess()
     }
-  }, [location, dispatch])
+  }, [])
 
   const handleGoogleLogin = async () => {
     try {
@@ -63,14 +64,13 @@ function Login() {
   }
 
   const handleAuthenticationProcess = async () => {
-    // const output = await authenticateAPI()
-    const output = true;
-    if (output.success) {
-      const output2 = await setPinAPI()
-      const output3 = await createWallet()
+    const output = await authenticateAPI()
+    if (output.authentication.status === 'success' && output.wallet.status === 'success') {
       const refreshToken = await getRefreshTokenAPI()
-      if (refreshToken.status === 'success') {
+      if (refreshToken.status === "success") {
         dispatch(setLoginState(true))
+        navigate('/')
+        sessionStorage.setItem("authProcess", "true")
       } else {
         setIsPopupOpen(false)
       }
@@ -83,7 +83,7 @@ function Login() {
     switch (currentStep) {
       case 1:
         return (
-          <div className="content z-50">
+          <div className="content z-1">
             <div
               className={`${styles.heading1} text-center mt-10 !text-black px-10`}
             >
@@ -109,7 +109,7 @@ function Login() {
         )
       case 2:
         return (
-          <div className="content z-50">
+          <div className="content z-1">
             <div
               className={`${styles.heading1} text-center mt-10 !text-black px-12`}
             >

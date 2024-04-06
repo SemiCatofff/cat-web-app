@@ -17,7 +17,7 @@ const authenticateAPI = async () => {
   }
   try {
     const response = await axios.post(
-      `${BackendURL}/oktoProxy/authenticate`,
+      `${BackendURL}/oktoProxy/authPinCreate`,
       {},
       { headers }
     )

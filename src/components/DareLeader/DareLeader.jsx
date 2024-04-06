@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import discord from '../../assets/images/dis.png'
 import ig from '../../assets/images/in.png'
 import tg from '../../assets/images/tg.png'
+import { useState } from 'react'
+
 
 const calculateHeight = (steps, maxSteps) => {
-  const maxHeight = 260
-  return Math.floor((steps / maxSteps) * maxHeight)
+  const maxHeight = 250
+  return Math.floor(((maxSteps - steps) / maxSteps) * maxHeight)
 }
 const LeaderboardItem = ({ steps, maxSteps }) => {
   const barHeight = calculateHeight(steps, maxSteps)
@@ -17,18 +19,20 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
     <div className="flex flex-col w-[50%] justify-end items-center gap-[20px]">
       <div
         className="bottom-0 rounded-t-xl w-[70px] bg-[#E1F076]"
-        style={{ height: `${barHeight + 100}px` }}
+        style={{ height: `${250}px` }}
       >
         <div
           className=" bottom-0 rounded-t-xl w-[70px] bg-[#6F6F6F]"
-          style={{ height: `${barHeight * 0.33}px` }}
+          style={{ height: `${barHeight}px` }}
         ></div>
       </div>
     </div>
   )
 }
-const DareLeader = ({ target, type, isActive,ends }) => {
+
+const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creatorImg }) => {
   const navigate = useNavigate()
+  const [people, setPeople] = useState(leaderBoard || []);
 
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
@@ -36,7 +40,7 @@ const DareLeader = ({ target, type, isActive,ends }) => {
         <div className="flex items-center my-2">
           <img
             className="w-[48px] h-[48px] border-4 border-yellow rounded-full mr-2"
-            src={profile}
+            src={people.length > 0 ? people[0].profilePicture: ""}
             alt="Participant"
           />
           <div className="flex flex-col">
@@ -45,7 +49,7 @@ const DareLeader = ({ target, type, isActive,ends }) => {
             >
               Participant
             </span>
-            <span className={`${styles.subheading} !text-[#000000]`}>You</span>
+            <span className={`${styles.subheading} !text-[#000000]`}>{ people[0].username}</span>
           </div>
         </div>
 
@@ -57,12 +61,12 @@ const DareLeader = ({ target, type, isActive,ends }) => {
               Challenger
             </span>
             <span className={`${styles.subheading} !text-[#000000]`}>
-              Meghan Jesse
+             { creator}
             </span>
           </div>
           <img
             className="w-[48px] h-[48px] border-4 border-yellow rounded-full"
-            src={profile}
+            src={creatorImg}
             alt="Challenger"
           />
         </div>
@@ -70,7 +74,7 @@ const DareLeader = ({ target, type, isActive,ends }) => {
 
       <div className="flex w-[90%] mt-4 justify-center">
         <div className="flex flex-col items-center justify-center">
-          <LeaderboardItem steps={100} maxSteps={300} />
+          <LeaderboardItem steps={people[0].value} maxSteps={target} />
         </div>
       </div>
       <div className="h-[3px] w-[296px] bg-[#6F6F6F] bg-opacity-35"></div>
