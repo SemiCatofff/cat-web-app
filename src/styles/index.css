@@ -238,3 +238,8 @@
 
 .parent-container {
 }
+
+/* Add this to your styles.css file or within a <style> tag */
+.slick-track {
+  margin-left: initial !important;
+}

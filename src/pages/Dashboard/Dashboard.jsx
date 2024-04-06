@@ -187,13 +187,13 @@ const Dashboard = () => {
       />
 
       {history.filter((item) => item.IsStarted && item.IsActive).length > 0 && (
-        <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
+        <div className={` ${styles.paddingX} ${styles.flexBetween} mt-10`}>
           <p className={`${styles.heading2} !text-black`}>
             Your Ongoing Challenges
           </p>
-          <a href="" className={`${styles.paragraph} !text-black`}>
+          {/* <a href="" className={`${styles.paragraph} !text-black`}>
             View All
-          </a>
+          </a> */}
         </div>
       )}
 
