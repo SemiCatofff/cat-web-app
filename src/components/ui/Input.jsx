@@ -33,7 +33,7 @@ export const Input = forwardRef(({ type="text", label, errorName, errors, footer
   <div className=" flex flex-col gap-2">
     <label className=" text-sm text-[#666666] font-semibold">{label}</label>
     <input type={type} className="rounded-md bg-[#F2EFFF] placeholder:text-[#666666] text-base w-full px-2 py-3 outline-none" ref={ref} {...props} />
-    {errors[errorName]?<p className=" text-sm text-red-500">{errors[errorName].message}</p>:<p className=" flex gap-1 text-sm text-[#666666]"><img src={info} alt="info" />{footerText}</p>}
+    {errors[errorName]?<p className=" text-sm text-red-500">{errors[errorName].message}</p>:<p className=" flex gap-1 text-sm text-[#666666]">{footerText}</p>}
   </div>
 ));
 
@@ -57,22 +57,22 @@ export const DatePickerInput = forwardRef(({ label, errors, errorName, ...props 
 
 
 
-export const RadioInput = forwardRef(({ label, handleInputChange, ...props }, ref) => {
+export const RadioInput = forwardRef(({ label, value, onChange, ...props }, ref) => {
   return (
     <label className="flex items-center gap-2 cursor-pointer">
       <input
         type="radio"
+        value={value}
+        onChange={onChange}
         className="placeholder:text-[#666666] text-base bg-[#F2EFFF]"
         ref={ref}
         {...props}
-        // value={value}
-        // checked={selectedValue === value}
-        // onChange={handleInputChange}
       />
-      <span className="">{label}</span>
+      <span>{label}</span>
     </label>
-    )
+  );
 });
+
 
 // export const DatePickerInput=({label,startDate,setDate})=>{
 //   return (
@@ -89,9 +89,9 @@ export const SelectInput=forwardRef(({label, initialOption, options, ...props}, 
         <label className=" text-sm text-[#666666] font-semibold">{label}</label>
         <select className="block w-full py-2 px-3   rounded-md shadow-sm focus:outline-none focus:ring-purple focus:border-purple bg-[#F2EFFF]" ref={ref} {...props}>
         <option disabled>{initialOption}</option>
-        {options.map((option)=>{
+        {options.map((option,index)=>{
           return (
-            <option className=" hover:bg-purple " value={option}>{option}</option>
+            <option className=" hover:bg-purple " value={index}>{option}</option>
           )
         })}
       </select>
