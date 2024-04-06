@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/style'
-import {
-  homeHeader,
-  arrow,
-  award2,
-  star,
-  user,
-  edit,
-  addd,
-  yellowarrow,
-  graphic1,
-  doubleright,
-} from '../../assets/images'
+import { homeHeader,arrow,award2,star,user,edit,addd,yellowarrow, graphic1,doubleright,} from '../../assets/images'
 import { Popup } from '../../components/index'
-import { getUserDetails, getUserChallenges, createWallet, logout} from '../../utils/ApiCalls'
+import { getUserDetails, getUserChallenges, withDrawApi} from '../../utils/ApiCalls'
 import moment from 'moment'
 import ChallengeSlider from '../../components/ChallengeSlider/ChallengeSlider'
 import { useDispatch } from 'react-redux'
 import { setLoginState } from '../../redux/actions/actions'
+import hippo from "../../assets/images/hippo.png"
+
 
 
 const Dashboard = () => {
@@ -25,19 +16,176 @@ const Dashboard = () => {
   const [history, setHistory] = useState([])
   const [details, setDetails] = useState([])
   const [solTok, setSolTok] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [isConfirmed, setIsConfirmed] = useState(false)
+  const [joinSuccess, setJoinSuccess] = useState(false)
+  const [state, setState] = useState(0)
+  const [amount, setAmount] = useState(1000)
+  
+
   const dispatch = useDispatch()
-
-  const handleOpenPopup = () => {
-    setIsPopupOpen(true)
-  }
-
   const handleClosePopup = () => {
     setIsPopupOpen(false)
+    setIsLoading(false)
+    setIsConfirmed(false)
   }
-  const handleConfirmation = () => {
-    setIsPopupOpen(false)
+  const messages =[
+    {
+      mess1: "Withdraw Credits Rules",
+      mess2: "How Many Points to withdraw",
+      success: "Rewards Claimed"
+    },
+    {
+      mess1: "Buying Credits Rules",
+      mess2: "How Many Points You wanna buy ?",
+      success: "Transaction success"
+    }
+  ]
+
+  const withdraw = async () => {
+    const output = await withDrawApi(amount)
+    setIsLoading(false)
+    if (output.status) {
+      setIsConfirmed(true)
+      setJoinSuccess(true)
+    } else {
+      setIsConfirmed(true)
+      setJoinSuccess(false)
+    }
   }
 
+  const deposit = async () =>{
+    setIsLoading(false)
+    //here goes the call to deposit
+    if (true) {
+      setIsConfirmed(true)
+      setJoinSuccess(true)
+    } else {
+      setIsConfirmed(true)
+      setJoinSuccess(false)
+    }
+  }
+
+
+  const handleOpenPopup = () => {
+   setIsPopupOpen(true)}
+  const handleSliderConfirm = () => {
+    setIsLoading(true)
+    if(state === 0)
+    {
+      withdraw()
+    }
+    else{
+      deposit()
+    }
+    
+  }
+
+  const goToDashboard = () => {
+    handleClosePopup()
+  }
+
+  const popupContent = isLoading ? (
+    <div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+        <h2 className={`${styles.heading1} !text-black `}>Please wait!</h2>
+        <p className={`${styles.subheading2} !text-black mt-6`}>
+          🎉 Processing Your Request! 🎉
+        </p>
+       
+        <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12 mx-auto mt-8"></div>
+      </div>
+    </div>
+  ) : isConfirmed ? (joinSuccess ?(
+    <div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+        <h2 className={`${styles.heading1} !text-black `}>Congratulations!</h2>
+        <p className={`${styles.subheading2} !text-black mt-6`}>
+          
+        </p>
+       
+        <button
+          className=" bg-black rounded-full py-5 mt-6 flex w-full"
+          onClick={goToDashboard}
+        >
+          <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
+            {' '}
+            GO TO DASHBOARD{' '}
+            <span className="ml-3">
+              <img src={yellowarrow} alt="" />
+            </span>
+          </p>
+        </button>
+      </div>
+    </div>) :(<div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY} flex flex-col gap-[20px] items-center justify-center text-center`}>
+        <h2 className={`${styles.heading1} !text-black `}>Ooops!</h2>
+        <img src ={hippo}></img>
+        <p className={`${styles.subheading2} !text-black mt-6`}>
+          Something went wrong!! Try again later
+        </p>
+      </div>
+    </div>
+)) : (
+    <div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+        <div>
+        <h2 className={`${styles.subheading} !text-black px-8 !text-[16px]`}>
+          { messages[state].mess1 }
+        </h2>
+        <h2 className={`${styles.paragraph} !text-black !font-[400] !text-[10px] !text-[#696969]`}>
+           Current Conversion Rate of the points are : <span className='!font-[600]'> 1000 credit = 1SOL</span>
+        </h2>
+
+        </div>
+        <div className='mt-5'>
+        <h2 className={`${styles.subheading} !text-black !text-[16px]`}>
+          { messages[state].mess2 }
+        </h2>
+        <h2 className={`${styles.paragraph} !text-black px-4 !font-[400] !text-[10px] !text-[#696969]`}>
+          Minimum Buy: 1000 SOLs
+        </h2>
+
+        </div>
+        {/* <img src={graphic1} alt="" className="mx-auto mt-10" /> */}
+        <div className='flex gap-[10px] h-[40px] items-center justify-center mt-5'>
+          <div className='w-[30px] h-full flex items-center justify-center bg-[#EDEBF3] rounded-[12px]'>
+          <h2 className={`${styles.subheading} !text-black !text-[16px] `} onClick={()=>{setAmount(amount+1)}}>
+        -
+        </h2>
+          </div>
+          <div className='w-[160px] h-full flex items-center justify-center bg-[#EDEBF3] rounded-[12px]'>
+          <h2 className={`${styles.subheading} !text-black !text-[16px]`}>
+        {amount} credits
+        </h2>
+          </div>
+          <div className='w-[30px] h-full flex items-center justify-center bg-[#EDEBF3] rounded-[12px]' onClick={()=>{setAmount(amount+1)}}>
+          <h2 className={`${styles.subheading} !text-black !text-[16px]`}>
+        +
+        </h2>
+          </div>
+          </div>
+        <div
+          className="slide-button flex items-center justify-center bg-yellow rounded-full !text-black py-5 mt-10 flex "
+          onClick={handleSliderConfirm}
+        >
+       <p
+            className={`text-center my-auto !text-black ${styles.heading2}`}
+          >
+             CONFIRM
+          </p>
+      
+
+        </div>
+      
+          {/* <div className="h-14 w-14 ml-2 my-auto bg-white rounded-full ">
+            <img src={doubleright} className="mx-auto mt-4" />
+          </div> */}
+         
+        </div>
+      </div>
+    
+  )
   const getDetails = async () => {
     const output = await getUserDetails()
     setDetails(output)
@@ -103,7 +251,8 @@ const Dashboard = () => {
             <span className="my-auto mr-1"> Total </span>{' '}
             <span className="font-bold my-auto">{details.Credits}</span>{' '}
             <span className="absolute -right-3 top-2">
-              <img src={addd} className="w-5" />
+              <img src={addd} className="w-5" onClick={()=>{setState(1)
+                  handleOpenPopup()}}/>
             </span>
           </div>
           <div
@@ -127,7 +276,9 @@ const Dashboard = () => {
                 <p>{details.TotalRewardsWon}</p>
               </span>{' '}
               <span
-                onClick={handleOpenPopup}
+                onClick={()=>{
+                  setState(0)
+                  handleOpenPopup()}}
                 className="-mr-2 bg-black text-yellow rounded-full px-8 py-4 flex cursor-pointer"
               >
                 WITHDRAW <img src={yellowarrow} alt="" />
@@ -139,33 +290,9 @@ const Dashboard = () => {
 
       <Popup
         isOpen={isPopupOpen}
-        content={
-          <div classname={`!z-40`}>
-            <div
-              className={`${styles.paddingX} ${styles.paddingY}  text-center`}
-            >
-              <h2 className={`${styles.heading1} !text-black `}>
-                Confirm Payment Of <br />
-                <span className="text-purple-500">2K Credits?</span>{' '}
-              </h2>
-              <img src={graphic1} alt="" className="mx-auto mt-5" />
-              <div className="slide-button bg-yellow rounded-full !text-black py-3 mt-6 flex ">
-                <div className="h-14 w-14 ml-2 my-auto bg-white rounded-full ">
-                  <img src={doubleright} className="mx-auto mt-4" />
-                </div>
-                <p
-                  className={`text-center my-auto  ml-8 !text-black ${styles.heading2}`}
-                >
-                  SLIDE TO CONFIRM
-                </p>
-              </div>
-            </div>
-          </div>
-        }
+        content={popupContent}
         onClose={handleClosePopup}
-      />
-       
-       
+      />     
        {history.filter(item => item.IsStarted && item.IsActive).length > 0 &&  <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
         <p className={`${styles.heading2} !text-black`}>Your Ongoing Challenges</p>
         <a href="" className={`${styles.paragraph} !text-black`}>
@@ -197,8 +324,7 @@ const Dashboard = () => {
                   <p className={`${styles.caption2} !text-gray-500`}>
                   {moment(parseInt(item.StartDate, 10)).format(
                 'D MMM, YYYY HH.mm'
-              )}
-                  
+              )}              
                   </p>
                 </div>
               </div>
