@@ -1,16 +1,17 @@
-const PurpleButton=({children,className=""})=>{
-    return (
-        <button className={'bg-purple text-white rounded-md p-2 w-full '+className}>
-            {children}
-        </button>
-    )
-}
+import React from "react";
+ 
+// const CustomButton = forwardRef(({buttonColor, textColor, className,...props}, ref) => {
+//   return (
+//     <button ref={ref}  className={` flex justify-between items-center gap-2 text-[${textColor}] bg-[${buttonColor}]  p-2 rounded-full ${className}`} {...props}>
+//       {props.children}
+//     </button>
+//   );
+// });
 
-const PurpleOutlineButton=({children, className="", onClick, type="button"})=>{
+export default function CustomButton({ buttonColor, textColor, className ,children, ...attributes }) {
     return (
-        <button type={type} className={'border-purple bg-white text-purple rounded-md p-2 w-full '+className} onClick={onClick}>
-            {children} 
-        </button>
-    )
+      <button className={` flex justify-center items-center gap-2  text-${textColor}  bg-${buttonColor}  p-3 w-32 rounded-full ${className}`} type="button" {...attributes}>
+        {children}
+      </button>
+    );
 }
-export {PurpleButton,PurpleOutlineButton};

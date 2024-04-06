@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, SelectInput, CheckboxInput, ToggleSwitchInput } from '../../ui/Input';
-import { PurpleButton, PurpleOutlineButton } from '../../ui/Button';
+import CustomButton from '../../ui/Button';
+import { yellowarrow } from '../../../assets/images';
 const DareChallengeForm = ({register,errors,handleSubmit}) => {
 
     // const handleChange=(e)=>{
@@ -33,7 +34,6 @@ const DareChallengeForm = ({register,errors,handleSubmit}) => {
 
     const onSubmit = (data) => {
         console.log("the form is submitted",data);
-        
         // console.log(data);
     }
 
@@ -88,14 +88,15 @@ const DareChallengeForm = ({register,errors,handleSubmit}) => {
                     {errors.terms&&<p className=" text-sm text-red-500">{errors.terms.message}</p>}
                 </div>
 
-                <div className=" lg:pb-10 h-full w-full pt-4">
+                <div className=" pb-32 h-full w-full pt-4">
                 <div className=" flex  justify-between gap-2 items-end px-2">
-                    <PurpleOutlineButton onClick={()=>console.log("clicked")}>
+                    <CustomButton textColor="black" buttonColor="[#F2EFFF]" type="button">
                         Cancel
-                    </PurpleOutlineButton> 
-                    <PurpleButton className=" opacity-80" type="submit">
+                    </CustomButton> 
+                    <CustomButton textColor="yellow" buttonColor="black" type="submit">
                         Submit
-                    </PurpleButton>
+                        <img src={yellowarrow} alt="next-arrow" />
+                    </CustomButton>
                 </div>
                 </div>
             </form>
