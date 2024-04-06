@@ -6,6 +6,7 @@ import bullets from '../../assets/images/bullets.svg'
 import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
+import likes from "../../assets/images/likes.png"
 import { useEffect, useState } from 'react'
 
 function Progress({
@@ -32,7 +33,35 @@ function Progress({
     <div className="flex flex-col mt-4 gap-[13px] ">
       <div className="h-[256px] flex justify-between mx-4 rounded-box gap-[2%]">
         <div className="bg-[#192126] relative flex flex-col justify-center items-center rounded-box w-[59%]">
-          <img
+        {!(type === "Steps" || type === "Calories")? <>
+        <img
+            src={bullets}
+            className="absolute bottom-4 right-[40%]"
+            alt=""
+          ></img>
+        <div className='flex flex-col items-center justify-center h-[55%] gap-[14px]'>
+        <div className={`${styles.paragraph} !font-[500]`}>
+            Provider : Twitter
+          </div>
+          <div className='flex items-center justify-center h-[34px] bg-[#E1F076] rounded-[6px] px-2'>
+          <div className={`${styles.heading2} !text-[#000000] !text-[9px] `}>
+           Connect Twitter Analytics
+          </div>
+
+          </div>
+
+        </div>
+        <div className='flex flex-col items-center justify-start h-[45%] gap-[9px]'>
+        <div className={`${styles.heading2} flex gap-[4px]`}>
+            0 <span><img src={likes}></img></span>
+          </div>
+        <div className={`${styles.paragraph} !font-[400]`}>
+            Total likes on post
+          </div>
+
+        </div>
+        
+        </>:<>  <img
             src={bg}
             className="absolute top-0 right-0 w-[90px] h-[90px]"
             alt=""
@@ -77,7 +106,7 @@ function Progress({
                 </div>
               </div>
             </div>
-          </div>
+          </div></>}
         </div>
         <div className="flex flex-col rounded-box w-[42%] gap-[2%] relative">
           <div className="flex flex-col justify-center bg-[#192126] rounded-box h-[64%] gap-[5%]">
