@@ -281,6 +281,30 @@ const getShareableChallengeLink = async (challengeID) => {
   }
 }
 
+const getReclaimProof = async (challengeID, ) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  
+   let body =  {
+      AppName: "TWITTER_ANALYTICS_VIEWS", 
+      ChallengeID: parseInt(challengeID)
+    }
+
+    try {
+      const response = await axios.post(
+        `${BackendURL}/reclaim/sign`,body,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+
+
+}
+
 
 
 const logout = async () => {}
@@ -302,5 +326,6 @@ export {
   logout,
   withDrawApi,
   getShareableChallengeLink,
-  createChallengeAPI
+  createChallengeAPI,
+  getReclaimProof
 }
