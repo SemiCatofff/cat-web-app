@@ -4,8 +4,9 @@ import styles from '../../styles/style'
 import hippo from '../../assets/images/hippo.png'
 import batch from '../../assets/images/batch.png'
 import move from '../../assets/images/move.png'
+import blur from '../../assets/images/blur.png'
 
-const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
+const Position = ({ type, profile, leaderBoard, creator, creatorImg }) => {
   const Competitor = ({ profileSrc, name, steps, isUser }) => (
     <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
       <div className="relative h-[85px] w-[85px] flex items-end justify-center">
@@ -23,11 +24,18 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
         />
       </div>
 
-      <div className="flex flex-col items-center z-20">
+      <div className="flex flex-col items-center z-20 relative">
         <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-        <span className={`${styles.subtext} !text-[#202117]`}>
+
+        {!isUser ? (
+          <span className={`${styles.subtext} !text-[#202117]`}style={{ filter: 'blur(3px)' }}>
+            {steps} Steps
+          </span>
+        ) : (
+          <span className={`${styles.subtext} !text-[#202117]`}>
           {steps} Steps
         </span>
+        )}
       </div>
     </div>
   )
@@ -36,9 +44,9 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
       case 'nvn':
         return (
           <div className="h-full w-full flex flex-col items-center justify-center gap-[6px]">
-            <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative">
-              <div className="absolute inset-0 bg-[#F8F8F8] bg-opacity-[85%]"></div>
-              <div className={`${styles.subheading} !text-[#4f4f4f]`}>{4}</div>
+            <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative " style={{ filter: 'blur(4px)' }}>
+            
+              <div className={`${styles.subheading} !text-[#4f4f4f]`} >{4}</div>
               <div>
                 <img
                   className="w-[30px] h-[30px] rounded-full mx-[10px]"
@@ -48,31 +56,30 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
               </div>
 
               <div className="flex-1 ml-2 mr-2">
-                <p className={`${styles.subheading} !text-[#4f4f4f]`}>name</p>
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>User</p>
               </div>
               <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
-                <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>0</p>
               </div>
             </div>
             <div className="h-[45px] w-[211px] bg-yellow rounded-[12px] px-4 flex items-center justify-center">
-              <div className={`${styles.subheading} !text-[#4f4f4f]`}>{4}</div>
+              <div className={`${styles.subheading} !text-[#4f4f4f]`}>{leaderBoard.length > 0 ? leaderBoard.findIndex(user => user.username === localStorage.getItem('name')) + 1 : ""}</div>
               <div>
                 <img
                   className="w-[30px] h-[30px] rounded-full mx-[10px]"
-                  src={profile}
+                  src={leaderBoard.length > 0? leaderBoard.find(user => user.username === localStorage.getItem('name')).profilePicture : ""}
                   alt=""
                 />
               </div>
 
               <div className="flex-1 ml-2 mr-2">
-                <p className={`${styles.subheading} !text-[#4f4f4f]`}>name</p>
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>{leaderBoard.length > 0? leaderBoard.find(user => user.username === localStorage.getItem('name')).username: "40"}</p>
               </div>
               <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
-                <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>{leaderBoard.length > 0? leaderBoard.find(user => user.username === localStorage.getItem('name')).value : "40"}  </p>
               </div>
             </div>
-            <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative">
-              <div className="absolute inset-0 bg-[#F8F8F8] bg-opacity-[85%]"></div>
+            <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative" style={{ filter: 'blur(4px)' }}>
               <div className={`${styles.subheading} !text-[#4f4f4f]`}>{4}</div>
               <div>
                 <img
@@ -83,7 +90,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
               </div>
 
               <div className="flex-1 ml-2 mr-2">
-                <p className={`${styles.subheading} !text-[#4f4f4f]`}>name</p>
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>User</p>
               </div>
               <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
                 <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
@@ -101,9 +108,9 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
               }
               name={leaderBoard.length > 0 ? leaderBoard[0].username : ''}
               steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
-              isUser={''}
+              isUser={leaderBoard[0].username == localStorage.getItem('name')}
             />
-            <div className="w-[14%] flex justify-center items-end">
+            <div className="w-[14%] flex justify-center items-center">
               <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s</div>
             </div>
             <Competitor
@@ -112,7 +119,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
               }
               name={leaderBoard.length > 0 ? leaderBoard[1].username : ''}
               steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
-              isUser={''}
+              isUser={leaderBoard[1].username == localStorage.getItem('name')}
             />
           </div>
         )
@@ -125,7 +132,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
               }
               name={leaderBoard.length > 0 ? leaderBoard[0].username : ''}
               steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
-              isUser={''}
+              isUser={false}
             />
             <div className="w-[14%] flex justify-center items-end">
               <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s</div>
@@ -134,7 +141,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
               profileSrc={creatorImg}
               name={creator}
               steps={0}
-              isUser={''}
+              isUser={true}
             />
           </div>
         )
@@ -145,7 +152,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg}) => {
             <div
               className={`${styles.heading2} !text-[#FF725E] mx-3 my-4 flex items-center justify-center`}
             >
-              Seems Like No One Joined In.{' '}
+              Seems Like No One Else Joined In.{' '}
             </div>
 
             <div className="h-[75%] w-[90%] flex items-center justify-center">

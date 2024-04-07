@@ -1,3 +1,4 @@
+
 export { default as homeHeader } from './homeHeader.svg'
 export { default as cardImg } from './cardImg.svg'
 export { default as stake } from './stake.svg'
@@ -25,3 +26,5 @@ export { default as set } from './sett.png'
 export { default as cross } from './cross.png'
 export { default as login } from './login.svg'
 export { default as arrowChevron } from './arrow-chevron.svg'
+export { default as info } from './info.svg'
+

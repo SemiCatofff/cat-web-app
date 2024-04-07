@@ -2,6 +2,7 @@ import Slider from 'react-slick'
 import challenge from '../../assets/images/challe.png'
 import styles from '../../styles/style'
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 const ChallengeSlider = ({ items }) => {
   var settings = {
