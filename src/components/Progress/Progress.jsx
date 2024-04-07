@@ -8,6 +8,9 @@ import moment from 'moment'
 import Position from '../Position/Position'
 import likes from "../../assets/images/likes.png"
 import { useEffect, useState } from 'react'
+import { getReclaimProof } from '../../utils/ApiCalls'
+import refresh from "../../assets/images/refresh.png"
+import {useNavigate, useParams} from 'react-router-dom'
 
 function Progress({
   value,
@@ -28,6 +31,22 @@ function Progress({
       #555555 ${(value / target) * 100}% 100%
     )`,
   }
+  const navigate = useNavigate()
+  const params = useParams()
+
+
+  const getVerificationReq = async () => {
+  
+    const data = await getReclaimProof(params.id); 
+    //console.log(data)
+    if (data) {
+      window.location.href = data; 
+    } else {
+      console.error("Failed to obtain verification URL.");
+      navigate("/"); 
+    }
+  };
+  
 
   return (
     <div className="flex flex-col mt-4 gap-[13px] ">
@@ -39,21 +58,50 @@ function Progress({
             className="absolute bottom-4 right-[40%]"
             alt=""
           ></img>
-        <div className='flex flex-col items-center justify-center h-[55%] gap-[14px]'>
-        <div className={`${styles.paragraph} !font-[500]`}>
+           <div className={`${styles.paragraph} absolute top-[8px] right-[12px]`} onClick={getVerificationReq}>
+           <img
+            src={refresh}
+           
+            alt=""
+          ></img>
+          
+          </div>
+        <div className='flex items-center justify-center h-[55%] gap-[14px]'>
+        {/* <div className={`${styles.paragraph} !font-[500]`}>
             Provider : Twitter
           </div>
           <div className='flex items-center justify-center h-[34px] bg-[#E1F076] rounded-[6px] px-2'>
           <div className={`${styles.heading2} !text-[#000000] !text-[9px] `}>
-           Connect Twitter Analytics
+           Refresh Twitter Analytics
           </div>
 
-          </div>
-
+          </div> */}
+          <div
+                className="rounded-full w-[66px] h-[66px] flex items-center justify-center"
+                style={progressStyle}
+              >
+                <div className="rounded-full bg-black w-[64px] h-[64px] flex items-center justify-center">
+                  <img
+                    src={localStorage.getItem('profile')}
+                    className="rounded-full w-[60px] h-[60px]"
+                  ></img>
+                </div>
+                
+              </div>
+              <div className={`flex flex-col gap-[1px] text-white`}>
+                <div className={`${styles.heading2}`}>
+                  Twitter
+                </div>
+                <div className={`${styles.paragraph} !text-[10px]`}>
+                  {localStorage.getItem('name')}
+                </div>
+              </div>
         </div>
+        
+        
         <div className='flex flex-col items-center justify-start h-[45%] gap-[9px]'>
         <div className={`${styles.heading2} flex gap-[4px]`}>
-            0 <span><img src={likes}></img></span>
+            {value} <span><img src={likes}></img></span>
           </div>
         <div className={`${styles.paragraph} !font-[400]`}>
             Total likes on post
@@ -66,8 +114,8 @@ function Progress({
             className="absolute top-0 right-0 w-[90px] h-[90px]"
             alt=""
           ></img>
-          <div className={`${styles.paragraph} absolute top-[8px] left-[12px]`}>
-            {moment().format('DD-MM-YYYY')}
+          <div className={`${styles.paragraph} absolute top-[10px] left-[14px]`}>
+            {moment().format("Do of MMMM, YYYY")}
           </div>
           <img
             src={bullets}

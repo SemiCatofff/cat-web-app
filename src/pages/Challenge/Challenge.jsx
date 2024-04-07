@@ -18,6 +18,7 @@ function Challenge() {
   const [gameType, setGameType] = useState(localStorage.getItem('type'))
   const params = useParams()
   const [challenges, setChallenges] = useState([])
+  const [amount, setAmount] = useState(0)
   const [userPerformance, setUserPerformance] = useState({
     Target: '1',
     Value: '0',
@@ -41,17 +42,22 @@ function Challenge() {
     const output = await getLeaderboard(params.id)
     if (output.success) {
       setLeaderBoard(output.data)
-      console.log(output.data)
     }
   }
-
-  useEffect(() => {
+  useEffect(()=>{
     fetchLeaderboard()
-  }, [])
+    getDashboardDetails()
+  },[])
 
   useEffect(() => {
-    getDashboardDetails()
-  }, [])
+    const timer = setTimeout(() => {
+      fetchLeaderboard()
+      getDashboardDetails() 
+    }, 100000); 
+    return () => clearTimeout(timer);
+  }, [userPerformance, leaderBoard]);
+
+
 
   return (
     <div className="flex flex-col h-auto">
@@ -151,6 +157,7 @@ function Challenge() {
               )
               .humanize()}
             leaderBoard={leaderBoard}
+            winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
           />
         )) ||
           (gameType === '1v1' && (
@@ -164,6 +171,7 @@ function Challenge() {
                 )
                 .humanize()}
               leaderBoard={leaderBoard}
+              winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
             />
           )) ||
           (gameType === '0v1' && (
@@ -179,6 +187,7 @@ function Challenge() {
               leaderBoard={leaderBoard}
               creator={userPerformance.ChallengeCreatorUsername}
               creatorImg={userPerformance.ChallengeCreatorImage}
+              winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
             />
           )))}
 
