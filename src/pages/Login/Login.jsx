@@ -83,7 +83,7 @@ function Login() {
     switch (currentStep) {
       case 1:
         return (
-          <div className="content z-1">
+          <div className="content ">
             <div
               className={`${styles.heading1} text-center mt-10 !text-black px-10`}
             >
@@ -155,7 +155,7 @@ function Login() {
       className={`${styles.marginX} ${styles.marginY} ${styles.flexCenter} flex-col relative`}
     >
       <img src={login} alt="Logo" className="w-full" />
-      <div className="content z-50">
+      <div className="content z-10">
         {renderStepContent()}
         <div className="flex justify-center mt-4">
           {[...Array(2)].map((_, index) => (
