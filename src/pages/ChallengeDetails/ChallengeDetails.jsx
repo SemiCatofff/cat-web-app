@@ -81,7 +81,7 @@ function ChallengeDetails() {
   }
 
   const goToDashboard = () => {
-    navigate(`/challenge/${params.id}`)
+    navigate(`/details/${params.id}`)
   }
 
   const popupContent = isLoading ? (
