@@ -49,7 +49,17 @@ const DareChallengeForm = ({register,errors,handleSubmit}) => {
                     errorName="maxParticipant"
                     errors={errors}
                     footerText="This is a sample footer text"
-                    {...register("maxParticipant", { required: "Max Participants value is required"})} 
+                    {...register("maxParticipant", { 
+                        required: "Max Participants value is required",
+                        pattern: {
+                            value: /^[0-9]+$/,
+                            message: "Max Participants must be a valid integer"
+                        },
+                    max: {
+                        value: 100,
+                        message: "Max Participants should be less than 100"
+                    }
+                })} 
                 />
                 
                 <Input
@@ -58,15 +68,28 @@ const DareChallengeForm = ({register,errors,handleSubmit}) => {
                     errorName="minParticipant"
                     errors={errors}
                     footerText="This is a sample footer text"
-                    {...register("minParticipant", { required: "Min Participants value is required"})} 
-                    />
+                    {...register("minParticipant", { 
+                        required: "Min Participants value is required",
+                        pattern: {
+                            value: /^[0-9]+$/,
+                            message: "Max Participants must be a valid integer"
+                        },
+                    max: {
+                        value: 0,
+                        message: "Min Participants should be less than 100"
+                    }})}/>
                 <Input
                     label='Wager Amount'
                     placeholder='Enter Wager Amount'
                     errorName="wager"
                     errors={errors}
                     footerText="This is a sample footer text"
-                    {...register("wager", { required: "wager value is required"})} 
+                    {...register("wager", { 
+                        required: "wager value is required",
+                        pattern: {
+                            value:/^\d+(\.\d+)?$/,
+                            message: "The wager can only be a number"
+                        }})} 
                 />
                 <SelectInput
                     label='Select Wallet'

@@ -7,6 +7,7 @@ const CreateChallenge = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -16,6 +17,7 @@ const CreateChallenge = () => {
       setStep={setStep}
       register={register}
       handleSubmit={handleSubmit}
+      watch={watch}
       errors={errors}
     />)}
     {step===2 && (<DareChallengeForm

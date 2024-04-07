@@ -2,7 +2,7 @@ import { Input, RadioInput, DatePickerInput,SelectInput } from "../ui/Input";
 import CustomButton from "../ui/Button";
 import { yellowarrow } from "../../assets/images";
 
-const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
+const CreateChallengeForm = ({setStep,register,handleSubmit,errors,watch}) => {
     // const [challenge,setChallenge]=useState({
     //     challengeName:"",
     //     description:"",
@@ -63,7 +63,11 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
                 errorName="challengeName"
                 errors={errors}
                 footerText="This is a sample footer text"
-                {...register("challengeName", { required: "This challenge Name is required"})} 
+                {...register("challengeName", { 
+                    required: "This challenge Name is required",
+                    minLength: { value: 10, message: "Challenge Name must be at least 10 characters long" },
+                    maxLength: { value: 50, message: "Challenge Name cannot exceed 50 characters" }
+                })} 
             />
 
             <Input 
@@ -72,7 +76,10 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
                 errorName="description"
                 errors={errors}
                 footerText="This is a sample footer text"
-                {...register("description", { required: "This challenge Description is required"})} 
+                {...register("description", { 
+                    required: "This challenge Description is required",
+                    maxLength: { value: 250, message: "Challenge description cannot exceed 50 characters" },
+                })} 
             />
             {/* <Input 
                 label='Requirements' 
@@ -88,7 +95,17 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
                 errorName="startDate"
                 errors={errors}
                 {...register("startDate",{
-                    required: "StartDate is required"
+                    required: "StartDate is required",
+                    validate: {
+                        notPast: value => {
+                            const selectedDate = new Date(value);
+                            const currentDate = new Date();
+                            if (selectedDate < currentDate) {
+                                return "Start Date cannot be in the past";
+                            }
+                            return true;
+                        }
+                    }
                 })}></DatePickerInput>
 
                 <DatePickerInput
@@ -96,7 +113,21 @@ const CreateChallengeForm = ({setStep,register,handleSubmit,errors}) => {
                 errorName="endDate"
                 errors={errors}
                 {...register("endDate",{
-                    required: "EndDate is required"
+                    required: "EndDate is required",
+                    validate: {
+                        notBeforeStart: value => {
+                            const startDateValue = watch('startDate');
+                            if (startDateValue) {
+                                const startDate = new Date(startDateValue);
+                                const endDate = new Date(value);
+            
+                                if (endDate < startDate) {
+                                    return "End Date cannot be before Start Date";
+                                }
+                            }
+                            return true;
+                        }
+                    }
                 })}></DatePickerInput>
 
             </div>
