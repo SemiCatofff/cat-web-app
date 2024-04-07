@@ -64,10 +64,10 @@ function Challenge() {
         </div>
         <div>
           <span className={`${styles.caption2} !text-[#202117] !font-medium`}>
-            14th April, 2024
+            {moment(parseInt(userPerformance.StartDate)).format("Do of MMMM, YYYY")} {moment(parseInt(userPerformance.StartDate)).format("h:mm a")}
           </span>
-          <span className={`${styles.paragraph} !text-[#8D8D8D]`}>
-            {'  '}Ending in{' '}
+          <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
+            {'Ending in '}
             {moment
               .duration(
                 moment(parseInt(userPerformance.EndDate)).diff(moment())
