@@ -12,23 +12,29 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
+import { setWalletAddress } from '../../redux/actions/actions'
+import {useDispatch} from 'react-redux'
 
 const Home = () => {
   const [challenges, setChallenges] = useState([])
   const [userInfo, setUserInfo] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const getChalData = async (filter) => {
     const output = await getOngoingChallenges(filter, 1, 10)
     if (output.success) {
       setChallenges(output.data)
+      
     }
   }
+
   const userData = async () => {
     const output = await getUserDetails()
     setUserInfo(output)
-    localStorage.setItem('profile', output.ProfilePicture)
+    localStorage.setItem('name', output.UserName)
+    localStorage.setItem('profile', output.ProfilePicture)  
   }
   const handleSearch = async () => {
     const output = await searchChallengeAPI(searchTerm, 1, 10)
@@ -86,7 +92,7 @@ const Home = () => {
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
-            item.IsStarted && (
+            !item.IsStarted && (
               <ChallengeCard
                 id={item.ChallengeID}
                 type={item.GameType}

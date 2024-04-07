@@ -3,6 +3,7 @@ import challenge from '../../assets/images/challe.png'
 import { useState } from 'react'
 import styles from '../../styles/style'
 import moment from 'moment'
+import {useNavigate} from 'react-router-dom'
 
 const ChallengeSlider=({items}) =>{
     var settings = {
@@ -14,12 +15,14 @@ const ChallengeSlider=({items}) =>{
         slidesToScroll: 2,
       }
 
+    const navigate = useNavigate()
+
 
     return( <div className={` slider-container overflow-hidden `}>
     {items.length > 0 && <Slider {...settings}>
       {items.map((item) => {
         return (
-          <div className="relative w-full cursor-pointer">
+          <div className="relative w-full cursor-pointer" onClick={()=>{navigate(`/challenge/${item.ChallengeID}`)}}>
             <img
               src={challenge}
               alt=""

@@ -1,43 +1,128 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input, SelectInput, CheckboxInput, ToggleSwitchInput } from '../../ui/Input';
-import { PurpleButton, PurpleOutlineButton } from '../../ui/Button';
+import CustomButton from '../../ui/Button';
+import styles from '../../../styles/style';
+import hippo from '../../../assets/images/hippo.png'
+import { yellowarrow } from '../../../assets/images';
+import Popup from '../../Popup/Popup';
+import { createChallengeAPI } from '../../../utils/ApiCalls';
+import {useNavigate} from 'react-router-dom'
+
 const DareChallengeForm = ({register,errors,handleSubmit}) => {
 
-    // const handleChange=(e)=>{
-    //     setChallenge({
-    //         ...challenge,
-    //         [e.target.id]:e.target.value
-    //     });
-    // }
+    const [isLoading, setIsLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [isPopupOpen, setIsPopupOpen] = useState(false)
+    const [cid, setCid] = useState('')
+    const navigate = useNavigate()
 
-    // const handleOptionChange=(e)=>{
-    //     setChallenge({
-    //         ...challenge,
-    //         selectedWallet:e.target.value
-    //     })
-    // }
+      
+      function getGameId(participation, game) {
+        const gameIdMap = {
+          '00': 1, // 0v1 Steps
+          '01': 2, // 0v1 Calories
+          '10': 3, // 1v1 Steps
+          '11': 4, // 1v1 Calories
+          '20': 5, // nvn Steps
+          '21': 6, // nvn Calories
+        };
+        return gameIdMap[`${participation}${game}`];
+      }
 
-    // const toggleCheckbox = () => {
-    //   setChallenge({
-    //     ...challenge,
-    //     checked: !challenge.checked
-    //   });
-    // };
+      const handleClosePopup = () => {
+        setIsPopupOpen(false)
+      }
 
-    // const toggleSwitch=()=>{
-    //     setChallenge({
-    //         ...challenge,
-    //         openForAll: !challenge.openForAll
-    //     });
-    // }
+      const goToDashboard = () =>{
+        navigate(`/challenge/${cid}`)
 
-    const onSubmit = (data) => {
-        console.log("the form is submitted",data);
+      }
+
+
+      const popupContent = isLoading ? (
+        <div className={`!z-40`}>
+          <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+            <h2 className={`${styles.heading1} !text-black `}>Please wait!</h2>
+            <p className={`${styles.subheading2} !text-black mt-6`}>
+              🎉 Processing Your Request! 🎉
+            </p>
+           
+            <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12 mx-auto mt-8"></div>
+          </div>
+        </div>
+      ) : success ?(
+        <div className={`!z-40`}>
+          <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+            <h2 className={`${styles.heading1} !text-black `}>Congratulations!</h2>
+          
+            <p className={`${styles.subheading2} !text-black mt-6`}>
+              🎉 Request successfully registered! 🎉
+            </p>
+           
+            <button
+              className=" bg-black rounded-full py-5 mt-6 flex w-full"
+              onClick={goToDashboard}
+            >
+    
+              <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
+                {' '}
+                GO TO CHALLENGE{' '}
+                <span className="ml-3">
+                  <img src={yellowarrow} alt="" />
+                </span>
+              </p>
+            </button>
+          </div>
+        </div>) :(<div className={`!z-40`}>
+          <div className={`${styles.paddingX} ${styles.paddingY} flex flex-col gap-[20px] items-center justify-center text-center`}>
+            <h2 className={`${styles.heading1} !text-black `}>Ooops!</h2>
+            <img src ={hippo}></img>
+            <p className={`${styles.subheading2} !text-black mt-6`}>
+              Something went wrong!! Try again later
+            </p>
+          </div>
+        </div>
+    )
+
+    const onSubmit = (data) => { 
+        const gameID = getGameId(data.challengeType, data.GameType);
+        let request = {
+            "ChallengeName": data.ChallengeName,
+            "ChallengeDescription":data.ChallengeDescription,
+             "StartDate": new Date(data.StartDate).getTime(),
+             "EndDate" : new Date(data.EndDate).getTime(),
+              "GameID" : gameID,
+              "Wager" : parseInt(data.wager),
+              "MaxParticipants":parseInt(data.maxParticipant),
+              "Target": parseInt(data.Target )  
+        }
+        createChallenge(request)
+        setIsLoading(true)
+        setIsPopupOpen(true)
         
-        // console.log(data);
     }
 
+    const createChallenge = async(request) =>{
+        console.log(request)
+        const output = await createChallengeAPI(request);
+        setIsLoading(false)
+        if(output.success){
+            
+            setSuccess(true)
+            setCid(output.data.ChallengeID)
+            
+        }
+        else{
+            setSuccess(false)
+            
+        }
+    }
+
+   
+
     return (
+
+        <>
         <div className='px-4'>
             <h1 className=' text-xl text-purple font-semibold mb-3'>
                 Create a new Challenge
@@ -49,58 +134,68 @@ const DareChallengeForm = ({register,errors,handleSubmit}) => {
                     errorName="maxParticipant"
                     errors={errors}
                     footerText="This is a sample footer text"
-                    {...register("maxParticipant", { required: "Max Participants value is required"})} 
+                    {...register("maxParticipant", { required: "Max Participants value is required"})}
                 />
-                
-                <Input
-                    label='Min Participants'
+
+                 <Input
+                    label='Target'
                     placeholder='Enter Min Participants'
-                    errorName="minParticipant"
+                    errorName="Target"
                     errors={errors}
-                    footerText="This is a sample footer text"
-                    {...register("minParticipant", { required: "Min Participants value is required"})} 
-                    />
+                    footerText=""
+                    {...register("Target", { required: "Min Participants value is required"})}
+                    /> 
                 <Input
                     label='Wager Amount'
                     placeholder='Enter Wager Amount'
                     errorName="wager"
                     errors={errors}
                     footerText="This is a sample footer text"
-                    {...register("wager", { required: "wager value is required"})} 
+                    {...register("wager", { required: "wager value is required"})}
                 />
-                <SelectInput
+                {/* <SelectInput
                     label='Select Wallet'
                     id='selectedWallet'
                     options={["Wallet 1","Wallet 2","Wallet 3"]}
                     {...register("selectedWallet")}
-                />
-                <ToggleSwitchInput
+                /> */}
+                {/* <ToggleSwitchInput
                     label='Open for all'
                     {...register("openForAll")}
                     // checked={challenge.openForAll}
                     // toggleSwitch={toggleSwitch}
-                />
+                /> */}
                 <div>
                     <CheckboxInput
                         label='I Accept all the terms and conditions'
                         {...register("terms", { required: "You need to accept the terms and conditions"})}
-                    /> 
+                    />
                     {errors.terms&&<p className=" text-sm text-red-500">{errors.terms.message}</p>}
                 </div>
 
-                <div className=" lg:pb-10 h-full w-full pt-4">
+                <div className=" pb-32 h-full w-full pt-4">
                 <div className=" flex  justify-between gap-2 items-end px-2">
-                    <PurpleOutlineButton onClick={()=>console.log("clicked")}>
+                    <CustomButton textColor="black" buttonColor="[#F2EFFF]" type="button">
                         Cancel
-                    </PurpleOutlineButton> 
-                    <PurpleButton className=" opacity-80" type="submit">
+                    </CustomButton>
+                    <CustomButton textColor="yellow" buttonColor="black" type="submit">
                         Submit
-                    </PurpleButton>
+                        <img src={yellowarrow} alt="next-arrow" />
+                    </CustomButton>
                 </div>
                 </div>
             </form>
         </div>
-  ) 
+        <Popup
+        isOpen={isPopupOpen}
+        content={popupContent}
+        onClose={handleClosePopup}
+      />   
+
+        </>
+
+
+  )
 }
 
 export default DareChallengeForm
