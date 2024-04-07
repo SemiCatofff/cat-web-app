@@ -13,6 +13,7 @@ const ChallengeSlider = ({ items }) => {
     slidesToShow: 2.15,
     slidesToScroll: 2,
   }
+  const navigate = useNavigate()
 
   // const sliderContainerClasses = `slider-container ${
   //   items.length === 1 ? 'single-item' : ''
@@ -23,7 +24,12 @@ const ChallengeSlider = ({ items }) => {
       <Slider {...settings}>
         {items.map((item) => {
           return (
-            <div className="relative w-full cursor-pointer">
+            <div
+              className="relative w-full cursor-pointer"
+              onClick={() => {
+                navigate(`/challenge/${item.ChallengeID}`)
+              }}
+            >
               <img src={challenge} alt="" className="w-[200px]" />
 
               <div
