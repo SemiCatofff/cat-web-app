@@ -64,7 +64,7 @@ const PlayerInfo = ({ index, name, steps, prof }) => {
   )
 }
 
-const MultiChallenge = ({ target, type, isActive, ends, leaderBoard }) => {
+const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) => {
   const [people, setPeople] = useState(leaderBoard || []);
 
   const params = useParams()
@@ -88,7 +88,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard }) => {
               (person, index) => (
                 <Competitor
                   key={index}
-                  isWinner={false}
+                  isWinner={index === 0 && winner === person.username}
                   name={person.username}
                   steps={person.value}
                   hval={70}
@@ -100,7 +100,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard }) => {
           : people.map((person, index) => (
               <Competitor
                 key={index}
-                isWinner={false}
+                isWinner={index === 0 && winner === person.username}
                 name={person.username}
                 steps={person.value}
                 hval={70}
