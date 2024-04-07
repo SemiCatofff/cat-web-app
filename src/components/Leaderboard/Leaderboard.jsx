@@ -89,7 +89,7 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-1">
         {leader.length >= 1 && <Competitor
-          isWinner={false}
+          isWinner={winner === leader[0].username}
           name={leader[0].username}
           steps={leader[0].value}
           profileSrc={leader[0].profilePicture}

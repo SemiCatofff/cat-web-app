@@ -151,6 +151,7 @@ function Challenge() {
               )
               .humanize()}
             leaderBoard={leaderBoard}
+            winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
           />
         )) ||
           (gameType === '1v1' && (
@@ -164,6 +165,7 @@ function Challenge() {
                 )
                 .humanize()}
               leaderBoard={leaderBoard}
+              winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
             />
           )) ||
           (gameType === '0v1' && (
@@ -179,6 +181,7 @@ function Challenge() {
               leaderBoard={leaderBoard}
               creator={userPerformance.ChallengeCreatorUsername}
               creatorImg={userPerformance.ChallengeCreatorImage}
+              winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
             />
           )))}
 
