@@ -21,6 +21,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('')
 
   const [isFilterVisible, setIsFilterVisible] = useState(false)
+  const [currentFilter, setCurrentFilter] = useState('All')
   const toggleFilter = () => {
     setIsFilterVisible(!isFilterVisible)
   }
@@ -47,6 +48,11 @@ const Home = () => {
     } else {
       alert('No challenges found with that')
     }
+  }
+
+  const handleFilterChange = (filterType) => {
+    setCurrentFilter(filterType)
+    getChalData(filterType.toLowerCase())
   }
 
   useEffect(() => {
@@ -116,22 +122,17 @@ const Home = () => {
           >
             Challenge Type
           </p>
-          <button
-            className={`${styles.caption1} !text-stone-700 shadow-sm bg-violet-100 px-6 py-1 rounded-full whitespace-nowrap`}
-          >
-            All
-          </button>
-          <button
-            className={`${styles.caption1} !text-stone-700 shadow-sm bg-violet-100 px-6 py-1 rounded-full whitespace-nowrap`}
-          >
-            Dares
-          </button>
-          <button
-            className={`${styles.caption1} !text-stone-700 shadow-sm bg-violet-100 px-6 py-1 rounded-full whitespace-nowrap`}
-          >
-            Peer to Peer
-          </button>
-          {/* Add more buttons as needed */}
+          {['All', 'Dares', 'Peer to Peer'].map((filterType) => (
+            <button
+              key={filterType}
+              className={`${styles.caption1} ${
+                currentFilter === filterType ? 'bg-violet-200' : 'bg-violet-100'
+              } shadow-sm  !text-stone-700 px-6 py-1 rounded-full whitespace-nowrap`}
+              onClick={() => handleFilterChange(filterType)}
+            >
+              {filterType}
+            </button>
+          ))}
         </div>
       )}
 
