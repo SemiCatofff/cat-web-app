@@ -58,14 +58,9 @@ const Dashboard = () => {
     const output = await withDrawApi(amount)
     
     setIsLoading(false)
-    console.log(output.status)
-    if (output.status) {
-      setIsConfirmed(true)
-      setJoinSuccess(true)
-    } else {
-      setIsConfirmed(false)
-      setJoinSuccess(false)
-    }
+    setIsConfirmed(true)
+    setJoinSuccess(true)
+    
   }
 
   const deposit = async () => {
