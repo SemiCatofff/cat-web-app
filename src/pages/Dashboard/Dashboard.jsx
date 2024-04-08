@@ -56,7 +56,9 @@ const Dashboard = () => {
 
   const withdraw = async () => {
     const output = await withDrawApi(amount)
+    
     setIsLoading(false)
+    console.log(output.status)
     if (output.status) {
       setIsConfirmed(true)
       setJoinSuccess(true)
