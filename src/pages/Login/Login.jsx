@@ -65,7 +65,7 @@ function Login() {
 
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
-    if (output.authentication.status === 'success' && output.wallet.status === 'success') {
+    if (output.authentication.status === 'success') {
       const refreshToken = await getRefreshTokenAPI()
       if (refreshToken.status === "success") {
         dispatch(setLoginState(true))
