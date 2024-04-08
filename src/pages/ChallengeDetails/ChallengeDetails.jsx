@@ -210,7 +210,7 @@ function ChallengeDetails() {
           <div className={` absolute top-4 w-full `}>
             <div className={`flex justify-between ${styles.marginX}`}>
               <p className={`${styles.subheading}`}>Target</p>
-              <p className={`${styles.subheading}`}>Starts in</p>
+              <p className={`${styles.subheading}`}> {moment(parseInt(challengeDetails.StartDate)).isBefore(moment())? "Starts in":"Started before" } </p>
             </div>
           </div>
           <div className={` absolute bottom-4 w-full `}>
