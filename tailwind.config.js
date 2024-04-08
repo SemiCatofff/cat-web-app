@@ -5,7 +5,7 @@ module.exports = {
       colors: {
         yellow: '#D5F84A',
         black: '#192126',
-
+        purple: '#8567FF',
         accent: '#f9acaa',
         custom: '#192126',
       },
@@ -32,10 +32,11 @@ module.exports = {
       },
       backgroundImage: {
         hero: "url('../assets/images/bgapp.svg')",
-        trophy: "url('../assets/images/glossy.png')",
+        trophy: "url('../assets/images/xyz.png')",
         signup: "url('../assets/images/signup.png')",
+        blur: "url('../assets/images/blur.png')",
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 }

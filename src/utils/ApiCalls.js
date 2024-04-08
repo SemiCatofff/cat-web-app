@@ -1,38 +1,25 @@
 import axios from 'axios'
-const BackendURL = 'http://192.168.1.153:3005'
+const BackendURL = 'https://stagingapi.catoff.xyz'
 
-const authToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMDE1MTE0MSwiZXhwIjoxNzEwMTU0NzQxfQ.mQOK4buQdz1M6_nhEV1LgxOLbt1t07tqWn97WvuE4cI'
-const loginAPI = async (signature, publicKey) => {
-  let body = {
-    signature: signature,
-    message: 'hello world',
-    publicKey: publicKey,
-  }
+//API CALLS FLOW
+//GOOGLE AUTH FLOW ON THE LOGIN PAGE
+const redirectGoogleAuth = async () => {
   try {
-    const response = await axios.post(`${BackendURL}/user/login`, body)
-    return response.data
-  } catch (error) {
-    return error.message
-  }
+    window.location.href = `${BackendURL}/googleAuth`
+  } catch (error) {}
 }
 
-const setUserDetailsAPI = async () => {
-  let headers = {
-    Authorization: `Bearer ${authToken}`,
-  }
+// ACCOUNT FETCHING SCREEN
 
-  let body = {
-    Email: 'ishita@gmail.com',
-    UserName: 'ishita',
+const authenticateAPI = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
-      `${BackendURL}/user/addUserDetails`,
-      body,
-      {
-        headers,
-      }
+      `${BackendURL}/oktoProxy/authPinCreate`,
+      {},
+      { headers }
     )
     return response.data
   } catch (error) {
@@ -40,35 +27,172 @@ const setUserDetailsAPI = async () => {
   }
 }
 
-const searchChallengeApi = async (searchTerm) => {
-  let headers = {
-    Authorization: `Bearer ${authToken}`,
-  }
+//first time user flow
 
+const setPinAPI = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
   try {
-    const response = await axios.get(
-      `${BackendURL}/challenge/challenges/search/calory?searchTerm=${searchTerm}`,
-      {
-        headers,
-      }
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/set_pin`,
+      {},
+      { headers }
     )
-    return response
+    return response.data
   } catch (error) {
     return error.message
   }
 }
 
-const getUserCurrentTableAPI = async () => {
+const createWallet = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/create_wallet`,
+      {},
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//logging in flow
+
+const getRefreshTokenAPI = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.post(
+      `${BackendURL}/oktoProxy/refresh_token`,
+      {},
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getUserWalletAPI = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
+  try {
+    const response = await axios.get(`${BackendURL}/oktoProxy/wallets`, {
+      headers,
+    })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//EXPLORE PAGE
+
+const getChallenges = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/${challengeID}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getOngoingChallenges = async (type, page, limit) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/onGoing/category/${type}?page=${page}&limit=${limit}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const searchChallengeAPI = async (search, page, limit) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/search/${search}?page=${page}&limit=${limit}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//CREATE CHALLENGE PAGE
+
+const createChallengeAPI = async (challengeDetails) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+
+  try {
+    const response = await axios.post(
+      `${BackendURL}/challenge/challenges`,
+      challengeDetails,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//CHALLENGE DETAILS PAGE
+
+//CHALLENGE JOIN FLOW4
+
+const joinChallengeAPI = async (challengeName) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+
+  let body = {
+    ChallengeID: challengeName,
+  }
+
+  try {
+    const response = await axios.post(`${BackendURL}/player`, body, { headers })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+//user dashboard page
+
+const getUserChallenges = async () => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
   try {
     const response = await axios.get(
       `${BackendURL}/userBoard/dashboard/userCurrentTable`,
-      {
-        headers,
-      }
+      { headers }
     )
     return response.data
   } catch (error) {
@@ -76,46 +200,132 @@ const getUserCurrentTableAPI = async () => {
   }
 }
 
-const getUserGraphAPI = async (time) => {
+const getUserDetails = async () => {
   let headers = {
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
-
-  try {
-    const response = await axios.get(
-      `${BackendURL}/userBoard/dashboard/userProgressGraph/${time}`,
-      {
-        headers,
-      }
-    )
-    return response.data
-  } catch (error) {
-    return error.message
-  }
-}
-const getUserProfileDataAPI = async () => {
-  let headers = {
-    Authorization: `Bearer ${authToken}`,
-  }
-
   try {
     const response = await axios.get(
       `${BackendURL}/userBoard/dashboard/userDetails`,
-      {
-        headers,
-      }
+      { headers }
     )
-    return response
+    return response.data
   } catch (error) {
     return error.message
   }
 }
 
+//CHALLENGE PROGRESS PAGE
+
+const getChallengeDashboard = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/dashboard/${challengeID}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getLeaderboard = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/${challengeID}/leaderboard`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const withDrawApi = async (amount) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  let body = {
+  amount: 1,
+    currency: "SOL"
+}
+
+  try {
+    const response = await axios.get(`${BackendURL}/user/withdraw`, body, {
+      headers,
+    })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getShareableChallengeLink = async (challengeID) => {
+  // let headers = {
+  //   Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  // }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/challenge/challenges/${challengeID}/share`
+      // { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const getReclaimProof = async (challengeID, ) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  
+   let body =  {
+      AppName: "TWITTER_ANALYTICS_VIEWS", 
+      ChallengeID: parseInt(challengeID)
+    }
+
+    try {
+      const response = await axios.post(
+        `${BackendURL}/reclaim/sign`,body,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+
+
+}
+
+
+
+const logout = async () => {}
 export {
-  loginAPI,
-  setUserDetailsAPI,
-  searchChallengeApi,
-  getUserCurrentTableAPI,
-  getUserGraphAPI,
-  getUserProfileDataAPI,
+  redirectGoogleAuth,
+  authenticateAPI,
+  setPinAPI,
+  getRefreshTokenAPI,
+  createWallet,
+  getUserWalletAPI,
+  getChallenges,
+  getOngoingChallenges,
+  getChallengeDashboard,
+  getLeaderboard,
+  searchChallengeAPI,
+  joinChallengeAPI,
+  getUserChallenges,
+  getUserDetails,
+  logout,
+  withDrawApi,
+  getShareableChallengeLink,
+  createChallengeAPI,
+  getReclaimProof
 }
