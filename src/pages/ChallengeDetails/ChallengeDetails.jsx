@@ -163,7 +163,8 @@ function ChallengeDetails() {
     <>
       <div className={`mb-20`}>
         <ChallengeCard
-          id={challengeDetails.ChallengeID}
+          // id={challengeDetails.ChallengeID}
+          id={params.id}
           type={challengeDetails.GameType}
           name={challengeDetails.ChallengeName}
           people={challengeDetails.PlayersJoined}
