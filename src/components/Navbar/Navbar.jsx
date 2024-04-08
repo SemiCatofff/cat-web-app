@@ -1,78 +1,115 @@
-import React, { useEffect, useRef } from 'react'
-import menu from '../../assets/images/Menu.svg'
-import bell from '../../assets/images/notif.png'
-import set from '../../assets/images/sett.png'
+import { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { getUserDetails } from '../../utils/ApiCalls'
+import { set, cross, arrowChevron } from '../../assets/images'
+import styles from '../../styles/style'
+
 
 const Navbar = () => {
-  const buttonContainerRef = useRef(null)
-  const overlayRef = useRef(null)
-  const bodyRef = useRef(null)
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const toggleOverlay = () => {
+    setIsOverlayOpen(!isOverlayOpen)
+  }
+
+  const [userInfo, setUserInfo] = useState([])
+  const navigate = useNavigate()
+
+  const userData = async () => {
+    const output = await getUserDetails()
+    setUserInfo(output)
+    localStorage.setItem('profile', output.ProfilePicture)
+  }
 
   useEffect(() => {
-    const buttonContainer = buttonContainerRef.current
-    const overlay = overlayRef.current
-    const body = bodyRef.current
-
-    const toggleClass = () => {
-      buttonContainer?.classList.toggle('active')
-      overlay?.classList.toggle('open')
-      body?.classList.toggle('active')
-    }
-
-    buttonContainer?.addEventListener('click', toggleClass)
-
-    return () => {
-      buttonContainer?.removeEventListener('click', toggleClass)
-    }
+    userData()
   }, [])
+
+  const navigateAndCloseOverlay = (path) => {
+    navigate(path)
+    toggleOverlay()
+  }
 
   return (
     <>
-      <div className="w-full px-2 py-2">
-        <div className="flex justify-between items-center ">
-          <a href="/" className=" z-40">
-            <img src={''} alt="Logo" className="w-full" />
-          </a>
-          <div className="flex justify-between items-center ">
+      <div className="w-full">
+        <div
+          className={`${styles.flexBetween} ${styles.paddingX} mt-6 mb-2 items-center`}
+        >
+          <Link
+            to="/"
+            className={`z-50 ${styles.heading2} !text-black`}
+            onClick={toggleOverlay}
+          >
+            CATOFF
+          </Link>
+          <div className="flex justify-between items-center">
             <div
-              id="menuToggle z-10"
-              className="flex justify-center items-center"
+              id="menuToggle"
+              className="z-40 flex justify-center items-center"
             >
-              <div ref={buttonContainerRef}></div>
+              <button onClick={toggleOverlay}>
+                <img
+                  src={isOverlayOpen ? cross : set}
+                  alt={isOverlayOpen ? 'Close' : 'Settings'}
+                />
+              </button>
 
-              <div ref={overlayRef} class="overlay mt-0">
-                <div class="nav">
-                  <div className="flex justify-end px-4 w-full text-white">
-                    <div className="col2 text-right">
+              <div className={`overlay mt-0 ${isOverlayOpen ? 'open' : ''}`}>
+                <div className="nav">
+                  <div
+                    className={`${styles.marginX} bg-white rounded-xl px-4 py-3 shadow flex justify-between `}
+                    onClick={() => navigateAndCloseOverlay('/dashboard')}
+                  >
+                    <div className="flex">
                       {' '}
-                      <ul>
-                        <div className="nav-para text-2xl mb-4 mt-4">
-                          <a className="lala  relative " href="/anarchy">
-                            Explore
-                          </a>
-                        </div>
-                        <div className="nav-para text-2xl mb-4 mt-4">
-                          <a className="lala  relative " href="/anarchy">
-                            Create Challenge
-                          </a>
-                        </div>
-                        <div className="nav-para text-2xl mb-4 mt-4">
-                          <a className="lala  relative " href="/anarchy">
-                            Join Challenge
-                          </a>
-                        </div>
-                        <div className="nav-para text-2xl mb-4 mt-4">
-                          <a className="lala  relative " href="/anarchy">
-                            My Profile
-                          </a>
-                        </div>
-                        <div className="nav-para text-2xl mb-4 mt-4">
-                          <a className="lala  relative " href="/anarchy">
-                            Invite Friend
-                          </a>
-                        </div>
-                      </ul>
+                      <img
+                        src={userInfo.ProfilePicture}
+                        alt="pp"
+                        className="rounded-full object-cover mr-3 w-12 h-12"
+                      />
+                      <div>
+                        <p className={`${styles.heading2} !text-black mt-1 `}>
+                          Hey{' '}
+                          <span className="!text-purple">
+                            {userInfo.UserName}!
+                          </span>
+                        </p>
+                        <p>Go to Dashboard</p>
+                      </div>{' '}
                     </div>
+                    <img src={arrowChevron} alt="gg" />
+                  </div>
+                  <div
+                    className={`px-4 w-full flex flex-col !text-black ${styles.heading2}`}
+                  >
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/"
+                      onClick={toggleOverlay}
+                    >
+                      Explore Challenge
+                    </Link>
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/create"
+                      onClick={toggleOverlay}
+                    >
+                      Create Challenge
+                    </Link>
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/dashboard"
+                      onClick={toggleOverlay}
+                    >
+                      Ongoing Challenges
+                    </Link>
+                    <Link
+                      className="mx-auto mt-6"
+                      to="/contact"
+                      onClick={toggleOverlay}
+                    >
+                      Contact Us
+                    </Link>
                   </div>
                 </div>
               </div>
