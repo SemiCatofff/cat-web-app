@@ -236,7 +236,7 @@ const Dashboard = () => {
 
   const copyInviteLink = async () => {
     try {
-      await navigator.clipboard.writeText('https://staging.catoff.xyz')
+      await navigator.clipboard.writeText('https://api.catoff.xyz')
       alert('Link copied to clipboard!')
     } catch (err) {
       alert('failed to Share')
