@@ -171,6 +171,9 @@ const Home = () => {
           </p>
           <div
             className={`${styles.caption2} mx-3 ${styles.paddingX} transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex absolute bottom-4 `}
+            onClick={() => {
+              navigate('/create')
+            }}
           >
             Create Now
           </div>
