@@ -42,6 +42,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboar
   </div>
 )
 
+
 const PlayerInfo = ({ index, name, steps, prof }) => {
   return (
     <div className="h-[48px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center">

@@ -3,11 +3,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellow: "#D5F84A",
-        black: "#192126",
-        purple:"#8567FF",
-        accent: "#f9acaa",
-        custom: "#192126",
+        yellow: '#D5F84A',
+        black: '#192126',
+        purple: '#8567FF',
+        accent: '#f9acaa',
+        custom: '#192126',
       },
       fontFamily: {
         ttruns: ['TTRuns', 'sans-serif'],
@@ -38,5 +38,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 }

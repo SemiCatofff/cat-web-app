@@ -6,7 +6,7 @@ import bullets from '../../assets/images/bullets.svg'
 import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
-import likes from "../../assets/images/likes.png"
+import likes from '../../assets/images/likes.png'
 import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import refresh from "../../assets/images/refresh.png"
@@ -23,7 +23,7 @@ function Progress({
   leaderBoard,
   creator,
   creatorImg,
-  joined
+  joined,
 }) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
@@ -52,109 +52,90 @@ function Progress({
     <div className="flex flex-col mt-4 gap-[13px] ">
       <div className="h-[256px] flex justify-between mx-4 rounded-box gap-[2%]">
         <div className="bg-[#192126] relative flex flex-col justify-center items-center rounded-box w-[59%]">
-        {!(type === "Steps" || type === "Calories")? <>
-        <img
-            src={bullets}
-            className="absolute bottom-4 right-[40%]"
-            alt=""
-          ></img>
-           <div className={`${styles.paragraph} absolute top-[8px] right-[12px]`} onClick={getVerificationReq}>
-           <img
-            src={refresh}
-           
-            alt=""
-          ></img>
-          
-          </div>
-        <div className='flex items-center justify-center h-[55%] gap-[14px]'>
-        {/* <div className={`${styles.paragraph} !font-[500]`}>
-            Provider : Twitter
-          </div>
-          <div className='flex items-center justify-center h-[34px] bg-[#E1F076] rounded-[6px] px-2'>
-          <div className={`${styles.heading2} !text-[#000000] !text-[9px] `}>
-           Refresh Twitter Analytics
-          </div>
-
-          </div> */}
-          <div
-                className="rounded-full w-[66px] h-[66px] flex items-center justify-center"
-                style={progressStyle}
-              >
-                <div className="rounded-full bg-black w-[64px] h-[64px] flex items-center justify-center">
-                  <img
-                    src={localStorage.getItem('profile')}
-                    className="rounded-full w-[60px] h-[60px]"
-                  ></img>
+          {!(type === 'Steps' || type === 'Calories') ? (
+            <>
+              <img
+                src={bullets}
+                className="absolute bottom-4 right-[40%]"
+                alt=""
+              ></img>
+              <div className="flex flex-col items-center justify-center h-[55%] gap-[14px]">
+                <div className={`${styles.paragraph} !font-[500]`}>
+                  Provider : Twitter
                 </div>
-                
-              </div>
-              <div className={`flex flex-col gap-[1px] text-white`}>
-                <div className={`${styles.heading2}`}>
-                  Twitter
-                </div>
-                <div className={`${styles.paragraph} !text-[10px]`}>
-                  {localStorage.getItem('name')}
+                <div className="flex items-center justify-center h-[34px] bg-[#E1F076] rounded-[6px] px-2">
+                  <div
+                    className={`${styles.heading2} !text-[#000000] !text-[9px] `}
+                  >
+                    Connect Twitter Analytics
+                  </div>
                 </div>
               </div>
-        </div>
-        
-        
-        <div className='flex flex-col items-center justify-start h-[45%] gap-[9px]'>
-        <div className={`${styles.heading2} flex gap-[4px]`}>
-            {value} <span><img src={likes}></img></span>
-          </div>
-        <div className={`${styles.paragraph} !font-[400]`}>
-            Total likes on post
-          </div>
-
-        </div>
-        
-        </>:<>  <img
-            src={bg}
-            className="absolute top-0 right-0 w-[90px] h-[90px]"
-            alt=""
-          ></img>
-          <div className={`${styles.paragraph} absolute top-[10px] left-[14px]`}>
-            {moment().format("Do of MMMM, YYYY")}
-          </div>
-          <img
-            src={bullets}
-            className="absolute bottom-4 right-[40%]"
-            alt=""
-          ></img>
-          <div className="w-auto flex flex-col justify-center gap-[25px]">
-            <div className="flex items-center gap-[10px]">
+              <div className="flex flex-col items-center justify-start h-[45%] gap-[9px]">
+                <div className={`${styles.heading2} flex gap-[4px]`}>
+                  0{' '}
+                  <span>
+                    <img src={likes}></img>
+                  </span>
+                </div>
+                <div className={`${styles.paragraph} !font-[400]`}>
+                  Total likes on post
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {' '}
+              <img
+                src={bg}
+                className="absolute top-0 right-0 w-[90px] h-[90px]"
+                alt=""
+              ></img>
               <div
-                className="rounded-full w-[66px] h-[66px] flex items-center justify-center"
-                style={progressStyle}
+                className={`${styles.paragraph} absolute top-[8px] left-[12px]`}
               >
-                <div className="rounded-full bg-black w-[64px] h-[64px] flex items-center justify-center">
-                  <img
-                    src={localStorage.getItem('profile')}
-                    className="rounded-full w-[60px] h-[60px]"
-                  ></img>
-                </div>
+                {moment().format('DD-MM-YYYY')}
               </div>
+              <img
+                src={bullets}
+                className="absolute bottom-4 right-[40%]"
+                alt=""
+              ></img>
+              <div className="w-auto flex flex-col justify-center gap-[25px]">
+                <div className="flex items-center gap-[10px]">
+                  <div
+                    className="rounded-full w-[66px] h-[66px] flex items-center justify-center"
+                    style={progressStyle}
+                  >
+                    <div className="rounded-full bg-black w-[64px] h-[64px] flex items-center justify-center">
+                      <img
+                        src={localStorage.getItem('profile')}
+                        className="rounded-full w-[60px] h-[60px]"
+                      ></img>
+                    </div>
+                  </div>
 
-              <div className={`flex flex-col gap-[1px] text-white`}>
-                <div className={`${styles.heading2}`}>
-                  {parseInt((parseInt(value) / parseInt(target)) * 100)}%
+                  <div className={`flex flex-col gap-[1px] text-white`}>
+                    <div className={`${styles.heading2}`}>
+                      {parseInt((parseInt(value) / parseInt(target)) * 100)}%
+                    </div>
+                    <div className={`${styles.paragraph} !text-[10px]`}>
+                      of the goal
+                    </div>
+                  </div>
                 </div>
-                <div className={`${styles.paragraph} !text-[10px]`}>
-                  of the goal
+                <div className="flex items-center gap-[10px]">
+                  <img src={boot}></img>
+                  <div className={`flex flex-col gap-[1px] text-white`}>
+                    <div className={`${styles.heading2}`}>{value}</div>
+                    <div className={`${styles.paragraph} !text-[10px]`}>
+                      Total {type} counted
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center gap-[10px]">
-              <img src={boot}></img>
-              <div className={`flex flex-col gap-[1px] text-white`}>
-                <div className={`${styles.heading2}`}>{value}</div>
-                <div className={`${styles.paragraph} !text-[10px]`}>
-                  Total {type} counted
-                </div>
-              </div>
-            </div>
-          </div></>}
+            </>
+          )}
         </div>
         <div className="flex flex-col rounded-box w-[42%] gap-[2%] relative">
           <div className="flex flex-col justify-center bg-[#192126] rounded-box h-[64%] gap-[5%]">
@@ -188,12 +169,13 @@ function Progress({
       </div>
 
       <Position
-        type={(game !== "0v1" && leaderBoard.length < 2 )?"0": game}
+        type={game !== '0v1' && leaderBoard.length < 2 ? '0' : game}
         profile={profile}
         styles={styles}
         leaderBoard={leaderBoard}
-        creator={creator} 
-        creatorImg={creatorImg}     />
+        creator={creator}
+        creatorImg={creatorImg}
+      />
 
       {item.filter((mem) => !mem.IsStarted).length > 0 && (
         <div className={`${styles.heading2} !text-[16px] !text-[#202117] mx-4`}>
