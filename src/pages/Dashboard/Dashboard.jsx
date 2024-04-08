@@ -61,7 +61,7 @@ const Dashboard = () => {
       setIsConfirmed(true)
       setJoinSuccess(true)
     } else {
-      setIsConfirmed(true)
+      setIsConfirmed(false)
       setJoinSuccess(false)
     }
   }
