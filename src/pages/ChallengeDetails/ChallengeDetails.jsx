@@ -12,9 +12,13 @@ import {
   yellowarrow,
 } from '../../assets/images'
 import { useParams } from 'react-router-dom'
-import { getChallenges, joinChallengeAPI, getUserChallenges } from '../../utils/ApiCalls'
+import {
+  getChallenges,
+  joinChallengeAPI,
+  getUserChallenges,
+} from '../../utils/ApiCalls'
 import moment from 'moment'
-import hippo from "../../assets/images/hippo.png"
+import hippo from '../../assets/images/hippo.png'
 
 function ChallengeDetails() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -22,7 +26,6 @@ function ChallengeDetails() {
   const [isConfirmed, setIsConfirmed] = useState(false)
   const [joinSuccess, setJoinSuccess] = useState(true)
   const [active, setActive] = useState([])
-
 
   const navigate = useNavigate()
   const params = useParams()
@@ -35,11 +38,10 @@ function ChallengeDetails() {
       localStorage.setItem('type', output.data.ParticipationType)
     }
   }
-  const userChallenges = async ()=>{
+  const userChallenges = async () => {
     const output = await getUserChallenges()
-      const activeChallenges = output.map((item)=> item.ChallengeID)
-      setActive(activeChallenges)
-
+    const activeChallenges = output.map((item) => item.ChallengeID)
+    setActive(activeChallenges)
   }
 
   useEffect(() => {
@@ -48,13 +50,11 @@ function ChallengeDetails() {
   }, [])
 
   const handleOpenPopup = () => {
-       if(active.includes(parseInt(params.id))){
+    if (active.includes(parseInt(params.id))) {
       navigate(`/details/${params.id}`)
-    }
-    else{
+    } else {
       setIsPopupOpen(true)
     }
-    
   }
 
   const handleClosePopup = () => {
@@ -91,46 +91,57 @@ function ChallengeDetails() {
         <p className={`${styles.subheading2} !text-black mt-6`}>
           🎉 Processing Your Request! 🎉
         </p>
-       
+
         <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-yellow h-12 w-12 mx-auto mt-8"></div>
       </div>
     </div>
-  ) : isConfirmed ? (joinSuccess ?(
-    <div className={`!z-40`}>
-      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
-        <h2 className={`${styles.heading1} !text-black `}>Congratulations!</h2>
-        <p className={`${styles.subheading2} !text-black mt-6`}>
-          🎉 You are in! 🎉
-        </p>
-        <img src={graphic2} alt="Checkmark" className="mx-auto mt-5" />
-        <button
-          className=" bg-black rounded-full py-5 mt-6 flex w-full"
-          onClick={goToDashboard}
-        >
-          <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
-            {' '}
-            GO TO DASHBOARD{' '}
-            <span className="ml-3">
-              <img src={yellowarrow} alt="" />
-            </span>
+  ) : isConfirmed ? (
+    joinSuccess ? (
+      <div className={`!z-40`}>
+        <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+          <h2 className={`${styles.heading1} !text-black `}>
+            Congratulations!
+          </h2>
+          <p className={`${styles.subheading2} !text-black mt-6`}>
+            🎉 You are in! 🎉
           </p>
-        </button>
+          <img src={graphic2} alt="Checkmark" className="mx-auto mt-5" />
+          <button
+            className=" bg-black rounded-full py-5 mt-6 flex w-full"
+            onClick={goToDashboard}
+          >
+            <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
+              {' '}
+              GO TO DASHBOARD{' '}
+              <span className="ml-3">
+                <img src={yellowarrow} alt="" />
+              </span>
+            </p>
+          </button>
+        </div>
       </div>
-    </div>) :(<div className={`!z-40`}>
-      <div className={`${styles.paddingX} ${styles.paddingY} flex flex-col gap-[20px] items-center justify-center text-center`}>
-        <h2 className={`${styles.heading1} !text-black `}>Ooops!</h2>
-        <img src ={hippo}></img>
-        <p className={`${styles.subheading2} !text-black mt-6`}>
-          Something went wrong!! Try again later
-        </p>
+    ) : (
+      <div className={`!z-40`}>
+        <div
+          className={`${styles.paddingX} ${styles.paddingY} flex flex-col gap-[20px] items-center justify-center text-center`}
+        >
+          <h2 className={`${styles.heading1} !text-black `}>Ooops!</h2>
+          <img src={hippo}></img>
+          <p className={`${styles.subheading2} !text-black mt-6`}>
+            Something went wrong!! Try again later
+          </p>
+        </div>
       </div>
-    </div>
-)) : (
+    )
+  ) : (
     <div className={`!z-40`}>
       <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
         <h2 className={`${styles.heading1} !text-black px-8`}>
           Confirm Payment Of{' '}
-          <span className="text-purple-500"> {challengeDetails.Wager} Credits?</span>{' '}
+          <span className="text-purple-500">
+            {' '}
+            {challengeDetails.Wager} Credits?
+          </span>{' '}
         </h2>
         <img src={graphic1} alt="" className="mx-auto mt-10" />
         <div
@@ -140,10 +151,8 @@ function ChallengeDetails() {
           {/* <div className="h-14 w-14 ml-2 my-auto bg-white rounded-full ">
             <img src={doubleright} className="mx-auto mt-4" />
           </div> */}
-          <p
-            className={`text-center my-auto !text-black ${styles.heading2}`}
-          >
-             CONFIRM
+          <p className={`text-center my-auto !text-black ${styles.heading2}`}>
+            CONFIRM
           </p>
         </div>
       </div>
@@ -154,7 +163,8 @@ function ChallengeDetails() {
     <>
       <div className={`mb-20`}>
         <ChallengeCard
-          id={challengeDetails.ChallengeID}
+          // id={challengeDetails.ChallengeID}
+          id={params.id}
           type={challengeDetails.GameType}
           name={challengeDetails.ChallengeName}
           people={challengeDetails.PlayersJoined}
@@ -240,7 +250,11 @@ function ChallengeDetails() {
           >
             <h1 className={`${styles.heading2} !text-black flex `}>
               {' '}
-              <span className="my-auto">{!active.includes(parseInt(params.id))?"JOIN NOW":"VIEW STATUS"}</span>{' '}
+              <span className="my-auto">
+                {!active.includes(parseInt(params.id))
+                  ? 'JOIN NOW'
+                  : 'VIEW STATUS'}
+              </span>{' '}
               <span className="-mr-2 ">
                 <img src={arrow} alt="" className="h-8 w-8 my-auto" />
               </span>{' '}
