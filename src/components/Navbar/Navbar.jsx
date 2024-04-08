@@ -38,7 +38,6 @@ const Navbar = () => {
           <Link
             to="/"
             className={`z-50 ${styles.heading2} !text-black`}
-            onClick={toggleOverlay}
           >
             CATOFF
           </Link>

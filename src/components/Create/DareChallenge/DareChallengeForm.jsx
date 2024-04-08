@@ -14,6 +14,8 @@ const DareChallengeForm = ({
   handleSubmit,
   setValue,
   watch,
+  setStep
+  
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -207,8 +209,9 @@ const DareChallengeForm = ({
                 textColor="black"
                 buttonColor="[#F2EFFF]"
                 type="button"
+                onClick={()=>{setStep(1)}}
               >
-                Cancel
+                Back
               </CustomButton>
               <CustomButton
                 textColor="yellow"

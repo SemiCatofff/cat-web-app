@@ -174,7 +174,7 @@ const Dashboard = () => {
             <h2
               className={`${styles.subheading} !text-black !text-[16px] `}
               onClick={() => {
-                setAmount(amount + 1)
+                setAmount(amount - 1)
               }}
             >
               -
@@ -197,7 +197,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div
-          className="slide-button flex items-center justify-center bg-yellow rounded-full !text-black py-5 mt-10 flex "
+          className="slide-button items-center justify-center bg-yellow rounded-full !text-black py-5 mt-10 flex "
           onClick={handleSliderConfirm}
         >
           <p className={`text-center my-auto !text-black ${styles.heading2}`}>
