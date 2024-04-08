@@ -13,12 +13,18 @@ import 'slick-carousel/slick/slick-theme.css'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import { setWalletAddress } from '../../redux/actions/actions'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const Home = () => {
   const [challenges, setChallenges] = useState([])
   const [userInfo, setUserInfo] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+
+  const [isFilterVisible, setIsFilterVisible] = useState(false)
+  const [currentFilter, setCurrentFilter] = useState('All')
+  const toggleFilter = () => {
+    setIsFilterVisible(!isFilterVisible)
+  }
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -26,7 +32,6 @@ const Home = () => {
     const output = await getOngoingChallenges(filter, 1, 10)
     if (output.success) {
       setChallenges(output.data)
-      
     }
   }
 
@@ -34,7 +39,7 @@ const Home = () => {
     const output = await getUserDetails()
     setUserInfo(output)
     localStorage.setItem('name', output.UserName)
-    localStorage.setItem('profile', output.ProfilePicture)  
+    localStorage.setItem('profile', output.ProfilePicture)
   }
   const handleSearch = async () => {
     const output = await searchChallengeAPI(searchTerm, 1, 10)
@@ -43,6 +48,11 @@ const Home = () => {
     } else {
       alert('No challenges found with that')
     }
+  }
+
+  const handleFilterChange = (filterType) => {
+    setCurrentFilter(filterType)
+    getChalData(filterType.toLowerCase())
   }
 
   useEffect(() => {
@@ -77,17 +87,54 @@ const Home = () => {
             className="bg-no-repeat bg-left-center bg-[length:20px_20px] pl-6 w-full h-12 bg-violet-100 rounded-xl shadow"
             placeholder="Search for challenges..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+            onChange={async (e) => {
+              setSearchTerm(e.target.value)
+              if (e.target.value.trim() !== '') {
+                const output = await searchChallengeAPI(
+                  e.target.value.trim(),
+                  1,
+                  10
+                )
+                if (output.success) {
+                  setChallenges(output.data)
+                } else {
+                  alert('No challenges found with that')
+                }
+              } else {
+                getChalData('all')
+              }
+            }}
           />
         </div>
         <button
           className="ml-2 w-12 h-12 bg-violet-100 rounded-xl shadow flex justify-center my-auto"
-          onClick={handleSearch}
+          onClick={toggleFilter}
         >
           <img src={filter} alt="filter" className="my-auto" />
         </button>
       </div>
+      {isFilterVisible && (
+        <div
+          className={`flex space-x-2 overflow-x-auto scrollbar-hide ${styles.marginX} mt-4`}
+        >
+          <p
+            className={`${styles.subheading2} mr-2 !text-gray-500 my-auto whitespace-nowrap`}
+          >
+            Challenge Type
+          </p>
+          {['All', 'Dares', 'Peer to Peer'].map((filterType) => (
+            <button
+              key={filterType}
+              className={`${styles.caption1} ${
+                currentFilter === filterType ? 'bg-violet-200' : 'bg-violet-100'
+              } shadow-sm  !text-stone-700 px-6 py-1 rounded-full whitespace-nowrap`}
+              onClick={() => handleFilterChange(filterType)}
+            >
+              {filterType}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className={`card-box`}>
         {challenges.map((item) => {
