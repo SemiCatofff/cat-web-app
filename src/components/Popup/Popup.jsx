@@ -2,7 +2,7 @@ import React from 'react'
 
 const Popup = ({ isOpen, content, onClose }) => {
   const popupClasses = `popup-backdrop absolute z-40 h-screen  ${isOpen ? 'open' : ''}`
-  const contentClasses = `popup-content mb-[15px] h-[50%] ${isOpen ? 'open' : ''}`
+  const contentClasses = `popup-content h-[50%] ${isOpen ? 'open' : ''}`
 
   return (
     <div className={popupClasses}>
