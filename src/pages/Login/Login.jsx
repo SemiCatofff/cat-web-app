@@ -21,6 +21,7 @@ function Login() {
 
   const handleClosePopup = () => {
     setIsPopupOpen(false)
+    
   }
 
   const popupContent = (
@@ -59,7 +60,6 @@ function Login() {
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
     const refreshToken = await getRefreshTokenAPI()
-      
         dispatch(setLoginState(true))
         navigate('/')
         sessionStorage.setItem("authProcess", "true")

@@ -1,8 +1,9 @@
-import { SET_WALLET_ADDRESS, SET_LOGIN_STATE } from '../actions/actions'
+import { SET_WALLET_ADDRESS, SET_LOGIN_STATE, SET_POPUP_STATE } from '../actions/actions'
 
 const initialState = {
   walletAddress: '',
   isLoggedIn: false,
+  isPopup: false
 }
 
 const userReducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: action.payload,
       }
+    
+    case SET_POPUP_STATE:
+        return {
+          ...state,
+          isPopup: action.payload,
+        }
     default:
       return state
   }
