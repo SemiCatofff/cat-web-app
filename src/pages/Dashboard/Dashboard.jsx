@@ -1,17 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/style'
-import {
-  homeHeader,
-  arrow,
-  award2,
-  star,
-  user,
-  edit,
-  addd,
-  yellowarrow,
-  graphic1,
-  doubleright,
-} from '../../assets/images'
+import {  homeHeader,  award2, star,  user,  edit, addd, yellowarrow,} from '../../assets/images'
 import { Popup } from '../../components/index'
 import {
   getUserDetails,
@@ -65,7 +54,6 @@ const Dashboard = () => {
 
   const deposit = async () => {
     setIsLoading(false)
-    //here goes the call to deposit
     if (true) {
       setIsConfirmed(true)
       setJoinSuccess(true)
@@ -201,10 +189,6 @@ const Dashboard = () => {
             CONFIRM
           </p>
         </div>
-
-        {/* <div className="h-14 w-14 ml-2 my-auto bg-white rounded-full ">
-            <img src={doubleright} className="mx-auto mt-4" />
-          </div> */}
       </div>
     </div>
   )
@@ -233,7 +217,7 @@ const Dashboard = () => {
 
   const copyInviteLink = async () => {
     try {
-      await navigator.clipboard.writeText('https://api.catoff.xyz')
+      await navigator.clipboard.writeText('https://game.catoff.xyz')
       alert('Link copied to clipboard!')
     } catch (err) {
       alert('failed to Share')
@@ -353,7 +337,7 @@ const Dashboard = () => {
       <ChallengeSlider
         items={history.filter((item) => item.IsStarted && item.IsActive)}
       />
-      {history.filter((item) => !item.IsStarted && !item.IsActive).length >
+      {history.filter((item) => item.IsStarted && item.IsActive).length >
         0 && (
         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
           <p className={`${styles.heading2} !text-black`}>History</p>
@@ -366,7 +350,7 @@ const Dashboard = () => {
         className={`${styles.paddingX} ${styles.marginY} flex flex-col gap-[6px]`}
       >
         {history
-          .filter((item) => !item.IsStarted && !item.IsActive)
+          .filter((item) => item.IsStarted && !item.IsActive)
           .map((item, index) => {
             return (
               <div

@@ -89,7 +89,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
               (person, index) => (
                 <Competitor
                   key={index}
-                  isWinner={index === 0 && winner === person.username}
+                  isWinner={winner === person.username}
                   name={person.username}
                   steps={person.value}
                   hval={70}
@@ -101,7 +101,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
           : people.map((person, index) => (
               <Competitor
                 key={index}
-                isWinner={index === 0 && winner === person.username}
+                isWinner={winner === person.username}
                 name={person.username}
                 steps={person.value}
                 hval={70}

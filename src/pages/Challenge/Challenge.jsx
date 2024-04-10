@@ -142,6 +142,7 @@ function Challenge() {
           creator={userPerformance.ChallengeCreatorUsername}
           creatorImg={userPerformance.ChallengeCreatorImage}
           joined ={setUserPerformance.PlayersJoined}
+          setTab={setTab}
         />
       )}
 
