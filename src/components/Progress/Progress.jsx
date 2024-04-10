@@ -24,6 +24,7 @@ function Progress({
   creator,
   creatorImg,
   joined,
+  setTab
 }) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
@@ -203,6 +204,7 @@ function Progress({
         leaderBoard={leaderBoard}
         creator={creator}
         creatorImg={creatorImg}
+        setTab={setTab}
       />
 
       {item.filter((mem) => !mem.IsStarted).length > 0 && (

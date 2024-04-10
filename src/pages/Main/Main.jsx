@@ -8,7 +8,6 @@ import el2 from '../../assets/images/el2.png'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLoginState } from '../../redux/actions/actions'
-import Fetchdetails from '../FetchDetails/FetchDetails'
 
 function Main(props) {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)

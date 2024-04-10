@@ -1,22 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import store from './redux/store/store'
 import { Provider } from 'react-redux'
-import {
-  Challenge,
-  Dashboard,
-  Home,
-  Main,
-  Chat,
-  Fetchdetails,
-} from './pages'
+import { Challenge,Dashboard, Home,  Main,  Chat,} from './pages'
 import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
 import CreateChallenge from './pages/CreateChallenge/CreateChallenge'
-
-import { GoogleOAuthProvider } from '@react-oauth/google'
-
 function App() {
   return (
-    <GoogleOAuthProvider clientId="719827239908-s7sm3g1a0bavuus0fq039l8b73qvc6bq.apps.googleusercontent.com">
       <Provider store={store}>
         <Router>
           <Main>
@@ -26,21 +15,12 @@ function App() {
               <Route path="/details/:id" element={<Challenge />} />
               <Route path="/challenge/:id" element={<ChallengeDetails />} />
               <Route path="/chat" element={<Chat />} />
-              <Route path="/explore" element={<Fetchdetails />} />
               <Route path="/create" element={<CreateChallenge />} />
             </Routes>
           </Main>
         </Router>
       </Provider>
-    </GoogleOAuthProvider>
   )
 }
 
 export default App
-
-// {
-//   "code": "4/0AeaYSHC_LUBD7DbIottsXXJYiDGFeogYEZm3zciA8Deu0rkUJTOFqhDJ0SsTo7fw7I8XuQ",
-//   "scope": "email profile openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
-//   "authuser": "0",
-//   "prompt": "consent"
-// }

@@ -1,15 +1,8 @@
 import { setLoginState } from '../../redux/actions/actions'
 import { useNavigate, useLocation } from 'react-router-dom'
-import {
-  authenticateAPI,
-  createWallet,
-  getRefreshTokenAPI,
-  setPinAPI,
-  redirectGoogleAuth,
-} from '../../utils/ApiCalls'
+import { authenticateAPI, getRefreshTokenAPI,  redirectGoogleAuth,} from '../../utils/ApiCalls'
 import { useDispatch } from 'react-redux'
 import styles from '../../styles/style'
-
 import React, { useEffect, useState } from 'react'
 import { Popup } from '../../components'
 import {
@@ -65,7 +58,7 @@ function Login() {
 
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
-      const refreshToken = await getRefreshTokenAPI()
+    const refreshToken = await getRefreshTokenAPI()
       
         dispatch(setLoginState(true))
         navigate('/')
