@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { Challenge,Dashboard, Home,  Main,  Chat,} from './pages'
 import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
 import CreateChallenge from './pages/CreateChallenge/CreateChallenge'
+
 function App() {
   return (
       <Provider store={store}>
