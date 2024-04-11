@@ -24,6 +24,7 @@ function Progress({
   creator,
   creatorImg,
   joined,
+  setTab
 }) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
@@ -53,36 +54,64 @@ function Progress({
       <div className="h-[256px] flex justify-between mx-4 rounded-box gap-[2%]">
         <div className="bg-[#192126] relative flex flex-col justify-center items-center rounded-box w-[59%]">
           {!(type === 'Steps' || type === 'Calories') ? (
-            <>
-              <img
-                src={bullets}
-                className="absolute bottom-4 right-[40%]"
-                alt=""
-              ></img>
-              <div className="flex flex-col items-center justify-center h-[55%] gap-[14px]">
-                <div className={`${styles.paragraph} !font-[500]`}>
-                  Provider : Twitter
-                </div>
-                <div className="flex items-center justify-center h-[34px] bg-[#E1F076] rounded-[6px] px-2">
-                  <div
-                    className={`${styles.heading2} !text-[#000000] !text-[9px] `}
-                  >
-                    Connect Twitter Analytics
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-start h-[45%] gap-[9px]">
-                <div className={`${styles.heading2} flex gap-[4px]`}>
-                  0{' '}
-                  <span>
-                    <img src={likes}></img>
-                  </span>
-                </div>
-                <div className={`${styles.paragraph} !font-[400]`}>
-                  Total likes on post
-                </div>
-              </div>
-            </>
+             <>
+             <img
+                 src={bullets}
+                 className="absolute bottom-4 right-[40%]"
+                 alt=""
+               ></img>
+                <div className={`${styles.paragraph} absolute top-[8px] right-[12px]`} onClick={getVerificationReq}>
+                <img
+                 src={refresh}
+                
+                 alt=""
+               ></img>
+               
+               </div>
+             <div className='flex items-center justify-center h-[55%] gap-[14px]'>
+             {/* <div className={`${styles.paragraph} !font-[500]`}>
+                 Provider : Twitter
+               </div>
+               <div className='flex items-center justify-center h-[34px] bg-[#E1F076] rounded-[6px] px-2'>
+               <div className={`${styles.heading2} !text-[#000000] !text-[9px] `}>
+                Refresh Twitter Analytics
+               </div>
+     
+               </div> */}
+               <div
+                     className="rounded-full w-[66px] h-[66px] flex items-center justify-center"
+                     style={progressStyle}
+                   >
+                     <div className="rounded-full bg-black w-[64px] h-[64px] flex items-center justify-center">
+                       <img
+                         src={localStorage.getItem('profile')}
+                         className="rounded-full w-[60px] h-[60px]"
+                       ></img>
+                     </div>
+                     
+                   </div>
+                   <div className={`flex flex-col gap-[1px] text-white`}>
+                     <div className={`${styles.heading2}`}>
+                       Twitter
+                     </div>
+                     <div className={`${styles.paragraph} !text-[10px]`}>
+                       {localStorage.getItem('name')}
+                     </div>
+                   </div>
+             </div>
+             
+             
+             <div className='flex flex-col items-center justify-start h-[45%] gap-[9px]'>
+             <div className={`${styles.heading2} flex gap-[4px]`}>
+                 {value} <span><img src={likes}></img></span>
+               </div>
+             <div className={`${styles.paragraph} !font-[400]`}>
+                 Total likes on post
+               </div>
+     
+             </div>
+             
+             </>
           ) : (
             <>
               {' '}
@@ -175,6 +204,7 @@ function Progress({
         leaderBoard={leaderBoard}
         creator={creator}
         creatorImg={creatorImg}
+        setTab={setTab}
       />
 
       {item.filter((mem) => !mem.IsStarted).length > 0 && (

@@ -1,15 +1,8 @@
 import { setLoginState } from '../../redux/actions/actions'
 import { useNavigate, useLocation } from 'react-router-dom'
-import {
-  authenticateAPI,
-  createWallet,
-  getRefreshTokenAPI,
-  setPinAPI,
-  redirectGoogleAuth,
-} from '../../utils/ApiCalls'
+import { authenticateAPI, getRefreshTokenAPI,  redirectGoogleAuth,} from '../../utils/ApiCalls'
 import { useDispatch } from 'react-redux'
 import styles from '../../styles/style'
-
 import React, { useEffect, useState } from 'react'
 import { Popup } from '../../components'
 import {
@@ -28,6 +21,7 @@ function Login() {
 
   const handleClosePopup = () => {
     setIsPopupOpen(false)
+    
   }
 
   const popupContent = (
@@ -65,18 +59,11 @@ function Login() {
 
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
-    if (output.authentication.status === 'success' && output.wallet.status === 'success') {
-      const refreshToken = await getRefreshTokenAPI()
-      if (refreshToken.status === "success") {
+    const refreshToken = await getRefreshTokenAPI()
         dispatch(setLoginState(true))
         navigate('/')
         sessionStorage.setItem("authProcess", "true")
-      } else {
-        setIsPopupOpen(false)
-      }
-    } else {
-      setIsPopupOpen(false)
-    }
+    
   }
 
   const renderStepContent = () => {

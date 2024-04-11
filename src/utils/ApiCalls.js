@@ -252,12 +252,12 @@ const withDrawApi = async (amount) => {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
   let body = {
-  amount: 1,
+  amount: parseInt(amount),
     currency: "SOL"
 }
 
   try {
-    const response = await axios.get(`${BackendURL}/user/withdraw`, body, {
+    const response = await axios.post(`${BackendURL}/user/withdraw`, body, {
       headers,
     })
     return response.data

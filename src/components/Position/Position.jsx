@@ -6,7 +6,8 @@ import batch from '../../assets/images/batch.png'
 import move from '../../assets/images/move.png'
 import blur from '../../assets/images/blur.png'
 
-const Position = ({ type, profile, leaderBoard, creator, creatorImg }) => {
+const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab }) => {
+  const handleTab = () => {setTab(1)}
   const Competitor = ({ profileSrc, name, steps, isUser }) => (
     <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
       <div className="relative h-[85px] w-[85px] flex items-end justify-center">
@@ -179,7 +180,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg }) => {
             </div>
           </div>
 
-          <img src={move} className="h-[40px]"></img>
+          <img src={move} className="h-[40px]" onClick = {handleTab}></img>
         </div>
       )}
       {renderMatchType()}
