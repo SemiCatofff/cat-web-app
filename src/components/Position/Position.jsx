@@ -29,11 +29,11 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg }) => {
 
         {!isUser ? (
           <span className={`${styles.subtext} !text-[#202117]`}style={{ filter: 'blur(3px)' }}>
-            {steps} Steps
+            {steps} points
           </span>
         ) : (
           <span className={`${styles.subtext} !text-[#202117]`}>
-          {steps} Steps
+          {steps} points
         </span>
         )}
       </div>
@@ -93,7 +93,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg }) => {
                 <p className={`${styles.subheading} !text-[#4f4f4f]`}>User</p>
               </div>
               <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
-                <p className={`${styles.subtext} !text-[#4f4f4f]`}>steps </p>
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>points </p>
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg }) => {
                 leaderBoard.length > 0 ? leaderBoard[1].profilePicture : ''
               }
               name={leaderBoard.length > 0 ? leaderBoard[1].username : ''}
-              steps={leaderBoard.length > 0 ? leaderBoard[0].value : ''}
+              steps={leaderBoard.length > 0 ? leaderBoard[1].value : ''}
               isUser={leaderBoard[1].username == localStorage.getItem('name')}
             />
           </div>
