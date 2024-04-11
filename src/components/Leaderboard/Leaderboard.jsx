@@ -62,7 +62,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
 
     <div className="flex flex-col items-center z-20">
       <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-      <span className={`${styles.subtext} !text-[#202117]`}>{steps} Steps</span>
+      <span className={`${styles.subtext} !text-[#202117]`}>{steps} Points</span>
     </div>
 
     {/* {isWinner && <div className="h-[5px]"> </div>} */}
