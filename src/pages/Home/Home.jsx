@@ -1,33 +1,23 @@
 import styles from '../../styles/style'
-import { homeHeader, filter, search } from '../../assets/images'
+import { homeHeader, filter } from '../../assets/images'
 import { ChallengeCard } from '../../components'
 import { useEffect, useState } from 'react'
-import {
-  getOngoingChallenges,
-  getUserChallenges,
-  getUserDetails,
-  searchChallengeAPI,
-} from '../../utils/ApiCalls'
+import { getOngoingChallenges, getUserDetails,searchChallengeAPI,} from '../../utils/ApiCalls'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
-import { setWalletAddress } from '../../redux/actions/actions'
-import { useDispatch } from 'react-redux'
 
 const Home = () => {
   const [challenges, setChallenges] = useState([])
   const [userInfo, setUserInfo] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
-
   const [isFilterVisible, setIsFilterVisible] = useState(false)
   const [currentFilter, setCurrentFilter] = useState('All')
   const toggleFilter = () => {
     setIsFilterVisible(!isFilterVisible)
   }
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-
   const getChalData = async (filter) => {
     const output = await getOngoingChallenges(filter, 1, 10)
     if (output.success) {
@@ -171,6 +161,9 @@ const Home = () => {
           </p>
           <div
             className={`${styles.caption2} mx-3 ${styles.paddingX} transparent-bg  py-2 my-auto rounded-xl text-center px-2 flex absolute bottom-4 `}
+            onClick={() => {
+              navigate('/create')
+            }}
           >
             Create Now
           </div>

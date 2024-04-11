@@ -7,6 +7,9 @@ import { yellowarrow } from '../../../assets/images'
 import Popup from '../../Popup/Popup'
 import { createChallengeAPI } from '../../../utils/ApiCalls'
 import { useNavigate, useForm } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setPopupState } from '../../../redux/actions/actions'
+
 
 const DareChallengeForm = ({
   register,
@@ -14,15 +17,17 @@ const DareChallengeForm = ({
   handleSubmit,
   setValue,
   watch,
+  setStep
+  
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [cid, setCid] = useState('')
   const navigate = useNavigate()
-
-  // Watch the challengeType value to determine the form behavior
+  const dispatch = useDispatch()
   const challengeType = watch('challengeType')
+
 
   useEffect(() => {
     // Default values for "0v1" and "1v1" challenge types
@@ -50,6 +55,7 @@ const DareChallengeForm = ({
   }
 
   const handleClosePopup = () => {
+    dispatch(setPopupState(false))
     setIsPopupOpen(false)
   }
 
@@ -119,6 +125,7 @@ const DareChallengeForm = ({
     }
     createChallenge(request)
     setIsLoading(true)
+    dispatch(setPopupState(true))
     setIsPopupOpen(true)
   }
 
@@ -207,8 +214,9 @@ const DareChallengeForm = ({
                 textColor="black"
                 buttonColor="[#F2EFFF]"
                 type="button"
+                onClick={()=>{setStep(1)}}
               >
-                Cancel
+                Back
               </CustomButton>
               <CustomButton
                 textColor="yellow"

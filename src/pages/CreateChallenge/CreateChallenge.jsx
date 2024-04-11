@@ -30,6 +30,7 @@ const CreateChallenge = () => {
           watch={watch} // Pass watch down to the DareChallengeForm
           handleSubmit={handleSubmit}
           errors={errors}
+          setStep={setStep}
         />
       )}
     </>

@@ -21,8 +21,8 @@ const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
   }
 
   const shareChallenge = (id) => {
-    alert(id)
-    console.log(id)
+    // alert(id)
+    // console.log(id)
     const challengeUrl = `${window.location.origin}/challenge/${id}`
     copyToClipboard(challengeUrl)
   }
@@ -38,7 +38,7 @@ const ChallengeCard = ({ id, name, date, people, wager, prize, type }) => {
             <img src={avatargrp} alt="" />+ {people} members
           </div>
           <div
-            className="rounded px-3 py-4 transparent-bg my-auto"
+            className="rounded-full px-3 py-3 transparent-bg my-auto"
             onClick={(e) => {
               e.stopPropagation()
               shareChallenge(id)

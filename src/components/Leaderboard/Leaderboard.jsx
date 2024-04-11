@@ -100,7 +100,7 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
           <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s </div>
         </div>
         {leader.length === 2 &&<Competitor
-          isWinner={false}
+          isWinner={winner === leader[1].username}
           name={leader[1].username}
           steps={leader[1].value}
           profileSrc={leader[1].profilePicture}
