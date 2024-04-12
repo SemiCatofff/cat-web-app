@@ -11,7 +11,7 @@ import tg from '../../assets/images/tg.png'
 import { getLeaderboard } from '../../utils/ApiCalls'
 
 
-const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboard }) => (
+const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboard, type }) => (
   <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
     <div className="">
       {isWinner && (
@@ -35,7 +35,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboar
 
     <div className="flex flex-col items-center z-20">
       <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-      <span className={`${styles.subtext} !text-[#202117]`}>{steps} Steps</span>
+      <span className={`${styles.subtext} !text-[#202117]`}>{steps} {type === "DigitalProof"? "Points": type}</span>
     </div>
 
     {index === 1 && <div className="h-[5px]"> </div>}
@@ -43,7 +43,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboar
 )
 
 
-const PlayerInfo = ({ index, name, steps, prof }) => {
+const PlayerInfo = ({ index, name, steps, prof, type }) => {
   return (
     <div className="h-[48px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center">
       <div className={`${styles.subheading} !text-[#4f4f4f]`}>{index + 4}</div>
@@ -59,7 +59,7 @@ const PlayerInfo = ({ index, name, steps, prof }) => {
         <p className={`${styles.subheading} !text-[#4f4f4f]`}>{name}</p>
       </div>
       <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
-        <p className={`${styles.subtext} !text-[#4f4f4f]`}>{steps} </p>
+        <p className={`${styles.subtext} !text-[#4f4f4f]`}>{steps}{type} </p>
       </div>
     </div>
   )
@@ -95,6 +95,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
                   hval={70}
                   index={index === 0 ? 2 : index === 2 ? 3 : index}
                   profileSrc={person.profilePicture}
+                  type ={type}
                 />
               )
             )
@@ -107,6 +108,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
                 hval={70}
                 index={index + 1}
                 profileSrc={person.profilePicture}
+                type ={type}
               />
             ))}
       </div>
@@ -121,6 +123,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
                 address={item.address}
                 steps={item.value}
                 prof= {item.profilePicture}
+                type ={type}
               />
             )
           })}
@@ -139,7 +142,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
         :
    <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-          You won 2000 credits!
+          You won
         </div>
         <div
           className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
