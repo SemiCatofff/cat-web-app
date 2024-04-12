@@ -7,11 +7,11 @@ import el1 from '../../assets/images/el1.png'
 import el2 from '../../assets/images/el2.png'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setLoginState } from '../../redux/actions/actions'
-import Fetchdetails from '../FetchDetails/FetchDetails'
+import { setLoginState, setPopupState } from '../../redux/actions/actions'
 
 function Main(props) {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+  const isPopupOpen = useSelector((state) => state.user.isPopup)
   const location = useLocation()
   const routes = ['/', '/create', '/dashboard', '/settings', '/chat']
   const dispatch = useDispatch()
@@ -22,6 +22,10 @@ function Main(props) {
       dispatch(setLoginState(true))
     }
   }, [dispatch])
+  useEffect(() => {
+  
+      dispatch(setPopupState(false))
+  }, [window.location.pathname])
 
   const showAppbar = routes.includes(location.pathname)
   
@@ -41,7 +45,7 @@ function Main(props) {
           <div className="absolute rigth-0 bottom-[5px]">
             <img src={el1} alt=""></img>
           </div>
-          {showAppbar && (
+          {showAppbar && !isPopupOpen && (
             <div className="z-20">
               <Appbar />
             </div>

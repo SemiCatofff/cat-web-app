@@ -14,13 +14,8 @@ const ChallengeSlider = ({ items }) => {
     slidesToScroll: 2,
   }
   const navigate = useNavigate()
-
-  // const sliderContainerClasses = `slider-container ${
-  //   items.length === 1 ? 'single-item' : ''
-  // }`
-
   return (
-    <div className={` slider-container `}>
+    <div className={` slider-container w-[95%]`}>
       <Slider {...settings}>
         {items.map((item) => {
           return (

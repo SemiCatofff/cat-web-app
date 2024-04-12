@@ -2,21 +2,9 @@ import React, { useState, useEffect } from 'react'
 import styles from '../../styles/style'
 import { useNavigate } from 'react-router-dom'
 import { ChallengeCard, Popup } from '../../components/index'
-import {
-  avatargrp2,
-  targetbg,
-  arrow,
-  graphic1,
-  graphic2,
-  doubleright,
-  yellowarrow,
-} from '../../assets/images'
+import {  targetbg,  arrow,  graphic1,  graphic2,  yellowarrow,} from '../../assets/images'
 import { useParams } from 'react-router-dom'
-import {
-  getChallenges,
-  joinChallengeAPI,
-  getUserChallenges,
-} from '../../utils/ApiCalls'
+import {  getChallenges,  joinChallengeAPI,  getUserChallenges,} from '../../utils/ApiCalls'
 import moment from 'moment'
 import hippo from '../../assets/images/hippo.png'
 
@@ -210,13 +198,20 @@ function ChallengeDetails() {
           <div className={` absolute top-4 w-full `}>
             <div className={`flex justify-between ${styles.marginX}`}>
               <p className={`${styles.subheading}`}>Target</p>
-              <p className={`${styles.subheading}`}> {!moment(parseInt(challengeDetails.StartDate)).isBefore(moment())? "Starts in":"Started before" } </p>
+              <p className={`${styles.subheading}`}>
+                {' '}
+                {!moment(parseInt(challengeDetails.StartDate)).isBefore(
+                  moment()
+                )
+                  ? 'Starts in'
+                  : 'Started'}{' '}
+              </p>
             </div>
           </div>
           <div className={` absolute bottom-4 w-full `}>
             <div className={`flex justify-between ${styles.marginX}`}>
               <p className={`${styles.heading2} text-yellow`}>
-                {challengeDetails.Target} steps in{' '}
+                {challengeDetails.Target} {challengeDetails.GameType === 'DigitalProof'? "Points": challengeDetails.GameType} in{' '}
                 {moment
                   .duration(
                     moment(parseInt(challengeDetails.EndDate)).diff(
