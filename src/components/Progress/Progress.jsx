@@ -199,6 +199,7 @@ function Progress({
 
       <Position
         type={game !== '0v1' && leaderBoard.length < 2 ? '0' : game}
+        game= {type}
         profile={profile}
         styles={styles}
         leaderBoard={leaderBoard}

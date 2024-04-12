@@ -6,9 +6,7 @@ import styles from '../../styles/style'
 import React, { useEffect, useState } from 'react'
 import { Popup } from '../../components'
 import {
-  login,
-  arrowChevron,
-  yellowarrow,
+  login,  yellowarrow,
   arrow,
 } from '../../assets/images/index'
 
@@ -98,13 +96,13 @@ function Login() {
         return (
           <div className="content z-1">
             <div
-              className={`${styles.heading1} text-center mt-10 !text-black px-12`}
+              className={`${styles.heading1} text-center mt-6 !text-black px-12`}
             >
               Welcome To <br />
               Catoff Gaming 🔥
             </div>
             <div
-              className={`${styles.heading2} mt-8`}
+              className={`${styles.heading2} mt-4`}
               onClick={handleGoogleLogin}
             >
               <div className="h-16 py-3.5 bg-stone-900  rounded-full justify-center items-center inline-flex w-full">
@@ -117,17 +115,17 @@ function Login() {
             <div className="mt-8">
               <div className="w-80 h-4 opacity-50 justify-start items-center gap-5 inline-flex">
                 <div className="grow shrink mt-5 p-2 border-dashed  border-t-2 border-stone-900" />
-                <div className="justify-start items-center gap-5 flex">
+                <div className="justify-start items-center gap-5 flex flex-col">
                   <div className="text-center text-stone-900 text-sm font-normal font-['Inter'] leading-none">
                     Already our user?
                   </div>
+               
                 </div>
                 <div className="grow shrink mt-5 p-2 border-dashed border-t-2 border-stone-900" />
               </div>
-            </div>
-            <div className="text-center mt-8 cursor-pointer flex justify-center  text-stone-900 text-sm font-normal font-['Inter'] leading-none">
+              <div className="text-center text-stone-900 text-sm font-normal font-['Inter'] "  onClick={handleGoogleLogin}>
               Continue with your account{' '}
-              {/* <img src={arrowChevron} alt="arrow" className="mx-2 mt-0.5" /> */}
+                  </div>
             </div>
           </div>
         )
