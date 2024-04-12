@@ -11,7 +11,6 @@ const redirectGoogleAuth = async () => {
 }
 
 // ACCOUNT FETCHING SCREEN
-
 const authenticateAPI = async () => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
