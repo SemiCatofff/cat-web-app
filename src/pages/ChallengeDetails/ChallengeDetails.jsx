@@ -204,7 +204,7 @@ function ChallengeDetails() {
                   moment()
                 )
                   ? 'Starts in'
-                  : 'Started '}{' '}
+                  : 'Started'}{' '}
               </p>
             </div>
           </div>
