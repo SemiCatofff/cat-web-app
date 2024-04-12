@@ -93,7 +93,7 @@ const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creator
         :
    <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-          You won 2000 credits!
+          You won!
         </div>
         <div
           className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
