@@ -1,14 +1,15 @@
 import { setLoginState } from '../../redux/actions/actions'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { authenticateAPI, getRefreshTokenAPI,  redirectGoogleAuth,} from '../../utils/ApiCalls'
+import {
+  authenticateAPI,
+  getRefreshTokenAPI,
+  redirectGoogleAuth,
+} from '../../utils/ApiCalls'
 import { useDispatch } from 'react-redux'
 import styles from '../../styles/style'
 import React, { useEffect, useState } from 'react'
 import { Popup } from '../../components'
-import {
-  login,  yellowarrow,
-  arrow,
-} from '../../assets/images/index'
+import { login, yellowarrow, arrow } from '../../assets/images/index'
 
 function Login() {
   const location = useLocation()
@@ -16,10 +17,10 @@ function Login() {
   const dispatch = useDispatch()
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
+  const [accept, setAccept] = useState(false)
 
   const handleClosePopup = () => {
     setIsPopupOpen(false)
-    
   }
 
   const popupContent = (
@@ -38,8 +39,8 @@ function Login() {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
     const jwt = queryParams.get('jwt')
-    if (jwt && !sessionStorage.getItem("authProcess")) {
-      sessionStorage.setItem("authProcess", "false")
+    if (jwt && !sessionStorage.getItem('authProcess')) {
+      sessionStorage.setItem('authProcess', 'false')
       setIsPopupOpen(true)
       sessionStorage.setItem('authToken', jwt)
       handleAuthenticationProcess()
@@ -47,21 +48,24 @@ function Login() {
   }, [])
 
   const handleGoogleLogin = async () => {
+    if(accept){
     try {
       const output = await redirectGoogleAuth()
       setCurrentStep(currentStep + 1)
     } catch (error) {
       console.error('Error during login:', error)
+    }}
+    else{
+      alert("Please accept the terms and conditions")
     }
   }
 
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
     const refreshToken = await getRefreshTokenAPI()
-        dispatch(setLoginState(true))
-        navigate('/')
-        sessionStorage.setItem("authProcess", "true")
-    
+    dispatch(setLoginState(true))
+    navigate('/')
+    sessionStorage.setItem('authProcess', 'true')
   }
 
   const renderStepContent = () => {
@@ -96,10 +100,18 @@ function Login() {
         return (
           <div className="content z-1">
             <div
-              className={`${styles.heading1} text-center mt-6 !text-black px-12`}
+              className={`${styles.heading1} text-center mt-3 !text-black px-12`}
             >
-              Welcome To <br />
-              Catoff Gaming 🔥
+              Welcome To Catoff Gaming 🔥
+            </div>
+            <div className='flex gap-[10px] justify-start items-start mt-3'>
+            <input
+              type="checkbox"
+              className="mt-[3px]"
+              value = {accept}
+              onChange={()=>{setAccept(!accept)}}/>
+            <p className='text-[12px] !text-stone-900'>I acknowledge that I agree to the 
+            <span className='text-blue-600'> <a href="https://www.catoff.xyz/terms" target="_blank">Terms of Service</a></span> and <span className='text-blue-600'><a href="https://www.catoff.xyz/privacypolicy" target="_blank">Privacy Policy</a></span> of the platform</p>
             </div>
             <div
               className={`${styles.heading2} mt-4`}
@@ -117,15 +129,17 @@ function Login() {
                 <div className="grow shrink mt-5 p-2 border-dashed  border-t-2 border-stone-900" />
                 <div className="justify-start items-center gap-5 flex flex-col">
                   <div className="text-center text-stone-900 text-sm font-normal font-['Inter'] leading-none">
-                    Already our user?
+                    Already our user? <span className='text-blue-600'>Login</span>
                   </div>
-               
                 </div>
                 <div className="grow shrink mt-5 p-2 border-dashed border-t-2 border-stone-900" />
               </div>
-              <div className="text-center text-stone-900 text-sm font-normal font-['Inter'] "  onClick={handleGoogleLogin}>
-              Continue with your account{' '}
-                  </div>
+              {/* <div
+                className="text-center text-stone-900 text-sm font-normal font-['Inter'] "
+                onClick={handleGoogleLogin}
+              >
+                Continue with your account{' '}
+              </div> */}
             </div>
           </div>
         )
