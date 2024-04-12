@@ -53,7 +53,7 @@ function Challenge() {
     const timer = setTimeout(() => {
       fetchLeaderboard()
       getDashboardDetails() 
-    }, 100000); 
+    }, 10000); 
     return () => clearTimeout(timer);
   }, [userPerformance, leaderBoard]);
 
@@ -142,6 +142,7 @@ function Challenge() {
           creator={userPerformance.ChallengeCreatorUsername}
           creatorImg={userPerformance.ChallengeCreatorImage}
           joined ={setUserPerformance.PlayersJoined}
+          setTab={setTab}
         />
       )}
 
