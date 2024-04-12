@@ -6,7 +6,8 @@ import batch from '../../assets/images/batch.png'
 import move from '../../assets/images/move.png'
 import blur from '../../assets/images/blur.png'
 
-const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab }) => {
+
+const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, game }) => {
   const handleTab = () => {setTab(1)}
   const Competitor = ({ profileSrc, name, steps, isUser }) => (
     <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
@@ -30,11 +31,11 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab }) =
 
         {!isUser ? (
           <span className={`${styles.subtext} !text-[#202117]`}style={{ filter: 'blur(3px)' }}>
-            {steps} Steps
+            {steps} {game === "DigitalProof" ? "Points": game}
           </span>
         ) : (
           <span className={`${styles.subtext} !text-[#202117]`}>
-          {steps} Steps
+          {steps} {game === "DigitalProof" ? "Points": game}
         </span>
         )}
       </div>

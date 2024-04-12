@@ -31,7 +31,7 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
   )
 }
 
-const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
+const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, type }) => (
   <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
     {isWinner && (
       <span className={`${styles.buttoncta2} !text-[#202117] mb-[6px]`}>
@@ -62,7 +62,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index }) => (
 
     <div className="flex flex-col items-center z-20">
       <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-      <span className={`${styles.subtext} !text-[#202117]`}>{steps} Steps</span>
+      <span className={`${styles.subtext} !text-[#202117]`}>{steps} {type === "DigitalProof"? "Points": type}</span>
     </div>
 
     {/* {isWinner && <div className="h-[5px]"> </div>} */}
@@ -95,6 +95,7 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
           profileSrc={leader[0].profilePicture}
           hval={80}
           index={1}
+          type = {type}
         />}
         <div className="w-[14%] h-[100px] flex justify-center">
           <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s </div>
@@ -106,6 +107,7 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
           profileSrc={leader[1].profilePicture}
           hval={80}
           index={2}
+          type = {type}
         />}
       </div>
 
@@ -132,7 +134,7 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
         :
    <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-          You won 2000 credits!
+          You won
         </div>
         <div
           className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
