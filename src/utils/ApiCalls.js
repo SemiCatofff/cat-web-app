@@ -1,7 +1,6 @@
 import axios from 'axios'
 const BackendURL = 'https://api.catoff.xyz'
 
-
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
 const redirectGoogleAuth = async () => {
