@@ -129,7 +129,7 @@ function Login() {
                 <div className="grow shrink mt-5 p-2 border-dashed  border-t-2 border-stone-900" />
                 <div className="justify-start items-center gap-5 flex flex-col">
                   <div className="text-center text-stone-900 text-sm font-normal font-['Inter'] leading-none">
-                    Already our user? <span className='text-blue-600'>Login</span>
+                    Already our user? <span className='text-blue-600' onClick={handleGoogleLogin}>Login</span>
                   </div>
                 </div>
                 <div className="grow shrink mt-5 p-2 border-dashed border-t-2 border-stone-900" />
