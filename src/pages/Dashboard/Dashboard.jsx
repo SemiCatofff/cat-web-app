@@ -204,7 +204,7 @@ const Dashboard = () => {
         {history
           .filter((item) => item.IsStarted && item.IsActive)
           .map((item, index) => {
-            return ( <HistoryItem item ={item} index={index} /> )
+            return ( <HistoryItem item ={item} index={index}e /> )
           })}
       </div>
       {/* Buttons */}

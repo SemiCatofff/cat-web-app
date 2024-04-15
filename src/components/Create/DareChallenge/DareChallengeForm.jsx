@@ -195,7 +195,7 @@ const DareChallengeForm = ({
             placeholder="Enter Wager Amount"
             errorName="wager"
             errors={errors}
-            footerText="This is a sample footer text"
+            footerText=""
             {...register('wager', { required: 'wager value is required' })}
           />
           {/* <SelectInput

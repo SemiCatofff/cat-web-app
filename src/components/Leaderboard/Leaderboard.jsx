@@ -14,7 +14,7 @@ const calculateHeight = (steps, maxSteps) => {
   return Math.floor(((maxSteps - steps) / maxSteps) * maxHeight)
 }
 const LeaderboardItem = ({ steps, maxSteps }) => {
-  const barHeight = calculateHeight(steps, maxSteps)
+  const barHeight = calculateHeight(steps > maxSteps? maxSteps: steps, maxSteps)
 
   return (
     <div className="flex flex-col w-[50%] justify-end items-center gap-[20px]">
@@ -31,7 +31,15 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
   )
 }
 
-const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, type }) => (
+const Competitor = ({
+  profileSrc,
+  name,
+  steps,
+  isWinner,
+  hval,
+  index,
+  type,
+}) => (
   <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
     {isWinner && (
       <span className={`${styles.buttoncta2} !text-[#202117] mb-[6px]`}>
@@ -62,14 +70,23 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, type }) =>
 
     <div className="flex flex-col items-center z-20">
       <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-      <span className={`${styles.subtext} !text-[#202117]`}>{steps} {type === "DigitalProof"? "Points": type}</span>
+      <span className={`${styles.subtext} !text-[#202117]`}>
+        {steps} {type === 'DigitalProof' ? 'Points' : type}
+      </span>
     </div>
 
     {/* {isWinner && <div className="h-[5px]"> </div>} */}
   </div>
 )
 
-const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) => {
+const StepUpChallenge = ({
+  target,
+  winner,
+  type,
+  isActive,
+  ends,
+  leaderBoard,
+}) => {
   const navigate = useNavigate()
   const params = useParams()
   const [leader, setLeader] = useState(leaderBoard || [])
@@ -88,27 +105,31 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
   return (
     <div className="flex flex-col mx-4 mt-4 items-center justify-center">
       <div className="flex items-end w-[90%] mt-1">
-        {leader.length >= 1 && <Competitor
-          isWinner={winner === leader[0].username}
-          name={leader[0].username}
-          steps={leader[0].value}
-          profileSrc={leader[0].profilePicture}
-          hval={80}
-          index={1}
-          type = {type}
-        />}
+        {leader.length >= 1 && (
+          <Competitor
+            isWinner={winner === leader[0].username}
+            name={leader[0].username}
+            steps={leader[0].value}
+            profileSrc={leader[0].profilePicture}
+            hval={80}
+            index={1}
+            type={type}
+          />
+        )}
         <div className="w-[14%] h-[100px] flex justify-center">
           <div className={`${styles.buttoncta2} !text-[#202117]`}>v/s </div>
         </div>
-        {leader.length === 2 &&<Competitor
-          isWinner={winner === leader[1].username}
-          name={leader[1].username}
-          steps={leader[1].value}
-          profileSrc={leader[1].profilePicture}
-          hval={80}
-          index={2}
-          type = {type}
-        />}
+        {leader.length === 2 && (
+          <Competitor
+            isWinner={winner === leader[1].username}
+            name={leader[1].username}
+            steps={leader[1].value}
+            profileSrc={leader[1].profilePicture}
+            hval={80}
+            index={2}
+            type={type}
+          />
+        )}
       </div>
 
       <div className="flex gap-[14%] w-[90%] mt-4">
@@ -122,31 +143,30 @@ const StepUpChallenge = ({ target, winner, type, isActive,ends , leaderBoard}) =
       </div>
       <div className="h-[3px] w-[296px] bg-[#6F6F6F] bg-opacity-35"></div>
       <div className="flex flex-col items-center justify-center mt-[20px] gap-[10px]">
-      { !isActive?
-       <>
-        <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-           Challenge Ends in
-        </div>
-        <div className={`${styles.heading2} !text-[#202117]`}>
-           {ends}
-        </div>
-        </> 
-        :
-   <>
-        <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-          You won
-        </div>
-        <div
-          className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
-          onClick={() => {
-            navigate('/dashboard')
-          }}
-        >
-          CLAIM
-        </div>
-        </> 
-
-}
+        {!isActive ? (
+          <>
+            <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
+              Challenge Ends in
+            </div>
+            <div className={`${styles.heading2} !text-[#202117]`}>{ends}</div>
+          </>
+        ) : (
+          <>
+            <div className={`${styles.heading2} !text-[#202117] !font-regular`}>
+              {winner === localStorage.getItem('name')
+                ? 'You won!'
+                : 'Better luck next time!'}
+            </div>
+            <div
+              className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
+              onClick={() => {
+                navigate('/dashboard')
+              }}
+            >
+              CLAIM
+            </div>
+          </>
+        )}
       </div>
 
       <div className="relative w-full h-[85px] mx-4 my-6 rounded-box bg-[#192126] flex items-center justify-center gap-[7%]">
