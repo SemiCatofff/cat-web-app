@@ -1,12 +1,16 @@
 import moment from "moment"
 import styles
  from "../../styles/style"
+import { useNavigate } from "react-router-dom"
 const HistoryItem = ({item, index}) =>{
+
+  const navigate = useNavigate()
+  
 
 return (
     <div
     className={`flex justify-between bg-white rounded-xl ${styles.paddingX} px-6 ${styles.paddingY} py-4 shadow`}
-  >
+   onClick={()=>{navigate(`/challenge/${item.ChallengeID}`)}} >
     <div className="flex">
       <div className="w-12 h-12 rounded-full bg-[#FFF5D9] text-center">
         <p className={`${styles.subheading} !text-black my-3.5`}>
