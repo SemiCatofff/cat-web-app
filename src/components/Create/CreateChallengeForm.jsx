@@ -1,11 +1,18 @@
 import { Input, RadioInput, DatePickerInput, SelectInput } from '../ui/Input'
 import CustomButton from '../ui/Button'
 import { yellowarrow } from '../../assets/images'
+import { useEffect, useState } from 'react'
 
-const CreateChallengeForm = ({ setStep, register, handleSubmit, errors }) => {
+const CreateChallengeForm = ({ setStep, register, watch, handleSubmit, errors }) => {
   const onSubmit = (data) => {
     setStep(2)
   }
+  const selectedCategory = watch('GameType');
+  const [selection, setSelection] = useState(false)
+  
+  useEffect(()=>{
+   setSelection(selectedCategory !== '2')
+  },[selectedCategory])
 
   return (
     <div className="px-4">
@@ -60,7 +67,7 @@ const CreateChallengeForm = ({ setStep, register, handleSubmit, errors }) => {
         <SelectInput
           label="Select Category"
           id="category"
-          options={['Steps', 'Calories']}
+          options={['Steps', 'Calories','Twitter Impressions (Reclaim)']}
           {...register('GameType')}
         />
 
@@ -69,7 +76,7 @@ const CreateChallengeForm = ({ setStep, register, handleSubmit, errors }) => {
             Challenge Type
           </label>
           <div className="grid grid-cols-2 gap-3">
-            {['0v1 Challenge', '1v1 Challenge', 'Multiplayer Challenge'].map(
+            {(!selection? ['1v1 Challenge','Multiplayer Challenge']: ['0v1 Challenge', '1v1 Challenge', 'Multiplayer Challenge']).map(
               (value, index) => {
                 return (
                   <RadioInput
