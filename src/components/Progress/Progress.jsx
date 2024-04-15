@@ -123,7 +123,7 @@ function Progress({
               <div
                 className={`${styles.paragraph} absolute top-[8px] left-[12px]`}
               >
-                {moment().format('DD-MM-YYYY')}
+                {moment().format('MMM D, YYYY')}
               </div>
               <img
                 src={bullets}
