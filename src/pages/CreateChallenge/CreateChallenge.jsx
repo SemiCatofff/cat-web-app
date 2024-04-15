@@ -19,6 +19,7 @@ const CreateChallenge = () => {
         <CreateChallengeForm
           setStep={setStep}
           register={register}
+          watch={watch}
           handleSubmit={handleSubmit}
           errors={errors}
         />

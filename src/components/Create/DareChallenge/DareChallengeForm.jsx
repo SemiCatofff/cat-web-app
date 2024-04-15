@@ -27,6 +27,7 @@ const DareChallengeForm = ({
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const challengeType = watch('challengeType')
+  const GameType = watch('GameType')
 
 
   useEffect(() => {
@@ -35,21 +36,32 @@ const DareChallengeForm = ({
       0: { maxParticipants: '1', target: '1' }, // 0v1 Challenge
       1: { maxParticipants: '2', target: '1' }, // 1v1 Challenge
     }
-
-    if (defaults[challengeType]) {
-      setValue('maxParticipant', defaults[challengeType].maxParticipants)
-      setValue('Target', defaults[challengeType].target)
+    const defaultsR = {
+      0: { maxParticipants: '2', target: '2' }, // 0v1 Challenge
     }
+    if(GameType !== '2'){
+      if (defaults[challengeType]) {
+        setValue('maxParticipant', defaults[challengeType].maxParticipants)
+
+      }
+    }
+    else{
+      if (defaultsR[challengeType]) {
+      setValue('maxParticipant', defaultsR[challengeType].maxParticipants)}
+    }
+  
   }, [challengeType, setValue])
 
   function getGameId(participation, game) {
     const gameIdMap = {
       '00': 1, // 0v1 Steps
       '01': 2, // 0v1 Calories
-      10: 3, // 1v1 Steps
-      11: 4, // 1v1 Calories
-      20: 5, // nvn Steps
-      21: 6, // nvn Calories
+      '10': 3, // 1v1 Steps
+      '11': 4, // 1v1 Calories
+      '20': 5, // nvn Steps
+      '21': 6, // nvn Calories
+      '02': 7,
+      '12':8
     }
     return gameIdMap[`${participation}${game}`]
   }
@@ -112,7 +124,8 @@ const DareChallengeForm = ({
   )
 
   const onSubmit = (data) => {
-    const gameID = getGameId(data.challengeType, data.GameType)
+     const gameID = getGameId(data.challengeType, data.GameType)
+    
     let request = {
       ChallengeName: data.ChallengeName,
       ChallengeDescription: data.ChallengeDescription,
@@ -123,6 +136,7 @@ const DareChallengeForm = ({
       MaxParticipants: parseInt(data.maxParticipant),
       Target: parseInt(data.Target),
     }
+  
     createChallenge(request)
     setIsLoading(true)
     dispatch(setPopupState(true))
@@ -130,7 +144,7 @@ const DareChallengeForm = ({
   }
 
   const createChallenge = async (request) => {
-    console.log(request)
+  
     const output = await createChallengeAPI(request)
     setIsLoading(false)
     if (output.success) {
@@ -156,7 +170,7 @@ const DareChallengeForm = ({
             placeholder="Enter Max Participants"
             errorName="maxParticipant"
             errors={errors}
-            disabled={['0', '1'].includes(challengeType)}
+            disabled={(GameType==="2"?['0']:['0', '1']).includes(challengeType)}
             {...register('maxParticipant', {
               required: 'Max Participants value is required',
             })}
@@ -181,7 +195,7 @@ const DareChallengeForm = ({
             placeholder="Enter Wager Amount"
             errorName="wager"
             errors={errors}
-            footerText="This is a sample footer text"
+            footerText=""
             {...register('wager', { required: 'wager value is required' })}
           />
           {/* <SelectInput
