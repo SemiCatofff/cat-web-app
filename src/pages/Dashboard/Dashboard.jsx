@@ -189,7 +189,7 @@ const Dashboard = () => {
       <ChallengeSlider
         items={history.filter((item) => item.IsStarted && item.IsActive)}
       />
-      {history.filter((item) => item.IsStarted && item.IsActive).length >
+      {history.filter((item) => item.IsStarted && !item.IsActive).length >
         0 && (
         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
           <p className={`${styles.heading2} !text-black`}>History</p>
@@ -202,7 +202,7 @@ const Dashboard = () => {
         className={`${styles.paddingX} ${styles.marginY} flex flex-col gap-[6px]`}
       >
         {history
-          .filter((item) => item.IsStarted && item.IsActive)
+          .filter((item) => item.IsStarted && !item.IsActive)
           .map((item, index) => {
             return ( <HistoryItem item ={item} index={index}e /> )
           })}
