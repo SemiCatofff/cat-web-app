@@ -204,7 +204,9 @@ function ChallengeDetails() {
                   moment()
                 )
                   ? 'Starts in'
-                  : 'Started'}{' '}
+                  : !moment(parseInt(challengeDetails.EndDate)).isBefore(
+                    moment()
+                  )?'Ends in':'Ended'}{' '}
               </p>
             </div>
           </div>
@@ -222,11 +224,17 @@ function ChallengeDetails() {
               </p>
               <p className={`${styles.heading2} !text-gray-400`}>
                 {' '}
-                {moment
+                {  !moment(parseInt(challengeDetails.StartDate)).isBefore(
+                  moment()
+                )? moment
                   .duration(
                     moment(parseInt(challengeDetails.StartDate)).diff(moment())
                   )
-                  .humanize()}
+                  .humanize(): moment
+                  .duration(
+                    moment(parseInt(challengeDetails.EndDate)).diff(moment())
+                  )
+                  .humanize() }
               </p>
             </div>
           </div>

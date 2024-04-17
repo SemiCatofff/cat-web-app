@@ -13,7 +13,7 @@ const calculateHeight = (steps, maxSteps) => {
   return Math.floor(((maxSteps - steps) / maxSteps) * maxHeight)
 }
 const LeaderboardItem = ({ steps, maxSteps }) => {
-  const barHeight = calculateHeight(steps, maxSteps)
+  const barHeight = calculateHeight(steps > maxSteps? maxSteps: steps, maxSteps)
 
   return (
     <div className="flex flex-col w-[50%] justify-end items-center gap-[20px]">
@@ -30,7 +30,7 @@ const LeaderboardItem = ({ steps, maxSteps }) => {
   )
 }
 
-const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creatorImg }) => {
+const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creatorImg, winner }) => {
   const navigate = useNavigate()
   const [people, setPeople] = useState(leaderBoard || []);
 
@@ -92,8 +92,8 @@ const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creator
         </> 
         :
    <>
-        <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-          You won!
+       <div className={`${styles.heading2} !text-[#202117] !font-regular`}>
+          {winner === localStorage.getItem("name")?"You won!":"Better luck next time!"}
         </div>
         <div
           className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}

@@ -129,7 +129,6 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
           })}
       </div>
 
-      <div className="flex flex-col items-center justify-center mt-[20px] gap-[10px]">
       { !isActive?
        <>
         <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
@@ -141,8 +140,8 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
         </> 
         :
    <>
-        <div className={`${styles.subtext} !text-[#202117] !font-regular`}>
-          You won
+       <div className={`${styles.heading2} !text-[#202117] !font-regular`}>
+          {winner === localStorage.getItem("name")?"You won!":"Better luck next time!"}
         </div>
         <div
           className={`${styles.heading2} !text-[16px] flex items-center justify-center h-[68px] w-[217px] bg-[#202117] !text-[#E1F076] rounded-[80px] `}
@@ -153,9 +152,7 @@ const MultiChallenge = ({ target, type, isActive, ends, leaderBoard, winner }) =
           CLAIM
         </div>
         </> 
-
 }
-      </div>
 
       <div className="relative w-full h-[85px] mx-4 my-6 rounded-box bg-[#192126] flex items-center justify-center gap-[7%]">
         <div

@@ -72,14 +72,21 @@ function Challenge() {
           <span className={`${styles.caption2} !text-[#202117] !font-medium`}>
             {moment(parseInt(userPerformance.StartDate)).format("Do of MMMM, YYYY")} {moment(parseInt(userPerformance.StartDate)).format("h:mm a")}
           </span>
-          <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
+         {!moment(parseInt(userPerformance.EndDate)).isBefore(moment())? <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
             {'Ending in '}
             {moment
               .duration(
                 moment(parseInt(userPerformance.EndDate)).diff(moment())
               )
               .humanize()}
-          </span>
+          </span>: <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
+            {'Ended '}
+            {moment
+              .duration(
+                moment(parseInt(userPerformance.EndDate)).diff(moment())
+              )
+              .humanize()} {' ago '}
+          </span> }
         </div>
       </div>
       <div className="h-[54px] mx-4 flex bg-[#EDEBF3] rounded-tab drop-shadow gap-[1%]">
@@ -131,7 +138,7 @@ function Challenge() {
 
       {tab === 0 && (
         <Progress
-          value={userPerformance.Value}
+          value={userPerformance.Value > userPerformance.Target? userPerformance.Target : userPerformance.Value}
           target={userPerformance.Target}
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
@@ -151,7 +158,7 @@ function Challenge() {
           <MultiChallenge
             target={userPerformance.Target}
             type={userPerformance.GameType}
-            isActive={userPerformance.isStarted}
+            isActive={moment(parseInt(userPerformance.EndDate)).isBefore(moment())}
             ends={moment
               .duration(
                 moment(parseInt(userPerformance.EndDate)).diff(moment())
@@ -165,7 +172,7 @@ function Challenge() {
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
-              isActive={userPerformance.isStarted}
+              isActive={moment(parseInt(userPerformance.EndDate)).isBefore(moment())}
               ends={moment
                 .duration(
                   moment(parseInt(userPerformance.EndDate)).diff(moment())
@@ -179,7 +186,7 @@ function Challenge() {
             <DareLeader
               target={userPerformance.Target}
               type={userPerformance.GameType}
-              isActive={userPerformance.isStarted}
+              isActive={moment(parseInt(userPerformance.EndDate)).isBefore(moment())}
               ends={moment
                 .duration(
                   moment(parseInt(userPerformance.EndDate)).diff(moment())
