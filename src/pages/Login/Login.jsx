@@ -39,12 +39,24 @@ function Login() {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
     const jwt = queryParams.get('jwt')
+    console.log(window.location.pathname)
+    
+    
     if (jwt && !sessionStorage.getItem('authProcess')) {
       sessionStorage.setItem('authProcess', 'false')
       setIsPopupOpen(true)
       sessionStorage.setItem('authToken', jwt)
       handleAuthenticationProcess()
     }
+    const challengeRegex = /\/challenge\/(\d+)/;
+    const match = window.location.pathname.match(challengeRegex);
+
+  if (match) {
+    // match[1] contains the challenge number extracted from the URL
+    sessionStorage.setItem('challengeId', match[1]);
+    console.log(`Challenge ID stored: ${match[1]}`);
+  }
+   
   }, [])
 
   const handleGoogleLogin = async () => {
@@ -63,8 +75,13 @@ function Login() {
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
     const refreshToken = await getRefreshTokenAPI()
+    if(sessionStorage.getItem('challengeId')){
+      navigate(`challenge/${sessionStorage.getItem('challengeId')}`)
+    }
+    else{
+      navigate('/')
+    }
     dispatch(setLoginState(true))
-    navigate('/')
     sessionStorage.setItem('authProcess', 'true')
   }
 
