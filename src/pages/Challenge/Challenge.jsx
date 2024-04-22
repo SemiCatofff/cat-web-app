@@ -25,6 +25,7 @@ function Challenge() {
     StakedWager: '00',
     TotalWagerStaked: '000',
   })
+  const [voting, setVoting ] = useState("voting")
   const getDashboardDetails = async () => {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
@@ -142,7 +143,8 @@ function Challenge() {
           target={userPerformance.Target}
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
-          type={userPerformance.GameType}
+          // type={userPerformance.GameType}
+          type={voting}
           game={gameType}
           item={challenges}
           leaderBoard={leaderBoard} // Pass leaderBoard as prop
