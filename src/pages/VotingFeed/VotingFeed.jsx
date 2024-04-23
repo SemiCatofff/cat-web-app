@@ -6,6 +6,12 @@ import { VoteCard } from '../../components'
 const VotingFeed = () =>{
 
 
+   const update = (id) =>{
+
+
+   }
+
+
     return(
         <>
          <div className="h-[300px] w-full bg-[#8915D0] rounded-b-[30px] relative"> 
