@@ -143,6 +143,7 @@ function Challenge() {
           target={userPerformance.Target}
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
+          startDate = {userPerformance.StartDate}
           // type={userPerformance.GameType}
           type={voting}
           game={gameType}
