@@ -7,6 +7,7 @@ import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
 import likes from '../../assets/images/likes.png'
+import { imgHolder, fi_upload } from '../../assets/images'
 import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import refresh from "../../assets/images/refresh.png"
@@ -24,7 +25,8 @@ function Progress({
   creator,
   creatorImg,
   joined,
-  setTab
+  setTab,
+  startDate
 }) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
@@ -32,21 +34,27 @@ function Progress({
       #555555 ${(value / target) * 100}% 100%
     )`,
   }
+
   const navigate = useNavigate()
   const params = useParams()
 
   const currentDate = moment();
 
-  // Function to check if a challenge has started based on its start date
-  const hasChallengeStarted = (startDate) => {
-    const challengeStartDate = moment(startDate);
-    return currentDate.isAfter(challengeStartDate);
+  const formattedStartDate = moment.unix(startDate / 1000); 
+ 
+  const hasChallengeStarted = (date) => {
+    const challengeStartDate = moment(date);
+    // return ((currentDate.isAfter(challengeStartDate) && joined) ? true: false);
+    return (currentDate.isAfter(challengeStartDate))
   };
-
+  // const isChallengeStarted = hasChallengeStarted(formattedStartDate);
+  // console.log("Is challenge started?", isChallengeStarted);
+  // console.log("current date", currentDate);
+  // console.log("start date", formattedStartDate);
+  // console.log("joined", joined);
   const getVerificationReq = async () => {
   
     const data = await getReclaimProof(params.id); 
-    //console.log(data)
     if (data) {
       window.location.href = data; 
     } else {
@@ -54,6 +62,10 @@ function Progress({
       navigate("/"); 
     }
   };
+
+  const handleUploadMedia = () => {
+    alert("uploaded")
+  }
   
 
   return (
@@ -65,11 +77,28 @@ function Progress({
       case 'voting':
         return (
          <>
-          <img
-              src={bg}
-              className="absolute top-0 right-0 w-[90px] h-[90px]"
-              alt=""
-            ></img>
+
+              <img
+                src={bg}
+                className="absolute top-0 right-0 w-[90px] h-[90px] "
+                alt=""
+              />
+              {hasChallengeStarted(formattedStartDate) ? (
+                <>
+                <img src={imgHolder} alt="" className='w-40 absolute-20' />
+         
+                <button onClick={handleUploadMedia} className='bg-yellow px-2 w-40 py-2 rounded-lg mt-4'>
+                  <p className={`${styles.heading2} !text-black flex mx-auto`}> <span><img src={fi_upload} alt="" className='mr-2 pt-1' /></span>Upload Media</p>
+                </button>
+                
+                </>
+              ) : (
+             
+                <div className={`${styles.marginX} text-center`}>
+                  <p className={`${styles.heading2}`}>Hello! Welcome! Challenge not started yet.</p>
+                </div>
+              )}
+          
          </>
         );
       case 'Steps':
