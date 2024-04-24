@@ -46,6 +46,7 @@ function Progress({
   };
   const handleSubmit = () => {
     alert("submitted")
+    setStep(4);
   };
   const increment = () => {
     setQuantity(quantity + 1);
@@ -136,6 +137,16 @@ function Progress({
             </div>
           </>
         );
+        case 4: 
+      return (
+        // Submission confirmation screen
+        <div className={`${styles.marginX} text-center`}>
+          <p className={`${styles.heading2}`}>
+            Thank you for your submission!
+          </p>
+         
+        </div>
+      );
       default:
         return null;
     }
@@ -191,11 +202,6 @@ function Progress({
               />
               {hasChallengeStarted(formattedStartDate) ? (
                 <>
-                {/* <img src={imgHolder} alt="" className='w-40 absolute-20' />
-         
-                <button onClick={handleUploadMedia} className='bg-yellow px-2 w-40 py-2 rounded-lg mt-4'>
-                  <p className={`${styles.heading2} !text-black flex mx-auto`}> <span><img src={fi_upload} alt="" className='mr-2 pt-1' /></span>Upload Media</p>
-                </button> */}
                   {renderStep()}
                 
                 </>
