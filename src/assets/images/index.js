@@ -30,5 +30,6 @@ export { default as info } from './info.svg'
 export {default as imgHolder } from './img-holder.svg'
 export {default as fi_upload } from "./fi_upload.svg"
 export {default as arrowRight} from "./arrow-right.svg"
+export {default as thumbnail} from "./thumbnail.svg"
 
 
