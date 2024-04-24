@@ -16,7 +16,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/details/:id" element={<Challenge />} />
               <Route path="/challenge/:id" element={<ChallengeDetails />} />
-              <Route path="/vote" element={<VotingFeed />} />
+              <Route path="/vote/:id" element={<VotingFeed />} />
               <Route path="/feed" element={<GeneralVote />} />
               <Route path="/chat" element={<Chat/>} />
               <Route path="/create" element={<CreateChallenge />} />

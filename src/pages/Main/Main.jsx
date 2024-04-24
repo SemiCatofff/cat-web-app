@@ -29,7 +29,7 @@ function Main(props) {
   }, [window.location.pathname])
 
   const showAppbar = routes.includes(location.pathname)
-  const showNav = approutes.includes(location.pathname)
+  const showNav = approutes.some(route => location.pathname.startsWith(route));
   
   return (
     <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] overflow-hidden relative md:max-w-[360px]">
