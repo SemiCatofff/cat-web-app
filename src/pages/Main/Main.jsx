@@ -14,6 +14,7 @@ function Main(props) {
   const isPopupOpen = useSelector((state) => state.user.isPopup)
   const location = useLocation()
   const routes = ['/', '/create', '/dashboard', '/settings', '/chat']
+  const approutes = ['/vote', '/feed']
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -28,15 +29,16 @@ function Main(props) {
   }, [window.location.pathname])
 
   const showAppbar = routes.includes(location.pathname)
+  const showNav = approutes.some(route => location.pathname.startsWith(route));
   
   return (
     <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] overflow-hidden relative md:max-w-[360px]">
       {isLoggedIn ? (
         <>
           <div className="z-1">
-            <Navbar />
+          {!showNav && <Navbar />}
           </div>
-          <div className="flex-grow overflow-auto h-[auto] z-10 px-2">
+          <div className= {`flex-grow overflow-auto h-[auto] z-10 ${showNav?"":"px-2"}`}>
             {props.children}
           </div>
           <div className="absolute right-0 top-[5px]">
