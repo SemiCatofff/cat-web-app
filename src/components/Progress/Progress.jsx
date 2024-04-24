@@ -7,7 +7,7 @@ import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
 import likes from '../../assets/images/likes.png'
-import { imgHolder, fi_upload } from '../../assets/images'
+import { imgHolder, fi_upload, arrowRight } from '../../assets/images'
 import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import refresh from "../../assets/images/refresh.png"
@@ -26,7 +26,7 @@ function Progress({
   creatorImg,
   joined,
   setTab,
-  startDate
+  startDate, 
 }) {
   const progressStyle = {
     backgroundImage: `conic-gradient(
@@ -34,6 +34,112 @@ function Progress({
       #555555 ${(value / target) * 100}% 100%
     )`,
   }
+
+  const [step, setStep] = useState(1);
+  const [quantity, setQuantity] = useState(100);
+  const handleNextStep = () => {
+    setStep(step + 1);
+  };
+
+  const handlePrevStep = () => {
+    setStep(step - 1);
+  };
+  const handleSubmit = () => {
+    alert("submitted")
+  };
+  const increment = () => {
+    setQuantity(quantity + 1);
+   
+  };
+  const decrement = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    
+    }
+  };
+  const handleInputChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (!isNaN(value)) {
+      setQuantity(value);
+    }
+  };
+
+
+  
+
+  const renderStep = () => {
+    
+    switch (step) {
+      case 1:
+        return (
+          <>
+            {/* Step 1: Introduction/Information */}
+            <div className={`${styles.marginX} text-center`}>
+              <p className={`${styles.heading2}`}>
+              Add Quantity Consumed 
+              </p>
+              <div className="flex items-center justify-center mt-4">
+      <button onClick={decrement} className="bg-gray-300 px-4 py-2 rounded-l-lg">
+        -
+      </button>
+      <div className="bg-white px-4 py-2">
+      <input type="number" value={quantity} onChange={handleInputChange} className=" px-4  text-center w-16" />
+  
+      </div>
+      <button onClick={increment} className="bg-gray-300 px-4 py-2 rounded-r-lg">
+        +
+      </button>
+    </div>
+            </div>
+            <button onClick={handleNextStep} className="bg-yellow px-2 w-40 py-2 rounded-lg mt-4">
+              <p className={`${styles.heading2} !text-black flex justify-center`}>Next <span><img src={arrowRight} alt="" className='ml-2 pt-1' /></span></p>
+            </button>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            {/* Step 2: Media Upload */}
+            <div className={`${styles.marginX} text-center`}>
+              <p className={`${styles.heading2}`}>
+                Upload your media:
+              </p>
+              <input type="file" onChange={handleUploadMedia} className='w-40' />
+            </div>
+            <div className="w-40 flex justify-between "> 
+            <button onClick={handlePrevStep} className="bg-gray-400 px-2  py-2 rounded-lg mt-4 w-full mr-1">
+              <p className={`${styles.heading2} !text-black flex justify-center`}>Back</p>
+            </button>
+            <button onClick={handleNextStep} className="bg-yellow px-2 w-full  py-2 rounded-lg mt-4 ml-1">
+              <p className={`${styles.heading2} !text-black flex justify-center`}>Next</p>
+            </button>
+            </div>
+           
+          </>
+        );
+      case 3:
+        return (
+          <>
+            {/* Step 3: Confirmation/Submit */}
+            <div className={`${styles.marginX} text-center`}>
+              <p className={`${styles.heading2}`}>
+                Confirm your submission:
+              </p>
+            </div>
+            <div className="w-40 flex justify-between "> 
+            <button onClick={handlePrevStep} className="bg-gray-400 px-2  py-2 rounded-lg mt-4 w-full mr-1">
+              <p className={`${styles.heading2} !text-black flex justify-center`}>Back</p>
+            </button>
+            <button onClick={handleSubmit} className="bg-yellow px-2 w-full  py-2 rounded-lg mt-4 ml-1">
+              <p className={`${styles.heading2} !text-black flex justify-center`}>Submit</p>
+            </button>
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
 
   const navigate = useNavigate()
   const params = useParams()
@@ -85,11 +191,12 @@ function Progress({
               />
               {hasChallengeStarted(formattedStartDate) ? (
                 <>
-                <img src={imgHolder} alt="" className='w-40 absolute-20' />
+                {/* <img src={imgHolder} alt="" className='w-40 absolute-20' />
          
                 <button onClick={handleUploadMedia} className='bg-yellow px-2 w-40 py-2 rounded-lg mt-4'>
                   <p className={`${styles.heading2} !text-black flex mx-auto`}> <span><img src={fi_upload} alt="" className='mr-2 pt-1' /></span>Upload Media</p>
-                </button>
+                </button> */}
+                  {renderStep()}
                 
                 </>
               ) : (
