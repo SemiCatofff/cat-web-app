@@ -5,7 +5,7 @@ import StepUpChallenge from '../../components/Leaderboard/Leaderboard'
 import MultiChallenge from '../../components/MultiChallenge/MultiChallenge'
 import Chatbox from '../../components/Chatbox/Chatbox'
 import DareLeader from '../../components/DareLeader/DareLeader'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import {
   getChallengeDashboard,
   getOngoingChallenges,
@@ -28,6 +28,7 @@ function Challenge() {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
       setUserPerformance(output.data)
+      localStorage.setItem("ChallengeName", output.data.ChallengeName)
     }
     const output2 = await getOngoingChallenges({status:"upcoming"})
     if (output2.success) {
@@ -36,7 +37,7 @@ function Challenge() {
   }
 
   const [leaderBoard, setLeaderBoard] = useState([])
-
+  const navigate = useNavigate()
   const fetchLeaderboard = async () => {
     const out = await getLeaderboard(params.id)
     console.log(out)
@@ -125,14 +126,20 @@ function Challenge() {
             tab === 2 ? 'bg-[#E1F076]' : ''
           }`}
           onClick={() => {
-            setTab(2)
+            
+            if(userPerformance.GameType === "Voting")
+            {navigate(`/vote/${params.id}`)}
+            else{
+              setTab(2)
+            }
+           
           }}
         >
           <div
             className={`${styles.caption1} ${tab === 2 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
           >
             {' '}
-            Chatroom
+            {userPerformance.GameType !== "voting"?"Chatroom":"Feed"}
           </div>
         </div>
       </div>
@@ -171,7 +178,7 @@ function Challenge() {
             winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
           />
         )) ||
-          (userPerformance.ParticipationType === '1v1' && (
+          (userPerformance.ParticipationType === '1v1' &&  (
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
