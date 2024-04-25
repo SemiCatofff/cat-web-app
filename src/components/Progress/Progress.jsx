@@ -46,6 +46,8 @@ function Progress({
   const [quantity, setQuantity] = useState(100);
   const [uploadedImage, setUploadedImage] = useState(null);
 
+  const navigate = useNavigate()
+  const params = useParams()
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -198,7 +200,7 @@ function Progress({
     
                 <p className={`${styles.heading2}`}>{quantity} gm</p>
                 <div className="">   
-              <p className={`${styles.paragraph} py-1  px-4 bg-white !text-black flex rounded-xl`}>View <img src={arrowRight} className='bg-white ml-1' alt="" /></p>
+              <p className={`${styles.paragraph} py-1  px-4 bg-white !text-black flex rounded-xl`} onClick={() => navigate(`/vote/id`)}>View <img src={arrowRight} className='bg-white ml-1' alt="" /></p>
               </div>
               </div>
   
@@ -211,8 +213,7 @@ function Progress({
     }
   };
 
-  const navigate = useNavigate()
-  const params = useParams()
+ 
 
   const currentDate = moment();
 
