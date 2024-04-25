@@ -7,7 +7,6 @@ import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
 import likes from '../../assets/images/likes.png'
-import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import refresh from "../../assets/images/refresh.png"
 import {useNavigate, useParams} from 'react-router-dom'
@@ -34,7 +33,7 @@ function Progress({
   }
   const navigate = useNavigate()
   const params = useParams()
-
+  console.log(leaderBoard)
 
   const getVerificationReq = async () => {
   
