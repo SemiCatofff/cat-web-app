@@ -1,13 +1,21 @@
 import styles from '../../styles/style'
-import profile from '../../assets/images/prof.png'
-import boot from '../../assets/images/boot.svg'
-import bg from '../../assets/images/bg.svg'
-import bullets from '../../assets/images/bullets.svg'
 import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
-import likes from '../../assets/images/likes.png'
-import { imgHolder, fi_upload, arrowRight, thumbnail, tick, refresh } from '../../assets/images'
+import {
+  boot,
+  bg,
+  bullets,
+  likes,
+  imgHolder,
+  fi_upload,
+  arrowRight,
+  thumbnail,
+  tick,
+  refresh,
+  profile
+} from '../../assets/images';
+
 import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -172,7 +180,7 @@ function Progress({
       case 4:
         return (
           <div className={`${styles.marginX} relative`}>
-           <div className="flex justify-between -mt-2 mb-6">
+           <div className="flex justify-between -mt-1 mb-4">
            <div className=" w-[70px]">   
               <p className={`${styles.paragraph} py-1  border  border-neutral-300 border-opacity-10 bg-black  flex justify-center rounded-xl`}> <img src={tick} className='mr-1 ' alt="" />Verified </p>
               </div>
