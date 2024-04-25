@@ -110,15 +110,15 @@ const getChallenges = async (challengeID) => {
   }
 }
 
-const getOngoingChallenges = async (type, page, limit) => {
+const getOngoingChallenges = async (body) => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
-    const response = await axios.get(
-      `${BackendURL}/challenge/challenges/onGoing/category/${type}?page=${page}&limit=${limit}`,
-      { headers }
+    const response = await axios.post(
+      `${BackendURL}/challenge/filter`, body,
+      { headers },
     )
     return response.data
   } catch (error) {
@@ -151,7 +151,7 @@ const createChallengeAPI = async (challengeDetails) => {
 
   try {
     const response = await axios.post(
-      `${BackendURL}/challenge/challenges`,
+      `${BackendURL}/challenge`,
       challengeDetails,
       { headers }
     )
@@ -171,8 +171,9 @@ const joinChallengeAPI = async (challengeName) => {
   }
 
   let body = {
-    ChallengeID: challengeName,
+    ChallengeID: parseInt(challengeName),
   }
+  
 
   try {
     const response = await axios.post(`${BackendURL}/player`, body, { headers })
