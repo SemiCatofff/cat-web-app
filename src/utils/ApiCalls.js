@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BackendURL = 'https://stagingapi.catoff.xyz'
+const BackendURL = 'https://stagingapi2.catoff.xyz'
 
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
@@ -68,7 +68,7 @@ const getRefreshTokenAPI = async () => {
   }
   try {
     const response = await axios.post(
-      `${BackendURL}/oktoProxy/refresh_token`,
+      `${BackendURL}/oktoProxy/refreshToken`,
       {},
       { headers }
     )
@@ -101,7 +101,7 @@ const getChallenges = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/${challengeID}`,
+      `${BackendURL}/challenge/dashboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -222,7 +222,7 @@ const getChallengeDashboard = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/dashboard/${challengeID}`,
+      `${BackendURL}/challenge/dashboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -237,7 +237,7 @@ const getLeaderboard = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/${challengeID}/leaderboard`,
+      `${BackendURL}/challenge/leaderboard/${challengeID}`,
       { headers }
     )
     return response.data
