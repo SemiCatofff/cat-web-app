@@ -27,9 +27,12 @@ const Home = () => {
 
   const userData = async () => {
     const output = await getUserDetails()
-    setUserInfo(output)
-    localStorage.setItem('name', output.UserName)
-    localStorage.setItem('profile', output.ProfilePicture)
+    if(output.success){
+      setUserInfo(output)
+      localStorage.setItem('name', output.UserName)
+      localStorage.setItem('profile', output.ProfilePicture)
+
+    }
   }
   const handleSearch = async () => {
     const output = await searchChallengeAPI(searchTerm, 1, 10)
