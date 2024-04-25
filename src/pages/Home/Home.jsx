@@ -18,8 +18,9 @@ const Home = () => {
     setIsFilterVisible(!isFilterVisible)
   }
   const navigate = useNavigate()
+  const type = ["Steps","Calorie","DigitalProof"]
   const getChalData = async (filter) => {
-    const output = await getOngoingChallenges(filter, 1, 10)
+    const output = await getOngoingChallenges(filter)
     if (output.success) {
       setChallenges(output.data)
     }
@@ -28,9 +29,9 @@ const Home = () => {
   const userData = async () => {
     const output = await getUserDetails()
     if(output.success){
-      setUserInfo(output)
-      localStorage.setItem('name', output.UserName)
-      localStorage.setItem('profile', output.ProfilePicture)
+      setUserInfo(output.data)
+      localStorage.setItem('name', output.data.UserName)
+      localStorage.setItem('profile', output.data.ProfilePicture)
 
     }
   }
@@ -43,14 +44,24 @@ const Home = () => {
     }
   }
 
-  const handleFilterChange = (filterType) => {
+  const handleFilterChange = (filterType, index) => {
     setCurrentFilter(filterType)
-    getChalData(filterType.toLowerCase())
+    console.log(index)
+    let body ={}
+    if(index === 1){
+      body = {"participationType": "0v1", "status":"upcoming"}
+    }else if(index === 2){
+      body = {"participationType": "1v1", "status":"upcoming"}
+    }
+    else{
+      body = {"status" : "upcoming"}
+    }
+    getChalData(body)
   }
 
   useEffect(() => {
     userData()
-    getChalData('all')
+    getChalData({status : "upcoming"})
   }, [])
 
   return (
@@ -83,18 +94,10 @@ const Home = () => {
             onChange={async (e) => {
               setSearchTerm(e.target.value)
               if (e.target.value.trim() !== '') {
-                const output = await searchChallengeAPI(
-                  e.target.value.trim(),
-                  1,
-                  10
+                const output = await getChalData({searchTerm: e.target.value, status:"upcoming"}
                 )
-                if (output.success) {
-                  setChallenges(output.data)
-                } else {
-                  alert('No challenges found with that')
-                }
               } else {
-                getChalData('all')
+                getChalData({status:"upcoming"})
               }
             }}
           />
@@ -115,13 +118,13 @@ const Home = () => {
           >
             Challenge Type
           </p>
-          {['All', 'Dares', 'Peer to Peer'].map((filterType) => (
+          {['All', 'Dares', 'Peer to Peer'].map((filterType,index) => (
             <button
               key={filterType}
               className={`${styles.caption1} ${
                 currentFilter === filterType ? 'bg-violet-200' : 'bg-violet-100'
               } shadow-sm  !text-stone-700 px-6 py-1 rounded-full whitespace-nowrap`}
-              onClick={() => handleFilterChange(filterType)}
+              onClick={() => handleFilterChange(filterType,index)}
             >
               {filterType}
             </button>
@@ -135,14 +138,14 @@ const Home = () => {
             !item.IsStarted && (
               <ChallengeCard
                 id={item.ChallengeID}
-                type={item.GameType}
+                type={type[item.Game.GameType]}
                 name={item.ChallengeName}
-                people={item.PlayerJoined}
+                people={item.Players.length}
                 date={moment(parseInt(item.StartDate, 10)).format(
                   'D MMM, YYYY HH.mm'
                 )}
                 wager={item.Wager}
-                prize={item.CurrentPool}
+                prize={item.Wager * item.Players.length}
               />
             )
           )
