@@ -15,23 +15,21 @@ import moment from 'moment'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
-  const [gameType, setGameType] = useState(localStorage.getItem('type'))
   const params = useParams()
   const [challenges, setChallenges] = useState([])
-  const [amount, setAmount] = useState(0)
   const [userPerformance, setUserPerformance] = useState({
     Target: '1',
     Value: '0',
     StakedWager: '00',
     TotalWagerStaked: '000',
   })
-  const [voting, setVoting ] = useState("voting")
+  //const [voting, setVoting ] = useState("voting")
   const getDashboardDetails = async () => {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
       setUserPerformance(output.data)
     }
-    const output2 = await getOngoingChallenges('all', 1, 10)
+    const output2 = await getOngoingChallenges({status:"upcoming"})
     if (output2.success) {
       setChallenges(output2.data)
     }
@@ -146,9 +144,9 @@ function Challenge() {
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
           startDate = {userPerformance.StartDate}
-          // type={userPerformance.GameType}
-          type={voting}
-          game={gameType}
+          type={userPerformance.GameType}
+          //type={voting}
+          game={userPerformance.ParticipationType}
           item={challenges}
           leaderBoard={leaderBoard} // Pass leaderBoard as prop
           creator={userPerformance.ChallengeCreatorUsername}
@@ -159,7 +157,7 @@ function Challenge() {
       )}
 
       {tab === 1 &&
-        ((gameType === 'nvn' && (
+        ((userPerformance.ParticipationType === 'nvn' && (
           <MultiChallenge
             target={userPerformance.Target}
             type={userPerformance.GameType}
@@ -173,7 +171,7 @@ function Challenge() {
             winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
           />
         )) ||
-          (gameType === '1v1' && (
+          (userPerformance.ParticipationType === '1v1' && (
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
@@ -187,7 +185,7 @@ function Challenge() {
               winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner:""}
             />
           )) ||
-          (gameType === '0v1' && (
+          (userPerformance.ParticipationType === '0v1' && (
             <DareLeader
               target={userPerformance.Target}
               type={userPerformance.GameType}
