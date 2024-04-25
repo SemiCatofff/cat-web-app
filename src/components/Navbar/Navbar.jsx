@@ -17,8 +17,8 @@ const Navbar = () => {
   const userData = async () => {
     const output = await getUserDetails()
     if(output.success){
-      setUserInfo(output)
-      localStorage.setItem('profile', output.ProfilePicture)
+      setUserInfo(output.data)
+      localStorage.setItem('profile', output.data.ProfilePicture)
 
     }
   }

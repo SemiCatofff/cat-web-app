@@ -10,6 +10,7 @@ import likes from '../../assets/images/likes.png'
 import { imgHolder, fi_upload, arrowRight, thumbnail, tick, refresh } from '../../assets/images'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
 
 function Progress({
   value,
