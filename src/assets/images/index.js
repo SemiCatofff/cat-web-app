@@ -27,4 +27,11 @@ export { default as cross } from './cross.png'
 export { default as login } from './login.svg'
 export { default as arrowChevron } from './arrow-chevron.svg'
 export { default as info } from './info.svg'
+export {default as imgHolder } from './img-holder.svg'
+export {default as fi_upload } from "./fi_upload.svg"
+export {default as arrowRight} from "./arrow-right.svg"
+export {default as thumbnail} from "./thumbnail.svg"
+export {default as tick } from "./tick.svg"
+export {default as refresh } from "./refresh.png"
+
 
