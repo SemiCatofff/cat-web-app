@@ -21,6 +21,7 @@ const ChallengeSlider = ({ items }) => {
           return (
             <div
               className="relative w-full cursor-pointer"
+              key={item.ChallengeID}
               onClick={() => {
                 navigate(`/challenge/${item.ChallengeID}`)
               }}
