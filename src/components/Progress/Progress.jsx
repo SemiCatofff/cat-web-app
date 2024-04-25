@@ -7,7 +7,7 @@ import ChallengeSlider from '../ChallengeSlider/ChallengeSlider'
 import moment from 'moment'
 import Position from '../Position/Position'
 import likes from '../../assets/images/likes.png'
-import { imgHolder, fi_upload, arrowRight, thumbnail } from '../../assets/images'
+import { imgHolder, fi_upload, arrowRight, thumbnail, tick } from '../../assets/images'
 import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import refresh from "../../assets/images/refresh.png"
@@ -88,7 +88,7 @@ function Progress({
     }
   };
 
- 
+
 
 
 
@@ -121,37 +121,37 @@ function Progress({
             </button>
           </>
         );
-        case 2:
-          return (
-            <>
-              <div className={`${styles.marginX} text-center h-full`}>
-                <p className={`${styles.heading2} mt-10 mb-2`}>Upload your media:</p>
-                <label htmlFor="file-upload" className="custom-file-upload">
-                  {uploadedImage ? (
-                    <img src={uploadedImage} className='w-[152px] h-[108px] object-cover rounded-xl' alt="Uploaded thumbnail" />
-                  ) : (
-                    <img src={thumbnail} className='w-[152px] h-[108px] object-cover rounded-xl' alt="Upload icon" />
-                  )}
-                </label>
-                <input
-                  id="file-upload"
-                  type="file"
-                  accept="image/*,video/*"
-                  onChange={handleUploadMedia}
-                  className="hidden"
-                />
-              </div>
-              <div className="w-40 flex justify-between mb-4">
-                <button onClick={handlePrevStep} className="bg-gray-400 px-2 py-2 rounded-lg mt-4 w-full mr-1">
-                  <p className={`${styles.heading2} !text-black flex justify-center`}>Back</p>
-                </button>
-                <button onClick={handleNextStep} className="bg-yellow px-2 w-full py-2 rounded-lg mt-4 ml-1">
-                  <p className={`${styles.heading2} !text-black flex justify-center`}>Next</p>
-                </button>
-              </div>
-            </>
-          );
-        case 3:
+      case 2:
+        return (
+          <>
+            <div className={`${styles.marginX} text-center h-full`}>
+              <p className={`${styles.heading2} mt-10 mb-2`}>Upload your media:</p>
+              <label htmlFor="file-upload" className="custom-file-upload">
+                {uploadedImage ? (
+                  <img src={uploadedImage} className='w-[152px] h-[108px] object-cover rounded-xl' alt="Uploaded thumbnail" />
+                ) : (
+                  <img src={thumbnail} className='w-[152px] h-[108px] object-cover rounded-xl' alt="Upload icon" />
+                )}
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                accept="image/*,video/*"
+                onChange={handleUploadMedia}
+                className="hidden"
+              />
+            </div>
+            <div className="w-40 flex justify-between mb-4">
+              <button onClick={handlePrevStep} className="bg-gray-400 px-2 py-2 rounded-lg mt-4 w-full mr-1">
+                <p className={`${styles.heading2} !text-black flex justify-center`}>Back</p>
+              </button>
+              <button onClick={handleNextStep} className="bg-yellow px-2 w-full py-2 rounded-lg mt-4 ml-1">
+                <p className={`${styles.heading2} !text-black flex justify-center`}>Next</p>
+              </button>
+            </div>
+          </>
+        );
+      case 3:
         return (
           <>
             {/* Step 3: Confirmation/Submit */}
@@ -172,14 +172,30 @@ function Progress({
         );
       case 4:
         return (
-       
           <div className={`${styles.marginX} text-center`}>
-            <p className={`${styles.heading2}`}>
-              Thank you for your submission!
-            </p>
-
+           
+               <div className=" w-24 ">   
+              <p className={`${styles.paragraph} py-1  px-3 border  border-neutral-300 border-opacity-10 bg-black  flex rounded-xl`}> <img src={tick} className='mr-1 mb-1' alt="" />Verified </p>
+              </div>
+            {uploadedImage && (
+              <div className="mt-4">
+               
+                <img src={uploadedImage} className='w-[152px] h-[108px] object-cover rounded-xl' alt="Submitted thumbnail" />
+              </div>
+            )}
+            <div className="mt-3 text-left flex justify-between">
+              <div className="">
+    
+                <p className={`${styles.heading2}`}>{quantity} gm</p>
+                <div className="mt-3 ">   
+              <p className={`${styles.paragraph} py-1  px-4 bg-white !text-black flex rounded-xl`}>View Post <img src={arrowRight} className='bg-white ml-1' alt="" /></p>
+              </div>
+              </div>
+  
+            </div>
           </div>
         );
+
       default:
         return null;
     }
@@ -213,8 +229,8 @@ function Progress({
     }
   };
 
- 
-  
+
+
 
   return (
     <div className="flex flex-col mt-4 gap-[13px] ">
