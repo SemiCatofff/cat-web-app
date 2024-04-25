@@ -21,15 +21,19 @@ function ChallengeDetails() {
 
   const getChallengeData = async () => {
     const output = await getChallenges(params.id)
+    console.log(output)
     if (output.success) {
       setChallengeDetails(output.data)
       localStorage.setItem('type', output.data.ParticipationType)
     }
   }
+
   const userChallenges = async () => {
     const output = await getUserChallenges()
-    const activeChallenges = output.map((item) => item.ChallengeID)
+    if(output.success){
+      const activeChallenges = output.data.map((item) => item.ChallengeID)
     setActive(activeChallenges)
+    }
   }
 
   useEffect(() => {
@@ -128,12 +132,12 @@ function ChallengeDetails() {
           Confirm Payment Of{' '}
           <span className="text-purple-500">
             {' '}
-            {challengeDetails.Wager} Credits?
+            {challengeDetails.StakedWager} Credits?
           </span>{' '}
         </h2>
         <img src={graphic1} alt="" className="mx-auto mt-10" />
         <div
-          className="slide-button flex items-center justify-center bg-yellow rounded-full !text-black py-5 mt-10 flex "
+          className="slide-button items-center justify-center bg-yellow rounded-full !text-black py-5 mt-10 flex "
           onClick={handleSliderConfirm}
         >
           {/* <div className="h-14 w-14 ml-2 my-auto bg-white rounded-full ">
@@ -159,7 +163,7 @@ function ChallengeDetails() {
           date={moment(parseInt(challengeDetails.StartDate, 10)).format(
             'D MMM, YYYY'
           )}
-          wager={challengeDetails.Wager}
+          wager={challengeDetails.StakedWager}
           prize={challengeDetails.TotalWagerStaked}
         />
         <div className={`${styles.marginY} ${styles.marginX}`}>
@@ -243,7 +247,7 @@ function ChallengeDetails() {
         <div className={`${styles.marginX} flex justify-between mt-6`}>
           <div className="credit py-5">
             <h1 className={`${styles.heading2} !text-black`}>
-              {challengeDetails.Wager} Credit
+              {challengeDetails.StakedWager} Credit
             </h1>
             <p className={`${styles.caption1} !text-gray-500 `}>Wager Amount</p>
           </div>

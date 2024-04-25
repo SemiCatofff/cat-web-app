@@ -39,9 +39,11 @@ function Challenge() {
   const [leaderBoard, setLeaderBoard] = useState([])
 
   const fetchLeaderboard = async () => {
-    const output = await getLeaderboard(params.id)
-    if (output.success) {
-      setLeaderBoard(output.data)
+    const out = await getLeaderboard(params.id)
+    console.log(out)
+    if (out.success) {
+      setLeaderBoard(out.data)
+      console.log(leaderBoard)
     }
   }
   useEffect(()=>{
