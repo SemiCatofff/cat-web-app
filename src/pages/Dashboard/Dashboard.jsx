@@ -184,7 +184,7 @@ const Dashboard = () => {
         onClose={handleClosePopup}
       />
 
-      {history.filter((item) => item.IsStarted && item.IsActive).length > 0 && (
+      {history.filter((item) => !moment(parseInt(item.EndDate)).isBefore(moment())).length > 0 && (
         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
           <p className={`${styles.heading2} !text-black`}>
             Your Ongoing Challenges
@@ -196,7 +196,7 @@ const Dashboard = () => {
       )}
 
       <ChallengeSlider
-        items={history.filter((item) => item.IsStarted && item.IsActive)}
+        items={history.filter((item) => !moment(parseInt(item.EndDate)).isBefore(moment()))}
       />
       {history.filter((item) => moment(parseInt(item.EndDate)).isBefore(moment())).length >
         0 && (

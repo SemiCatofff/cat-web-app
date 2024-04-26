@@ -6,7 +6,7 @@ import back from '../../assets/images/back.png'
 import food from '../../assets/images/food.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import clock from '../../assets/images/clock.png'
-import { getChallengeDashboard } from '../../utils/ApiCalls'
+import { getChallengeDashboard, getSubmissions } from '../../utils/ApiCalls'
 
 const VotingFeed = () => {
   const [submits, setSubmits] = useState([
@@ -22,9 +22,17 @@ const VotingFeed = () => {
   const params = useParams()
 
   useEffect(() => {
+    getData()
     const ids = submits.map((submit) => submit.id)
     setValidates(ids)
   }, [])
+
+  const getData = async () =>{
+    const output = await getSubmissions(params.id)
+    if(output.success){
+      setSubmits(output.data)
+    }
+  }
 
   const updateValidates = (id) => {
     if (validates.includes(id)) {
@@ -67,7 +75,7 @@ const VotingFeed = () => {
                 {userPerformance.ChallengeName}
               </div>
               <div className="flex gap-[10px] mt-3">
-                <div className="bg-white rounded-full py-1.5 px-1 w-[40%] flex justify-center">
+                <div className="bg-white rounded-full py-1.5 px-1 w-[50%] flex justify-center">
                   <div className="flex ">
                     <img alt="" src={userPerformance.ChallengeCreatorImage} className='w-[15px] h-[15px] rounded-[50%] mr-[5px]'></img>
                     <p
@@ -77,7 +85,7 @@ const VotingFeed = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-black rounded-full py-1 w-[25%] flex justify-center mt-[1px]">
+                <div className="bg-black rounded-full py-1 w-[35%] flex justify-center mt-[1px]">
                 <img src={clock} className='w-[10px] h-[10px] mt-[5px] mr-[4px] alt=""'></img>
                   <div className="flex">
                    
