@@ -266,6 +266,24 @@ const withDrawApi = async (amount) => {
   }
 }
 
+const uploadFileApi = async (file) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await axios.post(`https://ipfs.catoff.xyz/upload`,  formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }})
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
 const getShareableChallengeLink = async (challengeID) => {
   // let headers = {
   //   Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
@@ -305,7 +323,79 @@ const getReclaimProof = async (challengeID, ) =>{
 
 }
 
+const getSubmissions = async (challengeID, ) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+    try {
+      const response = await axios.get(
+        `${BackendURL}/player/submissions/${challengeID}`,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
 
+
+
+}
+
+const submitClaim = async (challengeID, value, Url) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  let body ={
+    "ChallengeID": parseInt(challengeID),
+    "Value": parseInt(value),
+    "Url": Url
+  }
+    try {
+      const response = await axios.post(
+        `${BackendURL}/player/submission`, body,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+}
+
+
+const validate = async (challengeID, ) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+    try {
+      const response = await axios.get(
+        `${BackendURL}/player/submissions/${challengeID}`,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+
+
+}
+
+const getMysubmit = async (challengeID) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+    try {
+      const response = await axios.get(
+        `${BackendURL}/player/submissions/${challengeID}`,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+}
 
 const logout = async () => {}
 export {
@@ -327,5 +417,10 @@ export {
   withDrawApi,
   getShareableChallengeLink,
   createChallengeAPI,
-  getReclaimProof
+  getReclaimProof,
+  uploadFileApi,
+  getSubmissions,
+  validate,
+  submitClaim,
+  getMysubmit
 }
