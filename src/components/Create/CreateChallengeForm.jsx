@@ -11,7 +11,7 @@ const CreateChallengeForm = ({ setStep, register, watch, handleSubmit, errors })
   const [selection, setSelection] = useState(false)
   
   useEffect(()=>{
-   setSelection(selectedCategory !== '2')
+   setSelection(selectedCategory !== '2' && selectedCategory !== '3')
   },[selectedCategory])
 
   return (
@@ -67,7 +67,7 @@ const CreateChallengeForm = ({ setStep, register, watch, handleSubmit, errors })
         <SelectInput
           label="Select Category"
           id="category"
-          options={['Steps', 'Calories','Twitter Impressions (Reclaim)']}
+          options={['Steps', 'Calories','Twitter Impressions (Reclaim)', 'Validation-based']}
           {...register('GameType')}
         />
 

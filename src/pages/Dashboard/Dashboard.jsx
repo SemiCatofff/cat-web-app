@@ -10,6 +10,7 @@ import HistoryItem from '../../components/HistoryItem/HistoryItem'
 import Profile from '../../components/Profile.jsx/Profile'
 import { setPopupState } from '../../redux/actions/actions'
 import DashboardPopup from "../../components/Popup/DashboardPopup"
+import moment from 'moment'
 
 const Dashboard = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -33,10 +34,14 @@ const Dashboard = () => {
 
   const withdraw = async () => {
     const output = await withDrawApi(amount)
-    
     setIsLoading(false)
-    setIsConfirmed(true)
-    setJoinSuccess(true)
+    if (output.success) {
+      setIsConfirmed(true)
+      setJoinSuccess(true)
+    } else {
+      setIsConfirmed(true)
+      setJoinSuccess(false)
+    }
     
   }
 
@@ -73,16 +78,20 @@ const Dashboard = () => {
 
   const getDetails = async () => {
     const output = await getUserDetails()
-    setDetails(output)
+    if(output.success){
+
+    
+    setDetails(output.data)
 
     let tok =
-      output.Portfolio.length > 0
-        ? output.Portfolio[0].quantity + ' ' + output.Portfolio[0].token_name
+      output.data.Portfolio.tokens.length > 0
+        ? output.data.Portfolio.tokens[0].quantity + ' ' + output.data.Portfolio.tokens[0].token_name
         : 'No tokens'
     setSolTok(tok)
-
+    }
+    
     const histor = await getUserChallenges()
-    setHistory(histor)
+    setHistory(histor.data)
   }
 
   useEffect(() => {
@@ -175,7 +184,7 @@ const Dashboard = () => {
         onClose={handleClosePopup}
       />
 
-      {history.filter((item) => item.IsStarted && item.IsActive).length > 0 && (
+      {history.filter((item) => !moment(parseInt(item.EndDate)).isBefore(moment())).length > 0 && (
         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
           <p className={`${styles.heading2} !text-black`}>
             Your Ongoing Challenges
@@ -187,9 +196,9 @@ const Dashboard = () => {
       )}
 
       <ChallengeSlider
-        items={history.filter((item) => item.IsStarted && item.IsActive)}
+        items={history.filter((item) => !moment(parseInt(item.EndDate)).isBefore(moment()))}
       />
-      {history.filter((item) => item.IsStarted && !item.IsActive).length >
+      {history.filter((item) => moment(parseInt(item.EndDate)).isBefore(moment())).length >
         0 && (
         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
           <p className={`${styles.heading2} !text-black`}>History</p>
@@ -202,7 +211,7 @@ const Dashboard = () => {
         className={`${styles.paddingX} ${styles.marginY} flex flex-col gap-[6px]`}
       >
         {history
-          .filter((item) => item.IsStarted && !item.IsActive)
+          .filter((item) =>  moment(parseInt(item.EndDate)).isBefore(moment()))
           .map((item, index) => {
             return ( <HistoryItem item ={item} index={index}e /> )
           })}

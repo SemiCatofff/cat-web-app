@@ -68,7 +68,7 @@ const getRefreshTokenAPI = async () => {
   }
   try {
     const response = await axios.post(
-      `${BackendURL}/oktoProxy/refresh_token`,
+      `${BackendURL}/oktoProxy/refreshToken`,
       {},
       { headers }
     )
@@ -101,7 +101,7 @@ const getChallenges = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/${challengeID}`,
+      `${BackendURL}/challenge/dashboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -110,15 +110,15 @@ const getChallenges = async (challengeID) => {
   }
 }
 
-const getOngoingChallenges = async (type, page, limit) => {
+const getOngoingChallenges = async (body) => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
-    const response = await axios.get(
-      `${BackendURL}/challenge/challenges/onGoing/category/${type}?page=${page}&limit=${limit}`,
-      { headers }
+    const response = await axios.post(
+      `${BackendURL}/challenge/filter`, body,
+      { headers },
     )
     return response.data
   } catch (error) {
@@ -151,7 +151,7 @@ const createChallengeAPI = async (challengeDetails) => {
 
   try {
     const response = await axios.post(
-      `${BackendURL}/challenge/challenges`,
+      `${BackendURL}/challenge`,
       challengeDetails,
       { headers }
     )
@@ -171,8 +171,9 @@ const joinChallengeAPI = async (challengeName) => {
   }
 
   let body = {
-    ChallengeID: challengeName,
+    ChallengeID: parseInt(challengeName),
   }
+  
 
   try {
     const response = await axios.post(`${BackendURL}/player`, body, { headers })
@@ -222,7 +223,7 @@ const getChallengeDashboard = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/dashboard/${challengeID}`,
+      `${BackendURL}/challenge/dashboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -237,7 +238,7 @@ const getLeaderboard = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/${challengeID}/leaderboard`,
+      `${BackendURL}/challenge/leaderboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -259,6 +260,24 @@ const withDrawApi = async (amount) => {
     const response = await axios.post(`${BackendURL}/user/withdraw`, body, {
       headers,
     })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const uploadFileApi = async (file) => {
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await axios.post(`https://ipfs.catoff.xyz/upload`,  formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }})
     return response.data
   } catch (error) {
     return error.message
@@ -304,6 +323,83 @@ const getReclaimProof = async (challengeID, ) =>{
 
 }
 
+const getSubmissions = async (challengeID, ) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+    try {
+      const response = await axios.get(
+        `${BackendURL}/player/submissions/${challengeID}`,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+
+
+}
+
+const submitClaim = async (challengeID, value, Url) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  let body ={
+    "ChallengeID": parseInt(challengeID),
+    "Value": parseInt(value),
+    "Url": Url
+  }
+    try {
+      const response = await axios.post(
+        `${BackendURL}/player/submission`, body,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+}
+
+
+const validate = async (challengeID, invalid) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+  let body = {
+    "InvalidSubmissions": invalid
+  
+  }
+    try {
+      const response = await axios.post(
+        `${BackendURL}/challenge/validate/${challengeID}`, body,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+
+
+}
+
+const getMysubmit = async (challengeID) =>{
+  let headers = {
+    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  }
+    try {
+      const response = await axios.get(
+        `${BackendURL}/player/submission/${challengeID}`,
+        { headers }
+      )
+      return response.data
+    } catch (error) {
+      return error.message
+    }
+
+}
 
 
 const logout = async () => {}
@@ -326,5 +422,10 @@ export {
   withDrawApi,
   getShareableChallengeLink,
   createChallengeAPI,
-  getReclaimProof
+  getReclaimProof,
+  uploadFileApi,
+  getSubmissions,
+  validate,
+  submitClaim,
+  getMysubmit
 }
