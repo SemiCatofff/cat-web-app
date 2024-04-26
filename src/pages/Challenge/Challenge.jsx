@@ -127,7 +127,7 @@ console.log(userPerformance.GameType)
           }`}
           onClick={() => {
             
-            if(userPerformance.GameType === "Voting")
+            if(userPerformance.GameType === "Validator")
             {navigate(`/vote/${params.id}`)}
             else{
               setTab(2)
@@ -139,7 +139,7 @@ console.log(userPerformance.GameType)
             className={`${styles.caption1} ${tab === 2 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
           >
             {' '}
-            {userPerformance.GameType !== "voting"?"Chatroom":"Feed"}
+            {userPerformance.GameType !== "Validator"?"Chatroom":"Feed"}
           </div>
         </div>
       </div>
@@ -151,8 +151,8 @@ console.log(userPerformance.GameType)
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
           startDate = {userPerformance.StartDate}
-          //type={userPerformance.GameType}
-          type={voting}
+          type={userPerformance.GameType}
+          //type={voting}
           game={userPerformance.ParticipationType}
           item={challenges}
           leaderBoard={leaderBoard} // Pass leaderBoard as prop
