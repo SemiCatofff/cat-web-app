@@ -60,29 +60,31 @@ function Login() {
   }, [])
 
   const handleGoogleLogin = async () => {
-    if(accept){
+    
     try {
       const output = await redirectGoogleAuth()
       setCurrentStep(currentStep + 1)
     } catch (error) {
       console.error('Error during login:', error)
-    }}
-    else{
-      alert("Please accept the terms and conditions")
     }
   }
 
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
     const refreshToken = await getRefreshTokenAPI()
-    if(sessionStorage.getItem('challengeId')){
-      navigate(`challenge/${sessionStorage.getItem('challengeId')}`)
+
+    if(output.success && refreshToken.success){
+      if(sessionStorage.getItem('challengeId')){
+        navigate(`challenge/${sessionStorage.getItem('challengeId')}`)
+      }
+      else{
+        navigate('/')
+      }
+      dispatch(setLoginState(true))
+      sessionStorage.setItem('authProcess', 'true')
+
     }
-    else{
-      navigate('/')
-    }
-    dispatch(setLoginState(true))
-    sessionStorage.setItem('authProcess', 'true')
+    
   }
 
   const renderStepContent = () => {
@@ -121,7 +123,7 @@ function Login() {
             >
               Welcome To Catoff Gaming 🔥
             </div>
-            <div className='flex gap-[10px] justify-start items-start mt-3'>
+            {/* <div className='flex gap-[10px] justify-start items-start mt-3'>
             <input
               type="checkbox"
               className="mt-[3px]"
@@ -129,7 +131,7 @@ function Login() {
               onChange={()=>{setAccept(!accept)}}/>
             <p className='text-[12px] !text-stone-900'>I acknowledge that I agree to the 
             <span className='text-blue-600'> <a href="https://www.catoff.xyz/terms" target="_blank">Terms of Service</a></span> and <span className='text-blue-600'><a href="https://www.catoff.xyz/privacypolicy" target="_blank">Privacy Policy</a></span> of the platform</p>
-            </div>
+            </div> */}
             <div
               className={`${styles.heading2} mt-4`}
               onClick={handleGoogleLogin}

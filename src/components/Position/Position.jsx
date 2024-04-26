@@ -1,13 +1,14 @@
 import flame from '../../assets/images/flame.png'
-import React, { useEffect } from 'react'
+import React, {} from 'react'
 import styles from '../../styles/style'
 import hippo from '../../assets/images/hippo.png'
 import batch from '../../assets/images/batch.png'
 import move from '../../assets/images/move.png'
-import blur from '../../assets/images/blur.png'
+
 
 
 const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, game }) => {
+  console.log(leaderBoard)
   const handleTab = () => {setTab(1)}
   const Competitor = ({ profileSrc, name, steps, isUser }) => (
     <div className="w-[43%] h-full flex flex-col items-center relative gap-[15px]">
@@ -31,11 +32,11 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, gam
 
         {!isUser ? (
           <span className={`${styles.subtext} !text-[#202117]`}style={{ filter: 'blur(3px)' }}>
-            {steps} {game === "DigitalProof" ? "Points": game}
+            {steps} {game === 'DigitalProof' ? 'Points' : game === "Validator"? "":game}
           </span>
         ) : (
           <span className={`${styles.subtext} !text-[#202117]`}>
-          {steps} {game === "DigitalProof" ? "Points": game}
+          {steps} {game === 'DigitalProof' ? 'Points' : game === "Validator"? "":game}
         </span>
         )}
       </div>
@@ -69,16 +70,16 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, gam
               <div>
                 <img
                   className="w-[30px] h-[30px] rounded-full mx-[10px]"
-                  src={leaderBoard.length > 0? leaderBoard.find(user => user.username === localStorage.getItem('name')).profilePicture : ""}
+                  src={leaderBoard.length > 0 && localStorage.getItem('name') ? leaderBoard.find(user => user.username === localStorage.getItem('name')).profilePicture : ""}
                   alt=""
                 />
               </div>
 
               <div className="flex-1 ml-2 mr-2">
-                <p className={`${styles.subheading} !text-[#4f4f4f]`}>{leaderBoard.length > 0? leaderBoard.find(user => user.username === localStorage.getItem('name')).username: "40"}</p>
+                <p className={`${styles.subheading} !text-[#4f4f4f]`}>{leaderBoard.length > 0 && localStorage.getItem('name') ? leaderBoard.find(user => user.username === localStorage.getItem('name')).username: "40"}</p>
               </div>
               <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
-                <p className={`${styles.subtext} !text-[#4f4f4f]`}>{leaderBoard.length > 0? leaderBoard.find(user => user.username === localStorage.getItem('name')).value : "40"}  </p>
+                <p className={`${styles.subtext} !text-[#4f4f4f]`}>{leaderBoard.length > 0 && localStorage.getItem('name') ? leaderBoard.find(user => user.username === localStorage.getItem('name')).value : "40"}  </p>
               </div>
             </div>
             <div className="h-[45px] w-[211px] bg-[#FFFFFF] rounded-[12px] px-4 flex items-center justify-center relative" style={{ filter: 'blur(4px)' }}>
@@ -171,7 +172,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, gam
     <div className="h-[241px] mx-4 rounded-box border-[1px] border-grey flex flex-col">
       {type != 0 && (
         <div className="flex items-center px-3 py-3 gap-[3%]">
-          <img src={batch} className="h-[30px]"></img>
+          <img src={batch} className="h-[30px]" alt=""></img>
           <div className=" gap-[1px] w-[88%]">
             <div className={`${styles.heading2} !text-[#202117] `}>
               Keep Going!{' '}
@@ -181,7 +182,7 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, gam
             </div>
           </div>
 
-          <img src={move} className="h-[40px]" onClick = {handleTab}></img>
+          <img src={move} className="h-[40px]" onClick = {handleTab} alt=""></img>
         </div>
       )}
       {renderMatchType()}
