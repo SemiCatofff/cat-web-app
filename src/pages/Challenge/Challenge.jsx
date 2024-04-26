@@ -59,7 +59,7 @@ function Challenge() {
     return () => clearTimeout(timer);
   }, [userPerformance, leaderBoard]);
 
-
+console.log(userPerformance.GameType)
 
   return (
     <div className="flex flex-col h-auto">
