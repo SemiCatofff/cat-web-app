@@ -39,7 +39,7 @@ const DareChallengeForm = ({
     const defaultsR = {
       0: { maxParticipants: '2', target: '2' }, // 0v1 Challenge
     }
-    if(GameType !== '2'){
+    if(GameType !== '2' && GameType !== '3'){
       if (defaults[challengeType]) {
         setValue('maxParticipant', defaults[challengeType].maxParticipants)
 
@@ -47,10 +47,12 @@ const DareChallengeForm = ({
     }
     else{
       if (defaultsR[challengeType]) {
+
       setValue('maxParticipant', defaultsR[challengeType].maxParticipants)}
+      
     }
   
-  }, [challengeType, setValue])
+  }, [challengeType])
 
   function getGameId(participation, game) {
     const gameIdMap = {
@@ -62,8 +64,8 @@ const DareChallengeForm = ({
       '21': 6, // nvn Calories
       '02': 7,
       '12': 8,
-      '13': 9,  // Single Validator Based Game (1v1)
-      '23': 10  // Single Validator Based Game (nvn)
+      '03': 9,  // Single Validator Based Game (1v1)
+      '13': 10  // Single Validator Based Game (nvn)
     }
     console.log("gameidmap",gameIdMap[`${participation}${game}`])
     return gameIdMap[`${participation}${game}`]
@@ -138,7 +140,7 @@ const DareChallengeForm = ({
       GameID: gameID,
       Wager: parseInt(data.wager),
       MaxParticipants: parseInt(data.maxParticipant),
-      Target: parseInt(data.Target),
+      Target: GameType === '3'? 1000 : parseInt(data.Target),
     }
   
     createChallenge(request)
@@ -174,7 +176,7 @@ const DareChallengeForm = ({
             placeholder="Enter Max Participants"
             errorName="maxParticipant"
             errors={errors}
-            disabled={(GameType==="2"?['0']:['0', '1']).includes(challengeType)}
+            disabled={(GameType==="2" || GameType === "3"?['0']:['0', '1']).includes(challengeType)}
             {...register('maxParticipant', {
               required: 'Max Participants value is required',
             })}
@@ -186,14 +188,14 @@ const DareChallengeForm = ({
             errors={errors}
             disabled={['0', '1'].includes(challengeType)}
           />
-          <Input
+          {GameType !== "3" && <Input
             label="Target"
             placeholder="Enter Target To Complete"
             errorName="Target"
             errors={errors}
             footerText=""
             {...register('Target', { required: 'Target Required' })}
-          />
+          />}
           <Input
             label="Wager Amount"
             placeholder="Enter Wager Amount"

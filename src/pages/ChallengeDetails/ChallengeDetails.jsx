@@ -217,7 +217,7 @@ function ChallengeDetails() {
           <div className={` absolute bottom-4 w-full `}>
             <div className={`flex justify-between ${styles.marginX}`}>
               <p className={`${styles.heading2} text-yellow`}>
-                {challengeDetails.Target} {challengeDetails.GameType === 'DigitalProof'? "Points": challengeDetails.GameType} in{' '}
+                {challengeDetails.GameType === "Validator" ? "Best ":challengeDetails.Target + " " + challengeDetails.GameType === 'DigitalProof'? "Points": challengeDetails.GameType} in{' '}
                 {moment
                   .duration(
                     moment(parseInt(challengeDetails.EndDate)).diff(
