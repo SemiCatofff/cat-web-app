@@ -75,14 +75,19 @@ function Login() {
   const handleAuthenticationProcess = async () => {
     const output = await authenticateAPI()
     const refreshToken = await getRefreshTokenAPI()
-    if(sessionStorage.getItem('challengeId')){
-      navigate(`challenge/${sessionStorage.getItem('challengeId')}`)
+
+    if(output.success && refreshToken.success){
+      if(sessionStorage.getItem('challengeId')){
+        navigate(`challenge/${sessionStorage.getItem('challengeId')}`)
+      }
+      else{
+        navigate('/')
+      }
+      dispatch(setLoginState(true))
+      sessionStorage.setItem('authProcess', 'true')
+
     }
-    else{
-      navigate('/')
-    }
-    dispatch(setLoginState(true))
-    sessionStorage.setItem('authProcess', 'true')
+    
   }
 
   const renderStepContent = () => {

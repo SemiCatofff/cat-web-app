@@ -8,9 +8,9 @@ import moment from 'moment'
 import Position from '../Position/Position'
 import likes from '../../assets/images/likes.png'
 import { imgHolder, fi_upload, arrowRight, thumbnail, tick, refresh } from '../../assets/images'
-import { useEffect, useState } from 'react'
 import { getReclaimProof } from '../../utils/ApiCalls'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
 
 function Progress({
   value,
@@ -205,7 +205,7 @@ function Progress({
 
   const navigate = useNavigate()
   const params = useParams()
-
+  console.log(leaderBoard)
   const currentDate = moment();
 
   const formattedStartDate = moment.unix(startDate / 1000);
