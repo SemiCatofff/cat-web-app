@@ -103,9 +103,11 @@ function Progress({
   useEffect(()=>{
     const func = async ()=>{
       const output = await getMysubmit(params.id)
-    console.log(output)}
+      if(output.success){
+          setStep(4)
+          setUploadedImage(output.data.MediaUrl)
+      }}
       func()
-
   },[])
 
   const renderStep = () => {
@@ -169,7 +171,7 @@ function Progress({
               <label htmlFor="file-upload" className="custom-file-upload">
                 {uploadedImage ? (
                   <img
-                    src={uploadedImage}
+                    src={`https://gateway.catoff.xyz/ipfs/${uploadedImage}`}
                     className="w-[152px] h-[108px] object-cover rounded-xl"
                     alt="Uploaded thumbnail"
                   />
@@ -222,6 +224,19 @@ function Progress({
                 Confirm your submission:
               </p>
             </div>
+            {uploadedImage ? (
+                  <img
+                    src={`https://gateway.catoff.xyz/ipfs/${uploadedImage}`}
+                    className="w-[152px] h-[108px] object-cover rounded-xl"
+                    alt="Uploaded thumbnail"
+                  />
+                ) : (
+                  <img
+                    src={thumbnail}
+                    className="w-[152px] h-[108px] object-cover rounded-xl"
+                    alt="Upload icon"
+                  />
+                )}
             <div className="w-40 flex justify-between mb-4">
               <button
                 onClick={handlePrevStep}
@@ -256,7 +271,7 @@ function Progress({
                 >
                   {' '}
                   <img src={tick} className="mr-1 " alt="" />
-                  Verified{' '}
+                  Submitted {' '}
                 </p>
               </div>
               <img src={refresh} className="w-[15px] h-[17px] my-auto" />
@@ -265,7 +280,7 @@ function Progress({
             {uploadedImage && (
               <div className="mt-2">
                 <img
-                  src={uploadedImage}
+                  src={`https://gateway.catoff.xyz/ipfs/${uploadedImage}`}
                   className="w-[152px] h-[120px] object-cover rounded-xl"
                   alt="Submitted thumbnail"
                 />
@@ -294,7 +309,7 @@ function Progress({
 
   const navigate = useNavigate()
   const params = useParams()
-  console.log(leaderBoard)
+
   const currentDate = moment()
 
   const formattedStartDate = moment.unix(startDate / 1000)
@@ -325,7 +340,7 @@ function Progress({
         <div className="bg-[#192126] relative flex flex-col justify-center items-center rounded-box w-[59%]">
           {(() => {
             switch (type) {
-              case 'voting':
+              case 'Validator':
                 return (
                   <>
                     <img
