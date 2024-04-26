@@ -35,7 +35,7 @@ const Competitor = ({ profileSrc, name, steps, isWinner, hval, index, leaderboar
 
     <div className="flex flex-col items-center z-20">
       <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
-      <span className={`${styles.subtext} !text-[#202117]`}>{steps} {type === "DigitalProof"? "Points": type}</span>
+      <span className={`${styles.subtext} !text-[#202117]`}>{steps} {type === 'DigitalProof' ? 'Points' : type === "Validator"? "":type}</span>
     </div>
 
     {index === 1 && <div className="h-[5px]"> </div>}
@@ -59,7 +59,7 @@ const PlayerInfo = ({ index, name, steps, prof, type }) => {
         <p className={`${styles.subheading} !text-[#4f4f4f]`}>{name}</p>
       </div>
       <div className="flex justify-center items-center rounded-full text-[10px] font-medium text-[#4f4f4f]">
-        <p className={`${styles.subtext} !text-[#4f4f4f]`}>{steps}{type} </p>
+        <p className={`${styles.subtext} !text-[#4f4f4f]`}>{steps}{type === 'DigitalProof' ? 'Points' : type === "Validator"? "":type} </p>
       </div>
     </div>
   )

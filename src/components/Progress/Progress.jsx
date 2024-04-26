@@ -94,6 +94,7 @@ function Progress({
       
           setUploadedImage(data.Hash);
 
+
     
       }
     } else {
@@ -107,7 +108,7 @@ function Progress({
       if(output.success){
           setStep(4)
           setUploadedImage(output.data.MediaUrl)
-          setQuantity(value)
+          setQuantity(output.data.Player.Value)
       }}
       func()
   },[])
@@ -290,7 +291,7 @@ function Progress({
             )}
             <div className="mt-6">
               <div className="flex justify-between">
-                <p className={`${styles.heading2}`}>{quantity} gm</p>
+                <p className={`${styles.heading2}`}>{quantity}</p>
                 <div className="">
                   <p
                     className={`${styles.paragraph} py-1  px-4 bg-white !text-black flex rounded-xl`}
