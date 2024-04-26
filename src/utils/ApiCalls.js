@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BackendURL = 'https://stagingapi.catoff.xyz'
+const BackendURL = 'https://stagingapi2.catoff.xyz'
 
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
@@ -68,7 +68,7 @@ const getRefreshTokenAPI = async () => {
   }
   try {
     const response = await axios.post(
-      `${BackendURL}/oktoProxy/refresh_token`,
+      `${BackendURL}/oktoProxy/refreshToken`,
       {},
       { headers }
     )
@@ -101,7 +101,7 @@ const getChallenges = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/${challengeID}`,
+      `${BackendURL}/challenge/dashboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -110,15 +110,15 @@ const getChallenges = async (challengeID) => {
   }
 }
 
-const getOngoingChallenges = async (type, page, limit) => {
+const getOngoingChallenges = async (body) => {
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
 
   try {
-    const response = await axios.get(
-      `${BackendURL}/challenge/challenges/onGoing/category/${type}?page=${page}&limit=${limit}`,
-      { headers }
+    const response = await axios.post(
+      `${BackendURL}/challenge/filter`, body,
+      { headers },
     )
     return response.data
   } catch (error) {
@@ -151,7 +151,7 @@ const createChallengeAPI = async (challengeDetails) => {
 
   try {
     const response = await axios.post(
-      `${BackendURL}/challenge/challenges`,
+      `${BackendURL}/challenge`,
       challengeDetails,
       { headers }
     )
@@ -171,8 +171,9 @@ const joinChallengeAPI = async (challengeName) => {
   }
 
   let body = {
-    ChallengeID: challengeName,
+    ChallengeID: parseInt(challengeName),
   }
+  
 
   try {
     const response = await axios.post(`${BackendURL}/player`, body, { headers })
@@ -222,7 +223,7 @@ const getChallengeDashboard = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/dashboard/${challengeID}`,
+      `${BackendURL}/challenge/dashboard/${challengeID}`,
       { headers }
     )
     return response.data
@@ -237,7 +238,7 @@ const getLeaderboard = async (challengeID) => {
   }
   try {
     const response = await axios.get(
-      `${BackendURL}/challenge/challenges/${challengeID}/leaderboard`,
+      `${BackendURL}/challenge/leaderboard/${challengeID}`,
       { headers }
     )
     return response.data

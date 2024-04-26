@@ -6,6 +6,7 @@ import back from '../../assets/images/back.png'
 import food from '../../assets/images/food.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import clock from '../../assets/images/clock.png'
+import { getChallengeDashboard } from '../../utils/ApiCalls'
 
 const VotingFeed = () => {
   const [submits, setSubmits] = useState([
@@ -13,6 +14,8 @@ const VotingFeed = () => {
     { id: '2' },
     { id: '3' },
   ])
+
+  const [userPerformance, setUserPerformance] = useState({ChallengeName : localStorage.getItem('ChallengeName')})
 
   const [validates, setValidates] = useState([])
   const navigate = useNavigate()
@@ -36,6 +39,16 @@ const VotingFeed = () => {
     console.log(validates)
   }
 
+  const getDashboardDetails = async () => {
+    const output = await getChallengeDashboard(params.id)
+    if (output.success) {
+      setUserPerformance(output.data)
+      localStorage.setItem("ChallengeName", output.data.ChallengeName)
+    }}
+
+  useEffect(()=>{
+  getDashboardDetails()
+  },[])
   return (
     <>
       <div className="h-[300px] w-full bg-gradient-to-b from-[#7C61EA] to-[#8915D0] rounded-b-[30px] relative">
@@ -45,26 +58,26 @@ const VotingFeed = () => {
           className="absolute top-[0px] right-[0px] h-[68%]"
           alt=""
         ></img>
-        <div className="absolute bottom-[9%] w-full px-4">
+        <div className="absolute bottom-[3%] w-full px-4">
           <div className={styles.flexBetween}>
             <div
               className={`${styles.caption1} ${styles.marginY} !text-[#B5B5B5] `}
             >
               <div className={`${styles.heading2} !text-[20px] w-[50%]`}>
-                Digital Art Challenge
+                {userPerformance.ChallengeName}
               </div>
               <div className="flex gap-[10px] mt-3">
-                <div className="bg-white rounded-full py-1.5 px-1 w-[60%] flex justify-center">
+                <div className="bg-white rounded-full py-1.5 px-1 w-[40%] flex justify-center">
                   <div className="flex ">
-                    <img alt="" src={localStorage.getItem("profile")} className='w-[15px] h-[15px] rounded-[50%] mr-[2px]'></img>
+                    <img alt="" src={userPerformance.ChallengeCreatorImage} className='w-[15px] h-[15px] rounded-[50%] mr-[5px]'></img>
                     <p
                       className={`${styles.heading2} !text-[#696969] !text-[10px] mt-[2px]`}
                     >
-                      Creator Mary Jane
+                      Creator {userPerformance.ChallengeCreatorUsername}
                     </p>
                   </div>
                 </div>
-                <div className="bg-black rounded-full py-1 w-[40%] flex justify-center mt-[1px]">
+                <div className="bg-black rounded-full py-1 w-[25%] flex justify-center mt-[1px]">
                 <img src={clock} className='w-[10px] h-[10px] mt-[5px] mr-[4px] alt=""'></img>
                   <div className="flex">
                    
@@ -75,7 +88,7 @@ const VotingFeed = () => {
                 </div>
               </div>
               <div className={`${styles.subheading} !text-[10px] mt-2`}>
-                This is the challenge details area
+              {userPerformance.ChallengeDescription?.substring(0,115) + "..."}
               </div>
               <div className={`${styles.subheading} !text-[10px] mt-2 cursor-pointer` } onClick={()=>{navigate(`/details/${params.id}`)}}>
                 View Challenge
@@ -94,7 +107,7 @@ const VotingFeed = () => {
         </div>
       </div>
 
-      <div className="h-[47px] mt-3 rounded-[100px] bg-[#EDEBF3] mx-3 flex">
+      {localStorage.getItem("name") === userPerformance.ChallengeCreatorUsername && <div className="h-[47px] mt-3 rounded-[100px] bg-[#EDEBF3] mx-3 flex">
         <div className="w-[60%] flex items-center">
           <img src={tick} className="h-[42px] mx-1 mt-1"></img>
           <div
@@ -113,7 +126,7 @@ const VotingFeed = () => {
             Submit{' '}
           </div>
         </div>
-      </div>
+      </div>}
 
       {submits.map((item) => {
         return (
@@ -125,6 +138,7 @@ const VotingFeed = () => {
             id={item.id}
             isChecked={validates.includes(item.id)}
             trigger={updateValidates}
+            isCreator ={localStorage.getItem("name") === userPerformance.ChallengeCreatorUsername}
           />
         )
       })}

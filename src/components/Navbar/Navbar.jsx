@@ -16,8 +16,11 @@ const Navbar = () => {
 
   const userData = async () => {
     const output = await getUserDetails()
-    setUserInfo(output)
-    localStorage.setItem('profile', output.ProfilePicture)
+    if(output.success){
+      setUserInfo(output.data)
+      localStorage.setItem('profile', output.data.ProfilePicture)
+
+    }
   }
 
   useEffect(() => {

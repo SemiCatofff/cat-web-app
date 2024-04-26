@@ -2,8 +2,9 @@ import card2 from '../../assets/images/img.png'
 import styles from '../../styles/style'
 import { useState } from 'react'
 import share from '../../assets/images/shareic.png'
+import tick from '../../assets/images/tck.png'
 
-const VoteCard = ({ name, img, time, id, isChecked, trigger }) => {
+const VoteCard = ({ name, img, time, id, isChecked, trigger, isCreator}) => {
   const handleCheckboxChange = () => {
     trigger(id)
   }
@@ -29,9 +30,9 @@ const VoteCard = ({ name, img, time, id, isChecked, trigger }) => {
           {' '}
           Posted few days ago{' '}
         </div>
-        {/* <div className={`${styles.subheading} !font-bold !text-[10px] flex items-center px-3 py-1 bg-[#4A484B] rounded-[20px] justify-center`} >
-          <img src={tick} className='h-[22px] mr-[1px] mt-[2px]'></img> <span className='mr-1'>Verified</span> </div> */}
-        
+       {!isCreator? <div className={`${styles.subheading} !font-bold !text-[10px] flex items-center px-3 py-1 bg-[#4A484B] rounded-[20px] justify-center`} >
+          <img src={tick} className='h-[22px] mr-[1px] mt-[2px]'></img> <span className='mr-2'>Verified</span> </div>
+        :
         <div className='w-[20%] flex justify-end'><input 
           type="checkbox" 
           id={`checkbox-${id}`} 
@@ -61,7 +62,7 @@ const VoteCard = ({ name, img, time, id, isChecked, trigger }) => {
               strokeLinejoin="round"
             />
           </svg>
-        </label> </div>
+        </label> </div>}
       </div>
       <div>
         <img src={card2} className="w-full rounded-[20px]" />
