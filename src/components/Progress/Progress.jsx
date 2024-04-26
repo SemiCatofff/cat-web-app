@@ -93,6 +93,7 @@ function Progress({
         console.log(data)
       
           setUploadedImage(data.Hash);
+
     
       }
     } else {
@@ -106,6 +107,7 @@ function Progress({
       if(output.success){
           setStep(4)
           setUploadedImage(output.data.MediaUrl)
+          setQuantity(value)
       }}
       func()
   },[])
