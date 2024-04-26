@@ -61,9 +61,13 @@ const DareChallengeForm = ({
       '20': 5, // nvn Steps
       '21': 6, // nvn Calories
       '02': 7,
-      '12':8
+      '12': 8,
+      '13': 9,  // Single Validator Based Game (1v1)
+      '23': 10  // Single Validator Based Game (nvn)
     }
+    console.log("gameidmap",gameIdMap[`${participation}${game}`])
     return gameIdMap[`${participation}${game}`]
+   
   }
 
   const handleClosePopup = () => {
