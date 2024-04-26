@@ -71,7 +71,7 @@ const Competitor = ({
     <div className="flex flex-col items-center z-20">
       <span className={`${styles.subheading} !text-[#202117]`}>{name}</span>
       <span className={`${styles.subtext} !text-[#202117]`}>
-        {steps} {type === 'DigitalProof' ? 'Points' : type}
+        {steps} {type === 'DigitalProof' ? 'Points' : type === "Validator"? "":type}
       </span>
     </div>
 

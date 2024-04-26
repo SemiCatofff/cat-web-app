@@ -175,7 +175,7 @@ console.log(userPerformance.GameType)
               )
               .humanize()}
             leaderBoard={leaderBoard}
-            winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner.UserName:""}
+            winner ={ userPerformance.ChallengeWinner && userPerformance.ChallengeWinner.UserName ? userPerformance.ChallengeWinner.UserName : ""}
           />
         )) ||
           (userPerformance.ParticipationType === '1v1' &&  (
@@ -189,7 +189,7 @@ console.log(userPerformance.GameType)
                 )
                 .humanize()}
               leaderBoard={leaderBoard}
-              winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner.UserName:""}
+              winner ={userPerformance.ChallengeWinner && userPerformance.ChallengeWinner.UserName ? userPerformance.ChallengeWinner.UserName : ""}
             />
           )) ||
           (userPerformance.ParticipationType === '0v1' && (
@@ -205,7 +205,7 @@ console.log(userPerformance.GameType)
               leaderBoard={leaderBoard}
               creator={userPerformance.ChallengeCreatorUsername}
               creatorImg={userPerformance.ChallengeCreatorImage}
-              winner ={moment(parseInt(userPerformance.EndDate)).isBefore(moment())?userPerformance.ChallengeWinner.UserName:""}
+              winner ={ userPerformance.ChallengeWinner && userPerformance.ChallengeWinner.UserName ? userPerformance.ChallengeWinner.UserName : ""}
             />
           )))}
 
