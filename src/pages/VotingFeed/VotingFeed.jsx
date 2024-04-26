@@ -7,6 +7,7 @@ import food from '../../assets/images/food.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import clock from '../../assets/images/clock.png'
 import { getChallengeDashboard, getSubmissions, validate } from '../../utils/ApiCalls'
+import moment from 'moment'
 
 const VotingFeed = () => {
   const [submits, setSubmits] = useState([
@@ -51,8 +52,8 @@ const invalid = ids
     console.log(invalid)
     const output = await validate(params.id, invalid);
 
-    if(output.sucess){
-
+    if(output.success){
+     alert(output.message)
     }
     else{
       alert(output.message)
@@ -104,7 +105,11 @@ const invalid = ids
                   <div className="flex">
                    
                     <p className={`${styles.heading2} !text-[10px] mt-[3px]`}>
-                      8 hrs left
+                      {!moment(parseInt(userPerformance.EndDate)).isBefore(moment())?moment
+              .duration(
+                moment(parseInt(userPerformance.EndDate)).diff(moment())
+              )
+              .humanize() :"Ended"}
                     </p>
                   </div>
                 </div>
