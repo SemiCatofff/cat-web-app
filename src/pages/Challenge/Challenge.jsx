@@ -23,7 +23,7 @@ function Challenge() {
     StakedWager: '00',
     TotalWagerStaked: '000',
   })
-  //const [voting, setVoting ] = useState("voting")
+  const [voting, setVoting ] = useState("voting")
   const getDashboardDetails = async () => {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
@@ -127,7 +127,7 @@ console.log(userPerformance.GameType)
           }`}
           onClick={() => {
             
-            if(userPerformance.GameType === "Voting")
+            if(userPerformance.GameType === "Validator")
             {navigate(`/vote/${params.id}`)}
             else{
               setTab(2)
@@ -139,7 +139,7 @@ console.log(userPerformance.GameType)
             className={`${styles.caption1} ${tab === 2 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
           >
             {' '}
-            {userPerformance.GameType !== "voting"?"Chatroom":"Feed"}
+            {userPerformance.GameType !== "Validator"?"Chatroom":"Feed"}
           </div>
         </div>
       </div>
