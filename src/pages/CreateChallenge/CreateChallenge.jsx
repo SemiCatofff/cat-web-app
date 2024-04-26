@@ -27,8 +27,8 @@ const CreateChallenge = () => {
       {step === 2 && (
         <DareChallengeForm
           register={register}
-          setValue={setValue} // Pass setValue down to the DareChallengeForm
-          watch={watch} // Pass watch down to the DareChallengeForm
+          setValue={setValue} 
+          watch={watch} 
           handleSubmit={handleSubmit}
           errors={errors}
           setStep={setStep}
