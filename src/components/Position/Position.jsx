@@ -32,11 +32,11 @@ const Position = ({ type, profile, leaderBoard, creator, creatorImg, setTab, gam
 
         {!isUser ? (
           <span className={`${styles.subtext} !text-[#202117]`}style={{ filter: 'blur(3px)' }}>
-            {steps} {game === "DigitalProof" ? "Points": game}
+            {steps} {game === 'DigitalProof' ? 'Points' : game === "Validator"? "":game}
           </span>
         ) : (
           <span className={`${styles.subtext} !text-[#202117]`}>
-          {steps} {game === "DigitalProof" ? "Points": game}
+          {steps} {game === 'DigitalProof' ? 'Points' : game === "Validator"? "":game}
         </span>
         )}
       </div>
