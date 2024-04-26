@@ -67,7 +67,7 @@ const CreateChallengeForm = ({ setStep, register, watch, handleSubmit, errors })
         <SelectInput
           label="Select Category"
           id="category"
-          options={['Steps', 'Calories','Twitter Impressions (Reclaim)']}
+          options={['Steps', 'Calories','Twitter Impressions (Reclaim)', 'Food-War (Validator)']}
           {...register('GameType')}
         />
 
