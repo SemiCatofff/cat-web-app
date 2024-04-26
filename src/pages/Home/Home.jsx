@@ -18,7 +18,7 @@ const Home = () => {
     setIsFilterVisible(!isFilterVisible)
   }
   const navigate = useNavigate()
-  const type = ["Steps","Calorie","DigitalProof"]
+  const type = ["Steps","Calorie","DigitalProof","Validator"]
   const getChalData = async (filter) => {
     const output = await getOngoingChallenges(filter)
     if (output.success) {

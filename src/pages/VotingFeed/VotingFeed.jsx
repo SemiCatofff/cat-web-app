@@ -6,14 +6,11 @@ import back from '../../assets/images/back.png'
 import food from '../../assets/images/food.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import clock from '../../assets/images/clock.png'
-import { getChallengeDashboard } from '../../utils/ApiCalls'
+import { getChallengeDashboard, getSubmissions, validate } from '../../utils/ApiCalls'
 
 const VotingFeed = () => {
   const [submits, setSubmits] = useState([
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-  ])
+    ])
 
   const [userPerformance, setUserPerformance] = useState({ChallengeName : localStorage.getItem('ChallengeName')})
 
@@ -22,9 +19,17 @@ const VotingFeed = () => {
   const params = useParams()
 
   useEffect(() => {
-    const ids = submits.map((submit) => submit.id)
-    setValidates(ids)
+    getData()
   }, [])
+
+  const getData = async () =>{
+    const output = await getSubmissions(params.id)
+    if(output.success){
+      setSubmits(output.data)
+      const ids = output.data.map((submit) => submit.ID)
+      setValidates(ids)
+    }
+  }
 
   const updateValidates = (id) => {
     if (validates.includes(id)) {
@@ -35,8 +40,25 @@ const VotingFeed = () => {
     //console.log(validates)
   }
 
-  const handleValidate = () => {
-    console.log(validates)
+  const handleValidate = async() => {
+    //console.log(validates)
+    const ids = submits.map((submit) => submit.ID)
+  
+const invalid = ids
+.map(item => parseInt(item))
+.filter(item => isNaN(item) || !validates.includes(item));
+
+    console.log(invalid)
+    const output = await validate(params.id, invalid);
+
+    if(output.sucess){
+
+    }
+    else{
+      alert(output.message)
+    }
+
+  
   }
 
   const getDashboardDetails = async () => {
@@ -67,7 +89,7 @@ const VotingFeed = () => {
                 {userPerformance.ChallengeName}
               </div>
               <div className="flex gap-[10px] mt-3">
-                <div className="bg-white rounded-full py-1.5 px-1 w-[40%] flex justify-center">
+                <div className="bg-white rounded-full py-1.5 px-1 w-[150px] flex justify-center">
                   <div className="flex ">
                     <img alt="" src={userPerformance.ChallengeCreatorImage} className='w-[15px] h-[15px] rounded-[50%] mr-[5px]'></img>
                     <p
@@ -77,7 +99,7 @@ const VotingFeed = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-black rounded-full py-1 w-[25%] flex justify-center mt-[1px]">
+                <div className="bg-black rounded-full py-1 w-[100px] flex justify-center mt-[1px]">
                 <img src={clock} className='w-[10px] h-[10px] mt-[5px] mr-[4px] alt=""'></img>
                   <div className="flex">
                    
@@ -128,17 +150,19 @@ const VotingFeed = () => {
         </div>
       </div>}
 
-      {submits.map((item) => {
+      {submits.length > 0 && submits.map((item) => {
         return (
           <VoteCard
-            key={item.id}
-            name={item.name}
-            img={item.img}
+            key={item.Player.User.UserID}
+            name={item.Player.User.UserName}
+            img={item.Player.User.ProfilePicture}
             time={item.time}
-            id={item.id}
-            isChecked={validates.includes(item.id)}
+            id={item.ID}
+            isChecked={validates.includes(item.ID)}
             trigger={updateValidates}
             isCreator ={localStorage.getItem("name") === userPerformance.ChallengeCreatorUsername}
+            sub = {item.MediaUrl}
+            value={item.Player.Value}
           />
         )
       })}

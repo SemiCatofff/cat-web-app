@@ -4,7 +4,7 @@ import { useState } from 'react'
 import share from '../../assets/images/shareic.png'
 import tick from '../../assets/images/tck.png'
 
-const VoteCard = ({ name, img, time, id, isChecked, trigger, isCreator}) => {
+const VoteCard = ({ name, img, time, value, sub, id, isChecked, trigger, isCreator}) => {
   const handleCheckboxChange = () => {
     trigger(id)
   }
@@ -12,14 +12,14 @@ const VoteCard = ({ name, img, time, id, isChecked, trigger, isCreator}) => {
   return (
     <div className="mx-4 my-5  border-[#E2DBFF] border-[1px] bg-[#F6EEF6]  rounded-[12px] px-4 flex flex-col">
       <div className="w-full h-[60px] flex items-center relative">
-        <img src={card2} className="w-[30px] h-[30px] rounded-[50%] " alt="" />
+        <img src={img} className="w-[30px] h-[30px] rounded-[50%] " alt="" />
         <div
-          className={`${styles.subheading} !text-[#000000] mx-2 font-regular !text-[12px] flex items-center h-full`}
+          className={`${styles.subheading} !text-[#000000] mx-2 font-regular !text-[12px] flex items-center h-full w-[80%]`}
         >
           {' '}
-          Name{' '}
+          {name}{' '}
         </div>
-        <div
+        {/* <div
           className={`${styles.subheading} !text-[#000000] font-regular !text-[12px] flex items-center h-[7px] w-[7px] rounded-[50%] bg-[#939393]`}
         >
           {' '}
@@ -28,8 +28,8 @@ const VoteCard = ({ name, img, time, id, isChecked, trigger, isCreator}) => {
           className={`${styles.subheading} !text-[#6B6B6B] mx-2 font-regular !text-[9px] flex items-center h-full w-[50%]`}
         >
           {' '}
-          Posted few days ago{' '}
-        </div>
+      
+        </div> */}
        {!isCreator? <div className={`${styles.subheading} !font-bold !text-[10px] flex items-center px-3 py-1 bg-[#4A484B] rounded-[20px] justify-center`} >
           <img src={tick} className='h-[22px] mr-[1px] mt-[2px]'></img> <span className='mr-2'>Verified</span> </div>
         :
@@ -65,7 +65,7 @@ const VoteCard = ({ name, img, time, id, isChecked, trigger, isCreator}) => {
         </label> </div>}
       </div>
       <div>
-        <img src={card2} className="w-full rounded-[20px]" />
+        <img src={sub?`https://gateway.catoff.xyz/ipfs/${sub}`:card2} className="w-full rounded-[20px] " />
       </div>
       <div className="w-full h-[58px] flex items-center">
         <div className=" h-[48px] flex items-center w-full">
@@ -73,7 +73,7 @@ const VoteCard = ({ name, img, time, id, isChecked, trigger, isCreator}) => {
             className={`${styles.heading2} !text-[#000000] mx-2 flex items-center h-full !text-[14px] w-[89%]`}
           >
             {' '}
-            Quantity : 100 KG{' '}
+            Quantity : {value}{' '}
           </div>
           <img src={share} alt=""></img>
         </div>
