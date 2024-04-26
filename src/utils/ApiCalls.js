@@ -363,13 +363,17 @@ const submitClaim = async (challengeID, value, Url) =>{
 }
 
 
-const validate = async (challengeID, ) =>{
+const validate = async (challengeID, invalid) =>{
   let headers = {
     Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
   }
+  let body = {
+    "InvalidSubmissions": invalid
+  
+  }
     try {
-      const response = await axios.get(
-        `${BackendURL}/player/submissions/${challengeID}`,
+      const response = await axios.post(
+        `${BackendURL}/challenge/validate/${challengeID}`, body,
         { headers }
       )
       return response.data
@@ -387,7 +391,7 @@ const getMysubmit = async (challengeID) =>{
   }
     try {
       const response = await axios.get(
-        `${BackendURL}/player/submissions/${challengeID}`,
+        `${BackendURL}/player/submission/${challengeID}`,
         { headers }
       )
       return response.data
@@ -396,6 +400,7 @@ const getMysubmit = async (challengeID) =>{
     }
 
 }
+
 
 const logout = async () => {}
 export {
