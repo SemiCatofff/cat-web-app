@@ -182,7 +182,7 @@ function Login() {
 
   return (
     <div
-    className={`${styles.marginX} ${styles.marginY} ${styles.flexCenter} flex-col`}
+    className={`${styles.marginX} ${styles.marginY} ${styles.flexCenter} flex-col items-start justify-start`}
     style={{ height: screenHeight }}
   >
     <img
