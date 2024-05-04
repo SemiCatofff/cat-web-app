@@ -23,14 +23,17 @@ function Challenge() {
     StakedWager: '00',
     TotalWagerStaked: '000',
   })
-  const [voting, setVoting ] = useState("voting")
+
   const getDashboardDetails = async () => {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
       setUserPerformance(output.data)
       localStorage.setItem("ChallengeName", output.data.ChallengeName)
     }
-    const output2 = await getOngoingChallenges({status:"upcoming"})
+
+
+
+    const output2 = await getOngoingChallenges({status:"UPCOMING"})
     if (output2.success) {
       setChallenges(output2.data)
     }
@@ -49,7 +52,10 @@ function Challenge() {
   useEffect(()=>{
     fetchLeaderboard()
     getDashboardDetails()
+    
   },[])
+
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -59,7 +65,7 @@ function Challenge() {
     return () => clearTimeout(timer);
   }, [userPerformance, leaderBoard]);
 
-console.log(userPerformance.GameType)
+
 
   return (
     <div className="flex flex-col h-auto">
