@@ -179,7 +179,7 @@ const joinChallengeAPI = async (challengeName) => {
     const response = await axios.post(`${BackendURL}/player`, body, { headers })
     return response.data
   } catch (error) {
-    return error.message
+    return error.response.data
   }
 }
 
