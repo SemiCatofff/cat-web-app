@@ -14,7 +14,7 @@ function ChallengeDetails() {
   const [isConfirmed, setIsConfirmed] = useState(false)
   const [joinSuccess, setJoinSuccess] = useState(true)
   const [active, setActive] = useState([])
-
+  const [message, setMessage] = useState("")
   const navigate = useNavigate()
   const params = useParams()
   const [challengeDetails, setChallengeDetails] = useState([])
@@ -58,12 +58,16 @@ function ChallengeDetails() {
   const joinChal = async () => {
     const output = await joinChallengeAPI(params.id)
     setIsLoading(false)
+    console.log(output)
     if (output.success) {
       setIsConfirmed(true)
       setJoinSuccess(true)
     } else {
+  
+      setMessage(output.message.substring(output.message.indexOf(":") + 1))
       setIsConfirmed(true)
       setJoinSuccess(false)
+     
     }
   }
 
@@ -120,8 +124,7 @@ function ChallengeDetails() {
           <h2 className={`${styles.heading1} !text-black `}>Ooops!</h2>
           <img src={hippo}></img>
           <p className={`${styles.subheading2} !text-black mt-6`}>
-            Something went wrong!! Try again later
-          </p>
+            {message}          </p>
         </div>
       </div>
     )
