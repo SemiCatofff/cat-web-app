@@ -21,6 +21,8 @@ module.exports = {
       height: {
         custom: '79px',
         tab: '54px',
+        safe: 'calc(100vh - env(safe-area-inset-bottom) - env(safe-area-inset-top))',
+        
       },
 
       padding: {

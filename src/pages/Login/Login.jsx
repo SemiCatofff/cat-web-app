@@ -10,6 +10,7 @@ import styles from '../../styles/style'
 import React, { useEffect, useState } from 'react'
 import { Popup } from '../../components'
 import { login, yellowarrow, arrow } from '../../assets/images/index'
+import { useRef } from 'react'
 
 function Login() {
   const location = useLocation()
@@ -18,6 +19,29 @@ function Login() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [accept, setAccept] = useState(false)
+  const [imageHeight, setImageHeight] = useState('auto');
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenHeight(window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const remainingSpace = screenHeight*0.45 - imageRef.current.clientHeight ;
+  
+    setImageHeight(remainingSpace > 0 ? '100%' : '60%');
+
+  }, [screenHeight]);
+
 
   const handleClosePopup = () => {
     setIsPopupOpen(false)
@@ -60,13 +84,14 @@ function Login() {
   }, [])
 
   const handleGoogleLogin = async () => {
-    
+  
     try {
       const output = await redirectGoogleAuth()
       setCurrentStep(currentStep + 1)
     } catch (error) {
       console.error('Error during login:', error)
     }
+  
   }
 
   const handleAuthenticationProcess = async () => {
@@ -123,15 +148,7 @@ function Login() {
             >
               Welcome To Catoff Gaming 🔥
             </div>
-            {/* <div className='flex gap-[10px] justify-start items-start mt-3'>
-            <input
-              type="checkbox"
-              className="mt-[3px]"
-              value = {accept}
-              onChange={()=>{setAccept(!accept)}}/>
-            <p className='text-[12px] !text-stone-900'>I acknowledge that I agree to the 
-            <span className='text-blue-600'> <a href="https://www.catoff.xyz/terms" target="_blank">Terms of Service</a></span> and <span className='text-blue-600'><a href="https://www.catoff.xyz/privacypolicy" target="_blank">Privacy Policy</a></span> of the platform</p>
-            </div> */}
+          
             <div
               className={`${styles.heading2} mt-4`}
               onClick={handleGoogleLogin}
@@ -153,12 +170,7 @@ function Login() {
                 </div>
                 <div className="grow shrink mt-5 p-2 border-dashed border-t-2 border-stone-900" />
               </div>
-              {/* <div
-                className="text-center text-stone-900 text-sm font-normal font-['Inter'] "
-                onClick={handleGoogleLogin}
-              >
-                Continue with your account{' '}
-              </div> */}
+             
             </div>
           </div>
         )
@@ -170,26 +182,36 @@ function Login() {
 
   return (
     <div
-      className={`${styles.marginX} ${styles.marginY} ${styles.flexCenter} flex-col relative`}
-    >
-      <img src={login} alt="Logo" className="w-full" />
-      <div className="content z-10">
-        {renderStepContent()}
-        <div className="flex justify-center mt-4">
-          {[...Array(2)].map((_, index) => (
-            <div
-              key={index}
-              className={`h-2 w-2 mx-1 rounded-full ${currentStep === index + 1 ? 'bg-black' : 'bg-gray-300'}`}
-            />
-          ))}
-        </div>
+    className={`${styles.marginX} ${styles.marginY} ${styles.flexCenter} flex-col items-start justify-start`}
+    style={{ height: screenHeight }}
+  >
+    <img
+      src={login}
+      alt="Logo"
+      className="w-full"
+      style={{ height: imageHeight }}
+      ref={imageRef}
+    />
+
+    <div className="z-10 h-[50%]">
+      {renderStepContent()}
+      <div className="flex justify-center mt-4">
+        {[...Array(2)].map((_, index) => (
+          <div
+            key={index}
+            className={`h-2 w-2 mx-1 rounded-full ${
+              currentStep === index + 1 ? 'bg-black' : 'bg-gray-300'
+            }`}
+          />
+        ))}
       </div>
-      <Popup
-        isOpen={isPopupOpen}
-        content={popupContent}
-        onClose={handleClosePopup}
-      />
     </div>
+    <Popup
+      isOpen={isPopupOpen}
+      content={popupContent}
+      onClose={handleClosePopup}
+    />
+  </div>
   )
 }
 export default Login

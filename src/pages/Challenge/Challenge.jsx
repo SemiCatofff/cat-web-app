@@ -10,8 +10,11 @@ import {
   getChallengeDashboard,
   getOngoingChallenges,
   getLeaderboard,
+  getReclaimProof,
 } from '../../utils/ApiCalls'
+import { Popup } from '../../components'
 import moment from 'moment'
+import { graphic2, yellowarrow } from '../../assets/images'
 
 function Challenge() {
   const [tab, setTab] = useState(0)
@@ -23,14 +26,26 @@ function Challenge() {
     StakedWager: '00',
     TotalWagerStaked: '000',
   })
-  const [voting, setVoting ] = useState("voting")
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+
   const getDashboardDetails = async () => {
     const output = await getChallengeDashboard(params.id)
     if (output.success) {
       setUserPerformance(output.data)
-      localStorage.setItem("ChallengeName", output.data.ChallengeName)
+      localStorage.setItem('ChallengeName', output.data.ChallengeName)
+
+      if (output.data.GameType === 'DigitalProof') {
+        const filter = output.data.Player.filter(
+          (item) => item.User.UserName === localStorage.getItem('name')
+        ).map((item) => item.VariableDescription)
+
+        if (filter.length > 0 && !filter[0]) {
+          setIsPopupOpen(true)
+        }
+      }
     }
-    const output2 = await getOngoingChallenges({status:"upcoming"})
+
+    const output2 = await getOngoingChallenges({ status: 'UPCOMING' })
     if (output2.success) {
       setChallenges(output2.data)
     }
@@ -40,26 +55,64 @@ function Challenge() {
   const navigate = useNavigate()
   const fetchLeaderboard = async () => {
     const out = await getLeaderboard(params.id)
-    console.log(out)
+
     if (out.success) {
       setLeaderBoard(out.data)
-      console.log(leaderBoard)
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchLeaderboard()
     getDashboardDetails()
-  },[])
+  }, [])
+
+  const getVerificationReq = async () => {
+    const data = await getReclaimProof(params.id)
+    if (data) {
+      window.location.href = data
+    } else {
+      console.error('Failed to obtain verification URL.')
+      navigate('/')
+    }
+  }
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false)
+  }
+
+  const popupContent = (
+    <div className={`!z-40`}>
+      <div className={`${styles.paddingX} ${styles.paddingY}  text-center`}>
+        <br />
+        <h2 className={`${styles.heading1} !text-black `}>
+          Generate Your Claim!
+        </h2>
+        <p className={`${styles.subheading2} !text-black mt-6`}>
+          {/* 🎉 You are in!  */}
+        </p>
+        <img src={graphic2} alt="Checkmark" className="mx-auto mt-5" />
+        <button
+          className=" bg-black rounded-full py-5 mt-6 flex w-full"
+          onClick={getVerificationReq}
+        >
+          <p className={`${styles.heading2} !text-yellow mx-auto flex`}>
+            {' '}
+            Start Creating{' '}
+            <span className="ml-3">
+              <img src={yellowarrow} alt="" />
+            </span>
+          </p>
+        </button>
+      </div>
+    </div>
+  )
 
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchLeaderboard()
-      getDashboardDetails() 
-    }, 10000); 
-    return () => clearTimeout(timer);
-  }, [userPerformance, leaderBoard]);
-
-console.log(userPerformance.GameType)
+      getDashboardDetails()
+    }, 10000)
+    return () => clearTimeout(timer)
+  }, [userPerformance, leaderBoard])
 
   return (
     <div className="flex flex-col h-auto">
@@ -72,23 +125,31 @@ console.log(userPerformance.GameType)
         </div>
         <div>
           <span className={`${styles.caption2} !text-[#202117] !font-medium`}>
-            {moment(parseInt(userPerformance.StartDate)).format("Do of MMMM, YYYY")} {moment(parseInt(userPerformance.StartDate)).format("h:mm a")}
+            {moment(parseInt(userPerformance.StartDate)).format(
+              'Do of MMMM, YYYY'
+            )}{' '}
+            {moment(parseInt(userPerformance.StartDate)).format('h:mm a')}
           </span>
-         {!moment(parseInt(userPerformance.EndDate)).isBefore(moment())? <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
-            {'Ending in '}
-            {moment
-              .duration(
-                moment(parseInt(userPerformance.EndDate)).diff(moment())
-              )
-              .humanize()}
-          </span>: <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
-            {'Ended '}
-            {moment
-              .duration(
-                moment(parseInt(userPerformance.EndDate)).diff(moment())
-              )
-              .humanize()} {' ago '}
-          </span> }
+          {!moment(parseInt(userPerformance.EndDate)).isBefore(moment()) ? (
+            <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
+              {'Ending in '}
+              {moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}
+            </span>
+          ) : (
+            <span className={`${styles.paragraph} !text-[#8D8D8D] ml-2`}>
+              {'Ended '}
+              {moment
+                .duration(
+                  moment(parseInt(userPerformance.EndDate)).diff(moment())
+                )
+                .humanize()}{' '}
+              {' ago '}
+            </span>
+          )}
         </div>
       </div>
       <div className="h-[54px] mx-4 flex bg-[#EDEBF3] rounded-tab drop-shadow gap-[1%]">
@@ -126,31 +187,33 @@ console.log(userPerformance.GameType)
             tab === 2 ? 'bg-[#E1F076]' : ''
           }`}
           onClick={() => {
-            
-            if(userPerformance.GameType === "Validator")
-            {navigate(`/vote/${params.id}`)}
-            else{
+            if (userPerformance.GameType === 'Validator') {
+              navigate(`/vote/${params.id}`)
+            } else {
               setTab(2)
             }
-           
           }}
         >
           <div
             className={`${styles.caption1} ${tab === 2 ? '!text-[#202117]' : '!text-[#6F6F6F]'}`}
           >
             {' '}
-            {userPerformance.GameType !== "Validator"?"Chatroom":"Feed"}
+            {userPerformance.GameType !== 'Validator' ? 'Chatroom' : 'Feed'}
           </div>
         </div>
       </div>
 
       {tab === 0 && (
         <Progress
-          value={userPerformance.Value > userPerformance.Target? userPerformance.Target : userPerformance.Value}
+          value={
+            userPerformance.Value > userPerformance.Target
+              ? userPerformance.Target
+              : userPerformance.Value
+          }
           target={userPerformance.Target}
           wager={userPerformance.StakedWager}
           prize={userPerformance.TotalWagerStaked}
-          startDate = {userPerformance.StartDate}
+          startDate={userPerformance.StartDate}
           type={userPerformance.GameType}
           //type={voting}
           game={userPerformance.ParticipationType}
@@ -158,7 +221,7 @@ console.log(userPerformance.GameType)
           leaderBoard={leaderBoard} // Pass leaderBoard as prop
           creator={userPerformance.ChallengeCreatorUsername}
           creatorImg={userPerformance.ChallengeCreatorImage}
-          joined ={setUserPerformance.PlayersJoined}
+          joined={setUserPerformance.PlayersJoined}
           setTab={setTab}
         />
       )}
@@ -168,35 +231,51 @@ console.log(userPerformance.GameType)
           <MultiChallenge
             target={userPerformance.Target}
             type={userPerformance.GameType}
-            isActive={moment(parseInt(userPerformance.EndDate)).isBefore(moment())}
+            isActive={moment(parseInt(userPerformance.EndDate)).isBefore(
+              moment()
+            )}
             ends={moment
               .duration(
                 moment(parseInt(userPerformance.EndDate)).diff(moment())
               )
               .humanize()}
             leaderBoard={leaderBoard}
-            winner ={ userPerformance.ChallengeWinner && userPerformance.ChallengeWinner.UserName ? userPerformance.ChallengeWinner.UserName : ""}
+            winner={
+              userPerformance.ChallengeWinner &&
+              userPerformance.ChallengeWinner.UserName
+                ? userPerformance.ChallengeWinner.UserName
+                : ''
+            }
           />
         )) ||
-          (userPerformance.ParticipationType === '1v1' &&  (
+          (userPerformance.ParticipationType === '1v1' && (
             <StepUpChallenge
               target={userPerformance.Target}
               type={userPerformance.GameType}
-              isActive={moment(parseInt(userPerformance.EndDate)).isBefore(moment())}
+              isActive={moment(parseInt(userPerformance.EndDate)).isBefore(
+                moment()
+              )}
               ends={moment
                 .duration(
                   moment(parseInt(userPerformance.EndDate)).diff(moment())
                 )
                 .humanize()}
               leaderBoard={leaderBoard}
-              winner ={userPerformance.ChallengeWinner && userPerformance.ChallengeWinner.UserName ? userPerformance.ChallengeWinner.UserName : ""}
+              winner={
+                userPerformance.ChallengeWinner &&
+                userPerformance.ChallengeWinner.UserName
+                  ? userPerformance.ChallengeWinner.UserName
+                  : ''
+              }
             />
           )) ||
           (userPerformance.ParticipationType === '0v1' && (
             <DareLeader
               target={userPerformance.Target}
               type={userPerformance.GameType}
-              isActive={moment(parseInt(userPerformance.EndDate)).isBefore(moment())}
+              isActive={moment(parseInt(userPerformance.EndDate)).isBefore(
+                moment()
+              )}
               ends={moment
                 .duration(
                   moment(parseInt(userPerformance.EndDate)).diff(moment())
@@ -205,11 +284,21 @@ console.log(userPerformance.GameType)
               leaderBoard={leaderBoard}
               creator={userPerformance.ChallengeCreatorUsername}
               creatorImg={userPerformance.ChallengeCreatorImage}
-              winner ={ userPerformance.ChallengeWinner && userPerformance.ChallengeWinner.UserName ? userPerformance.ChallengeWinner.UserName : ""}
+              winner={
+                userPerformance.ChallengeWinner &&
+                userPerformance.ChallengeWinner.UserName
+                  ? userPerformance.ChallengeWinner.UserName
+                  : ''
+              }
             />
           )))}
 
       {tab === 2 && <Chatbox />}
+      <Popup
+        isOpen={isPopupOpen}
+        content={popupContent}
+        onClose={handleClosePopup}
+      />
     </div>
   )
 }
