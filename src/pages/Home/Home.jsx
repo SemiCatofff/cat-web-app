@@ -46,7 +46,7 @@ const Home = () => {
 
   const handleFilterChange = (filterType, index) => {
     setCurrentFilter(filterType)
-    console.log(index)
+    //console.log(index)
     let body ={}
     if(index === 1){
       body = {"participationType": "0v1", "status":"UPCOMING"}

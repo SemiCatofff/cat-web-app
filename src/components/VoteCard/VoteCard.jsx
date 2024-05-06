@@ -4,7 +4,7 @@ import { useState } from 'react'
 import share from '../../assets/images/shareic.png'
 import tick from '../../assets/images/tck.png'
 
-const VoteCard = ({ name, img, time, value, sub, id, isChecked, trigger, isCreator}) => {
+const VoteCard = ({ name, img, time, value, sub, id, isChecked, trigger, isCreator, isValid}) => {
   const handleCheckboxChange = () => {
     trigger(id)
   }
@@ -30,7 +30,7 @@ const VoteCard = ({ name, img, time, value, sub, id, isChecked, trigger, isCreat
           {' '}
       
         </div> */}
-       {!isCreator? <div className={`${styles.subheading} !font-bold !text-[10px] flex items-center px-3 py-1 bg-[#4A484B] rounded-[20px] justify-center`} >
+       {!isCreator? isValid && <div className={`${styles.subheading} !font-bold !text-[10px] flex items-center px-3 py-1 bg-[#4A484B] rounded-[20px] justify-center`} >
           <img src={tick} className='h-[22px] mr-[1px] mt-[2px]'></img> <span className='mr-2'>Verified</span> </div>
         :
         <div className='w-[20%] flex justify-end'><input 
