@@ -295,6 +295,7 @@ function Progress({
                 <div className="">
                   <p
                     className={`${styles.paragraph} py-1  px-4 bg-white !text-black flex rounded-xl`}
+                    onClick={()=>{navigate(`/vote/${params.id}`)}} 
                   >
                     View{' '}
                     <img src={arrowRight} className="bg-white ml-1" alt="" />
@@ -512,12 +513,12 @@ function Progress({
         setTab={setTab}
       />
 
-      {item.filter((mem) => !mem.IsStarted).length > 0 && (
+      {item.length > 0 && (
         <div className={`${styles.heading2} !text-[16px] !text-[#202117] mx-4`}>
           Explore more challenges
         </div>
       )}
-      <ChallengeSlider items={item.filter((mem) => !mem.IsStarted)} />
+      <ChallengeSlider items={item} />
     </div>
   )
 }

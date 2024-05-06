@@ -46,22 +46,22 @@ const Home = () => {
 
   const handleFilterChange = (filterType, index) => {
     setCurrentFilter(filterType)
-    console.log(index)
+    //console.log(index)
     let body ={}
     if(index === 1){
-      body = {"participationType": "0v1", "status":"upcoming"}
+      body = {"participationType": "0v1", "status":"UPCOMING"}
     }else if(index === 2){
-      body = {"participationType": "1v1", "status":"upcoming"}
+      body = {"participationType": "1v1", "status":"UPCOMING"}
     }
     else{
-      body = {"status" : "upcoming"}
+      body = {"status" : "UPCOMING"}
     }
     getChalData(body)
   }
 
   useEffect(() => {
     userData()
-    getChalData({status : "upcoming"})
+    getChalData({status : "UPCOMING"})
   }, [])
 
   return (
@@ -97,7 +97,7 @@ const Home = () => {
                 const output = await getChalData({searchTerm: e.target.value, status:"upcoming"}
                 )
               } else {
-                getChalData({status:"upcoming"})
+                getChalData({status:"UPCOMING"})
               }
             }}
           />
@@ -135,7 +135,7 @@ const Home = () => {
       <div className={`card-box`}>
         {challenges.map((item) => {
           return (
-            !item.IsStarted && (
+            
               <ChallengeCard
                 id={item.ChallengeID}
                 type={type[item.Game.GameType]}
@@ -148,7 +148,7 @@ const Home = () => {
                 prize={item.Wager * item.Players.length}
               />
             )
-          )
+          
         })}
       </div>
 

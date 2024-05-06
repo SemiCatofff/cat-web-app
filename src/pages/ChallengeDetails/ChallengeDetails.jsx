@@ -14,14 +14,14 @@ function ChallengeDetails() {
   const [isConfirmed, setIsConfirmed] = useState(false)
   const [joinSuccess, setJoinSuccess] = useState(true)
   const [active, setActive] = useState([])
-
+  const [message, setMessage] = useState("")
   const navigate = useNavigate()
   const params = useParams()
   const [challengeDetails, setChallengeDetails] = useState([])
 
   const getChallengeData = async () => {
     const output = await getChallenges(params.id)
-    console.log(output)
+   // console.log(output)
     if (output.success) {
       setChallengeDetails(output.data)
       localStorage.setItem('type', output.data.ParticipationType)
@@ -33,6 +33,7 @@ function ChallengeDetails() {
     if(output.success){
       const activeChallenges = output.data.map((item) => item.ChallengeID)
     setActive(activeChallenges)
+    //console.log(active)
     }
   }
 
@@ -42,7 +43,7 @@ function ChallengeDetails() {
   }, [])
 
   const handleOpenPopup = () => {
-    if (active.includes(parseInt(params.id))) {
+    if ((active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (((localStorage.getItem('type') === "0v1") && localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername))) {
       navigate(`/details/${params.id}`)
     } else {
       setIsPopupOpen(true)
@@ -58,12 +59,16 @@ function ChallengeDetails() {
   const joinChal = async () => {
     const output = await joinChallengeAPI(params.id)
     setIsLoading(false)
+    console.log(output)
     if (output.success) {
       setIsConfirmed(true)
       setJoinSuccess(true)
     } else {
+  
+      setMessage(output.message.substring(output.message.indexOf(":") + 1))
       setIsConfirmed(true)
       setJoinSuccess(false)
+     
     }
   }
 
@@ -120,8 +125,7 @@ function ChallengeDetails() {
           <h2 className={`${styles.heading1} !text-black `}>Ooops!</h2>
           <img src={hippo}></img>
           <p className={`${styles.subheading2} !text-black mt-6`}>
-            Something went wrong!! Try again later
-          </p>
+            {message}          </p>
         </div>
       </div>
     )
@@ -258,7 +262,7 @@ function ChallengeDetails() {
             <h1 className={`${styles.heading2} !text-black flex `}>
               {' '}
               <span className="my-auto">
-                {!active.includes(parseInt(params.id))
+                {((!active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (!((localStorage.getItem('type') === "0v1") && localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername)))
                   ? 'JOIN NOW'
                   : 'VIEW STATUS'}
               </span>{' '}

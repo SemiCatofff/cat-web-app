@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BackendURL = 'https://api.catoff.xyz'
+const BackendURL = 'https://stagingapi2.catoff.xyz'
 
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
@@ -179,7 +179,7 @@ const joinChallengeAPI = async (challengeName) => {
     const response = await axios.post(`${BackendURL}/player`, body, { headers })
     return response.data
   } catch (error) {
-    return error.message
+    return error.response.data
   }
 }
 

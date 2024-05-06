@@ -32,7 +32,7 @@ function Main(props) {
   const showNav = approutes.some(route => location.pathname.startsWith(route));
   
   return (
-    <div className="w-screen h-screen flex flex-col justify-between bg-[#F8F8F8] overflow-hidden relative md:max-w-[360px]">
+    <div className="w-screen h-safe flex flex-col justify-between bg-[#F8F8F8] overflow-hidden relative md:max-w-[360px]">
       {isLoggedIn ? (
         <>
           <div className="z-1">
