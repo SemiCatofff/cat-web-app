@@ -49,7 +49,7 @@ const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creator
             >
               Participant
             </span>
-            <span className={`${styles.subheading} !text-[#000000]`}>{ people[0].username}</span>
+            <span className={`${styles.subheading} !text-[#000000]`}>{people.length > 0 ?  people[0].username: ""}</span>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ const DareLeader = ({ target, type, isActive,ends, leaderBoard, creator, creator
 
       <div className="flex w-[90%] mt-4 justify-center">
         <div className="flex flex-col items-center justify-center">
-          <LeaderboardItem steps={people[0].value} maxSteps={target} />
+          <LeaderboardItem steps={people.length > 0 ? people[0].value: ""} maxSteps={target} />
         </div>
       </div>
       <div className="h-[3px] w-[296px] bg-[#6F6F6F] bg-opacity-35"></div>
