@@ -21,7 +21,7 @@ function ChallengeDetails() {
 
   const getChallengeData = async () => {
     const output = await getChallenges(params.id)
-    console.log(output)
+   // console.log(output)
     if (output.success) {
       setChallengeDetails(output.data)
       localStorage.setItem('type', output.data.ParticipationType)
@@ -33,6 +33,7 @@ function ChallengeDetails() {
     if(output.success){
       const activeChallenges = output.data.map((item) => item.ChallengeID)
     setActive(activeChallenges)
+    //console.log(active)
     }
   }
 
@@ -42,7 +43,7 @@ function ChallengeDetails() {
   }, [])
 
   const handleOpenPopup = () => {
-    if (active.includes(parseInt(params.id))) {
+    if ((active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (((localStorage.getItem('type') === "0v1") && localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername))) {
       navigate(`/details/${params.id}`)
     } else {
       setIsPopupOpen(true)
@@ -261,7 +262,7 @@ function ChallengeDetails() {
             <h1 className={`${styles.heading2} !text-black flex `}>
               {' '}
               <span className="my-auto">
-                {!active.includes(parseInt(params.id))
+                {((!active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (!((localStorage.getItem('type') === "0v1") && localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername)))
                   ? 'JOIN NOW'
                   : 'VIEW STATUS'}
               </span>{' '}

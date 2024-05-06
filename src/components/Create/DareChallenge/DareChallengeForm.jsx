@@ -67,7 +67,7 @@ const DareChallengeForm = ({
       '03': 9,  // Single Validator Based Game (1v1)
       '13': 10  // Single Validator Based Game (nvn)
     }
-    console.log("gameidmap",gameIdMap[`${participation}${game}`])
+    //console.log("gameidmap",gameIdMap[`${participation}${game}`])
     return gameIdMap[`${participation}${game}`]
    
   }
