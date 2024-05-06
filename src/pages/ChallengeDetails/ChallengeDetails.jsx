@@ -261,10 +261,17 @@ function ChallengeDetails() {
           >
             <h1 className={`${styles.heading2} !text-black flex `}>
               {' '}
-              <span className="my-auto">
-                {((!active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (!((localStorage.getItem('type') === "0v1") && localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername)))
-                  ? 'JOIN NOW'
-                  : 'VIEW STATUS'}
+              <span className="my-auto">{
+                challengeDetails.ParticipationType === "0v1"?(
+                  challengeDetails.ChallengeCreatorUsername === localStorage.getItem('name')?"VIEW STATUS":"JOIN NOW"
+
+                ):(
+                  !active.includes(parseInt(params.id))?"JOIN NOW":"VIEW STATUS"
+                )
+              }
+
+              
+               
               </span>{' '}
               <span className="-mr-2 ">
                 <img src={arrow} alt="" className="h-8 w-8 my-auto" />

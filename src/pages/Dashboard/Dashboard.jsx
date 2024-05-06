@@ -198,6 +198,7 @@ const Dashboard = () => {
       <ChallengeSlider
         items={history.filter((item) => !moment(parseInt(item.EndDate)).isBefore(moment()))}
       />
+      
       {history.filter((item) => moment(parseInt(item.EndDate)).isBefore(moment())).length >
         0 && (
         <div className={` ${styles.paddingX} ${styles.flexBetween}`}>
