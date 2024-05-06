@@ -295,6 +295,7 @@ function Progress({
                 <div className="">
                   <p
                     className={`${styles.paragraph} py-1  px-4 bg-white !text-black flex rounded-xl`}
+                    onClick={()=>{navigate(`/vote/${params.id}`)}} 
                   >
                     View{' '}
                     <img src={arrowRight} className="bg-white ml-1" alt="" />

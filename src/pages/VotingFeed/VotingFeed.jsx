@@ -49,7 +49,7 @@ const invalid = ids
 .map(item => parseInt(item))
 .filter(item => isNaN(item) || !validates.includes(item));
 
-    console.log(invalid)
+    //console.log(invalid)
     const output = await validate(params.id, invalid);
 
     if(output.success){
@@ -168,6 +168,7 @@ const invalid = ids
             isCreator ={localStorage.getItem("name") === userPerformance.ChallengeCreatorUsername}
             sub = {item.MediaUrl}
             value={item.Player.Value}
+            isValid ={item.IsValid}
           />
         )
       })}
