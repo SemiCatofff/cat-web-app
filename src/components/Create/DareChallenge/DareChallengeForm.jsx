@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { setPopupState } from '../../../redux/actions/actions'
 
 
+
 const DareChallengeForm = ({
   register,
   errors,
@@ -39,7 +40,7 @@ const DareChallengeForm = ({
     const defaultsR = {
       0: { maxParticipants: '2', target: '2' }, // 0v1 Challenge
     }
-    if(GameType !== '2' && GameType !== '3'){
+    if(GameType !== '2'){
       if (defaults[challengeType]) {
         setValue('maxParticipant', defaults[challengeType].maxParticipants)
 
@@ -64,8 +65,9 @@ const DareChallengeForm = ({
       '21': 6, // nvn Calories
       '02': 7,
       '12': 8,
-      '03': 9,  // Single Validator Based Game (1v1)
-      '13': 10  // Single Validator Based Game (nvn)
+      '03': 11,  // Single Validator Based Game (1v1)
+      '13': 9,
+      '23': 10 // Single Validator Based Game (nvn)
     }
     //console.log("gameidmap",gameIdMap[`${participation}${game}`])
     return gameIdMap[`${participation}${game}`]
