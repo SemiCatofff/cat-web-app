@@ -114,6 +114,19 @@ function Progress({
   },[])
 
   const renderStep = () => {
+    if(localStorage.getItem('name') === creator){
+      return <div className="h-4">
+      <p
+        className={`${styles.subheading} py-1  px-4 bg-white !text-black flex rounded-xl`}
+        onClick={()=>{navigate(`/vote/${params.id}`)}} 
+      >
+        View Submissions{' '}
+        <img src={arrowRight} className="bg-white ml-1" alt="" />
+      </p>
+    </div>
+
+    }
+      else{
     switch (step) {
       case 1:
         return (
@@ -308,7 +321,7 @@ function Progress({
 
       default:
         return null
-    }
+    }}
   }
 
   const navigate = useNavigate()
