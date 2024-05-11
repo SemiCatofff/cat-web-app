@@ -1,12 +1,21 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import store from './redux/store/store'
-import { Provider } from 'react-redux'
-import { Challenge,Dashboard, Home,  Main,  Chat, GeneralVote, VotingFeed} from './pages'
-import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails'
-import CreateChallenge from './pages/CreateChallenge/CreateChallenge'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
+import { Challenge, Dashboard, Home, Main, Chat, GeneralVote, VotingFeed } from './pages';
+import ChallengeDetails from './pages/ChallengeDetails/ChallengeDetails';
+import CreateChallenge from './pages/CreateChallenge/CreateChallenge';
+import React, { useEffect } from 'react'; 
+import ReactGA from 'react-ga4'; // Update the import to use react-ga4
 
+const TRACKING_ID = "G-9LE41PT8PM";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
+  useEffect(() => {
+    // Update the page view tracking method for react-ga4
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search });
+  }, []);
+
   return (
       <Provider store={store}>
         <Router>
@@ -24,7 +33,7 @@ function App() {
           </Main>
         </Router>
       </Provider>
-  )
+  );
 }
 
-export default App
+export default App;
