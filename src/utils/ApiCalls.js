@@ -269,7 +269,6 @@ const getLeaderboard = async (challengeID) => {
       `${BackendURL}/challenge/leaderboard/${challengeID}`,
       { headers }
     )
-    console.log("----------",response)
     return response.data
   } catch (error) {
     return error.message
