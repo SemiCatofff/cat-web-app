@@ -1,18 +1,46 @@
 import axios from 'axios'
-const BackendURL = 'https://api.catoff.xyz'
+const BackendURL = 'https://stagingapi2.catoff.xyz'
 
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
 const redirectGoogleAuth = async () => {
   try {
-    window.location.href = `${BackendURL}/googleAuth`
+    window.location.href = `${BackendURL}/auth/googleAuth`
   } catch (error) {}
+}
+
+const serverGoogleAuth = async (code) => {
+  let body = {
+    code: code,
+  }
+  try {
+    const response = await axios.post(
+      `${BackendURL}/auth/googleAuth/login`,body
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const refreshServer = async (code) => {
+  let headers = {
+    Authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
+  }  
+  try {
+    const response = await axios.post(
+      `${BackendURL}/auth/refresh`,{},{headers}
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 }
 
 // ACCOUNT FETCHING SCREEN
 const authenticateAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -30,7 +58,7 @@ const authenticateAPI = async () => {
 
 const setPinAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -46,7 +74,7 @@ const setPinAPI = async () => {
 
 const createWallet = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -64,7 +92,7 @@ const createWallet = async () => {
 
 const getRefreshTokenAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.post(
@@ -80,7 +108,7 @@ const getRefreshTokenAPI = async () => {
 
 const getUserWalletAPI = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
 
   try {
@@ -97,7 +125,7 @@ const getUserWalletAPI = async () => {
 
 const getChallenges = async (challengeID) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.get(
@@ -112,7 +140,7 @@ const getChallenges = async (challengeID) => {
 
 const getOngoingChallenges = async (body) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
 
   try {
@@ -128,7 +156,7 @@ const getOngoingChallenges = async (body) => {
 
 const searchChallengeAPI = async (search, page, limit) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
 
   try {
@@ -146,7 +174,7 @@ const searchChallengeAPI = async (search, page, limit) => {
 
 const createChallengeAPI = async (challengeDetails) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
 
   try {
@@ -167,7 +195,7 @@ const createChallengeAPI = async (challengeDetails) => {
 
 const joinChallengeAPI = async (challengeName) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
 
   let body = {
@@ -187,7 +215,7 @@ const joinChallengeAPI = async (challengeName) => {
 
 const getUserChallenges = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.get(
@@ -202,7 +230,7 @@ const getUserChallenges = async () => {
 
 const getUserDetails = async () => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.get(
@@ -219,7 +247,7 @@ const getUserDetails = async () => {
 
 const getChallengeDashboard = async (challengeID) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.get(
@@ -234,22 +262,24 @@ const getChallengeDashboard = async (challengeID) => {
 
 const getLeaderboard = async (challengeID) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   try {
     const response = await axios.get(
       `${BackendURL}/challenge/leaderboard/${challengeID}`,
       { headers }
     )
+    console.log("----------",response)
     return response.data
   } catch (error) {
     return error.message
   }
 }
 
+
 const withDrawApi = async (amount) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   let body = {
   amount: parseInt(amount),
@@ -268,7 +298,7 @@ const withDrawApi = async (amount) => {
 
 const uploadFileApi = async (file) => {
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   const formData = new FormData();
   formData.append('file', file);
@@ -286,7 +316,7 @@ const uploadFileApi = async (file) => {
 
 const getShareableChallengeLink = async (challengeID) => {
   // let headers = {
-  //   Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+  //   Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   // }
   try {
     const response = await axios.get(
@@ -301,7 +331,7 @@ const getShareableChallengeLink = async (challengeID) => {
 
 const getReclaimProof = async (challengeID, ) =>{
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   
    let body =  {
@@ -325,7 +355,7 @@ const getReclaimProof = async (challengeID, ) =>{
 
 const getSubmissions = async (challengeID, ) =>{
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
     try {
       const response = await axios.get(
@@ -343,7 +373,7 @@ const getSubmissions = async (challengeID, ) =>{
 
 const submitClaim = async (challengeID, value, Url) =>{
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   let body ={
     "ChallengeID": parseInt(challengeID),
@@ -365,7 +395,7 @@ const submitClaim = async (challengeID, value, Url) =>{
 
 const validate = async (challengeID, invalid) =>{
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   let body = {
     "InvalidSubmissions": invalid
@@ -387,7 +417,7 @@ const validate = async (challengeID, invalid) =>{
 
 const getMysubmit = async (challengeID) =>{
   let headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
     try {
       const response = await axios.get(
@@ -427,5 +457,7 @@ export {
   getSubmissions,
   validate,
   submitClaim,
-  getMysubmit
+  getMysubmit,
+  serverGoogleAuth,
+  refreshServer
 }
