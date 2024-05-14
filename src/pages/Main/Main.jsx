@@ -48,7 +48,6 @@ function Main(props) {
       authTok()
       console.log("refreshing the tokens")
     }, 40* 1000); 
-
     return () => clearInterval(interval);
   }, []);
 

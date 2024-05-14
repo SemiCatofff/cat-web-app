@@ -114,7 +114,7 @@ function Progress({
   },[])
 
   const renderStep = () => {
-    if(localStorage.getItem('name') === creator){
+    if(localStorage.getItem('name') === creator && game === "0v1"){
       return <div className="h-4">
       <p
         className={`${styles.subheading} py-1  px-4 bg-white !text-black flex rounded-xl`}
