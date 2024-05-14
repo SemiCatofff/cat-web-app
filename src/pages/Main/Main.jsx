@@ -32,24 +32,24 @@ function Main(props) {
     }
   }, []);
 
-  const authTok = async()=>{
-    const output = await refreshServer()
+  const authTok = async () => {
+    const output = await refreshServer();
     const now = new Date();
-    const accessTokenExpiry = new Date(now.getTime() + 4*1000);
-    const refreshTokenExpiry = new Date(now.getTime() + 1*60*1000); 
-    localStorage.setItem("authToken", output.data.access_token)
+    const accessTokenExpiry = new Date(now.getTime() + 4 * 60 * 1000); // 4 minutes
+    const refreshTokenExpiry = new Date(now.getTime() + 80 * 24 * 60 * 60 * 1000); // 80 days
+    localStorage.setItem("authToken", output.data.access_token);
     localStorage.setItem("authTokenExpiry", accessTokenExpiry.toISOString());
-    localStorage.setItem("refreshToken", output.data.refresh_token)
+    localStorage.setItem("refreshToken", output.data.refresh_token);
     localStorage.setItem("refreshTokenExpiry", refreshTokenExpiry.toISOString());
   }
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
-      authTok()
-      console.log("refreshing the tokens")
-    }, 40* 1000); 
+      authTok();
+      console.log("refreshing the tokens");
+    }, 4 * 60 * 1000); 
     return () => clearInterval(interval);
-  }, []);
+  }, []);  
 
   useEffect(() => {
   
