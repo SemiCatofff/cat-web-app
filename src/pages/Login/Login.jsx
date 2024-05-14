@@ -1,10 +1,6 @@
 import { setLoginState } from '../../redux/actions/actions'
 import { useNavigate, useLocation } from 'react-router-dom'
-import {
-  authenticateAPI,
-  getRefreshTokenAPI,
-  redirectGoogleAuth,
-} from '../../utils/ApiCalls'
+import { authenticateAPI, getRefreshTokenAPI, redirectGoogleAuth,serverGoogleAuth } from '../../utils/ApiCalls'
 import { useDispatch } from 'react-redux'
 import styles from '../../styles/style'
 import React, { useEffect, useState } from 'react'
@@ -61,27 +57,24 @@ function Login() {
   )
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search)
-    const jwt = queryParams.get('jwt')
-    console.log(window.location.pathname)
-    
-    
-    if (jwt && !sessionStorage.getItem('authProcess')) {
-      sessionStorage.setItem('authProcess', 'false')
+    const query = window.location.search
+    const mat= query.match(/[\?&]code=([^&#]*)/);
+    const code = mat ? mat[1] : null;
+
+    if (code) {
       setIsPopupOpen(true)
-      sessionStorage.setItem('authToken', jwt)
-      handleAuthenticationProcess()
+      handleAuthenticationProcess(code)
     }
+
     const challengeRegex = /\/challenge\/(\d+)/;
     const match = window.location.pathname.match(challengeRegex);
 
-  if (match) {
-    // match[1] contains the challenge number extracted from the URL
-    sessionStorage.setItem('challengeId', match[1]);
-    console.log(`Challenge ID stored: ${match[1]}`);
-  }
-   
-  }, [])
+    if (match) {
+      sessionStorage.setItem('challengeId', match[1]);
+    }
+  }, []);
+
+ 
 
   const handleGoogleLogin = async () => {
   
@@ -94,11 +87,22 @@ function Login() {
   
   }
 
-  const handleAuthenticationProcess = async () => {
-    const output = await authenticateAPI()
-    const refreshToken = await getRefreshTokenAPI()
-
-    if(output.success && refreshToken.success){
+  const handleAuthenticationProcess = async (code) => {
+    const tokens = await serverGoogleAuth(code)
+    if(tokens.success){
+      console.log("here refreshing")
+      const now = new Date();
+      const accessTokenExpiry = new Date(now.getTime() + 4*1000); // Access token expires in 4 minutes
+      const refreshTokenExpiry = new Date(now.getTime() + 1*60*1000); // Refresh token expires in 59 minutes
+  
+      localStorage.setItem("authToken", tokens.data.access_token)
+      localStorage.setItem("authTokenExpiry", accessTokenExpiry.toISOString());
+      localStorage.setItem("refreshToken", tokens.data.refresh_token)
+      localStorage.setItem("refreshTokenExpiry", refreshTokenExpiry.toISOString());
+  
+      const output = await authenticateAPI()
+      const refreshToken = await getRefreshTokenAPI()
+  
       if(sessionStorage.getItem('challengeId')){
         navigate(`challenge/${sessionStorage.getItem('challengeId')}`)
       }
@@ -106,10 +110,8 @@ function Login() {
         navigate('/')
       }
       dispatch(setLoginState(true))
-      sessionStorage.setItem('authProcess', 'true')
-
-    }
     
+    } 
   }
 
   const renderStepContent = () => {

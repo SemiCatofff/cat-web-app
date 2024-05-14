@@ -75,7 +75,7 @@ const invalid = ids
   return (
     <>
       <div className="h-[300px] w-full bg-gradient-to-b from-[#7C61EA] to-[#8915D0] rounded-b-[30px] relative">
-        <img src={back} alt="" className="absolute top-[12px] left-[12px]" onClick={()=>{navigate(`/details/${params.id}`)}}></img>
+        <img src={back} alt="" className="absolute top-[12px] left-[12px]" onClick={()=>{navigate(`/challenge/${params.id}`)}}></img>
         <img
           src={food}
           className="absolute top-[0px] right-[0px] h-[68%]"
