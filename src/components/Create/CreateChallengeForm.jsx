@@ -11,7 +11,7 @@ const CreateChallengeForm = ({ setStep, register, watch, handleSubmit, errors })
   const [selection, setSelection] = useState(false)
   
   useEffect(()=>{
-   setSelection(selectedCategory !== '2' && selectedCategory !== '3')
+   setSelection(selectedCategory !== '2')
   },[selectedCategory])
 
   return (

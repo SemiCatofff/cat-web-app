@@ -43,7 +43,7 @@ function ChallengeDetails() {
   }, [])
 
   const handleOpenPopup = () => {
-    if ((active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (((localStorage.getItem('type') === "0v1") && localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername))) {
+    if ((active.includes(parseInt(params.id)) && localStorage.getItem('type') !== "0v1" ) || (((localStorage.getItem('type') === "0v1") && (localStorage.getItem('name') === challengeDetails.ChallengeCreatorUsername) || active.includes(parseInt(params.id))))) {
       navigate(`/details/${params.id}`)
     } else {
       setIsPopupOpen(true)
@@ -263,7 +263,7 @@ function ChallengeDetails() {
               {' '}
               <span className="my-auto">{
                 challengeDetails.ParticipationType === "0v1"?(
-                  challengeDetails.ChallengeCreatorUsername === localStorage.getItem('name')?"VIEW STATUS":"JOIN NOW"
+                  challengeDetails.ChallengeCreatorUsername === localStorage.getItem('name') || active.includes(parseInt(params.id))?"VIEW STATUS":"JOIN NOW"
 
                 ):(
                   !active.includes(parseInt(params.id))?"JOIN NOW":"VIEW STATUS"

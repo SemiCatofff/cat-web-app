@@ -73,13 +73,13 @@ const Home = () => {
         }}
       >
         <img
-          src={userInfo.ProfilePicture}
+          src={localStorage.getItem("profile") || userInfo.ProfilePicture}
           alt="pp"
           className="rounded-full object-cover mr-3 w-12 h-12"
         />
         <div>
           <p className={`${styles.heading2} !text-black`}>
-            Hey <span className="!text-purple">{userInfo.UserName}!</span>
+            Hey <span className="!text-purple">{localStorage.getItem("name") || userInfo.UserName}!</span>
           </p>
           <p>Let's the game Begin ! 🔥</p>
         </div>

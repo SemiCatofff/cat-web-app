@@ -8,6 +8,7 @@ import el2 from '../../assets/images/el2.png'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLoginState, setPopupState } from '../../redux/actions/actions'
+import { refreshServer } from '../../utils/ApiCalls'
 
 function Main(props) {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
@@ -17,12 +18,40 @@ function Main(props) {
   const approutes = ['/vote', '/feed']
   const dispatch = useDispatch()
 
+ 
+
   useEffect(() => {
-    const authState = sessionStorage.getItem('authProcess') === "true"
-    if (authState) {
-      dispatch(setLoginState(true))
+    const refreshTokenExpiry = localStorage.getItem("refreshTokenExpiry");
+    if (new Date() < new Date(refreshTokenExpiry)) {
+      console.log(refreshTokenExpiry)
+      console.log(new Date())
+      dispatch(setLoginState(true));
     }
-  }, [dispatch])
+    else{
+      console.log("here")
+    }
+  }, []);
+
+  const authTok = async()=>{
+    const output = await refreshServer()
+    const now = new Date();
+    const accessTokenExpiry = new Date(now.getTime() + 4*1000);
+    const refreshTokenExpiry = new Date(now.getTime() + 1*60*1000); 
+    localStorage.setItem("authToken", output.data.access_token)
+    localStorage.setItem("authTokenExpiry", accessTokenExpiry.toISOString());
+    localStorage.setItem("refreshToken", output.data.refresh_token)
+    localStorage.setItem("refreshTokenExpiry", refreshTokenExpiry.toISOString());
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      authTok()
+      console.log("refreshing the tokens")
+    }, 40* 1000); 
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
   
       dispatch(setPopupState(false))
