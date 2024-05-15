@@ -99,9 +99,10 @@ const Dashboard = () => {
   }, [])
 
   const walletLogout = async () => {
+    dispatch(setLoginState(false))
     sessionStorage.clear()
     localStorage.clear()
-    dispatch(setLoginState(false))
+   
   }
 
   const copyInviteLink = async () => {
