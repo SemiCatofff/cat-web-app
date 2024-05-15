@@ -100,6 +100,7 @@ const Dashboard = () => {
 
   const walletLogout = async () => {
     sessionStorage.clear()
+    localStorage.clear()
     dispatch(setLoginState(false))
   }
 
