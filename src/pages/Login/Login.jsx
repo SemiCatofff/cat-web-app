@@ -89,8 +89,7 @@ function Login() {
 
   const handleAuthenticationProcess = async (code) => {
 
-    const encodedC = "4/" + code.slice(4)
-    const tokens = await serverGoogleAuth(encodedC)
+    const tokens = await serverGoogleAuth(decodeURIComponent(code))
     if(tokens.success){
   
       const now = new Date();
@@ -110,6 +109,7 @@ function Login() {
       }
       else{
         navigate('/')
+        setIsPopupOpen(false)
       }
       dispatch(setLoginState(true))
     
