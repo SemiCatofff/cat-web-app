@@ -13,6 +13,7 @@ const serverGoogleAuth = async (code) => {
   let body = JSON.stringify({
     code: code,
   });
+  console.log(code)
   const config = {
     headers: {
       'Content-Type': 'application/json'

@@ -88,9 +88,11 @@ function Login() {
   }
 
   const handleAuthenticationProcess = async (code) => {
-    const tokens = await serverGoogleAuth(code)
+
+    const encodedC = "4/" + code.slice(4)
+    const tokens = await serverGoogleAuth(encodedC)
     if(tokens.success){
-      console.log("here refreshing")
+  
       const now = new Date();
       const accessTokenExpiry = new Date(now.getTime() + 4 * 60 * 1000); // 4 minutes
       const refreshTokenExpiry = new Date(now.getTime() + 80 * 24 * 60 * 60 * 1000); // 80 days
