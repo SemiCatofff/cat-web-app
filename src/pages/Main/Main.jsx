@@ -25,6 +25,7 @@ function Main(props) {
     if (new Date() < new Date(refreshTokenExpiry)) {
       console.log(refreshTokenExpiry)
       console.log(new Date())
+      authTok()
       dispatch(setLoginState(true));
     }
     else{
