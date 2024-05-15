@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BackendURL = 'https://stagingapi2.catoff.xyz'
+const BackendURL = 'https://api.catoff.xyz'
 
 //API CALLS FLOW
 //GOOGLE AUTH FLOW ON THE LOGIN PAGE
