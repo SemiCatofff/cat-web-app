@@ -10,16 +10,21 @@ const redirectGoogleAuth = async () => {
 }
 
 const serverGoogleAuth = async (code) => {
-  let body = {
+  let body = JSON.stringify({
     code: code,
-  }
+  });
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
   try {
     const response = await axios.post(
-      `${BackendURL}/auth/googleAuth/login`,body
-    )
-    return response.data
+      `${BackendURL}/auth/googleAuth/login`, body, config
+    );
+    return response.data;
   } catch (error) {
-    return error.message
+    return error.message;
   }
 }
 
