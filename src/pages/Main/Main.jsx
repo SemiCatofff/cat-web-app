@@ -36,6 +36,7 @@ function Main(props) {
     const output = await refreshServer();
     if(!output.success){
       dispatch(setLoginState(false))
+      localStorage.clear()
     }
     else{
     const now = new Date();
