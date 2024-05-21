@@ -26,7 +26,6 @@ function Main(props) {
       console.log(refreshTokenExpiry)
       console.log(new Date())
       authTok()
-      dispatch(setLoginState(true));
     }
     else{
       console.log("here")
@@ -35,6 +34,11 @@ function Main(props) {
 
   const authTok = async () => {
     const output = await refreshServer();
+    if(!output.success){
+      dispatch(setLoginState(false))
+      localStorage.clear()
+    }
+    else{
     const now = new Date();
     const accessTokenExpiry = new Date(now.getTime() + 4 * 60 * 1000); // 4 minutes
     const refreshTokenExpiry = new Date(now.getTime() + 80 * 24 * 60 * 60 * 1000); // 80 days
@@ -42,6 +46,8 @@ function Main(props) {
     localStorage.setItem("authTokenExpiry", accessTokenExpiry.toISOString());
     localStorage.setItem("refreshToken", output.data.refresh_token);
     localStorage.setItem("refreshTokenExpiry", refreshTokenExpiry.toISOString());
+    dispatch(setLoginState(true))
+    }
   }
   
   useEffect(() => {
