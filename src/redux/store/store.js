@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux'
-import userReducer from '../reducers/reducer' // adjust the path as necessary
+import userReducer from '../reducers/reducer' // Adjust the path as necessary
 
 const rootReducer = combineReducers({
   user: userReducer,
