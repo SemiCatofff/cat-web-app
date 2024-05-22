@@ -12,30 +12,34 @@ const redirectGoogleAuth = async () => {
 const serverGoogleAuth = async (code) => {
   let body = JSON.stringify({
     code: code,
-  });
+  })
   console.log(code)
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
-  };
+      'Content-Type': 'application/json',
+    },
+  }
   try {
     const response = await axios.post(
-      `${BackendURL}/auth/googleAuth/login`, body, config
-    );
-    return response.data;
+      `${BackendURL}/auth/googleAuth/login`,
+      body,
+      config
+    )
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
 }
 
 const refreshServer = async (code) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
-  }  
+  }
   try {
     const response = await axios.post(
-      `${BackendURL}/auth/refresh`,{},{headers}
+      `${BackendURL}/auth/refresh`,
+      {},
+      { headers }
     )
     return response.data
   } catch (error) {
@@ -150,10 +154,9 @@ const getOngoingChallenges = async (body) => {
   }
 
   try {
-    const response = await axios.post(
-      `${BackendURL}/challenge/filter`, body,
-      { headers },
-    )
+    const response = await axios.post(`${BackendURL}/challenge/filter`, body, {
+      headers,
+    })
     return response.data
   } catch (error) {
     return error.message
@@ -207,7 +210,6 @@ const joinChallengeAPI = async (challengeName) => {
   let body = {
     ChallengeID: parseInt(challengeName),
   }
-  
 
   try {
     const response = await axios.post(`${BackendURL}/player`, body, { headers })
@@ -281,15 +283,14 @@ const getLeaderboard = async (challengeID) => {
   }
 }
 
-
 const withDrawApi = async (amount) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   let body = {
-  amount: parseInt(amount),
-    currency: "SOL"
-}
+    amount: parseInt(amount),
+    currency: 'SOL',
+  }
 
   try {
     const response = await axios.post(`${BackendURL}/user/withdraw`, body, {
@@ -304,15 +305,17 @@ const withDrawApi = async (amount) => {
 const uploadFileApi = async (file) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    'Content-Type': 'multipart/form-data',
   }
-  const formData = new FormData();
-  formData.append('file', file);
+  const formData = new FormData()
+  formData.append('file', file)
 
   try {
-    const response = await axios.post(`https://ipfs.catoff.xyz/upload`,  formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }})
+    const response = await axios.post(
+      `https://ipfs.catoff.xyz/upload`,
+      formData,
+      { headers }
+    )
     return response.data
   } catch (error) {
     return error.message
@@ -334,108 +337,93 @@ const getShareableChallengeLink = async (challengeID) => {
   }
 }
 
-const getReclaimProof = async (challengeID, ) =>{
+const getReclaimProof = async (challengeID) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
-  
-   let body =  {
-      AppName: "TWITTER_ANALYTICS_VIEWS", 
-      ChallengeID: parseInt(challengeID)
-    }
 
-    try {
-      const response = await axios.post(
-        `${BackendURL}/reclaim/sign`,body,
-        { headers }
-      )
-      return response.data
-    } catch (error) {
-      return error.message
-    }
+  let body = {
+    AppName: 'TWITTER_ANALYTICS_VIEWS',
+    ChallengeID: parseInt(challengeID),
+  }
 
-
-
+  try {
+    const response = await axios.post(`${BackendURL}/reclaim/sign`, body, {
+      headers,
+    })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 }
 
-const getSubmissions = async (challengeID, ) =>{
+const getSubmissions = async (challengeID) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
-    try {
-      const response = await axios.get(
-        `${BackendURL}/player/submissions/${challengeID}`,
-        { headers }
-      )
-      return response.data
-    } catch (error) {
-      return error.message
-    }
-
-
-
+  try {
+    const response = await axios.get(
+      `${BackendURL}/player/submissions/${challengeID}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 }
 
-const submitClaim = async (challengeID, value, Url) =>{
-  let headers = {
-    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-  }
-  let body ={
-    "ChallengeID": parseInt(challengeID),
-    "Value": parseInt(value),
-    "Url": Url
-  }
-    try {
-      const response = await axios.post(
-        `${BackendURL}/player/submission`, body,
-        { headers }
-      )
-      return response.data
-    } catch (error) {
-      return error.message
-    }
-
-}
-
-
-const validate = async (challengeID, invalid) =>{
+const submitClaim = async (challengeID, value, Url) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
   let body = {
-    "InvalidSubmissions": invalid
-  
+    ChallengeID: parseInt(challengeID),
+    Value: parseInt(value),
+    Url: Url,
   }
-    try {
-      const response = await axios.post(
-        `${BackendURL}/challenge/validate/${challengeID}`, body,
-        { headers }
-      )
-      return response.data
-    } catch (error) {
-      return error.message
-    }
-
-
-
+  try {
+    const response = await axios.post(`${BackendURL}/player/submission`, body, {
+      headers,
+    })
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 }
 
-const getMysubmit = async (challengeID) =>{
+const validate = async (challengeID, invalid) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
   }
-    try {
-      const response = await axios.get(
-        `${BackendURL}/player/submission/${challengeID}`,
-        { headers }
-      )
-      return response.data
-    } catch (error) {
-      return error.message
-    }
-
+  let body = {
+    InvalidSubmissions: invalid,
+  }
+  try {
+    const response = await axios.post(
+      `${BackendURL}/challenge/validate/${challengeID}`,
+      body,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
 }
 
+const getMysubmit = async (challengeID) => {
+  let headers = {
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+  }
+  try {
+    const response = await axios.get(
+      `${BackendURL}/player/submission/${challengeID}`,
+      { headers }
+    )
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
 
 const logout = async () => {}
 export {
@@ -464,5 +452,5 @@ export {
   submitClaim,
   getMysubmit,
   serverGoogleAuth,
-  refreshServer
+  refreshServer,
 }

@@ -93,7 +93,7 @@ function Login() {
     if(tokens.success){
   
       const now = new Date();
-      const accessTokenExpiry = new Date(now.getTime() + 4 * 60 * 1000); // 4 minutes
+      const accessTokenExpiry = new Date(now.getTime() + 24 * 60 * 1000); // 4 minutes
       const refreshTokenExpiry = new Date(now.getTime() + 80 * 24 * 60 * 60 * 1000); // 80 days
   
       localStorage.setItem("authToken", tokens.data.access_token)
