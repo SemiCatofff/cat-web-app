@@ -40,7 +40,7 @@ function Main(props) {
     }
     else{
     const now = new Date();
-    const accessTokenExpiry = new Date(now.getTime() + 4 * 60 * 1000); // 4 minutes
+    const accessTokenExpiry = new Date(now.getTime() + 24 * 60 * 1000); // 4 minutes
     const refreshTokenExpiry = new Date(now.getTime() + 80 * 24 * 60 * 60 * 1000); // 80 days
     localStorage.setItem("authToken", output.data.access_token);
     localStorage.setItem("authTokenExpiry", accessTokenExpiry.toISOString());
@@ -54,7 +54,7 @@ function Main(props) {
     const interval = setInterval(() => {
       authTok();
       console.log("refreshing the tokens");
-    }, 4 * 60 * 1000); 
+    }, 24 * 60 * 1000); 
     return () => clearInterval(interval);
   }, []);  
 
