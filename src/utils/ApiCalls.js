@@ -304,15 +304,17 @@ const withDrawApi = async (amount) => {
 const uploadFileApi = async (file) => {
   let headers = {
     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    'Content-Type': 'multipart/form-data',
   }
-  const formData = new FormData();
-  formData.append('file', file);
+  const formData = new FormData()
+  formData.append('file', file)
 
   try {
-    const response = await axios.post(`https://ipfs.catoff.xyz/upload`,  formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }})
+    const response = await axios.post(
+      `https://ipfs.catoff.xyz/upload`,
+      formData,
+      { headers }
+    )
     return response.data
   } catch (error) {
     return error.message
